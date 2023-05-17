@@ -4,6 +4,6 @@
  * Replace them with your own styles or remove the file completely.
  */
 
-.wp-block-create-block-unblock-writer {
-	border: 1px dotted #f00;
-}
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";

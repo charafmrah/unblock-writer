@@ -1,6 +1,140 @@
 /******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/components/Configuration.js":
+/*!*****************************************!*\
+  !*** ./src/components/Configuration.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Configuration)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+function Configuration(_ref) {
+  let {
+    onConfigurationSubmit
+  } = _ref;
+  const [apiKey, setApiKey] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+
+  // Fetch the saved API key when the component is mounted.
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
+      path: '/unblock-writer/v1/api-key'
+    }).then(savedApiKey => setApiKey(savedApiKey || ''));
+  }, []);
+  const handleInputChange = event => {
+    setApiKey(event.target.value);
+  };
+  const handleSubmit = event => {
+    event.preventDefault();
+    _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
+      path: '/unblock-writer/v1/api-key',
+      method: 'POST',
+      data: {
+        apiKey
+      }
+    });
+    onConfigurationSubmit(apiKey);
+  };
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
+    className: "mt-0"
+  }, "Set up your OpenAI API Key"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("form", {
+    onSubmit: handleSubmit,
+    className: "flex flex-col gap-5"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "OpenAI API Key:"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    type: "text",
+    value: apiKey,
+    onChange: handleInputChange
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    type: "submit",
+    className: "rounded-md py-2 bg-teal-600 text-slate-100"
+  }, "Save")));
+}
+
+/***/ }),
+
+/***/ "./src/components/Loading.js":
+/*!***********************************!*\
+  !*** ./src/components/Loading.js ***!
+  \***********************************/
+/***/ (() => {
+
+
+
+/***/ }),
+
+/***/ "./src/components/Outline.js":
+/*!***********************************!*\
+  !*** ./src/components/Outline.js ***!
+  \***********************************/
+/***/ (() => {
+
+
+
+/***/ }),
+
+/***/ "./src/components/Submission.js":
+/*!**************************************!*\
+  !*** ./src/components/Submission.js ***!
+  \**************************************/
+/***/ (() => {
+
+
+
+/***/ }),
+
+/***/ "./src/components/Topic.js":
+/*!*********************************!*\
+  !*** ./src/components/Topic.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Topic)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function Topic(_ref) {
+  let {
+    onTopicSubmit
+  } = _ref;
+  const [topic, setTopic] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+  const handleInputChange = event => {
+    setTopic(event.target.value);
+  };
+  const handleSubmit = event => {
+    event.preventDefault();
+    onTopicSubmit(topic);
+  };
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
+    className: "mt-0"
+  }, "What topic do you want to write about?"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("form", {
+    onSubmit: handleSubmit,
+    className: "flex flex-col gap-5"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Topic:"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    type: "text",
+    value: topic,
+    onChange: handleInputChange
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    type: "submit",
+    className: "rounded-md py-2 bg-teal-600 text-slate-100"
+  }, "Submit")));
+}
+
+/***/ }),
 
 /***/ "./src/edit.js":
 /*!*********************!*\
@@ -8,6 +142,7 @@
   \*********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Edit)
@@ -18,7 +153,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./editor.scss */ "./src/editor.scss");
+/* harmony import */ var _editor_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./editor.css */ "./src/editor.css");
+/* harmony import */ var _components_Configuration__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Configuration */ "./src/components/Configuration.js");
+/* harmony import */ var _components_Topic__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Topic */ "./src/components/Topic.js");
+/* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Loading */ "./src/components/Loading.js");
+/* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_components_Loading__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _components_Outline__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Outline */ "./src/components/Outline.js");
+/* harmony import */ var _components_Outline__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_components_Outline__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _components_Submission__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Submission */ "./src/components/Submission.js");
+/* harmony import */ var _components_Submission__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_components_Submission__WEBPACK_IMPORTED_MODULE_8__);
 
 /**
  * Retrieves the translation of text.
@@ -43,6 +186,12 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
+
+
+
+
+
+
 /**
  * The edit function describes the structure of your block in the context of the
  * editor. This represents what the editor will render when the block is used.
@@ -52,7 +201,64 @@ __webpack_require__.r(__webpack_exports__);
  * @return {WPElement} Element to render.
  */
 function Edit() {
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)(), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Unblock Writer – hello from the editor!', 'unblock-writer'));
+  const [state, setState] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('configuration');
+  const [apiKey, setApiKey] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+  const [topic, setTopic] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+  const [outline, setOutline] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+  const [content, setContent] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+  const handleConfigurationSubmit = apiKey => {
+    // save apiKey
+    setApiKey(apiKey);
+    // switch to topic state
+    setState('topic');
+  };
+  const handleTopicSubmit = topic => {
+    // save topic
+    setTopic(topic);
+    // switch to loading state
+    setState('loading');
+    // here you would make the API call to GPT-4 to get the outline
+    // then switch to the outline state and set the outline
+  };
+
+  const handleOutlineSubmit = outline => {
+    // save the outline
+    setOutline(outline);
+    // switch to loading state
+    setState('loading');
+    // here you would make the API call to GPT-4 to get the content
+    // then switch to the submission state and set the content
+  };
+
+  // render the appropriate component for the current state
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)({
+    className: 'prose flex flex-col justify-center items-middle w-full h-full bg-slate-100 p-2 text-slate-800 rounded-md shadow-md'
+  }), (() => {
+    switch (state) {
+      case 'CONFIGURATION':
+        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Configuration__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          onSuccess: () => setState('TOPIC')
+        });
+      case 'LOADING':
+        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)((_components_Loading__WEBPACK_IMPORTED_MODULE_6___default()), null);
+      case 'TOPIC':
+        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Topic__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          onSuccess: () => setState('OUTLINE')
+        });
+      case 'OUTLINE':
+        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)((_components_Outline__WEBPACK_IMPORTED_MODULE_7___default()), {
+          onSuccess: () => setState('SUBMISSION')
+        });
+      case 'SUBMISSION':
+        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)((_components_Submission__WEBPACK_IMPORTED_MODULE_8___default()), {
+          onSuccess: () => setState('CONFIGURATION')
+        });
+      default:
+        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Configuration__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          onSuccess: () => setState('TOPIC')
+        });
+    }
+  })());
 }
 
 /***/ }),
@@ -63,10 +269,11 @@ function Edit() {
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.scss */ "./src/style.scss");
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.css */ "./src/style.css");
 /* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./src/edit.js");
 /* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save */ "./src/save.js");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./block.json */ "./src/block.json");
@@ -117,6 +324,7 @@ __webpack_require__.r(__webpack_exports__);
   \*********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ save)
@@ -149,27 +357,40 @@ function save() {
 
 /***/ }),
 
-/***/ "./src/editor.scss":
-/*!*************************!*\
-  !*** ./src/editor.scss ***!
-  \*************************/
+/***/ "./src/editor.css":
+/*!************************!*\
+  !*** ./src/editor.css ***!
+  \************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
 
 /***/ }),
 
-/***/ "./src/style.scss":
-/*!************************!*\
-  !*** ./src/style.scss ***!
-  \************************/
+/***/ "./src/style.css":
+/*!***********************!*\
+  !*** ./src/style.css ***!
+  \***********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
+
+/***/ }),
+
+/***/ "@wordpress/api-fetch":
+/*!**********************************!*\
+  !*** external ["wp","apiFetch"] ***!
+  \**********************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = window["wp"]["apiFetch"];
 
 /***/ }),
 
@@ -179,6 +400,7 @@ __webpack_require__.r(__webpack_exports__);
   \*************************************/
 /***/ ((module) => {
 
+"use strict";
 module.exports = window["wp"]["blockEditor"];
 
 /***/ }),
@@ -189,6 +411,7 @@ module.exports = window["wp"]["blockEditor"];
   \********************************/
 /***/ ((module) => {
 
+"use strict";
 module.exports = window["wp"]["blocks"];
 
 /***/ }),
@@ -199,6 +422,7 @@ module.exports = window["wp"]["blocks"];
   \*********************************/
 /***/ ((module) => {
 
+"use strict";
 module.exports = window["wp"]["element"];
 
 /***/ }),
@@ -209,6 +433,7 @@ module.exports = window["wp"]["element"];
   \******************************/
 /***/ ((module) => {
 
+"use strict";
 module.exports = window["wp"]["i18n"];
 
 /***/ }),
@@ -219,6 +444,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ ((module) => {
 
+"use strict";
 module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"create-block/unblock-writer","version":"0.1.0","title":"Unblock Writer","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","supports":{"html":false},"textdomain":"unblock-writer","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
 
 /***/ })
