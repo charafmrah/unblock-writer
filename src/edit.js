@@ -21,6 +21,7 @@ import { useBlockProps } from '@wordpress/block-editor';
  */
 import './editor.css';
 import { useState } from '@wordpress/element';
+import Error from './components/Error';
 import Configuration from './components/Configuration';
 import Topic from './components/Topic';
 import Loading from './components/Loading';
@@ -36,79 +37,77 @@ import Submission from './components/Submission';
  * @return {WPElement} Element to render.
  */
 export default function Edit() {
-	const [ state, setState ] = useState( 'configuration' );
-	const [ apiKey, setApiKey ] = useState( '' );
-	const [ topic, setTopic ] = useState( '' );
-	const [ outline, setOutline ] = useState( [] );
-	const [ content, setContent ] = useState( '' );
+	const [state, setState] = useState('CONFIGURATION');
+	const [apiKey, setApiKey] = useState('');
+	const [topic, setTopic] = useState('');
+	const [outline, setOutline] = useState([]);
+	const [content, setContent] = useState('');
 
-	const handleConfigurationSubmit = ( apiKey ) => {
-		// save apiKey
-		setApiKey( apiKey );
-		// switch to topic state
-		setState( 'topic' );
+	const handleConfigurationSubmit = (apiKey) => {
+		setApiKey(apiKey);
+
+		setState('TOPIC');
 	};
 
-	const handleTopicSubmit = ( topic ) => {
-		// save topic
-		setTopic( topic );
-		// switch to loading state
-		setState( 'loading' );
-		// here you would make the API call to GPT-4 to get the outline
-		// then switch to the outline state and set the outline
+	const handleTopicSubmit = (topic) => {
+		setTopic(topic);
+
+		setState('LOADING');
+
+		// TODO: make the API call to GPT-4 to get the outline
+
+		// TODO: switch to the outline state and set the outline
 	};
 
-	const handleOutlineSubmit = ( outline ) => {
-		// save the outline
-		setOutline( outline );
-		// switch to loading state
-		setState( 'loading' );
-		// here you would make the API call to GPT-4 to get the content
-		// then switch to the submission state and set the content
+	const handleOutlineSubmit = (outline) => {
+		setOutline(outline);
+
+		setState('LOADING');
+
+		// TODO: make the API call to GPT-4 to get the content
+
+		// TODO: switch to the submission state and set the content
 	};
 
-	// render the appropriate component for the current state
+	const handleContentSubmit = (content) => {
+		setContent(content);
+	};
+
 	return (
 		<div
-			{ ...useBlockProps( {
+			{...useBlockProps({
 				className:
 					'prose flex flex-col justify-center items-middle w-full h-full bg-slate-100 p-2 text-slate-800 rounded-md shadow-md',
-			} ) }
+			})}
 		>
-			{ ( () => {
-				switch ( state ) {
+			{(() => {
+				switch (state) {
 					case 'CONFIGURATION':
 						return (
 							<Configuration
-								onSuccess={ () => setState( 'TOPIC' ) }
+								onConfigurationSubmit={
+									handleConfigurationSubmit
+								}
 							/>
 						);
 					case 'LOADING':
 						return <Loading />;
 					case 'TOPIC':
-						return (
-							<Topic onSuccess={ () => setState( 'OUTLINE' ) } />
-						);
+						return <Topic onTopicSubmit={handleTopicSubmit} />;
 					case 'OUTLINE':
 						return (
-							<Outline
-								onSuccess={ () => setState( 'SUBMISSION' ) }
-							/>
+							<Outline onSuccess={() => setState('SUBMISSION')} />
 						);
 					case 'SUBMISSION':
 						return (
 							<Submission
-								onSuccess={ () => setState( 'CONFIGURATION' ) }
+								onSuccess={() => setState('CONFIGURATION')}
 							/>
 						);
 					default:
-						return (
-							<Configuration
-								onSuccess={ () => setState( 'TOPIC' ) }
-							/>
-						);
+						return <Error />;
 				}
-			} )() }
+			})()}
 		</div>
 	);
 }
