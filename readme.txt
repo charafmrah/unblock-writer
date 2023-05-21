@@ -1,39 +1,46 @@
 === UnblockWriter ===
 Contributors:      Web Pangolin
-Tags:              block
+Tags:              Gutenberg, Blocks, AI, Writing, OpenAI
 Tested up to:      6.1
 Stable tag:        0.1.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
-Example block scaffolded with Create Block tool.
+A WordPress Gutenberg block plugin that helps writers overcome writer's block by using the power of OpenAI's ChatGPT.
 
 == Description ==
 
-This is the long description. No limit, and you can use Markdown (as well as in the following sections).
+Unblock Writer is a plugin designed to utilize the power of OpenAI's ChatGPT, providing an intuitive and streamlined writing experience. This tool offers an interactive interface within a Gutenberg block, designed to guide users through an AI-assisted writing process.
 
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
+How the Plugin Works:
+
+- Add the Unblock Writer Block: Users add the "Unblock Writer" Gutenberg block to their post.
+- Configuration: Inside the block, users input their OpenAI API key (if not already stored) and enter a topic into a text field.
+- Generate an Outline: Upon submitting the topic, the plugin makes an API call to ChatGPT, which generates an outline based on the chosen topic. The outline is presented within the block as draggable cards containing H2 & H3 headers.
+- Modify and Finalize the Outline: Users can rearrange the outline's structure by dragging the cards. Once satisfied, they submit the final outline.
+- Generate the Content: The plugin sends the finalized outline to ChatGPT via another API call, receiving the fleshed-out content in response.
+- Insert the Content: The received content is programmatically inserted into the post as native Gutenberg blocks (header and paragraph blocks).
+
+Unblock Writer's goal is to make the blog writing process smoother and more efficient by reducing the initial effort required to create an outline and comprehensive content. By managing different states (configuration, loading, outline, and submission) using React's useState hook, Unblock Writer ensures a user-friendly experience with an appropriate UI for each state.
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
-
-e.g.
-
-1. Upload the plugin files to the `/wp-content/plugins/unblock-writer` directory, or install the plugin through the WordPress plugins screen directly.
-1. Activate the plugin through the 'Plugins' screen in WordPress
+1.Activate the plugin through the 'Plugins' screen in WordPress
+1. Upload unblock-writer to the /wp-content/plugins/ directory.
+2. Activate the plugin through the 'Plugins' menu in WordPress.
+3. Navigate to a post and click 'Add Block'. Search for 'Unblock Writer' and add the block to your post.
+4. Enter your OpenAI API key and the topic you wish to write about. The plugin will guide you through the rest of the process.
 
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
+= Does this plugin work with the latest version of WordPress? =
 
-An answer to that question.
+Yes, Unblock Writer is fully compatible with the latest version of WordPress.
 
-= What about foo bar? =
+= Do I need an OpenAI API key to use this plugin? =
 
-Answer to foo bar dilemma.
+Yes, you will need an OpenAI API key to use Unblock Writer as it relies on the ChatGPT model to generate outlines
 
 == Screenshots ==
 
@@ -47,9 +54,3 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 
 = 0.1.0 =
 * Release
-
-== Arbitrary section ==
-
-You may provide arbitrary sections, in the same format as the ones above. This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation." Arbitrary sections will be shown below the built-in sections outlined above.
