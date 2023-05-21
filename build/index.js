@@ -37,10 +37,11 @@ function Configuration(_ref) {
   const handleSubmit = async event => {
     event.preventDefault();
     // make a request to your own server to test the API key
-    const response = await fetch('/wp-json/unblock-writer/v1/openai', {
+    const response = await fetch('/wp-json/unblock-writer/v1/api-key', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-WP-Nonce': unblockWriter.nonce
       },
       body: JSON.stringify({
         apiKey: apiKey,
@@ -48,7 +49,6 @@ function Configuration(_ref) {
       })
     }).then(res => {
       // TODO: If API Key is valid, save it
-
       onConfigurationSubmit(apiKey);
     }).catch(err => {
       throw new Error(err);

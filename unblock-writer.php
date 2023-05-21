@@ -14,14 +14,6 @@
  * @package           create-block
  */
 
-/**
- * Registers the block using the metadata loaded from the `block.json` file.
- * Behind the scenes, it registers also all assets so they can be enqueued
- * through the block editor in the corresponding context.
- *
- * @see https://developer.wordpress.org/reference/functions/register_block_type/
- */
-
 add_action( 'init', 'create_block_unblock_writer_block_init' );
 function create_block_unblock_writer_block_init() {
 	register_block_type( __DIR__ . '/build' );
@@ -51,7 +43,6 @@ function generate_outline($request_data) {
             ),
         ),
     );
-    // Pass 'apiKey' from $data to the 'make_request_to_openai' function
     return make_request_to_openai($body, $data['apiKey']);
 }
 
@@ -70,7 +61,6 @@ function generate_post_content($request_data) {
             ),
         ),
     );
-    // Pass 'apiKey' from $data to the 'make_request_to_openai' function
     return make_request_to_openai($body, $data['apiKey']);
 }
 
@@ -95,20 +85,44 @@ function make_request_to_openai($body, $apiKey) {
     }
 }
 
-add_action( 'rest_api_init', function () {
-    register_rest_route('unblock-writer/v1', '/openai', array(
-        'methods' => 'POST',
-        'callback' => 'forward_to_openai',
-    ));
+function unblock_writer_permissions_check() {
+    // Here 'publish_posts' capability allows admins, editors, and authors.
+    return current_user_can( 'publish_posts' );
+}
 
+add_action( 'init', 'enqueue_unblock_writer_script' );
+function enqueue_unblock_writer_script() {
+    $script_path = 'build/index.js';
+    wp_register_script(
+        'unblock-writer-script',
+        plugins_url($script_path, __FILE__),
+        array('wp-blocks', 'wp-element', 'wp-editor', 'wp-components', 'wp-data', 'wp-i18n'),
+        filemtime(plugin_dir_path(__FILE__) . $script_path)
+    );
+    wp_localize_script(
+        'unblock-writer-script',
+        'unblockWriter',
+        array(
+            'nonce' => wp_create_nonce( 'wp_rest' ),
+        )
+    );
+    register_block_type('unblock-writer/unblock-writer-block', array(
+        'editor_script' => 'unblock-writer-script',
+    ));
+}
+
+
+add_action( 'rest_api_init', function () {
     register_rest_route( 'unblock-writer/v1', '/api-key', array(
         'methods'  => 'GET',
         'callback' => 'unblock_writer_get_api_key',
+        'permission_callback' => 'unblock_writer_permissions_check',  
     ));
 
     register_rest_route( 'unblock-writer/v1', '/api-key', array(
-        'methods'  => 'POST',
+         'methods'  => 'POST',
         'callback' => 'unblock_writer_set_api_key',
+        'permission_callback' => 'unblock_writer_permissions_check',  
         'args'     => array(
             'apiKey' => array(
                 'required'          => true,
@@ -117,5 +131,17 @@ add_action( 'rest_api_init', function () {
                 },
             ),
         ),
+    ));
+
+    register_rest_route('unblock-writer/v1', '/generate-outline', array(
+        'methods' => 'POST',
+        'callback' => 'generate_outline',
+        'permission_callback' => 'unblock_writer_permissions_check',  
+    ));
+
+    register_rest_route('unblock-writer/v1', '/generate-content', array(
+        'methods' => 'POST',
+        'callback' => 'generate_post_content',
+        'permission_callback' => 'unblock_writer_permissions_check',  
     ));
 });

@@ -18,10 +18,11 @@ export default function Configuration({ onConfigurationSubmit }) {
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		// make a request to your own server to test the API key
-		const response = await fetch('/wp-json/unblock-writer/v1/openai', {
+		const response = await fetch('/wp-json/unblock-writer/v1/api-key', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
+				'X-WP-Nonce': unblockWriter.nonce,
 			},
 			body: JSON.stringify({
 				apiKey: apiKey,
@@ -30,7 +31,6 @@ export default function Configuration({ onConfigurationSubmit }) {
 		})
 			.then((res) => {
 				// TODO: If API Key is valid, save it
-
 				onConfigurationSubmit(apiKey);
 			})
 			.catch((err) => {
