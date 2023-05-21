@@ -24,6 +24,7 @@ function Configuration(_ref) {
     onConfigurationSubmit
   } = _ref;
   const [apiKey, setApiKey] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+  const [errorMessage, setErrorMessage] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null); // Add a state for error message
 
   // Fetch the saved API key when the component is mounted.
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
@@ -37,22 +38,28 @@ function Configuration(_ref) {
   const handleSubmit = async event => {
     event.preventDefault();
     // make a request to your own server to test the API key
-    const response = await fetch('/wp-json/unblock-writer/v1/api-key', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-WP-Nonce': unblockWriter.nonce
-      },
-      body: JSON.stringify({
-        apiKey: apiKey,
-        prompt: 'Test prompt'
-      })
-    }).then(res => {
-      // TODO: If API Key is valid, save it
+    try {
+      const response = await fetch('/wp-json/unblock-writer/v1/api-key', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-WP-Nonce': unblockWriter.nonce
+        },
+        body: JSON.stringify({
+          apiKey: apiKey,
+          prompt: 'Test prompt'
+        })
+      });
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(`Error: ${errorData.message}`);
+      }
+      // if no error, call the callback function
       onConfigurationSubmit(apiKey);
-    }).catch(err => {
-      throw new Error(err);
-    });
+    } catch (error) {
+      // If there's an error, set the error message
+      setErrorMessage(error.message);
+    }
   };
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
     className: "mt-0"
@@ -66,7 +73,9 @@ function Configuration(_ref) {
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     type: "submit",
     className: "py-2 bg-teal-600 rounded-md hover:bg-teal-700 text-slate-100"
-  }, "Save")));
+  }, "Verify Key"), errorMessage && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "error text-red-500 font-bold"
+  }, errorMessage)));
 }
 
 /***/ }),

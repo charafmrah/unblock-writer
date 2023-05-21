@@ -3,6 +3,7 @@ import apiFetch from '@wordpress/api-fetch';
 
 export default function Configuration({ onConfigurationSubmit }) {
 	const [apiKey, setApiKey] = useState('');
+	const [errorMessage, setErrorMessage] = useState(null); // Add a state for error message
 
 	// Fetch the saved API key when the component is mounted.
 	useEffect(() => {
@@ -18,24 +19,28 @@ export default function Configuration({ onConfigurationSubmit }) {
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		// make a request to your own server to test the API key
-		const response = await fetch('/wp-json/unblock-writer/v1/api-key', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				'X-WP-Nonce': unblockWriter.nonce,
-			},
-			body: JSON.stringify({
-				apiKey: apiKey,
-				prompt: 'Test prompt',
-			}),
-		})
-			.then((res) => {
-				// TODO: If API Key is valid, save it
-				onConfigurationSubmit(apiKey);
-			})
-			.catch((err) => {
-				throw new Error(err);
+		try {
+			const response = await fetch('/wp-json/unblock-writer/v1/api-key', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'X-WP-Nonce': unblockWriter.nonce,
+				},
+				body: JSON.stringify({
+					apiKey: apiKey,
+					prompt: 'Test prompt',
+				}),
 			});
+			if (!response.ok) {
+				const errorData = await response.json();
+				throw new Error(`Error: ${errorData.message}`);
+			}
+			// if no error, call the callback function
+			onConfigurationSubmit(apiKey);
+		} catch (error) {
+			// If there's an error, set the error message
+			setErrorMessage(error.message);
+		}
 	};
 
 	return (
@@ -52,8 +57,13 @@ export default function Configuration({ onConfigurationSubmit }) {
 					type="submit"
 					className="py-2 bg-teal-600 rounded-md hover:bg-teal-700 text-slate-100"
 				>
-					Save
+					Verify Key
 				</button>
+				{errorMessage && (
+					<p className="error text-red-500 font-bold">
+						{errorMessage}
+					</p>
+				)}
 			</form>
 		</div>
 	);

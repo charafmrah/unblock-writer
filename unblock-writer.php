@@ -24,7 +24,29 @@ function unblock_writer_get_api_key() {
 }
 
 function unblock_writer_set_api_key( WP_REST_Request $request ) {
-    update_option( 'unblock_writer_api_key', $request['apiKey'] );
+    $apiKey = $request['apiKey'];
+    $testBody = array(
+        'model' => 'gpt-3.5-turbo',
+        'messages' => array(
+            array(
+                'role' => 'system',
+                'content' => 'You are a helpful assistant.',
+            ),
+            array(
+                'role' => 'user',
+                'content' => 'Who are you?',
+            ),
+        ),
+    );
+    $testResponse = make_request_to_openai($testBody, $apiKey);
+    
+    // If there's an error or the API key isn't working, return an error response
+    if (is_wp_error($testResponse) || $testResponse->error) {
+        return new WP_Error( 'bad_api_key', 'The provided API key is invalid or not working.', array( 'status' => 400 ) );
+    }
+    
+    // If the test request is successful, save the API key
+    update_option( 'unblock_writer_api_key', $apiKey );
     return new WP_REST_Response( null, 204 );
 }
 
@@ -70,7 +92,7 @@ function make_request_to_openai($body, $apiKey) {
         'Content-Type' => 'application/json',
     );
     $response = wp_remote_post(
-        'https://api.openai.com/v1/engines/davinci-codex/completions',
+        'https://api.openai.com/v1/chat/completions',
         array(
             'method' => 'POST',
             'headers' => $headers,
@@ -81,8 +103,14 @@ function make_request_to_openai($body, $apiKey) {
         return $response;
     } else {
         $body = wp_remote_retrieve_body($response);
-        return json_decode($body);
+        $parsedBody = json_decode($body);
+        // If the response from OpenAI is correctly structured
+    if (isset($parsedBody->choices[0]->message->content)) {
+        return $parsedBody->choices[0]->message->content;
+    } else {
+        return new WP_Error( 'unexpected_response', 'The response from OpenAI was not in the expected format.', array( 'status' => 500 ) );
     }
+}
 }
 
 function unblock_writer_permissions_check() {
