@@ -36,25 +36,6 @@ function unblock_writer_set_api_key( WP_REST_Request $request ) {
     return new WP_REST_Response( null, 204 );
 }
 
-add_action( 'rest_api_init', function () {
-    register_rest_route( 'unblock-writer/v1', '/api-key', array(
-        'methods'  => 'GET',
-        'callback' => 'unblock_writer_get_api_key',
-    ) );
-    register_rest_route( 'unblock-writer/v1', '/api-key', array(
-        'methods'  => 'POST',
-        'callback' => 'unblock_writer_set_api_key',
-        'args'     => array(
-            'apiKey' => array(
-                'required'          => true,
-                'validate_callback' => function ( $param ) {
-                    return is_string( $param );
-                },
-            ),
-        ),
-    ) );
-} );
-
 function generate_outline($request_data) {
     $data = $request_data->get_params();
     $body = array(
@@ -114,13 +95,27 @@ function make_request_to_openai($body, $apiKey) {
     }
 }
 
-add_action('rest_api_init', function () {
-    register_rest_route('unblock-writer/v1', '/generate-outline', array(
+add_action( 'rest_api_init', function () {
+    register_rest_route('unblock-writer/v1', '/openai', array(
         'methods' => 'POST',
-        'callback' => 'generate_outline',
+        'callback' => 'forward_to_openai',
     ));
-    register_rest_route('unblock-writer/v1', '/generate-content', array(
-        'methods' => 'POST',
-        'callback' => 'generate_post_content',
+
+    register_rest_route( 'unblock-writer/v1', '/api-key', array(
+        'methods'  => 'GET',
+        'callback' => 'unblock_writer_get_api_key',
+    ));
+
+    register_rest_route( 'unblock-writer/v1', '/api-key', array(
+        'methods'  => 'POST',
+        'callback' => 'unblock_writer_set_api_key',
+        'args'     => array(
+            'apiKey' => array(
+                'required'          => true,
+                'validate_callback' => function ( $param ) {
+                    return is_string( $param );
+                },
+            ),
+        ),
     ));
 });
