@@ -45,9 +45,9 @@ export default function Configuration({ onConfigurationSubmit }) {
 
 	return (
 		<div>
-			<h2 className="mt-0">Set up your OpenAI API Key</h2>
+			<h2 className="mt-0">Connect Your ChatGPT Account</h2>
 			<form onSubmit={handleSubmit} className="flex flex-col gap-5">
-				<label>OpenAI API Key:</label>
+				<label>Your OpenAI API Key:</label>
 				<input
 					type="text"
 					value={apiKey}

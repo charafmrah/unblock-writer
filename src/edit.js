@@ -40,7 +40,7 @@ export default function Edit() {
 	const [state, setState] = useState('CONFIGURATION');
 	const [apiKey, setApiKey] = useState('');
 	const [topic, setTopic] = useState('');
-	const [outline, setOutline] = useState([]);
+	const [outline, setOutline] = useState('');
 	const [content, setContent] = useState('');
 
 	const handleConfigurationSubmit = (apiKey) => {
@@ -49,14 +49,35 @@ export default function Edit() {
 		setState('TOPIC');
 	};
 
-	const handleTopicSubmit = (topic) => {
+	const handleTopicSubmit = async (topic) => {
 		setTopic(topic);
 
-		setState('LOADING');
+		// making the API call to GPT-4 to get the outline
+		const outlineResponse = await fetch(
+			'/wp-json/unblock-writer/v1/generate-outline',
+			{
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'X-WP-Nonce': unblockWriter.nonce,
+				},
+				body: JSON.stringify({
+					prompt: topic,
+					apiKey: apiKey,
+				}),
+			}
+		);
 
-		// TODO: make the API call to GPT-4 to get the outline
+		if (!outlineResponse.ok) {
+			// handle the error
+			return;
+		}
 
-		// TODO: switch to the outline state and set the outline
+		const outline = await outlineResponse.json();
+
+		// switch to the outline state and set the outline
+		setOutline(outline);
+		setState('OUTLINE');
 	};
 
 	const handleOutlineSubmit = (outline) => {
@@ -77,7 +98,7 @@ export default function Edit() {
 		<div
 			{...useBlockProps({
 				className:
-					'prose flex flex-col justify-center items-middle w-full h-full bg-slate-100 p-2 text-slate-800 rounded-md shadow-md',
+					'flex flex-col justify-center items-middle w-full h-full bg-slate-100 p-2 text-slate-800 rounded-md shadow-md',
 			})}
 		>
 			{(() => {
@@ -96,14 +117,13 @@ export default function Edit() {
 						return <Topic onTopicSubmit={handleTopicSubmit} />;
 					case 'OUTLINE':
 						return (
-							<Outline onSuccess={() => setState('SUBMISSION')} />
-						);
-					case 'SUBMISSION':
-						return (
-							<Submission
-								onSuccess={() => setState('CONFIGURATION')}
+							<Outline
+								outline={outline}
+								onOutlineSubmit={handleOutlineSubmit}
 							/>
 						);
+					case 'SUBMISSION':
+						return <Submission />;
 					default:
 						return <Error />;
 				}

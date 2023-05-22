@@ -14,15 +14,15 @@ export default function Topic({ onTopicSubmit }) {
 
 	return (
 		<div>
-			<h2 className="mt-0">Topic</h2>
+			<h2 className="mt-0">Topic Selection</h2>
 			<form onSubmit={handleSubmit} className="flex flex-col gap-5">
-				<label>Describe your topic:</label>
+				<label>What is your blog post about?</label>
 				<input type="text" value={topic} onChange={handleInputChange} />
 				<button
 					type="submit"
-					className="py-2 bg-teal-600 rounded-md hover:bg-teal-700 text-slate-100"
+					className="p-2 bg-teal-600 rounded-md hover:bg-teal-700 text-slate-100"
 				>
-					Submit
+					Generate Outline
 				</button>
 			</form>
 		</div>
