@@ -1,6 +1,5204 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./node_modules/@dnd-kit/accessibility/dist/accessibility.esm.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/@dnd-kit/accessibility/dist/accessibility.esm.js ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   HiddenText: () => (/* binding */ HiddenText),
+/* harmony export */   LiveRegion: () => (/* binding */ LiveRegion),
+/* harmony export */   useAnnouncement: () => (/* binding */ useAnnouncement)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+const hiddenStyles = {
+  display: 'none'
+};
+function HiddenText(_ref) {
+  let {
+    id,
+    value
+  } = _ref;
+  return react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    id: id,
+    style: hiddenStyles
+  }, value);
+}
+
+const visuallyHidden = {
+  position: 'fixed',
+  width: 1,
+  height: 1,
+  margin: -1,
+  border: 0,
+  padding: 0,
+  overflow: 'hidden',
+  clip: 'rect(0 0 0 0)',
+  clipPath: 'inset(100%)',
+  whiteSpace: 'nowrap'
+};
+function LiveRegion(_ref) {
+  let {
+    id,
+    announcement
+  } = _ref;
+  return react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    id: id,
+    style: visuallyHidden,
+    role: "status",
+    "aria-live": "assertive",
+    "aria-atomic": true
+  }, announcement);
+}
+
+function useAnnouncement() {
+  const [announcement, setAnnouncement] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+  const announce = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(value => {
+    if (value != null) {
+      setAnnouncement(value);
+    }
+  }, []);
+  return {
+    announce,
+    announcement
+  };
+}
+
+
+//# sourceMappingURL=accessibility.esm.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/@dnd-kit/core/dist/core.esm.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/@dnd-kit/core/dist/core.esm.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   AutoScrollActivator: () => (/* binding */ AutoScrollActivator),
+/* harmony export */   DndContext: () => (/* binding */ DndContext),
+/* harmony export */   DragOverlay: () => (/* binding */ DragOverlay),
+/* harmony export */   KeyboardCode: () => (/* binding */ KeyboardCode),
+/* harmony export */   KeyboardSensor: () => (/* binding */ KeyboardSensor),
+/* harmony export */   MeasuringFrequency: () => (/* binding */ MeasuringFrequency),
+/* harmony export */   MeasuringStrategy: () => (/* binding */ MeasuringStrategy),
+/* harmony export */   MouseSensor: () => (/* binding */ MouseSensor),
+/* harmony export */   PointerSensor: () => (/* binding */ PointerSensor),
+/* harmony export */   TouchSensor: () => (/* binding */ TouchSensor),
+/* harmony export */   TraversalOrder: () => (/* binding */ TraversalOrder),
+/* harmony export */   applyModifiers: () => (/* binding */ applyModifiers),
+/* harmony export */   closestCenter: () => (/* binding */ closestCenter),
+/* harmony export */   closestCorners: () => (/* binding */ closestCorners),
+/* harmony export */   defaultAnnouncements: () => (/* binding */ defaultAnnouncements),
+/* harmony export */   defaultCoordinates: () => (/* binding */ defaultCoordinates),
+/* harmony export */   defaultDropAnimation: () => (/* binding */ defaultDropAnimationConfiguration),
+/* harmony export */   defaultDropAnimationSideEffects: () => (/* binding */ defaultDropAnimationSideEffects),
+/* harmony export */   defaultScreenReaderInstructions: () => (/* binding */ defaultScreenReaderInstructions),
+/* harmony export */   getClientRect: () => (/* binding */ getClientRect),
+/* harmony export */   getFirstCollision: () => (/* binding */ getFirstCollision),
+/* harmony export */   getScrollableAncestors: () => (/* binding */ getScrollableAncestors),
+/* harmony export */   pointerWithin: () => (/* binding */ pointerWithin),
+/* harmony export */   rectIntersection: () => (/* binding */ rectIntersection),
+/* harmony export */   useDndContext: () => (/* binding */ useDndContext),
+/* harmony export */   useDndMonitor: () => (/* binding */ useDndMonitor),
+/* harmony export */   useDraggable: () => (/* binding */ useDraggable),
+/* harmony export */   useDroppable: () => (/* binding */ useDroppable),
+/* harmony export */   useSensor: () => (/* binding */ useSensor),
+/* harmony export */   useSensors: () => (/* binding */ useSensors)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "react-dom");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @dnd-kit/utilities */ "./node_modules/@dnd-kit/utilities/dist/utilities.esm.js");
+/* harmony import */ var _dnd_kit_accessibility__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @dnd-kit/accessibility */ "./node_modules/@dnd-kit/accessibility/dist/accessibility.esm.js");
+
+
+
+
+
+const DndMonitorContext = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)(null);
+
+function useDndMonitor(listener) {
+  const registerListener = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(DndMonitorContext);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (!registerListener) {
+      throw new Error('useDndMonitor must be used within a children of <DndContext>');
+    }
+
+    const unsubscribe = registerListener(listener);
+    return unsubscribe;
+  }, [listener, registerListener]);
+}
+
+function useDndMonitorProvider() {
+  const [listeners] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(() => new Set());
+  const registerListener = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(listener => {
+    listeners.add(listener);
+    return () => listeners.delete(listener);
+  }, [listeners]);
+  const dispatch = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(_ref => {
+    let {
+      type,
+      event
+    } = _ref;
+    listeners.forEach(listener => {
+      var _listener$type;
+
+      return (_listener$type = listener[type]) == null ? void 0 : _listener$type.call(listener, event);
+    });
+  }, [listeners]);
+  return [dispatch, registerListener];
+}
+
+const defaultScreenReaderInstructions = {
+  draggable: "\n    To pick up a draggable item, press the space bar.\n    While dragging, use the arrow keys to move the item.\n    Press space again to drop the item in its new position, or press escape to cancel.\n  "
+};
+const defaultAnnouncements = {
+  onDragStart(_ref) {
+    let {
+      active
+    } = _ref;
+    return "Picked up draggable item " + active.id + ".";
+  },
+
+  onDragOver(_ref2) {
+    let {
+      active,
+      over
+    } = _ref2;
+
+    if (over) {
+      return "Draggable item " + active.id + " was moved over droppable area " + over.id + ".";
+    }
+
+    return "Draggable item " + active.id + " is no longer over a droppable area.";
+  },
+
+  onDragEnd(_ref3) {
+    let {
+      active,
+      over
+    } = _ref3;
+
+    if (over) {
+      return "Draggable item " + active.id + " was dropped over droppable area " + over.id;
+    }
+
+    return "Draggable item " + active.id + " was dropped.";
+  },
+
+  onDragCancel(_ref4) {
+    let {
+      active
+    } = _ref4;
+    return "Dragging was cancelled. Draggable item " + active.id + " was dropped.";
+  }
+
+};
+
+function Accessibility(_ref) {
+  let {
+    announcements = defaultAnnouncements,
+    container,
+    hiddenTextDescribedById,
+    screenReaderInstructions = defaultScreenReaderInstructions
+  } = _ref;
+  const {
+    announce,
+    announcement
+  } = (0,_dnd_kit_accessibility__WEBPACK_IMPORTED_MODULE_3__.useAnnouncement)();
+  const liveRegionId = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useUniqueId)("DndLiveRegion");
+  const [mounted, setMounted] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    setMounted(true);
+  }, []);
+  useDndMonitor((0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => ({
+    onDragStart(_ref2) {
+      let {
+        active
+      } = _ref2;
+      announce(announcements.onDragStart({
+        active
+      }));
+    },
+
+    onDragMove(_ref3) {
+      let {
+        active,
+        over
+      } = _ref3;
+
+      if (announcements.onDragMove) {
+        announce(announcements.onDragMove({
+          active,
+          over
+        }));
+      }
+    },
+
+    onDragOver(_ref4) {
+      let {
+        active,
+        over
+      } = _ref4;
+      announce(announcements.onDragOver({
+        active,
+        over
+      }));
+    },
+
+    onDragEnd(_ref5) {
+      let {
+        active,
+        over
+      } = _ref5;
+      announce(announcements.onDragEnd({
+        active,
+        over
+      }));
+    },
+
+    onDragCancel(_ref6) {
+      let {
+        active,
+        over
+      } = _ref6;
+      announce(announcements.onDragCancel({
+        active,
+        over
+      }));
+    }
+
+  }), [announce, announcements]));
+
+  if (!mounted) {
+    return null;
+  }
+
+  const markup = react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_dnd_kit_accessibility__WEBPACK_IMPORTED_MODULE_3__.HiddenText, {
+    id: hiddenTextDescribedById,
+    value: screenReaderInstructions.draggable
+  }), react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_dnd_kit_accessibility__WEBPACK_IMPORTED_MODULE_3__.LiveRegion, {
+    id: liveRegionId,
+    announcement: announcement
+  }));
+  return container ? (0,react_dom__WEBPACK_IMPORTED_MODULE_1__.createPortal)(markup, container) : markup;
+}
+
+var Action;
+
+(function (Action) {
+  Action["DragStart"] = "dragStart";
+  Action["DragMove"] = "dragMove";
+  Action["DragEnd"] = "dragEnd";
+  Action["DragCancel"] = "dragCancel";
+  Action["DragOver"] = "dragOver";
+  Action["RegisterDroppable"] = "registerDroppable";
+  Action["SetDroppableDisabled"] = "setDroppableDisabled";
+  Action["UnregisterDroppable"] = "unregisterDroppable";
+})(Action || (Action = {}));
+
+function noop() {}
+
+function useSensor(sensor, options) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => ({
+    sensor,
+    options: options != null ? options : {}
+  }), // eslint-disable-next-line react-hooks/exhaustive-deps
+  [sensor, options]);
+}
+
+function useSensors() {
+  for (var _len = arguments.length, sensors = new Array(_len), _key = 0; _key < _len; _key++) {
+    sensors[_key] = arguments[_key];
+  }
+
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => [...sensors].filter(sensor => sensor != null), // eslint-disable-next-line react-hooks/exhaustive-deps
+  [...sensors]);
+}
+
+const defaultCoordinates = /*#__PURE__*/Object.freeze({
+  x: 0,
+  y: 0
+});
+
+/**
+ * Returns the distance between two points
+ */
+function distanceBetween(p1, p2) {
+  return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
+}
+
+function getRelativeTransformOrigin(event, rect) {
+  const eventCoordinates = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.getEventCoordinates)(event);
+
+  if (!eventCoordinates) {
+    return '0 0';
+  }
+
+  const transformOrigin = {
+    x: (eventCoordinates.x - rect.left) / rect.width * 100,
+    y: (eventCoordinates.y - rect.top) / rect.height * 100
+  };
+  return transformOrigin.x + "% " + transformOrigin.y + "%";
+}
+
+/**
+ * Sort collisions from smallest to greatest value
+ */
+function sortCollisionsAsc(_ref, _ref2) {
+  let {
+    data: {
+      value: a
+    }
+  } = _ref;
+  let {
+    data: {
+      value: b
+    }
+  } = _ref2;
+  return a - b;
+}
+/**
+ * Sort collisions from greatest to smallest value
+ */
+
+function sortCollisionsDesc(_ref3, _ref4) {
+  let {
+    data: {
+      value: a
+    }
+  } = _ref3;
+  let {
+    data: {
+      value: b
+    }
+  } = _ref4;
+  return b - a;
+}
+/**
+ * Returns the coordinates of the corners of a given rectangle:
+ * [TopLeft {x, y}, TopRight {x, y}, BottomLeft {x, y}, BottomRight {x, y}]
+ */
+
+function cornersOfRectangle(_ref5) {
+  let {
+    left,
+    top,
+    height,
+    width
+  } = _ref5;
+  return [{
+    x: left,
+    y: top
+  }, {
+    x: left + width,
+    y: top
+  }, {
+    x: left,
+    y: top + height
+  }, {
+    x: left + width,
+    y: top + height
+  }];
+}
+function getFirstCollision(collisions, property) {
+  if (!collisions || collisions.length === 0) {
+    return null;
+  }
+
+  const [firstCollision] = collisions;
+  return property ? firstCollision[property] : firstCollision;
+}
+
+/**
+ * Returns the coordinates of the center of a given ClientRect
+ */
+
+function centerOfRectangle(rect, left, top) {
+  if (left === void 0) {
+    left = rect.left;
+  }
+
+  if (top === void 0) {
+    top = rect.top;
+  }
+
+  return {
+    x: left + rect.width * 0.5,
+    y: top + rect.height * 0.5
+  };
+}
+/**
+ * Returns the closest rectangles from an array of rectangles to the center of a given
+ * rectangle.
+ */
+
+
+const closestCenter = _ref => {
+  let {
+    collisionRect,
+    droppableRects,
+    droppableContainers
+  } = _ref;
+  const centerRect = centerOfRectangle(collisionRect, collisionRect.left, collisionRect.top);
+  const collisions = [];
+
+  for (const droppableContainer of droppableContainers) {
+    const {
+      id
+    } = droppableContainer;
+    const rect = droppableRects.get(id);
+
+    if (rect) {
+      const distBetween = distanceBetween(centerOfRectangle(rect), centerRect);
+      collisions.push({
+        id,
+        data: {
+          droppableContainer,
+          value: distBetween
+        }
+      });
+    }
+  }
+
+  return collisions.sort(sortCollisionsAsc);
+};
+
+/**
+ * Returns the closest rectangles from an array of rectangles to the corners of
+ * another rectangle.
+ */
+
+const closestCorners = _ref => {
+  let {
+    collisionRect,
+    droppableRects,
+    droppableContainers
+  } = _ref;
+  const corners = cornersOfRectangle(collisionRect);
+  const collisions = [];
+
+  for (const droppableContainer of droppableContainers) {
+    const {
+      id
+    } = droppableContainer;
+    const rect = droppableRects.get(id);
+
+    if (rect) {
+      const rectCorners = cornersOfRectangle(rect);
+      const distances = corners.reduce((accumulator, corner, index) => {
+        return accumulator + distanceBetween(rectCorners[index], corner);
+      }, 0);
+      const effectiveDistance = Number((distances / 4).toFixed(4));
+      collisions.push({
+        id,
+        data: {
+          droppableContainer,
+          value: effectiveDistance
+        }
+      });
+    }
+  }
+
+  return collisions.sort(sortCollisionsAsc);
+};
+
+/**
+ * Returns the intersecting rectangle area between two rectangles
+ */
+
+function getIntersectionRatio(entry, target) {
+  const top = Math.max(target.top, entry.top);
+  const left = Math.max(target.left, entry.left);
+  const right = Math.min(target.left + target.width, entry.left + entry.width);
+  const bottom = Math.min(target.top + target.height, entry.top + entry.height);
+  const width = right - left;
+  const height = bottom - top;
+
+  if (left < right && top < bottom) {
+    const targetArea = target.width * target.height;
+    const entryArea = entry.width * entry.height;
+    const intersectionArea = width * height;
+    const intersectionRatio = intersectionArea / (targetArea + entryArea - intersectionArea);
+    return Number(intersectionRatio.toFixed(4));
+  } // Rectangles do not overlap, or overlap has an area of zero (edge/corner overlap)
+
+
+  return 0;
+}
+/**
+ * Returns the rectangles that has the greatest intersection area with a given
+ * rectangle in an array of rectangles.
+ */
+
+const rectIntersection = _ref => {
+  let {
+    collisionRect,
+    droppableRects,
+    droppableContainers
+  } = _ref;
+  const collisions = [];
+
+  for (const droppableContainer of droppableContainers) {
+    const {
+      id
+    } = droppableContainer;
+    const rect = droppableRects.get(id);
+
+    if (rect) {
+      const intersectionRatio = getIntersectionRatio(rect, collisionRect);
+
+      if (intersectionRatio > 0) {
+        collisions.push({
+          id,
+          data: {
+            droppableContainer,
+            value: intersectionRatio
+          }
+        });
+      }
+    }
+  }
+
+  return collisions.sort(sortCollisionsDesc);
+};
+
+/**
+ * Check if a given point is contained within a bounding rectangle
+ */
+
+function isPointWithinRect(point, rect) {
+  const {
+    top,
+    left,
+    bottom,
+    right
+  } = rect;
+  return top <= point.y && point.y <= bottom && left <= point.x && point.x <= right;
+}
+/**
+ * Returns the rectangles that the pointer is hovering over
+ */
+
+
+const pointerWithin = _ref => {
+  let {
+    droppableContainers,
+    droppableRects,
+    pointerCoordinates
+  } = _ref;
+
+  if (!pointerCoordinates) {
+    return [];
+  }
+
+  const collisions = [];
+
+  for (const droppableContainer of droppableContainers) {
+    const {
+      id
+    } = droppableContainer;
+    const rect = droppableRects.get(id);
+
+    if (rect && isPointWithinRect(pointerCoordinates, rect)) {
+      /* There may be more than a single rectangle intersecting
+       * with the pointer coordinates. In order to sort the
+       * colliding rectangles, we measure the distance between
+       * the pointer and the corners of the intersecting rectangle
+       */
+      const corners = cornersOfRectangle(rect);
+      const distances = corners.reduce((accumulator, corner) => {
+        return accumulator + distanceBetween(pointerCoordinates, corner);
+      }, 0);
+      const effectiveDistance = Number((distances / 4).toFixed(4));
+      collisions.push({
+        id,
+        data: {
+          droppableContainer,
+          value: effectiveDistance
+        }
+      });
+    }
+  }
+
+  return collisions.sort(sortCollisionsAsc);
+};
+
+function adjustScale(transform, rect1, rect2) {
+  return { ...transform,
+    scaleX: rect1 && rect2 ? rect1.width / rect2.width : 1,
+    scaleY: rect1 && rect2 ? rect1.height / rect2.height : 1
+  };
+}
+
+function getRectDelta(rect1, rect2) {
+  return rect1 && rect2 ? {
+    x: rect1.left - rect2.left,
+    y: rect1.top - rect2.top
+  } : defaultCoordinates;
+}
+
+function createRectAdjustmentFn(modifier) {
+  return function adjustClientRect(rect) {
+    for (var _len = arguments.length, adjustments = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      adjustments[_key - 1] = arguments[_key];
+    }
+
+    return adjustments.reduce((acc, adjustment) => ({ ...acc,
+      top: acc.top + modifier * adjustment.y,
+      bottom: acc.bottom + modifier * adjustment.y,
+      left: acc.left + modifier * adjustment.x,
+      right: acc.right + modifier * adjustment.x
+    }), { ...rect
+    });
+  };
+}
+const getAdjustedRect = /*#__PURE__*/createRectAdjustmentFn(1);
+
+function parseTransform(transform) {
+  if (transform.startsWith('matrix3d(')) {
+    const transformArray = transform.slice(9, -1).split(/, /);
+    return {
+      x: +transformArray[12],
+      y: +transformArray[13],
+      scaleX: +transformArray[0],
+      scaleY: +transformArray[5]
+    };
+  } else if (transform.startsWith('matrix(')) {
+    const transformArray = transform.slice(7, -1).split(/, /);
+    return {
+      x: +transformArray[4],
+      y: +transformArray[5],
+      scaleX: +transformArray[0],
+      scaleY: +transformArray[3]
+    };
+  }
+
+  return null;
+}
+
+function inverseTransform(rect, transform, transformOrigin) {
+  const parsedTransform = parseTransform(transform);
+
+  if (!parsedTransform) {
+    return rect;
+  }
+
+  const {
+    scaleX,
+    scaleY,
+    x: translateX,
+    y: translateY
+  } = parsedTransform;
+  const x = rect.left - translateX - (1 - scaleX) * parseFloat(transformOrigin);
+  const y = rect.top - translateY - (1 - scaleY) * parseFloat(transformOrigin.slice(transformOrigin.indexOf(' ') + 1));
+  const w = scaleX ? rect.width / scaleX : rect.width;
+  const h = scaleY ? rect.height / scaleY : rect.height;
+  return {
+    width: w,
+    height: h,
+    top: y,
+    right: x + w,
+    bottom: y + h,
+    left: x
+  };
+}
+
+const defaultOptions = {
+  ignoreTransform: false
+};
+/**
+ * Returns the bounding client rect of an element relative to the viewport.
+ */
+
+function getClientRect(element, options) {
+  if (options === void 0) {
+    options = defaultOptions;
+  }
+
+  let rect = element.getBoundingClientRect();
+
+  if (options.ignoreTransform) {
+    const {
+      transform,
+      transformOrigin
+    } = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.getWindow)(element).getComputedStyle(element);
+
+    if (transform) {
+      rect = inverseTransform(rect, transform, transformOrigin);
+    }
+  }
+
+  const {
+    top,
+    left,
+    width,
+    height,
+    bottom,
+    right
+  } = rect;
+  return {
+    top,
+    left,
+    width,
+    height,
+    bottom,
+    right
+  };
+}
+/**
+ * Returns the bounding client rect of an element relative to the viewport.
+ *
+ * @remarks
+ * The ClientRect returned by this method does not take into account transforms
+ * applied to the element it measures.
+ *
+ */
+
+function getTransformAgnosticClientRect(element) {
+  return getClientRect(element, {
+    ignoreTransform: true
+  });
+}
+
+function getWindowClientRect(element) {
+  const width = element.innerWidth;
+  const height = element.innerHeight;
+  return {
+    top: 0,
+    left: 0,
+    right: width,
+    bottom: height,
+    width,
+    height
+  };
+}
+
+function isFixed(node, computedStyle) {
+  if (computedStyle === void 0) {
+    computedStyle = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.getWindow)(node).getComputedStyle(node);
+  }
+
+  return computedStyle.position === 'fixed';
+}
+
+function isScrollable(element, computedStyle) {
+  if (computedStyle === void 0) {
+    computedStyle = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.getWindow)(element).getComputedStyle(element);
+  }
+
+  const overflowRegex = /(auto|scroll|overlay)/;
+  const properties = ['overflow', 'overflowX', 'overflowY'];
+  return properties.some(property => {
+    const value = computedStyle[property];
+    return typeof value === 'string' ? overflowRegex.test(value) : false;
+  });
+}
+
+function getScrollableAncestors(element, limit) {
+  const scrollParents = [];
+
+  function findScrollableAncestors(node) {
+    if (limit != null && scrollParents.length >= limit) {
+      return scrollParents;
+    }
+
+    if (!node) {
+      return scrollParents;
+    }
+
+    if ((0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.isDocument)(node) && node.scrollingElement != null && !scrollParents.includes(node.scrollingElement)) {
+      scrollParents.push(node.scrollingElement);
+      return scrollParents;
+    }
+
+    if (!(0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.isHTMLElement)(node) || (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.isSVGElement)(node)) {
+      return scrollParents;
+    }
+
+    if (scrollParents.includes(node)) {
+      return scrollParents;
+    }
+
+    const computedStyle = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.getWindow)(element).getComputedStyle(node);
+
+    if (node !== element) {
+      if (isScrollable(node, computedStyle)) {
+        scrollParents.push(node);
+      }
+    }
+
+    if (isFixed(node, computedStyle)) {
+      return scrollParents;
+    }
+
+    return findScrollableAncestors(node.parentNode);
+  }
+
+  if (!element) {
+    return scrollParents;
+  }
+
+  return findScrollableAncestors(element);
+}
+function getFirstScrollableAncestor(node) {
+  const [firstScrollableAncestor] = getScrollableAncestors(node, 1);
+  return firstScrollableAncestor != null ? firstScrollableAncestor : null;
+}
+
+function getScrollableElement(element) {
+  if (!_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.canUseDOM || !element) {
+    return null;
+  }
+
+  if ((0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.isWindow)(element)) {
+    return element;
+  }
+
+  if (!(0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.isNode)(element)) {
+    return null;
+  }
+
+  if ((0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.isDocument)(element) || element === (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.getOwnerDocument)(element).scrollingElement) {
+    return window;
+  }
+
+  if ((0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.isHTMLElement)(element)) {
+    return element;
+  }
+
+  return null;
+}
+
+function getScrollXCoordinate(element) {
+  if ((0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.isWindow)(element)) {
+    return element.scrollX;
+  }
+
+  return element.scrollLeft;
+}
+function getScrollYCoordinate(element) {
+  if ((0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.isWindow)(element)) {
+    return element.scrollY;
+  }
+
+  return element.scrollTop;
+}
+function getScrollCoordinates(element) {
+  return {
+    x: getScrollXCoordinate(element),
+    y: getScrollYCoordinate(element)
+  };
+}
+
+var Direction;
+
+(function (Direction) {
+  Direction[Direction["Forward"] = 1] = "Forward";
+  Direction[Direction["Backward"] = -1] = "Backward";
+})(Direction || (Direction = {}));
+
+function isDocumentScrollingElement(element) {
+  if (!_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.canUseDOM || !element) {
+    return false;
+  }
+
+  return element === document.scrollingElement;
+}
+
+function getScrollPosition(scrollingContainer) {
+  const minScroll = {
+    x: 0,
+    y: 0
+  };
+  const dimensions = isDocumentScrollingElement(scrollingContainer) ? {
+    height: window.innerHeight,
+    width: window.innerWidth
+  } : {
+    height: scrollingContainer.clientHeight,
+    width: scrollingContainer.clientWidth
+  };
+  const maxScroll = {
+    x: scrollingContainer.scrollWidth - dimensions.width,
+    y: scrollingContainer.scrollHeight - dimensions.height
+  };
+  const isTop = scrollingContainer.scrollTop <= minScroll.y;
+  const isLeft = scrollingContainer.scrollLeft <= minScroll.x;
+  const isBottom = scrollingContainer.scrollTop >= maxScroll.y;
+  const isRight = scrollingContainer.scrollLeft >= maxScroll.x;
+  return {
+    isTop,
+    isLeft,
+    isBottom,
+    isRight,
+    maxScroll,
+    minScroll
+  };
+}
+
+const defaultThreshold = {
+  x: 0.2,
+  y: 0.2
+};
+function getScrollDirectionAndSpeed(scrollContainer, scrollContainerRect, _ref, acceleration, thresholdPercentage) {
+  let {
+    top,
+    left,
+    right,
+    bottom
+  } = _ref;
+
+  if (acceleration === void 0) {
+    acceleration = 10;
+  }
+
+  if (thresholdPercentage === void 0) {
+    thresholdPercentage = defaultThreshold;
+  }
+
+  const {
+    isTop,
+    isBottom,
+    isLeft,
+    isRight
+  } = getScrollPosition(scrollContainer);
+  const direction = {
+    x: 0,
+    y: 0
+  };
+  const speed = {
+    x: 0,
+    y: 0
+  };
+  const threshold = {
+    height: scrollContainerRect.height * thresholdPercentage.y,
+    width: scrollContainerRect.width * thresholdPercentage.x
+  };
+
+  if (!isTop && top <= scrollContainerRect.top + threshold.height) {
+    // Scroll Up
+    direction.y = Direction.Backward;
+    speed.y = acceleration * Math.abs((scrollContainerRect.top + threshold.height - top) / threshold.height);
+  } else if (!isBottom && bottom >= scrollContainerRect.bottom - threshold.height) {
+    // Scroll Down
+    direction.y = Direction.Forward;
+    speed.y = acceleration * Math.abs((scrollContainerRect.bottom - threshold.height - bottom) / threshold.height);
+  }
+
+  if (!isRight && right >= scrollContainerRect.right - threshold.width) {
+    // Scroll Right
+    direction.x = Direction.Forward;
+    speed.x = acceleration * Math.abs((scrollContainerRect.right - threshold.width - right) / threshold.width);
+  } else if (!isLeft && left <= scrollContainerRect.left + threshold.width) {
+    // Scroll Left
+    direction.x = Direction.Backward;
+    speed.x = acceleration * Math.abs((scrollContainerRect.left + threshold.width - left) / threshold.width);
+  }
+
+  return {
+    direction,
+    speed
+  };
+}
+
+function getScrollElementRect(element) {
+  if (element === document.scrollingElement) {
+    const {
+      innerWidth,
+      innerHeight
+    } = window;
+    return {
+      top: 0,
+      left: 0,
+      right: innerWidth,
+      bottom: innerHeight,
+      width: innerWidth,
+      height: innerHeight
+    };
+  }
+
+  const {
+    top,
+    left,
+    right,
+    bottom
+  } = element.getBoundingClientRect();
+  return {
+    top,
+    left,
+    right,
+    bottom,
+    width: element.clientWidth,
+    height: element.clientHeight
+  };
+}
+
+function getScrollOffsets(scrollableAncestors) {
+  return scrollableAncestors.reduce((acc, node) => {
+    return (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.add)(acc, getScrollCoordinates(node));
+  }, defaultCoordinates);
+}
+function getScrollXOffset(scrollableAncestors) {
+  return scrollableAncestors.reduce((acc, node) => {
+    return acc + getScrollXCoordinate(node);
+  }, 0);
+}
+function getScrollYOffset(scrollableAncestors) {
+  return scrollableAncestors.reduce((acc, node) => {
+    return acc + getScrollYCoordinate(node);
+  }, 0);
+}
+
+function scrollIntoViewIfNeeded(element, measure) {
+  if (measure === void 0) {
+    measure = getClientRect;
+  }
+
+  if (!element) {
+    return;
+  }
+
+  const {
+    top,
+    left,
+    bottom,
+    right
+  } = measure(element);
+  const firstScrollableAncestor = getFirstScrollableAncestor(element);
+
+  if (!firstScrollableAncestor) {
+    return;
+  }
+
+  if (bottom <= 0 || right <= 0 || top >= window.innerHeight || left >= window.innerWidth) {
+    element.scrollIntoView({
+      block: 'center',
+      inline: 'center'
+    });
+  }
+}
+
+const properties = [['x', ['left', 'right'], getScrollXOffset], ['y', ['top', 'bottom'], getScrollYOffset]];
+class Rect {
+  constructor(rect, element) {
+    this.rect = void 0;
+    this.width = void 0;
+    this.height = void 0;
+    this.top = void 0;
+    this.bottom = void 0;
+    this.right = void 0;
+    this.left = void 0;
+    const scrollableAncestors = getScrollableAncestors(element);
+    const scrollOffsets = getScrollOffsets(scrollableAncestors);
+    this.rect = { ...rect
+    };
+    this.width = rect.width;
+    this.height = rect.height;
+
+    for (const [axis, keys, getScrollOffset] of properties) {
+      for (const key of keys) {
+        Object.defineProperty(this, key, {
+          get: () => {
+            const currentOffsets = getScrollOffset(scrollableAncestors);
+            const scrollOffsetsDeltla = scrollOffsets[axis] - currentOffsets;
+            return this.rect[key] + scrollOffsetsDeltla;
+          },
+          enumerable: true
+        });
+      }
+    }
+
+    Object.defineProperty(this, 'rect', {
+      enumerable: false
+    });
+  }
+
+}
+
+class Listeners {
+  constructor(target) {
+    this.target = void 0;
+    this.listeners = [];
+
+    this.removeAll = () => {
+      this.listeners.forEach(listener => {
+        var _this$target;
+
+        return (_this$target = this.target) == null ? void 0 : _this$target.removeEventListener(...listener);
+      });
+    };
+
+    this.target = target;
+  }
+
+  add(eventName, handler, options) {
+    var _this$target2;
+
+    (_this$target2 = this.target) == null ? void 0 : _this$target2.addEventListener(eventName, handler, options);
+    this.listeners.push([eventName, handler, options]);
+  }
+
+}
+
+function getEventListenerTarget(target) {
+  // If the `event.target` element is removed from the document events will still be targeted
+  // at it, and hence won't always bubble up to the window or document anymore.
+  // If there is any risk of an element being removed while it is being dragged,
+  // the best practice is to attach the event listeners directly to the target.
+  // https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
+  const {
+    EventTarget
+  } = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.getWindow)(target);
+  return target instanceof EventTarget ? target : (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.getOwnerDocument)(target);
+}
+
+function hasExceededDistance(delta, measurement) {
+  const dx = Math.abs(delta.x);
+  const dy = Math.abs(delta.y);
+
+  if (typeof measurement === 'number') {
+    return Math.sqrt(dx ** 2 + dy ** 2) > measurement;
+  }
+
+  if ('x' in measurement && 'y' in measurement) {
+    return dx > measurement.x && dy > measurement.y;
+  }
+
+  if ('x' in measurement) {
+    return dx > measurement.x;
+  }
+
+  if ('y' in measurement) {
+    return dy > measurement.y;
+  }
+
+  return false;
+}
+
+var EventName;
+
+(function (EventName) {
+  EventName["Click"] = "click";
+  EventName["DragStart"] = "dragstart";
+  EventName["Keydown"] = "keydown";
+  EventName["ContextMenu"] = "contextmenu";
+  EventName["Resize"] = "resize";
+  EventName["SelectionChange"] = "selectionchange";
+  EventName["VisibilityChange"] = "visibilitychange";
+})(EventName || (EventName = {}));
+
+function preventDefault(event) {
+  event.preventDefault();
+}
+function stopPropagation(event) {
+  event.stopPropagation();
+}
+
+var KeyboardCode;
+
+(function (KeyboardCode) {
+  KeyboardCode["Space"] = "Space";
+  KeyboardCode["Down"] = "ArrowDown";
+  KeyboardCode["Right"] = "ArrowRight";
+  KeyboardCode["Left"] = "ArrowLeft";
+  KeyboardCode["Up"] = "ArrowUp";
+  KeyboardCode["Esc"] = "Escape";
+  KeyboardCode["Enter"] = "Enter";
+})(KeyboardCode || (KeyboardCode = {}));
+
+const defaultKeyboardCodes = {
+  start: [KeyboardCode.Space, KeyboardCode.Enter],
+  cancel: [KeyboardCode.Esc],
+  end: [KeyboardCode.Space, KeyboardCode.Enter]
+};
+const defaultKeyboardCoordinateGetter = (event, _ref) => {
+  let {
+    currentCoordinates
+  } = _ref;
+
+  switch (event.code) {
+    case KeyboardCode.Right:
+      return { ...currentCoordinates,
+        x: currentCoordinates.x + 25
+      };
+
+    case KeyboardCode.Left:
+      return { ...currentCoordinates,
+        x: currentCoordinates.x - 25
+      };
+
+    case KeyboardCode.Down:
+      return { ...currentCoordinates,
+        y: currentCoordinates.y + 25
+      };
+
+    case KeyboardCode.Up:
+      return { ...currentCoordinates,
+        y: currentCoordinates.y - 25
+      };
+  }
+
+  return undefined;
+};
+
+class KeyboardSensor {
+  constructor(props) {
+    this.props = void 0;
+    this.autoScrollEnabled = false;
+    this.referenceCoordinates = void 0;
+    this.listeners = void 0;
+    this.windowListeners = void 0;
+    this.props = props;
+    const {
+      event: {
+        target
+      }
+    } = props;
+    this.props = props;
+    this.listeners = new Listeners((0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.getOwnerDocument)(target));
+    this.windowListeners = new Listeners((0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.getWindow)(target));
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
+    this.attach();
+  }
+
+  attach() {
+    this.handleStart();
+    this.windowListeners.add(EventName.Resize, this.handleCancel);
+    this.windowListeners.add(EventName.VisibilityChange, this.handleCancel);
+    setTimeout(() => this.listeners.add(EventName.Keydown, this.handleKeyDown));
+  }
+
+  handleStart() {
+    const {
+      activeNode,
+      onStart
+    } = this.props;
+    const node = activeNode.node.current;
+
+    if (node) {
+      scrollIntoViewIfNeeded(node);
+    }
+
+    onStart(defaultCoordinates);
+  }
+
+  handleKeyDown(event) {
+    if ((0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.isKeyboardEvent)(event)) {
+      const {
+        active,
+        context,
+        options
+      } = this.props;
+      const {
+        keyboardCodes = defaultKeyboardCodes,
+        coordinateGetter = defaultKeyboardCoordinateGetter,
+        scrollBehavior = 'smooth'
+      } = options;
+      const {
+        code
+      } = event;
+
+      if (keyboardCodes.end.includes(code)) {
+        this.handleEnd(event);
+        return;
+      }
+
+      if (keyboardCodes.cancel.includes(code)) {
+        this.handleCancel(event);
+        return;
+      }
+
+      const {
+        collisionRect
+      } = context.current;
+      const currentCoordinates = collisionRect ? {
+        x: collisionRect.left,
+        y: collisionRect.top
+      } : defaultCoordinates;
+
+      if (!this.referenceCoordinates) {
+        this.referenceCoordinates = currentCoordinates;
+      }
+
+      const newCoordinates = coordinateGetter(event, {
+        active,
+        context: context.current,
+        currentCoordinates
+      });
+
+      if (newCoordinates) {
+        const coordinatesDelta = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.subtract)(newCoordinates, currentCoordinates);
+        const scrollDelta = {
+          x: 0,
+          y: 0
+        };
+        const {
+          scrollableAncestors
+        } = context.current;
+
+        for (const scrollContainer of scrollableAncestors) {
+          const direction = event.code;
+          const {
+            isTop,
+            isRight,
+            isLeft,
+            isBottom,
+            maxScroll,
+            minScroll
+          } = getScrollPosition(scrollContainer);
+          const scrollElementRect = getScrollElementRect(scrollContainer);
+          const clampedCoordinates = {
+            x: Math.min(direction === KeyboardCode.Right ? scrollElementRect.right - scrollElementRect.width / 2 : scrollElementRect.right, Math.max(direction === KeyboardCode.Right ? scrollElementRect.left : scrollElementRect.left + scrollElementRect.width / 2, newCoordinates.x)),
+            y: Math.min(direction === KeyboardCode.Down ? scrollElementRect.bottom - scrollElementRect.height / 2 : scrollElementRect.bottom, Math.max(direction === KeyboardCode.Down ? scrollElementRect.top : scrollElementRect.top + scrollElementRect.height / 2, newCoordinates.y))
+          };
+          const canScrollX = direction === KeyboardCode.Right && !isRight || direction === KeyboardCode.Left && !isLeft;
+          const canScrollY = direction === KeyboardCode.Down && !isBottom || direction === KeyboardCode.Up && !isTop;
+
+          if (canScrollX && clampedCoordinates.x !== newCoordinates.x) {
+            const newScrollCoordinates = scrollContainer.scrollLeft + coordinatesDelta.x;
+            const canScrollToNewCoordinates = direction === KeyboardCode.Right && newScrollCoordinates <= maxScroll.x || direction === KeyboardCode.Left && newScrollCoordinates >= minScroll.x;
+
+            if (canScrollToNewCoordinates && !coordinatesDelta.y) {
+              // We don't need to update coordinates, the scroll adjustment alone will trigger
+              // logic to auto-detect the new container we are over
+              scrollContainer.scrollTo({
+                left: newScrollCoordinates,
+                behavior: scrollBehavior
+              });
+              return;
+            }
+
+            if (canScrollToNewCoordinates) {
+              scrollDelta.x = scrollContainer.scrollLeft - newScrollCoordinates;
+            } else {
+              scrollDelta.x = direction === KeyboardCode.Right ? scrollContainer.scrollLeft - maxScroll.x : scrollContainer.scrollLeft - minScroll.x;
+            }
+
+            if (scrollDelta.x) {
+              scrollContainer.scrollBy({
+                left: -scrollDelta.x,
+                behavior: scrollBehavior
+              });
+            }
+
+            break;
+          } else if (canScrollY && clampedCoordinates.y !== newCoordinates.y) {
+            const newScrollCoordinates = scrollContainer.scrollTop + coordinatesDelta.y;
+            const canScrollToNewCoordinates = direction === KeyboardCode.Down && newScrollCoordinates <= maxScroll.y || direction === KeyboardCode.Up && newScrollCoordinates >= minScroll.y;
+
+            if (canScrollToNewCoordinates && !coordinatesDelta.x) {
+              // We don't need to update coordinates, the scroll adjustment alone will trigger
+              // logic to auto-detect the new container we are over
+              scrollContainer.scrollTo({
+                top: newScrollCoordinates,
+                behavior: scrollBehavior
+              });
+              return;
+            }
+
+            if (canScrollToNewCoordinates) {
+              scrollDelta.y = scrollContainer.scrollTop - newScrollCoordinates;
+            } else {
+              scrollDelta.y = direction === KeyboardCode.Down ? scrollContainer.scrollTop - maxScroll.y : scrollContainer.scrollTop - minScroll.y;
+            }
+
+            if (scrollDelta.y) {
+              scrollContainer.scrollBy({
+                top: -scrollDelta.y,
+                behavior: scrollBehavior
+              });
+            }
+
+            break;
+          }
+        }
+
+        this.handleMove(event, (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.add)((0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.subtract)(newCoordinates, this.referenceCoordinates), scrollDelta));
+      }
+    }
+  }
+
+  handleMove(event, coordinates) {
+    const {
+      onMove
+    } = this.props;
+    event.preventDefault();
+    onMove(coordinates);
+  }
+
+  handleEnd(event) {
+    const {
+      onEnd
+    } = this.props;
+    event.preventDefault();
+    this.detach();
+    onEnd();
+  }
+
+  handleCancel(event) {
+    const {
+      onCancel
+    } = this.props;
+    event.preventDefault();
+    this.detach();
+    onCancel();
+  }
+
+  detach() {
+    this.listeners.removeAll();
+    this.windowListeners.removeAll();
+  }
+
+}
+KeyboardSensor.activators = [{
+  eventName: 'onKeyDown',
+  handler: (event, _ref, _ref2) => {
+    let {
+      keyboardCodes = defaultKeyboardCodes,
+      onActivation
+    } = _ref;
+    let {
+      active
+    } = _ref2;
+    const {
+      code
+    } = event.nativeEvent;
+
+    if (keyboardCodes.start.includes(code)) {
+      const activator = active.activatorNode.current;
+
+      if (activator && event.target !== activator) {
+        return false;
+      }
+
+      event.preventDefault();
+      onActivation == null ? void 0 : onActivation({
+        event: event.nativeEvent
+      });
+      return true;
+    }
+
+    return false;
+  }
+}];
+
+function isDistanceConstraint(constraint) {
+  return Boolean(constraint && 'distance' in constraint);
+}
+
+function isDelayConstraint(constraint) {
+  return Boolean(constraint && 'delay' in constraint);
+}
+
+class AbstractPointerSensor {
+  constructor(props, events, listenerTarget) {
+    var _getEventCoordinates;
+
+    if (listenerTarget === void 0) {
+      listenerTarget = getEventListenerTarget(props.event.target);
+    }
+
+    this.props = void 0;
+    this.events = void 0;
+    this.autoScrollEnabled = true;
+    this.document = void 0;
+    this.activated = false;
+    this.initialCoordinates = void 0;
+    this.timeoutId = null;
+    this.listeners = void 0;
+    this.documentListeners = void 0;
+    this.windowListeners = void 0;
+    this.props = props;
+    this.events = events;
+    const {
+      event
+    } = props;
+    const {
+      target
+    } = event;
+    this.props = props;
+    this.events = events;
+    this.document = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.getOwnerDocument)(target);
+    this.documentListeners = new Listeners(this.document);
+    this.listeners = new Listeners(listenerTarget);
+    this.windowListeners = new Listeners((0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.getWindow)(target));
+    this.initialCoordinates = (_getEventCoordinates = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.getEventCoordinates)(event)) != null ? _getEventCoordinates : defaultCoordinates;
+    this.handleStart = this.handleStart.bind(this);
+    this.handleMove = this.handleMove.bind(this);
+    this.handleEnd = this.handleEnd.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
+    this.handleKeydown = this.handleKeydown.bind(this);
+    this.removeTextSelection = this.removeTextSelection.bind(this);
+    this.attach();
+  }
+
+  attach() {
+    const {
+      events,
+      props: {
+        options: {
+          activationConstraint
+        }
+      }
+    } = this;
+    this.listeners.add(events.move.name, this.handleMove, {
+      passive: false
+    });
+    this.listeners.add(events.end.name, this.handleEnd);
+    this.windowListeners.add(EventName.Resize, this.handleCancel);
+    this.windowListeners.add(EventName.DragStart, preventDefault);
+    this.windowListeners.add(EventName.VisibilityChange, this.handleCancel);
+    this.windowListeners.add(EventName.ContextMenu, preventDefault);
+    this.documentListeners.add(EventName.Keydown, this.handleKeydown);
+
+    if (activationConstraint) {
+      if (isDistanceConstraint(activationConstraint)) {
+        return;
+      }
+
+      if (isDelayConstraint(activationConstraint)) {
+        this.timeoutId = setTimeout(this.handleStart, activationConstraint.delay);
+        return;
+      }
+    }
+
+    this.handleStart();
+  }
+
+  detach() {
+    this.listeners.removeAll();
+    this.windowListeners.removeAll(); // Wait until the next event loop before removing document listeners
+    // This is necessary because we listen for `click` and `selection` events on the document
+
+    setTimeout(this.documentListeners.removeAll, 50);
+
+    if (this.timeoutId !== null) {
+      clearTimeout(this.timeoutId);
+      this.timeoutId = null;
+    }
+  }
+
+  handleStart() {
+    const {
+      initialCoordinates
+    } = this;
+    const {
+      onStart
+    } = this.props;
+
+    if (initialCoordinates) {
+      this.activated = true; // Stop propagation of click events once activation constraints are met
+
+      this.documentListeners.add(EventName.Click, stopPropagation, {
+        capture: true
+      }); // Remove any text selection from the document
+
+      this.removeTextSelection(); // Prevent further text selection while dragging
+
+      this.documentListeners.add(EventName.SelectionChange, this.removeTextSelection);
+      onStart(initialCoordinates);
+    }
+  }
+
+  handleMove(event) {
+    var _getEventCoordinates2;
+
+    const {
+      activated,
+      initialCoordinates,
+      props
+    } = this;
+    const {
+      onMove,
+      options: {
+        activationConstraint
+      }
+    } = props;
+
+    if (!initialCoordinates) {
+      return;
+    }
+
+    const coordinates = (_getEventCoordinates2 = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.getEventCoordinates)(event)) != null ? _getEventCoordinates2 : defaultCoordinates;
+    const delta = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.subtract)(initialCoordinates, coordinates);
+
+    if (!activated && activationConstraint) {
+      // Constraint validation
+      if (isDelayConstraint(activationConstraint)) {
+        if (hasExceededDistance(delta, activationConstraint.tolerance)) {
+          return this.handleCancel();
+        }
+
+        return;
+      }
+
+      if (isDistanceConstraint(activationConstraint)) {
+        if (activationConstraint.tolerance != null && hasExceededDistance(delta, activationConstraint.tolerance)) {
+          return this.handleCancel();
+        }
+
+        if (hasExceededDistance(delta, activationConstraint.distance)) {
+          return this.handleStart();
+        }
+
+        return;
+      }
+    }
+
+    if (event.cancelable) {
+      event.preventDefault();
+    }
+
+    onMove(coordinates);
+  }
+
+  handleEnd() {
+    const {
+      onEnd
+    } = this.props;
+    this.detach();
+    onEnd();
+  }
+
+  handleCancel() {
+    const {
+      onCancel
+    } = this.props;
+    this.detach();
+    onCancel();
+  }
+
+  handleKeydown(event) {
+    if (event.code === KeyboardCode.Esc) {
+      this.handleCancel();
+    }
+  }
+
+  removeTextSelection() {
+    var _this$document$getSel;
+
+    (_this$document$getSel = this.document.getSelection()) == null ? void 0 : _this$document$getSel.removeAllRanges();
+  }
+
+}
+
+const events = {
+  move: {
+    name: 'pointermove'
+  },
+  end: {
+    name: 'pointerup'
+  }
+};
+class PointerSensor extends AbstractPointerSensor {
+  constructor(props) {
+    const {
+      event
+    } = props; // Pointer events stop firing if the target is unmounted while dragging
+    // Therefore we attach listeners to the owner document instead
+
+    const listenerTarget = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.getOwnerDocument)(event.target);
+    super(props, events, listenerTarget);
+  }
+
+}
+PointerSensor.activators = [{
+  eventName: 'onPointerDown',
+  handler: (_ref, _ref2) => {
+    let {
+      nativeEvent: event
+    } = _ref;
+    let {
+      onActivation
+    } = _ref2;
+
+    if (!event.isPrimary || event.button !== 0) {
+      return false;
+    }
+
+    onActivation == null ? void 0 : onActivation({
+      event
+    });
+    return true;
+  }
+}];
+
+const events$1 = {
+  move: {
+    name: 'mousemove'
+  },
+  end: {
+    name: 'mouseup'
+  }
+};
+var MouseButton;
+
+(function (MouseButton) {
+  MouseButton[MouseButton["RightClick"] = 2] = "RightClick";
+})(MouseButton || (MouseButton = {}));
+
+class MouseSensor extends AbstractPointerSensor {
+  constructor(props) {
+    super(props, events$1, (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.getOwnerDocument)(props.event.target));
+  }
+
+}
+MouseSensor.activators = [{
+  eventName: 'onMouseDown',
+  handler: (_ref, _ref2) => {
+    let {
+      nativeEvent: event
+    } = _ref;
+    let {
+      onActivation
+    } = _ref2;
+
+    if (event.button === MouseButton.RightClick) {
+      return false;
+    }
+
+    onActivation == null ? void 0 : onActivation({
+      event
+    });
+    return true;
+  }
+}];
+
+const events$2 = {
+  move: {
+    name: 'touchmove'
+  },
+  end: {
+    name: 'touchend'
+  }
+};
+class TouchSensor extends AbstractPointerSensor {
+  constructor(props) {
+    super(props, events$2);
+  }
+
+  static setup() {
+    // Adding a non-capture and non-passive `touchmove` listener in order
+    // to force `event.preventDefault()` calls to work in dynamically added
+    // touchmove event handlers. This is required for iOS Safari.
+    window.addEventListener(events$2.move.name, noop, {
+      capture: false,
+      passive: false
+    });
+    return function teardown() {
+      window.removeEventListener(events$2.move.name, noop);
+    }; // We create a new handler because the teardown function of another sensor
+    // could remove our event listener if we use a referentially equal listener.
+
+    function noop() {}
+  }
+
+}
+TouchSensor.activators = [{
+  eventName: 'onTouchStart',
+  handler: (_ref, _ref2) => {
+    let {
+      nativeEvent: event
+    } = _ref;
+    let {
+      onActivation
+    } = _ref2;
+    const {
+      touches
+    } = event;
+
+    if (touches.length > 1) {
+      return false;
+    }
+
+    onActivation == null ? void 0 : onActivation({
+      event
+    });
+    return true;
+  }
+}];
+
+var AutoScrollActivator;
+
+(function (AutoScrollActivator) {
+  AutoScrollActivator[AutoScrollActivator["Pointer"] = 0] = "Pointer";
+  AutoScrollActivator[AutoScrollActivator["DraggableRect"] = 1] = "DraggableRect";
+})(AutoScrollActivator || (AutoScrollActivator = {}));
+
+var TraversalOrder;
+
+(function (TraversalOrder) {
+  TraversalOrder[TraversalOrder["TreeOrder"] = 0] = "TreeOrder";
+  TraversalOrder[TraversalOrder["ReversedTreeOrder"] = 1] = "ReversedTreeOrder";
+})(TraversalOrder || (TraversalOrder = {}));
+
+function useAutoScroller(_ref) {
+  let {
+    acceleration,
+    activator = AutoScrollActivator.Pointer,
+    canScroll,
+    draggingRect,
+    enabled,
+    interval = 5,
+    order = TraversalOrder.TreeOrder,
+    pointerCoordinates,
+    scrollableAncestors,
+    scrollableAncestorRects,
+    delta,
+    threshold
+  } = _ref;
+  const scrollIntent = useScrollIntent({
+    delta,
+    disabled: !enabled
+  });
+  const [setAutoScrollInterval, clearAutoScrollInterval] = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useInterval)();
+  const scrollSpeed = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)({
+    x: 0,
+    y: 0
+  });
+  const scrollDirection = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)({
+    x: 0,
+    y: 0
+  });
+  const rect = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
+    switch (activator) {
+      case AutoScrollActivator.Pointer:
+        return pointerCoordinates ? {
+          top: pointerCoordinates.y,
+          bottom: pointerCoordinates.y,
+          left: pointerCoordinates.x,
+          right: pointerCoordinates.x
+        } : null;
+
+      case AutoScrollActivator.DraggableRect:
+        return draggingRect;
+    }
+  }, [activator, draggingRect, pointerCoordinates]);
+  const scrollContainerRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  const autoScroll = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(() => {
+    const scrollContainer = scrollContainerRef.current;
+
+    if (!scrollContainer) {
+      return;
+    }
+
+    const scrollLeft = scrollSpeed.current.x * scrollDirection.current.x;
+    const scrollTop = scrollSpeed.current.y * scrollDirection.current.y;
+    scrollContainer.scrollBy(scrollLeft, scrollTop);
+  }, []);
+  const sortedScrollableAncestors = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => order === TraversalOrder.TreeOrder ? [...scrollableAncestors].reverse() : scrollableAncestors, [order, scrollableAncestors]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (!enabled || !scrollableAncestors.length || !rect) {
+      clearAutoScrollInterval();
+      return;
+    }
+
+    for (const scrollContainer of sortedScrollableAncestors) {
+      if ((canScroll == null ? void 0 : canScroll(scrollContainer)) === false) {
+        continue;
+      }
+
+      const index = scrollableAncestors.indexOf(scrollContainer);
+      const scrollContainerRect = scrollableAncestorRects[index];
+
+      if (!scrollContainerRect) {
+        continue;
+      }
+
+      const {
+        direction,
+        speed
+      } = getScrollDirectionAndSpeed(scrollContainer, scrollContainerRect, rect, acceleration, threshold);
+
+      for (const axis of ['x', 'y']) {
+        if (!scrollIntent[axis][direction[axis]]) {
+          speed[axis] = 0;
+          direction[axis] = 0;
+        }
+      }
+
+      if (speed.x > 0 || speed.y > 0) {
+        clearAutoScrollInterval();
+        scrollContainerRef.current = scrollContainer;
+        setAutoScrollInterval(autoScroll, interval);
+        scrollSpeed.current = speed;
+        scrollDirection.current = direction;
+        return;
+      }
+    }
+
+    scrollSpeed.current = {
+      x: 0,
+      y: 0
+    };
+    scrollDirection.current = {
+      x: 0,
+      y: 0
+    };
+    clearAutoScrollInterval();
+  }, // eslint-disable-next-line react-hooks/exhaustive-deps
+  [acceleration, autoScroll, canScroll, clearAutoScrollInterval, enabled, interval, // eslint-disable-next-line react-hooks/exhaustive-deps
+  JSON.stringify(rect), // eslint-disable-next-line react-hooks/exhaustive-deps
+  JSON.stringify(scrollIntent), setAutoScrollInterval, scrollableAncestors, sortedScrollableAncestors, scrollableAncestorRects, // eslint-disable-next-line react-hooks/exhaustive-deps
+  JSON.stringify(threshold)]);
+}
+const defaultScrollIntent = {
+  x: {
+    [Direction.Backward]: false,
+    [Direction.Forward]: false
+  },
+  y: {
+    [Direction.Backward]: false,
+    [Direction.Forward]: false
+  }
+};
+
+function useScrollIntent(_ref2) {
+  let {
+    delta,
+    disabled
+  } = _ref2;
+  const previousDelta = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.usePrevious)(delta);
+  return (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useLazyMemo)(previousIntent => {
+    if (disabled || !previousDelta || !previousIntent) {
+      // Reset scroll intent tracking when auto-scrolling is disabled
+      return defaultScrollIntent;
+    }
+
+    const direction = {
+      x: Math.sign(delta.x - previousDelta.x),
+      y: Math.sign(delta.y - previousDelta.y)
+    }; // Keep track of the user intent to scroll in each direction for both axis
+
+    return {
+      x: {
+        [Direction.Backward]: previousIntent.x[Direction.Backward] || direction.x === -1,
+        [Direction.Forward]: previousIntent.x[Direction.Forward] || direction.x === 1
+      },
+      y: {
+        [Direction.Backward]: previousIntent.y[Direction.Backward] || direction.y === -1,
+        [Direction.Forward]: previousIntent.y[Direction.Forward] || direction.y === 1
+      }
+    };
+  }, [disabled, delta, previousDelta]);
+}
+
+function useCachedNode(draggableNodes, id) {
+  const draggableNode = id !== null ? draggableNodes.get(id) : undefined;
+  const node = draggableNode ? draggableNode.node.current : null;
+  return (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useLazyMemo)(cachedNode => {
+    var _ref;
+
+    if (id === null) {
+      return null;
+    } // In some cases, the draggable node can unmount while dragging
+    // This is the case for virtualized lists. In those situations,
+    // we fall back to the last known value for that node.
+
+
+    return (_ref = node != null ? node : cachedNode) != null ? _ref : null;
+  }, [node, id]);
+}
+
+function useCombineActivators(sensors, getSyntheticHandler) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => sensors.reduce((accumulator, sensor) => {
+    const {
+      sensor: Sensor
+    } = sensor;
+    const sensorActivators = Sensor.activators.map(activator => ({
+      eventName: activator.eventName,
+      handler: getSyntheticHandler(activator.handler, sensor)
+    }));
+    return [...accumulator, ...sensorActivators];
+  }, []), [sensors, getSyntheticHandler]);
+}
+
+var MeasuringStrategy;
+
+(function (MeasuringStrategy) {
+  MeasuringStrategy[MeasuringStrategy["Always"] = 0] = "Always";
+  MeasuringStrategy[MeasuringStrategy["BeforeDragging"] = 1] = "BeforeDragging";
+  MeasuringStrategy[MeasuringStrategy["WhileDragging"] = 2] = "WhileDragging";
+})(MeasuringStrategy || (MeasuringStrategy = {}));
+
+var MeasuringFrequency;
+
+(function (MeasuringFrequency) {
+  MeasuringFrequency["Optimized"] = "optimized";
+})(MeasuringFrequency || (MeasuringFrequency = {}));
+
+const defaultValue = /*#__PURE__*/new Map();
+function useDroppableMeasuring(containers, _ref) {
+  let {
+    dragging,
+    dependencies,
+    config
+  } = _ref;
+  const [queue, setQueue] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const {
+    frequency,
+    measure,
+    strategy
+  } = config;
+  const containersRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(containers);
+  const disabled = isDisabled();
+  const disabledRef = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useLatestValue)(disabled);
+  const measureDroppableContainers = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function (ids) {
+    if (ids === void 0) {
+      ids = [];
+    }
+
+    if (disabledRef.current) {
+      return;
+    }
+
+    setQueue(value => {
+      if (value === null) {
+        return ids;
+      }
+
+      return value.concat(ids.filter(id => !value.includes(id)));
+    });
+  }, [disabledRef]);
+  const timeoutId = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  const droppableRects = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useLazyMemo)(previousValue => {
+    if (disabled && !dragging) {
+      return defaultValue;
+    }
+
+    if (!previousValue || previousValue === defaultValue || containersRef.current !== containers || queue != null) {
+      const map = new Map();
+
+      for (let container of containers) {
+        if (!container) {
+          continue;
+        }
+
+        if (queue && queue.length > 0 && !queue.includes(container.id) && container.rect.current) {
+          // This container does not need to be re-measured
+          map.set(container.id, container.rect.current);
+          continue;
+        }
+
+        const node = container.node.current;
+        const rect = node ? new Rect(measure(node), node) : null;
+        container.rect.current = rect;
+
+        if (rect) {
+          map.set(container.id, rect);
+        }
+      }
+
+      return map;
+    }
+
+    return previousValue;
+  }, [containers, queue, dragging, disabled, measure]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    containersRef.current = containers;
+  }, [containers]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (disabled) {
+      return;
+    }
+
+    measureDroppableContainers();
+  }, // eslint-disable-next-line react-hooks/exhaustive-deps
+  [dragging, disabled]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (queue && queue.length > 0) {
+      setQueue(null);
+    }
+  }, //eslint-disable-next-line react-hooks/exhaustive-deps
+  [JSON.stringify(queue)]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (disabled || typeof frequency !== 'number' || timeoutId.current !== null) {
+      return;
+    }
+
+    timeoutId.current = setTimeout(() => {
+      measureDroppableContainers();
+      timeoutId.current = null;
+    }, frequency);
+  }, // eslint-disable-next-line react-hooks/exhaustive-deps
+  [frequency, disabled, measureDroppableContainers, ...dependencies]);
+  return {
+    droppableRects,
+    measureDroppableContainers,
+    measuringScheduled: queue != null
+  };
+
+  function isDisabled() {
+    switch (strategy) {
+      case MeasuringStrategy.Always:
+        return false;
+
+      case MeasuringStrategy.BeforeDragging:
+        return dragging;
+
+      default:
+        return !dragging;
+    }
+  }
+}
+
+function useInitialValue(value, computeFn) {
+  return (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useLazyMemo)(previousValue => {
+    if (!value) {
+      return null;
+    }
+
+    if (previousValue) {
+      return previousValue;
+    }
+
+    return typeof computeFn === 'function' ? computeFn(value) : value;
+  }, [computeFn, value]);
+}
+
+function useInitialRect(node, measure) {
+  return useInitialValue(node, measure);
+}
+
+/**
+ * Returns a new MutationObserver instance.
+ * If `MutationObserver` is undefined in the execution environment, returns `undefined`.
+ */
+
+function useMutationObserver(_ref) {
+  let {
+    callback,
+    disabled
+  } = _ref;
+  const handleMutations = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useEvent)(callback);
+  const mutationObserver = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
+    if (disabled || typeof window === 'undefined' || typeof window.MutationObserver === 'undefined') {
+      return undefined;
+    }
+
+    const {
+      MutationObserver
+    } = window;
+    return new MutationObserver(handleMutations);
+  }, [handleMutations, disabled]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    return () => mutationObserver == null ? void 0 : mutationObserver.disconnect();
+  }, [mutationObserver]);
+  return mutationObserver;
+}
+
+/**
+ * Returns a new ResizeObserver instance bound to the `onResize` callback.
+ * If `ResizeObserver` is undefined in the execution environment, returns `undefined`.
+ */
+
+function useResizeObserver(_ref) {
+  let {
+    callback,
+    disabled
+  } = _ref;
+  const handleResize = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useEvent)(callback);
+  const resizeObserver = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
+    if (disabled || typeof window === 'undefined' || typeof window.ResizeObserver === 'undefined') {
+      return undefined;
+    }
+
+    const {
+      ResizeObserver
+    } = window;
+    return new ResizeObserver(handleResize);
+  }, // eslint-disable-next-line react-hooks/exhaustive-deps
+  [disabled]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    return () => resizeObserver == null ? void 0 : resizeObserver.disconnect();
+  }, [resizeObserver]);
+  return resizeObserver;
+}
+
+function defaultMeasure(element) {
+  return new Rect(getClientRect(element), element);
+}
+
+function useRect(element, measure, fallbackRect) {
+  if (measure === void 0) {
+    measure = defaultMeasure;
+  }
+
+  const [rect, measureRect] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)(reducer, null);
+  const mutationObserver = useMutationObserver({
+    callback(records) {
+      if (!element) {
+        return;
+      }
+
+      for (const record of records) {
+        const {
+          type,
+          target
+        } = record;
+
+        if (type === 'childList' && target instanceof HTMLElement && target.contains(element)) {
+          measureRect();
+          break;
+        }
+      }
+    }
+
+  });
+  const resizeObserver = useResizeObserver({
+    callback: measureRect
+  });
+  (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useIsomorphicLayoutEffect)(() => {
+    measureRect();
+
+    if (element) {
+      resizeObserver == null ? void 0 : resizeObserver.observe(element);
+      mutationObserver == null ? void 0 : mutationObserver.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+    } else {
+      resizeObserver == null ? void 0 : resizeObserver.disconnect();
+      mutationObserver == null ? void 0 : mutationObserver.disconnect();
+    }
+  }, [element]);
+  return rect;
+
+  function reducer(currentRect) {
+    if (!element) {
+      return null;
+    }
+
+    if (element.isConnected === false) {
+      var _ref;
+
+      // Fall back to last rect we measured if the element is
+      // no longer connected to the DOM.
+      return (_ref = currentRect != null ? currentRect : fallbackRect) != null ? _ref : null;
+    }
+
+    const newRect = measure(element);
+
+    if (JSON.stringify(currentRect) === JSON.stringify(newRect)) {
+      return currentRect;
+    }
+
+    return newRect;
+  }
+}
+
+function useRectDelta(rect) {
+  const initialRect = useInitialValue(rect);
+  return getRectDelta(rect, initialRect);
+}
+
+const defaultValue$1 = [];
+function useScrollableAncestors(node) {
+  const previousNode = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(node);
+  const ancestors = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useLazyMemo)(previousValue => {
+    if (!node) {
+      return defaultValue$1;
+    }
+
+    if (previousValue && previousValue !== defaultValue$1 && node && previousNode.current && node.parentNode === previousNode.current.parentNode) {
+      return previousValue;
+    }
+
+    return getScrollableAncestors(node);
+  }, [node]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    previousNode.current = node;
+  }, [node]);
+  return ancestors;
+}
+
+function useScrollOffsets(elements) {
+  const [scrollCoordinates, setScrollCoordinates] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const prevElements = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(elements); // To-do: Throttle the handleScroll callback
+
+  const handleScroll = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(event => {
+    const scrollingElement = getScrollableElement(event.target);
+
+    if (!scrollingElement) {
+      return;
+    }
+
+    setScrollCoordinates(scrollCoordinates => {
+      if (!scrollCoordinates) {
+        return null;
+      }
+
+      scrollCoordinates.set(scrollingElement, getScrollCoordinates(scrollingElement));
+      return new Map(scrollCoordinates);
+    });
+  }, []);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    const previousElements = prevElements.current;
+
+    if (elements !== previousElements) {
+      cleanup(previousElements);
+      const entries = elements.map(element => {
+        const scrollableElement = getScrollableElement(element);
+
+        if (scrollableElement) {
+          scrollableElement.addEventListener('scroll', handleScroll, {
+            passive: true
+          });
+          return [scrollableElement, getScrollCoordinates(scrollableElement)];
+        }
+
+        return null;
+      }).filter(entry => entry != null);
+      setScrollCoordinates(entries.length ? new Map(entries) : null);
+      prevElements.current = elements;
+    }
+
+    return () => {
+      cleanup(elements);
+      cleanup(previousElements);
+    };
+
+    function cleanup(elements) {
+      elements.forEach(element => {
+        const scrollableElement = getScrollableElement(element);
+        scrollableElement == null ? void 0 : scrollableElement.removeEventListener('scroll', handleScroll);
+      });
+    }
+  }, [handleScroll, elements]);
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
+    if (elements.length) {
+      return scrollCoordinates ? Array.from(scrollCoordinates.values()).reduce((acc, coordinates) => (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.add)(acc, coordinates), defaultCoordinates) : getScrollOffsets(elements);
+    }
+
+    return defaultCoordinates;
+  }, [elements, scrollCoordinates]);
+}
+
+function useScrollOffsetsDelta(scrollOffsets, dependencies) {
+  if (dependencies === void 0) {
+    dependencies = [];
+  }
+
+  const initialScrollOffsets = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    initialScrollOffsets.current = null;
+  }, // eslint-disable-next-line react-hooks/exhaustive-deps
+  dependencies);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    const hasScrollOffsets = scrollOffsets !== defaultCoordinates;
+
+    if (hasScrollOffsets && !initialScrollOffsets.current) {
+      initialScrollOffsets.current = scrollOffsets;
+    }
+
+    if (!hasScrollOffsets && initialScrollOffsets.current) {
+      initialScrollOffsets.current = null;
+    }
+  }, [scrollOffsets]);
+  return initialScrollOffsets.current ? (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.subtract)(scrollOffsets, initialScrollOffsets.current) : defaultCoordinates;
+}
+
+function useSensorSetup(sensors) {
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (!_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.canUseDOM) {
+      return;
+    }
+
+    const teardownFns = sensors.map(_ref => {
+      let {
+        sensor
+      } = _ref;
+      return sensor.setup == null ? void 0 : sensor.setup();
+    });
+    return () => {
+      for (const teardown of teardownFns) {
+        teardown == null ? void 0 : teardown();
+      }
+    };
+  }, // TO-DO: Sensors length could theoretically change which would not be a valid dependency
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  sensors.map(_ref2 => {
+    let {
+      sensor
+    } = _ref2;
+    return sensor;
+  }));
+}
+
+function useSyntheticListeners(listeners, id) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
+    return listeners.reduce((acc, _ref) => {
+      let {
+        eventName,
+        handler
+      } = _ref;
+
+      acc[eventName] = event => {
+        handler(event, id);
+      };
+
+      return acc;
+    }, {});
+  }, [listeners, id]);
+}
+
+function useWindowRect(element) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => element ? getWindowClientRect(element) : null, [element]);
+}
+
+const defaultValue$2 = [];
+function useRects(elements, measure) {
+  if (measure === void 0) {
+    measure = getClientRect;
+  }
+
+  const [firstElement] = elements;
+  const windowRect = useWindowRect(firstElement ? (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.getWindow)(firstElement) : null);
+  const [rects, measureRects] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)(reducer, defaultValue$2);
+  const resizeObserver = useResizeObserver({
+    callback: measureRects
+  });
+
+  if (elements.length > 0 && rects === defaultValue$2) {
+    measureRects();
+  }
+
+  (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useIsomorphicLayoutEffect)(() => {
+    if (elements.length) {
+      elements.forEach(element => resizeObserver == null ? void 0 : resizeObserver.observe(element));
+    } else {
+      resizeObserver == null ? void 0 : resizeObserver.disconnect();
+      measureRects();
+    }
+  }, [elements]);
+  return rects;
+
+  function reducer() {
+    if (!elements.length) {
+      return defaultValue$2;
+    }
+
+    return elements.map(element => isDocumentScrollingElement(element) ? windowRect : new Rect(measure(element), element));
+  }
+}
+
+function getMeasurableNode(node) {
+  if (!node) {
+    return null;
+  }
+
+  if (node.children.length > 1) {
+    return node;
+  }
+
+  const firstChild = node.children[0];
+  return (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.isHTMLElement)(firstChild) ? firstChild : node;
+}
+
+function useDragOverlayMeasuring(_ref) {
+  let {
+    measure
+  } = _ref;
+  const [rect, setRect] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const handleResize = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(entries => {
+    for (const {
+      target
+    } of entries) {
+      if ((0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.isHTMLElement)(target)) {
+        setRect(rect => {
+          const newRect = measure(target);
+          return rect ? { ...rect,
+            width: newRect.width,
+            height: newRect.height
+          } : newRect;
+        });
+        break;
+      }
+    }
+  }, [measure]);
+  const resizeObserver = useResizeObserver({
+    callback: handleResize
+  });
+  const handleNodeChange = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(element => {
+    const node = getMeasurableNode(element);
+    resizeObserver == null ? void 0 : resizeObserver.disconnect();
+
+    if (node) {
+      resizeObserver == null ? void 0 : resizeObserver.observe(node);
+    }
+
+    setRect(node ? measure(node) : null);
+  }, [measure, resizeObserver]);
+  const [nodeRef, setRef] = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useNodeRef)(handleNodeChange);
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => ({
+    nodeRef,
+    rect,
+    setRef
+  }), [rect, nodeRef, setRef]);
+}
+
+const defaultSensors = [{
+  sensor: PointerSensor,
+  options: {}
+}, {
+  sensor: KeyboardSensor,
+  options: {}
+}];
+const defaultData = {
+  current: {}
+};
+const defaultMeasuringConfiguration = {
+  draggable: {
+    measure: getTransformAgnosticClientRect
+  },
+  droppable: {
+    measure: getTransformAgnosticClientRect,
+    strategy: MeasuringStrategy.WhileDragging,
+    frequency: MeasuringFrequency.Optimized
+  },
+  dragOverlay: {
+    measure: getClientRect
+  }
+};
+
+class DroppableContainersMap extends Map {
+  get(id) {
+    var _super$get;
+
+    return id != null ? (_super$get = super.get(id)) != null ? _super$get : undefined : undefined;
+  }
+
+  toArray() {
+    return Array.from(this.values());
+  }
+
+  getEnabled() {
+    return this.toArray().filter(_ref => {
+      let {
+        disabled
+      } = _ref;
+      return !disabled;
+    });
+  }
+
+  getNodeFor(id) {
+    var _this$get$node$curren, _this$get;
+
+    return (_this$get$node$curren = (_this$get = this.get(id)) == null ? void 0 : _this$get.node.current) != null ? _this$get$node$curren : undefined;
+  }
+
+}
+
+const defaultPublicContext = {
+  activatorEvent: null,
+  active: null,
+  activeNode: null,
+  activeNodeRect: null,
+  collisions: null,
+  containerNodeRect: null,
+  draggableNodes: /*#__PURE__*/new Map(),
+  droppableRects: /*#__PURE__*/new Map(),
+  droppableContainers: /*#__PURE__*/new DroppableContainersMap(),
+  over: null,
+  dragOverlay: {
+    nodeRef: {
+      current: null
+    },
+    rect: null,
+    setRef: noop
+  },
+  scrollableAncestors: [],
+  scrollableAncestorRects: [],
+  measuringConfiguration: defaultMeasuringConfiguration,
+  measureDroppableContainers: noop,
+  windowRect: null,
+  measuringScheduled: false
+};
+const defaultInternalContext = {
+  activatorEvent: null,
+  activators: [],
+  active: null,
+  activeNodeRect: null,
+  ariaDescribedById: {
+    draggable: ''
+  },
+  dispatch: noop,
+  draggableNodes: /*#__PURE__*/new Map(),
+  over: null,
+  measureDroppableContainers: noop
+};
+const InternalContext = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)(defaultInternalContext);
+const PublicContext = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)(defaultPublicContext);
+
+function getInitialState() {
+  return {
+    draggable: {
+      active: null,
+      initialCoordinates: {
+        x: 0,
+        y: 0
+      },
+      nodes: new Map(),
+      translate: {
+        x: 0,
+        y: 0
+      }
+    },
+    droppable: {
+      containers: new DroppableContainersMap()
+    }
+  };
+}
+function reducer(state, action) {
+  switch (action.type) {
+    case Action.DragStart:
+      return { ...state,
+        draggable: { ...state.draggable,
+          initialCoordinates: action.initialCoordinates,
+          active: action.active
+        }
+      };
+
+    case Action.DragMove:
+      if (!state.draggable.active) {
+        return state;
+      }
+
+      return { ...state,
+        draggable: { ...state.draggable,
+          translate: {
+            x: action.coordinates.x - state.draggable.initialCoordinates.x,
+            y: action.coordinates.y - state.draggable.initialCoordinates.y
+          }
+        }
+      };
+
+    case Action.DragEnd:
+    case Action.DragCancel:
+      return { ...state,
+        draggable: { ...state.draggable,
+          active: null,
+          initialCoordinates: {
+            x: 0,
+            y: 0
+          },
+          translate: {
+            x: 0,
+            y: 0
+          }
+        }
+      };
+
+    case Action.RegisterDroppable:
+      {
+        const {
+          element
+        } = action;
+        const {
+          id
+        } = element;
+        const containers = new DroppableContainersMap(state.droppable.containers);
+        containers.set(id, element);
+        return { ...state,
+          droppable: { ...state.droppable,
+            containers
+          }
+        };
+      }
+
+    case Action.SetDroppableDisabled:
+      {
+        const {
+          id,
+          key,
+          disabled
+        } = action;
+        const element = state.droppable.containers.get(id);
+
+        if (!element || key !== element.key) {
+          return state;
+        }
+
+        const containers = new DroppableContainersMap(state.droppable.containers);
+        containers.set(id, { ...element,
+          disabled
+        });
+        return { ...state,
+          droppable: { ...state.droppable,
+            containers
+          }
+        };
+      }
+
+    case Action.UnregisterDroppable:
+      {
+        const {
+          id,
+          key
+        } = action;
+        const element = state.droppable.containers.get(id);
+
+        if (!element || key !== element.key) {
+          return state;
+        }
+
+        const containers = new DroppableContainersMap(state.droppable.containers);
+        containers.delete(id);
+        return { ...state,
+          droppable: { ...state.droppable,
+            containers
+          }
+        };
+      }
+
+    default:
+      {
+        return state;
+      }
+  }
+}
+
+function RestoreFocus(_ref) {
+  let {
+    disabled
+  } = _ref;
+  const {
+    active,
+    activatorEvent,
+    draggableNodes
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(InternalContext);
+  const previousActivatorEvent = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.usePrevious)(activatorEvent);
+  const previousActiveId = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.usePrevious)(active == null ? void 0 : active.id); // Restore keyboard focus on the activator node
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (disabled) {
+      return;
+    }
+
+    if (!activatorEvent && previousActivatorEvent && previousActiveId != null) {
+      if (!(0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.isKeyboardEvent)(previousActivatorEvent)) {
+        return;
+      }
+
+      if (document.activeElement === previousActivatorEvent.target) {
+        // No need to restore focus
+        return;
+      }
+
+      const draggableNode = draggableNodes.get(previousActiveId);
+
+      if (!draggableNode) {
+        return;
+      }
+
+      const {
+        activatorNode,
+        node
+      } = draggableNode;
+
+      if (!activatorNode.current && !node.current) {
+        return;
+      }
+
+      requestAnimationFrame(() => {
+        for (const element of [activatorNode.current, node.current]) {
+          if (!element) {
+            continue;
+          }
+
+          const focusableNode = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.findFirstFocusableNode)(element);
+
+          if (focusableNode) {
+            focusableNode.focus();
+            break;
+          }
+        }
+      });
+    }
+  }, [activatorEvent, disabled, draggableNodes, previousActiveId, previousActivatorEvent]);
+  return null;
+}
+
+function applyModifiers(modifiers, _ref) {
+  let {
+    transform,
+    ...args
+  } = _ref;
+  return modifiers != null && modifiers.length ? modifiers.reduce((accumulator, modifier) => {
+    return modifier({
+      transform: accumulator,
+      ...args
+    });
+  }, transform) : transform;
+}
+
+function useMeasuringConfiguration(config) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => ({
+    draggable: { ...defaultMeasuringConfiguration.draggable,
+      ...(config == null ? void 0 : config.draggable)
+    },
+    droppable: { ...defaultMeasuringConfiguration.droppable,
+      ...(config == null ? void 0 : config.droppable)
+    },
+    dragOverlay: { ...defaultMeasuringConfiguration.dragOverlay,
+      ...(config == null ? void 0 : config.dragOverlay)
+    }
+  }), // eslint-disable-next-line react-hooks/exhaustive-deps
+  [config == null ? void 0 : config.draggable, config == null ? void 0 : config.droppable, config == null ? void 0 : config.dragOverlay]);
+}
+
+function useLayoutShiftScrollCompensation(_ref) {
+  let {
+    activeNode,
+    measure,
+    initialRect,
+    config = true
+  } = _ref;
+  const initialized = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(false);
+  const {
+    x,
+    y
+  } = typeof config === 'boolean' ? {
+    x: config,
+    y: config
+  } : config;
+  (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useIsomorphicLayoutEffect)(() => {
+    const disabled = !x && !y;
+
+    if (disabled || !activeNode) {
+      initialized.current = false;
+      return;
+    }
+
+    if (initialized.current || !initialRect) {
+      // Return early if layout shift scroll compensation was already attempted
+      // or if there is no initialRect to compare to.
+      return;
+    } // Get the most up to date node ref for the active draggable
+
+
+    const node = activeNode == null ? void 0 : activeNode.node.current;
+
+    if (!node || node.isConnected === false) {
+      // Return early if there is no attached node ref or if the node is
+      // disconnected from the document.
+      return;
+    }
+
+    const rect = measure(node);
+    const rectDelta = getRectDelta(rect, initialRect);
+
+    if (!x) {
+      rectDelta.x = 0;
+    }
+
+    if (!y) {
+      rectDelta.y = 0;
+    } // Only perform layout shift scroll compensation once
+
+
+    initialized.current = true;
+
+    if (Math.abs(rectDelta.x) > 0 || Math.abs(rectDelta.y) > 0) {
+      const firstScrollableAncestor = getFirstScrollableAncestor(node);
+
+      if (firstScrollableAncestor) {
+        firstScrollableAncestor.scrollBy({
+          top: rectDelta.y,
+          left: rectDelta.x
+        });
+      }
+    }
+  }, [activeNode, x, y, initialRect, measure]);
+}
+
+const ActiveDraggableContext = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)({ ...defaultCoordinates,
+  scaleX: 1,
+  scaleY: 1
+});
+var Status;
+
+(function (Status) {
+  Status[Status["Uninitialized"] = 0] = "Uninitialized";
+  Status[Status["Initializing"] = 1] = "Initializing";
+  Status[Status["Initialized"] = 2] = "Initialized";
+})(Status || (Status = {}));
+
+const DndContext = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.memo)(function DndContext(_ref) {
+  var _sensorContext$curren, _dragOverlay$nodeRef$, _dragOverlay$rect, _over$rect;
+
+  let {
+    id,
+    accessibility,
+    autoScroll = true,
+    children,
+    sensors = defaultSensors,
+    collisionDetection = rectIntersection,
+    measuring,
+    modifiers,
+    ...props
+  } = _ref;
+  const store = (0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)(reducer, undefined, getInitialState);
+  const [state, dispatch] = store;
+  const [dispatchMonitorEvent, registerMonitorListener] = useDndMonitorProvider();
+  const [status, setStatus] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(Status.Uninitialized);
+  const isInitialized = status === Status.Initialized;
+  const {
+    draggable: {
+      active: activeId,
+      nodes: draggableNodes,
+      translate
+    },
+    droppable: {
+      containers: droppableContainers
+    }
+  } = state;
+  const node = activeId ? draggableNodes.get(activeId) : null;
+  const activeRects = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)({
+    initial: null,
+    translated: null
+  });
+  const active = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
+    var _node$data;
+
+    return activeId != null ? {
+      id: activeId,
+      // It's possible for the active node to unmount while dragging
+      data: (_node$data = node == null ? void 0 : node.data) != null ? _node$data : defaultData,
+      rect: activeRects
+    } : null;
+  }, [activeId, node]);
+  const activeRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  const [activeSensor, setActiveSensor] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const [activatorEvent, setActivatorEvent] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const latestProps = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useLatestValue)(props, Object.values(props));
+  const draggableDescribedById = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useUniqueId)("DndDescribedBy", id);
+  const enabledDroppableContainers = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => droppableContainers.getEnabled(), [droppableContainers]);
+  const measuringConfiguration = useMeasuringConfiguration(measuring);
+  const {
+    droppableRects,
+    measureDroppableContainers,
+    measuringScheduled
+  } = useDroppableMeasuring(enabledDroppableContainers, {
+    dragging: isInitialized,
+    dependencies: [translate.x, translate.y],
+    config: measuringConfiguration.droppable
+  });
+  const activeNode = useCachedNode(draggableNodes, activeId);
+  const activationCoordinates = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => activatorEvent ? (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.getEventCoordinates)(activatorEvent) : null, [activatorEvent]);
+  const autoScrollOptions = getAutoScrollerOptions();
+  const initialActiveNodeRect = useInitialRect(activeNode, measuringConfiguration.draggable.measure);
+  useLayoutShiftScrollCompensation({
+    activeNode: activeId ? draggableNodes.get(activeId) : null,
+    config: autoScrollOptions.layoutShiftCompensation,
+    initialRect: initialActiveNodeRect,
+    measure: measuringConfiguration.draggable.measure
+  });
+  const activeNodeRect = useRect(activeNode, measuringConfiguration.draggable.measure, initialActiveNodeRect);
+  const containerNodeRect = useRect(activeNode ? activeNode.parentElement : null);
+  const sensorContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)({
+    activatorEvent: null,
+    active: null,
+    activeNode,
+    collisionRect: null,
+    collisions: null,
+    droppableRects,
+    draggableNodes,
+    draggingNode: null,
+    draggingNodeRect: null,
+    droppableContainers,
+    over: null,
+    scrollableAncestors: [],
+    scrollAdjustedTranslate: null
+  });
+  const overNode = droppableContainers.getNodeFor((_sensorContext$curren = sensorContext.current.over) == null ? void 0 : _sensorContext$curren.id);
+  const dragOverlay = useDragOverlayMeasuring({
+    measure: measuringConfiguration.dragOverlay.measure
+  }); // Use the rect of the drag overlay if it is mounted
+
+  const draggingNode = (_dragOverlay$nodeRef$ = dragOverlay.nodeRef.current) != null ? _dragOverlay$nodeRef$ : activeNode;
+  const draggingNodeRect = isInitialized ? (_dragOverlay$rect = dragOverlay.rect) != null ? _dragOverlay$rect : activeNodeRect : null;
+  const usesDragOverlay = Boolean(dragOverlay.nodeRef.current && dragOverlay.rect); // The delta between the previous and new position of the draggable node
+  // is only relevant when there is no drag overlay
+
+  const nodeRectDelta = useRectDelta(usesDragOverlay ? null : activeNodeRect); // Get the window rect of the dragging node
+
+  const windowRect = useWindowRect(draggingNode ? (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.getWindow)(draggingNode) : null); // Get scrollable ancestors of the dragging node
+
+  const scrollableAncestors = useScrollableAncestors(isInitialized ? overNode != null ? overNode : activeNode : null);
+  const scrollableAncestorRects = useRects(scrollableAncestors); // Apply modifiers
+
+  const modifiedTranslate = applyModifiers(modifiers, {
+    transform: {
+      x: translate.x - nodeRectDelta.x,
+      y: translate.y - nodeRectDelta.y,
+      scaleX: 1,
+      scaleY: 1
+    },
+    activatorEvent,
+    active,
+    activeNodeRect,
+    containerNodeRect,
+    draggingNodeRect,
+    over: sensorContext.current.over,
+    overlayNodeRect: dragOverlay.rect,
+    scrollableAncestors,
+    scrollableAncestorRects,
+    windowRect
+  });
+  const pointerCoordinates = activationCoordinates ? (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.add)(activationCoordinates, translate) : null;
+  const scrollOffsets = useScrollOffsets(scrollableAncestors); // Represents the scroll delta since dragging was initiated
+
+  const scrollAdjustment = useScrollOffsetsDelta(scrollOffsets); // Represents the scroll delta since the last time the active node rect was measured
+
+  const activeNodeScrollDelta = useScrollOffsetsDelta(scrollOffsets, [activeNodeRect]);
+  const scrollAdjustedTranslate = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.add)(modifiedTranslate, scrollAdjustment);
+  const collisionRect = draggingNodeRect ? getAdjustedRect(draggingNodeRect, modifiedTranslate) : null;
+  const collisions = active && collisionRect ? collisionDetection({
+    active,
+    collisionRect,
+    droppableRects,
+    droppableContainers: enabledDroppableContainers,
+    pointerCoordinates
+  }) : null;
+  const overId = getFirstCollision(collisions, 'id');
+  const [over, setOver] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null); // When there is no drag overlay used, we need to account for the
+  // window scroll delta
+
+  const appliedTranslate = usesDragOverlay ? modifiedTranslate : (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.add)(modifiedTranslate, activeNodeScrollDelta);
+  const transform = adjustScale(appliedTranslate, (_over$rect = over == null ? void 0 : over.rect) != null ? _over$rect : null, activeNodeRect);
+  const instantiateSensor = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)((event, _ref2) => {
+    let {
+      sensor: Sensor,
+      options
+    } = _ref2;
+
+    if (activeRef.current == null) {
+      return;
+    }
+
+    const activeNode = draggableNodes.get(activeRef.current);
+
+    if (!activeNode) {
+      return;
+    }
+
+    const activatorEvent = event.nativeEvent;
+    const sensorInstance = new Sensor({
+      active: activeRef.current,
+      activeNode,
+      event: activatorEvent,
+      options,
+      // Sensors need to be instantiated with refs for arguments that change over time
+      // otherwise they are frozen in time with the stale arguments
+      context: sensorContext,
+
+      onStart(initialCoordinates) {
+        const id = activeRef.current;
+
+        if (id == null) {
+          return;
+        }
+
+        const draggableNode = draggableNodes.get(id);
+
+        if (!draggableNode) {
+          return;
+        }
+
+        const {
+          onDragStart
+        } = latestProps.current;
+        const event = {
+          active: {
+            id,
+            data: draggableNode.data,
+            rect: activeRects
+          }
+        };
+        (0,react_dom__WEBPACK_IMPORTED_MODULE_1__.unstable_batchedUpdates)(() => {
+          onDragStart == null ? void 0 : onDragStart(event);
+          setStatus(Status.Initializing);
+          dispatch({
+            type: Action.DragStart,
+            initialCoordinates,
+            active: id
+          });
+          dispatchMonitorEvent({
+            type: 'onDragStart',
+            event
+          });
+        });
+      },
+
+      onMove(coordinates) {
+        dispatch({
+          type: Action.DragMove,
+          coordinates
+        });
+      },
+
+      onEnd: createHandler(Action.DragEnd),
+      onCancel: createHandler(Action.DragCancel)
+    });
+    (0,react_dom__WEBPACK_IMPORTED_MODULE_1__.unstable_batchedUpdates)(() => {
+      setActiveSensor(sensorInstance);
+      setActivatorEvent(event.nativeEvent);
+    });
+
+    function createHandler(type) {
+      return async function handler() {
+        const {
+          active,
+          collisions,
+          over,
+          scrollAdjustedTranslate
+        } = sensorContext.current;
+        let event = null;
+
+        if (active && scrollAdjustedTranslate) {
+          const {
+            cancelDrop
+          } = latestProps.current;
+          event = {
+            activatorEvent,
+            active: active,
+            collisions,
+            delta: scrollAdjustedTranslate,
+            over
+          };
+
+          if (type === Action.DragEnd && typeof cancelDrop === 'function') {
+            const shouldCancel = await Promise.resolve(cancelDrop(event));
+
+            if (shouldCancel) {
+              type = Action.DragCancel;
+            }
+          }
+        }
+
+        activeRef.current = null;
+        (0,react_dom__WEBPACK_IMPORTED_MODULE_1__.unstable_batchedUpdates)(() => {
+          dispatch({
+            type
+          });
+          setStatus(Status.Uninitialized);
+          setOver(null);
+          setActiveSensor(null);
+          setActivatorEvent(null);
+          const eventName = type === Action.DragEnd ? 'onDragEnd' : 'onDragCancel';
+
+          if (event) {
+            const handler = latestProps.current[eventName];
+            handler == null ? void 0 : handler(event);
+            dispatchMonitorEvent({
+              type: eventName,
+              event
+            });
+          }
+        });
+      };
+    }
+  }, // eslint-disable-next-line react-hooks/exhaustive-deps
+  [draggableNodes]);
+  const bindActivatorToSensorInstantiator = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)((handler, sensor) => {
+    return (event, active) => {
+      const nativeEvent = event.nativeEvent;
+      const activeDraggableNode = draggableNodes.get(active);
+
+      if ( // Another sensor is already instantiating
+      activeRef.current !== null || // No active draggable
+      !activeDraggableNode || // Event has already been captured
+      nativeEvent.dndKit || nativeEvent.defaultPrevented) {
+        return;
+      }
+
+      const activationContext = {
+        active: activeDraggableNode
+      };
+      const shouldActivate = handler(event, sensor.options, activationContext);
+
+      if (shouldActivate === true) {
+        nativeEvent.dndKit = {
+          capturedBy: sensor.sensor
+        };
+        activeRef.current = active;
+        instantiateSensor(event, sensor);
+      }
+    };
+  }, [draggableNodes, instantiateSensor]);
+  const activators = useCombineActivators(sensors, bindActivatorToSensorInstantiator);
+  useSensorSetup(sensors);
+  (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useIsomorphicLayoutEffect)(() => {
+    if (activeNodeRect && status === Status.Initializing) {
+      setStatus(Status.Initialized);
+    }
+  }, [activeNodeRect, status]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    const {
+      onDragMove
+    } = latestProps.current;
+    const {
+      active,
+      activatorEvent,
+      collisions,
+      over
+    } = sensorContext.current;
+
+    if (!active || !activatorEvent) {
+      return;
+    }
+
+    const event = {
+      active,
+      activatorEvent,
+      collisions,
+      delta: {
+        x: scrollAdjustedTranslate.x,
+        y: scrollAdjustedTranslate.y
+      },
+      over
+    };
+    (0,react_dom__WEBPACK_IMPORTED_MODULE_1__.unstable_batchedUpdates)(() => {
+      onDragMove == null ? void 0 : onDragMove(event);
+      dispatchMonitorEvent({
+        type: 'onDragMove',
+        event
+      });
+    });
+  }, // eslint-disable-next-line react-hooks/exhaustive-deps
+  [scrollAdjustedTranslate.x, scrollAdjustedTranslate.y]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    const {
+      active,
+      activatorEvent,
+      collisions,
+      droppableContainers,
+      scrollAdjustedTranslate
+    } = sensorContext.current;
+
+    if (!active || activeRef.current == null || !activatorEvent || !scrollAdjustedTranslate) {
+      return;
+    }
+
+    const {
+      onDragOver
+    } = latestProps.current;
+    const overContainer = droppableContainers.get(overId);
+    const over = overContainer && overContainer.rect.current ? {
+      id: overContainer.id,
+      rect: overContainer.rect.current,
+      data: overContainer.data,
+      disabled: overContainer.disabled
+    } : null;
+    const event = {
+      active,
+      activatorEvent,
+      collisions,
+      delta: {
+        x: scrollAdjustedTranslate.x,
+        y: scrollAdjustedTranslate.y
+      },
+      over
+    };
+    (0,react_dom__WEBPACK_IMPORTED_MODULE_1__.unstable_batchedUpdates)(() => {
+      setOver(over);
+      onDragOver == null ? void 0 : onDragOver(event);
+      dispatchMonitorEvent({
+        type: 'onDragOver',
+        event
+      });
+    });
+  }, // eslint-disable-next-line react-hooks/exhaustive-deps
+  [overId]);
+  (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useIsomorphicLayoutEffect)(() => {
+    sensorContext.current = {
+      activatorEvent,
+      active,
+      activeNode,
+      collisionRect,
+      collisions,
+      droppableRects,
+      draggableNodes,
+      draggingNode,
+      draggingNodeRect,
+      droppableContainers,
+      over,
+      scrollableAncestors,
+      scrollAdjustedTranslate
+    };
+    activeRects.current = {
+      initial: draggingNodeRect,
+      translated: collisionRect
+    };
+  }, [active, activeNode, collisions, collisionRect, draggableNodes, draggingNode, draggingNodeRect, droppableRects, droppableContainers, over, scrollableAncestors, scrollAdjustedTranslate]);
+  useAutoScroller({ ...autoScrollOptions,
+    delta: translate,
+    draggingRect: collisionRect,
+    pointerCoordinates,
+    scrollableAncestors,
+    scrollableAncestorRects
+  });
+  const publicContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
+    const context = {
+      active,
+      activeNode,
+      activeNodeRect,
+      activatorEvent,
+      collisions,
+      containerNodeRect,
+      dragOverlay,
+      draggableNodes,
+      droppableContainers,
+      droppableRects,
+      over,
+      measureDroppableContainers,
+      scrollableAncestors,
+      scrollableAncestorRects,
+      measuringConfiguration,
+      measuringScheduled,
+      windowRect
+    };
+    return context;
+  }, [active, activeNode, activeNodeRect, activatorEvent, collisions, containerNodeRect, dragOverlay, draggableNodes, droppableContainers, droppableRects, over, measureDroppableContainers, scrollableAncestors, scrollableAncestorRects, measuringConfiguration, measuringScheduled, windowRect]);
+  const internalContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
+    const context = {
+      activatorEvent,
+      activators,
+      active,
+      activeNodeRect,
+      ariaDescribedById: {
+        draggable: draggableDescribedById
+      },
+      dispatch,
+      draggableNodes,
+      over,
+      measureDroppableContainers
+    };
+    return context;
+  }, [activatorEvent, activators, active, activeNodeRect, dispatch, draggableDescribedById, draggableNodes, over, measureDroppableContainers]);
+  return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(DndMonitorContext.Provider, {
+    value: registerMonitorListener
+  }, react__WEBPACK_IMPORTED_MODULE_0___default().createElement(InternalContext.Provider, {
+    value: internalContext
+  }, react__WEBPACK_IMPORTED_MODULE_0___default().createElement(PublicContext.Provider, {
+    value: publicContext
+  }, react__WEBPACK_IMPORTED_MODULE_0___default().createElement(ActiveDraggableContext.Provider, {
+    value: transform
+  }, children)), react__WEBPACK_IMPORTED_MODULE_0___default().createElement(RestoreFocus, {
+    disabled: (accessibility == null ? void 0 : accessibility.restoreFocus) === false
+  })), react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Accessibility, { ...accessibility,
+    hiddenTextDescribedById: draggableDescribedById
+  }));
+
+  function getAutoScrollerOptions() {
+    const activeSensorDisablesAutoscroll = (activeSensor == null ? void 0 : activeSensor.autoScrollEnabled) === false;
+    const autoScrollGloballyDisabled = typeof autoScroll === 'object' ? autoScroll.enabled === false : autoScroll === false;
+    const enabled = isInitialized && !activeSensorDisablesAutoscroll && !autoScrollGloballyDisabled;
+
+    if (typeof autoScroll === 'object') {
+      return { ...autoScroll,
+        enabled
+      };
+    }
+
+    return {
+      enabled
+    };
+  }
+});
+
+const NullContext = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)(null);
+const defaultRole = 'button';
+const ID_PREFIX = 'Droppable';
+function useDraggable(_ref) {
+  let {
+    id,
+    data,
+    disabled = false,
+    attributes
+  } = _ref;
+  const key = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useUniqueId)(ID_PREFIX);
+  const {
+    activators,
+    activatorEvent,
+    active,
+    activeNodeRect,
+    ariaDescribedById,
+    draggableNodes,
+    over
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(InternalContext);
+  const {
+    role = defaultRole,
+    roleDescription = 'draggable',
+    tabIndex = 0
+  } = attributes != null ? attributes : {};
+  const isDragging = (active == null ? void 0 : active.id) === id;
+  const transform = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(isDragging ? ActiveDraggableContext : NullContext);
+  const [node, setNodeRef] = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useNodeRef)();
+  const [activatorNode, setActivatorNodeRef] = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useNodeRef)();
+  const listeners = useSyntheticListeners(activators, id);
+  const dataRef = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useLatestValue)(data);
+  (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useIsomorphicLayoutEffect)(() => {
+    draggableNodes.set(id, {
+      id,
+      key,
+      node,
+      activatorNode,
+      data: dataRef
+    });
+    return () => {
+      const node = draggableNodes.get(id);
+
+      if (node && node.key === key) {
+        draggableNodes.delete(id);
+      }
+    };
+  }, // eslint-disable-next-line react-hooks/exhaustive-deps
+  [draggableNodes, id]);
+  const memoizedAttributes = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => ({
+    role,
+    tabIndex,
+    'aria-disabled': disabled,
+    'aria-pressed': isDragging && role === defaultRole ? true : undefined,
+    'aria-roledescription': roleDescription,
+    'aria-describedby': ariaDescribedById.draggable
+  }), [disabled, role, tabIndex, isDragging, roleDescription, ariaDescribedById.draggable]);
+  return {
+    active,
+    activatorEvent,
+    activeNodeRect,
+    attributes: memoizedAttributes,
+    isDragging,
+    listeners: disabled ? undefined : listeners,
+    node,
+    over,
+    setNodeRef,
+    setActivatorNodeRef,
+    transform
+  };
+}
+
+function useDndContext() {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(PublicContext);
+}
+
+const ID_PREFIX$1 = 'Droppable';
+const defaultResizeObserverConfig = {
+  timeout: 25
+};
+function useDroppable(_ref) {
+  let {
+    data,
+    disabled = false,
+    id,
+    resizeObserverConfig
+  } = _ref;
+  const key = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useUniqueId)(ID_PREFIX$1);
+  const {
+    active,
+    dispatch,
+    over,
+    measureDroppableContainers
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(InternalContext);
+  const previous = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)({
+    disabled
+  });
+  const resizeObserverConnected = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(false);
+  const rect = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  const callbackId = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  const {
+    disabled: resizeObserverDisabled,
+    updateMeasurementsFor,
+    timeout: resizeObserverTimeout
+  } = { ...defaultResizeObserverConfig,
+    ...resizeObserverConfig
+  };
+  const ids = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useLatestValue)(updateMeasurementsFor != null ? updateMeasurementsFor : id);
+  const handleResize = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(() => {
+    if (!resizeObserverConnected.current) {
+      // ResizeObserver invokes the `handleResize` callback as soon as `observe` is called,
+      // assuming the element is rendered and displayed.
+      resizeObserverConnected.current = true;
+      return;
+    }
+
+    if (callbackId.current != null) {
+      clearTimeout(callbackId.current);
+    }
+
+    callbackId.current = setTimeout(() => {
+      measureDroppableContainers(Array.isArray(ids.current) ? ids.current : [ids.current]);
+      callbackId.current = null;
+    }, resizeObserverTimeout);
+  }, //eslint-disable-next-line react-hooks/exhaustive-deps
+  [resizeObserverTimeout]);
+  const resizeObserver = useResizeObserver({
+    callback: handleResize,
+    disabled: resizeObserverDisabled || !active
+  });
+  const handleNodeChange = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)((newElement, previousElement) => {
+    if (!resizeObserver) {
+      return;
+    }
+
+    if (previousElement) {
+      resizeObserver.unobserve(previousElement);
+      resizeObserverConnected.current = false;
+    }
+
+    if (newElement) {
+      resizeObserver.observe(newElement);
+    }
+  }, [resizeObserver]);
+  const [nodeRef, setNodeRef] = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useNodeRef)(handleNodeChange);
+  const dataRef = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useLatestValue)(data);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (!resizeObserver || !nodeRef.current) {
+      return;
+    }
+
+    resizeObserver.disconnect();
+    resizeObserverConnected.current = false;
+    resizeObserver.observe(nodeRef.current);
+  }, [nodeRef, resizeObserver]);
+  (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useIsomorphicLayoutEffect)(() => {
+    dispatch({
+      type: Action.RegisterDroppable,
+      element: {
+        id,
+        key,
+        disabled,
+        node: nodeRef,
+        rect,
+        data: dataRef
+      }
+    });
+    return () => dispatch({
+      type: Action.UnregisterDroppable,
+      key,
+      id
+    });
+  }, // eslint-disable-next-line react-hooks/exhaustive-deps
+  [id]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (disabled !== previous.current.disabled) {
+      dispatch({
+        type: Action.SetDroppableDisabled,
+        id,
+        key,
+        disabled
+      });
+      previous.current.disabled = disabled;
+    }
+  }, [id, key, disabled, dispatch]);
+  return {
+    active,
+    rect,
+    isOver: (over == null ? void 0 : over.id) === id,
+    node: nodeRef,
+    over,
+    setNodeRef
+  };
+}
+
+function AnimationManager(_ref) {
+  let {
+    animation,
+    children
+  } = _ref;
+  const [clonedChildren, setClonedChildren] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const [element, setElement] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const previousChildren = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.usePrevious)(children);
+
+  if (!children && !clonedChildren && previousChildren) {
+    setClonedChildren(previousChildren);
+  }
+
+  (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useIsomorphicLayoutEffect)(() => {
+    if (!element) {
+      return;
+    }
+
+    const key = clonedChildren == null ? void 0 : clonedChildren.key;
+    const id = clonedChildren == null ? void 0 : clonedChildren.props.id;
+
+    if (key == null || id == null) {
+      setClonedChildren(null);
+      return;
+    }
+
+    Promise.resolve(animation(id, element)).then(() => {
+      setClonedChildren(null);
+    });
+  }, [animation, clonedChildren, element]);
+  return react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, children, clonedChildren ? (0,react__WEBPACK_IMPORTED_MODULE_0__.cloneElement)(clonedChildren, {
+    ref: setElement
+  }) : null);
+}
+
+const defaultTransform = {
+  x: 0,
+  y: 0,
+  scaleX: 1,
+  scaleY: 1
+};
+function NullifiedContextProvider(_ref) {
+  let {
+    children
+  } = _ref;
+  return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(InternalContext.Provider, {
+    value: defaultInternalContext
+  }, react__WEBPACK_IMPORTED_MODULE_0___default().createElement(ActiveDraggableContext.Provider, {
+    value: defaultTransform
+  }, children));
+}
+
+const baseStyles = {
+  position: 'fixed',
+  touchAction: 'none'
+};
+
+const defaultTransition = activatorEvent => {
+  const isKeyboardActivator = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.isKeyboardEvent)(activatorEvent);
+  return isKeyboardActivator ? 'transform 250ms ease' : undefined;
+};
+
+const PositionedOverlay = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.forwardRef)((_ref, ref) => {
+  let {
+    as,
+    activatorEvent,
+    adjustScale,
+    children,
+    className,
+    rect,
+    style,
+    transform,
+    transition = defaultTransition
+  } = _ref;
+
+  if (!rect) {
+    return null;
+  }
+
+  const scaleAdjustedTransform = adjustScale ? transform : { ...transform,
+    scaleX: 1,
+    scaleY: 1
+  };
+  const styles = { ...baseStyles,
+    width: rect.width,
+    height: rect.height,
+    top: rect.top,
+    left: rect.left,
+    transform: _dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.CSS.Transform.toString(scaleAdjustedTransform),
+    transformOrigin: adjustScale && activatorEvent ? getRelativeTransformOrigin(activatorEvent, rect) : undefined,
+    transition: typeof transition === 'function' ? transition(activatorEvent) : transition,
+    ...style
+  };
+  return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(as, {
+    className,
+    style: styles,
+    ref
+  }, children);
+});
+
+const defaultDropAnimationSideEffects = options => _ref => {
+  let {
+    active,
+    dragOverlay
+  } = _ref;
+  const originalStyles = {};
+  const {
+    styles,
+    className
+  } = options;
+
+  if (styles != null && styles.active) {
+    for (const [key, value] of Object.entries(styles.active)) {
+      if (value === undefined) {
+        continue;
+      }
+
+      originalStyles[key] = active.node.style.getPropertyValue(key);
+      active.node.style.setProperty(key, value);
+    }
+  }
+
+  if (styles != null && styles.dragOverlay) {
+    for (const [key, value] of Object.entries(styles.dragOverlay)) {
+      if (value === undefined) {
+        continue;
+      }
+
+      dragOverlay.node.style.setProperty(key, value);
+    }
+  }
+
+  if (className != null && className.active) {
+    active.node.classList.add(className.active);
+  }
+
+  if (className != null && className.dragOverlay) {
+    dragOverlay.node.classList.add(className.dragOverlay);
+  }
+
+  return function cleanup() {
+    for (const [key, value] of Object.entries(originalStyles)) {
+      active.node.style.setProperty(key, value);
+    }
+
+    if (className != null && className.active) {
+      active.node.classList.remove(className.active);
+    }
+  };
+};
+
+const defaultKeyframeResolver = _ref2 => {
+  let {
+    transform: {
+      initial,
+      final
+    }
+  } = _ref2;
+  return [{
+    transform: _dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.CSS.Transform.toString(initial)
+  }, {
+    transform: _dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.CSS.Transform.toString(final)
+  }];
+};
+
+const defaultDropAnimationConfiguration = {
+  duration: 250,
+  easing: 'ease',
+  keyframes: defaultKeyframeResolver,
+  sideEffects: /*#__PURE__*/defaultDropAnimationSideEffects({
+    styles: {
+      active: {
+        opacity: '0'
+      }
+    }
+  })
+};
+function useDropAnimation(_ref3) {
+  let {
+    config,
+    draggableNodes,
+    droppableContainers,
+    measuringConfiguration
+  } = _ref3;
+  return (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useEvent)((id, node) => {
+    if (config === null) {
+      return;
+    }
+
+    const activeDraggable = draggableNodes.get(id);
+
+    if (!activeDraggable) {
+      return;
+    }
+
+    const activeNode = activeDraggable.node.current;
+
+    if (!activeNode) {
+      return;
+    }
+
+    const measurableNode = getMeasurableNode(node);
+
+    if (!measurableNode) {
+      return;
+    }
+
+    const {
+      transform
+    } = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.getWindow)(node).getComputedStyle(node);
+    const parsedTransform = parseTransform(transform);
+
+    if (!parsedTransform) {
+      return;
+    }
+
+    const animation = typeof config === 'function' ? config : createDefaultDropAnimation(config);
+    scrollIntoViewIfNeeded(activeNode, measuringConfiguration.draggable.measure);
+    return animation({
+      active: {
+        id,
+        data: activeDraggable.data,
+        node: activeNode,
+        rect: measuringConfiguration.draggable.measure(activeNode)
+      },
+      draggableNodes,
+      dragOverlay: {
+        node,
+        rect: measuringConfiguration.dragOverlay.measure(measurableNode)
+      },
+      droppableContainers,
+      measuringConfiguration,
+      transform: parsedTransform
+    });
+  });
+}
+
+function createDefaultDropAnimation(options) {
+  const {
+    duration,
+    easing,
+    sideEffects,
+    keyframes
+  } = { ...defaultDropAnimationConfiguration,
+    ...options
+  };
+  return _ref4 => {
+    let {
+      active,
+      dragOverlay,
+      transform,
+      ...rest
+    } = _ref4;
+
+    if (!duration) {
+      // Do not animate if animation duration is zero.
+      return;
+    }
+
+    const delta = {
+      x: dragOverlay.rect.left - active.rect.left,
+      y: dragOverlay.rect.top - active.rect.top
+    };
+    const scale = {
+      scaleX: transform.scaleX !== 1 ? active.rect.width * transform.scaleX / dragOverlay.rect.width : 1,
+      scaleY: transform.scaleY !== 1 ? active.rect.height * transform.scaleY / dragOverlay.rect.height : 1
+    };
+    const finalTransform = {
+      x: transform.x - delta.x,
+      y: transform.y - delta.y,
+      ...scale
+    };
+    const animationKeyframes = keyframes({ ...rest,
+      active,
+      dragOverlay,
+      transform: {
+        initial: transform,
+        final: finalTransform
+      }
+    });
+    const [firstKeyframe] = animationKeyframes;
+    const lastKeyframe = animationKeyframes[animationKeyframes.length - 1];
+
+    if (JSON.stringify(firstKeyframe) === JSON.stringify(lastKeyframe)) {
+      // The start and end keyframes are the same, infer that there is no animation needed.
+      return;
+    }
+
+    const cleanup = sideEffects == null ? void 0 : sideEffects({
+      active,
+      dragOverlay,
+      ...rest
+    });
+    const animation = dragOverlay.node.animate(animationKeyframes, {
+      duration,
+      easing,
+      fill: 'forwards'
+    });
+    return new Promise(resolve => {
+      animation.onfinish = () => {
+        cleanup == null ? void 0 : cleanup();
+        resolve();
+      };
+    });
+  };
+}
+
+let key = 0;
+function useKey(id) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
+    if (id == null) {
+      return;
+    }
+
+    key++;
+    return key;
+  }, [id]);
+}
+
+const DragOverlay = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().memo(_ref => {
+  let {
+    adjustScale = false,
+    children,
+    dropAnimation: dropAnimationConfig,
+    style,
+    transition,
+    modifiers,
+    wrapperElement = 'div',
+    className,
+    zIndex = 999
+  } = _ref;
+  const {
+    activatorEvent,
+    active,
+    activeNodeRect,
+    containerNodeRect,
+    draggableNodes,
+    droppableContainers,
+    dragOverlay,
+    over,
+    measuringConfiguration,
+    scrollableAncestors,
+    scrollableAncestorRects,
+    windowRect
+  } = useDndContext();
+  const transform = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(ActiveDraggableContext);
+  const key = useKey(active == null ? void 0 : active.id);
+  const modifiedTransform = applyModifiers(modifiers, {
+    activatorEvent,
+    active,
+    activeNodeRect,
+    containerNodeRect,
+    draggingNodeRect: dragOverlay.rect,
+    over,
+    overlayNodeRect: dragOverlay.rect,
+    scrollableAncestors,
+    scrollableAncestorRects,
+    transform,
+    windowRect
+  });
+  const initialRect = useInitialValue(activeNodeRect);
+  const dropAnimation = useDropAnimation({
+    config: dropAnimationConfig,
+    draggableNodes,
+    droppableContainers,
+    measuringConfiguration
+  }); // We need to wait for the active node to be measured before connecting the drag overlay ref
+  // otherwise collisions can be computed against a mispositioned drag overlay
+
+  const ref = initialRect ? dragOverlay.setRef : undefined;
+  return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(NullifiedContextProvider, null, react__WEBPACK_IMPORTED_MODULE_0___default().createElement(AnimationManager, {
+    animation: dropAnimation
+  }, active && key ? react__WEBPACK_IMPORTED_MODULE_0___default().createElement(PositionedOverlay, {
+    key: key,
+    id: active.id,
+    ref: ref,
+    as: wrapperElement,
+    activatorEvent: activatorEvent,
+    adjustScale: adjustScale,
+    className: className,
+    transition: transition,
+    rect: initialRect,
+    style: {
+      zIndex,
+      ...style
+    },
+    transform: modifiedTransform
+  }, children) : null));
+});
+
+
+//# sourceMappingURL=core.esm.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/@dnd-kit/sortable/dist/sortable.esm.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/@dnd-kit/sortable/dist/sortable.esm.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   SortableContext: () => (/* binding */ SortableContext),
+/* harmony export */   arrayMove: () => (/* binding */ arrayMove),
+/* harmony export */   arraySwap: () => (/* binding */ arraySwap),
+/* harmony export */   defaultAnimateLayoutChanges: () => (/* binding */ defaultAnimateLayoutChanges),
+/* harmony export */   defaultNewIndexGetter: () => (/* binding */ defaultNewIndexGetter),
+/* harmony export */   hasSortableData: () => (/* binding */ hasSortableData),
+/* harmony export */   horizontalListSortingStrategy: () => (/* binding */ horizontalListSortingStrategy),
+/* harmony export */   rectSortingStrategy: () => (/* binding */ rectSortingStrategy),
+/* harmony export */   rectSwappingStrategy: () => (/* binding */ rectSwappingStrategy),
+/* harmony export */   sortableKeyboardCoordinates: () => (/* binding */ sortableKeyboardCoordinates),
+/* harmony export */   useSortable: () => (/* binding */ useSortable),
+/* harmony export */   verticalListSortingStrategy: () => (/* binding */ verticalListSortingStrategy)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @dnd-kit/core */ "./node_modules/@dnd-kit/core/dist/core.esm.js");
+/* harmony import */ var _dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @dnd-kit/utilities */ "./node_modules/@dnd-kit/utilities/dist/utilities.esm.js");
+
+
+
+
+/**
+ * Move an array item to a different position. Returns a new array with the item moved to the new position.
+ */
+function arrayMove(array, from, to) {
+  const newArray = array.slice();
+  newArray.splice(to < 0 ? newArray.length + to : to, 0, newArray.splice(from, 1)[0]);
+  return newArray;
+}
+
+/**
+ * Swap an array item to a different position. Returns a new array with the item swapped to the new position.
+ */
+function arraySwap(array, from, to) {
+  const newArray = array.slice();
+  newArray[from] = array[to];
+  newArray[to] = array[from];
+  return newArray;
+}
+
+function getSortedRects(items, rects) {
+  return items.reduce((accumulator, id, index) => {
+    const rect = rects.get(id);
+
+    if (rect) {
+      accumulator[index] = rect;
+    }
+
+    return accumulator;
+  }, Array(items.length));
+}
+
+function isValidIndex(index) {
+  return index !== null && index >= 0;
+}
+
+function itemsEqual(a, b) {
+  if (a === b) {
+    return true;
+  }
+
+  if (a.length !== b.length) {
+    return false;
+  }
+
+  for (let i = 0; i < a.length; i++) {
+    if (a[i] !== b[i]) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+function normalizeDisabled(disabled) {
+  if (typeof disabled === 'boolean') {
+    return {
+      draggable: disabled,
+      droppable: disabled
+    };
+  }
+
+  return disabled;
+}
+
+// To-do: We should be calculating scale transformation
+const defaultScale = {
+  scaleX: 1,
+  scaleY: 1
+};
+const horizontalListSortingStrategy = _ref => {
+  var _rects$activeIndex;
+
+  let {
+    rects,
+    activeNodeRect: fallbackActiveRect,
+    activeIndex,
+    overIndex,
+    index
+  } = _ref;
+  const activeNodeRect = (_rects$activeIndex = rects[activeIndex]) != null ? _rects$activeIndex : fallbackActiveRect;
+
+  if (!activeNodeRect) {
+    return null;
+  }
+
+  const itemGap = getItemGap(rects, index, activeIndex);
+
+  if (index === activeIndex) {
+    const newIndexRect = rects[overIndex];
+
+    if (!newIndexRect) {
+      return null;
+    }
+
+    return {
+      x: activeIndex < overIndex ? newIndexRect.left + newIndexRect.width - (activeNodeRect.left + activeNodeRect.width) : newIndexRect.left - activeNodeRect.left,
+      y: 0,
+      ...defaultScale
+    };
+  }
+
+  if (index > activeIndex && index <= overIndex) {
+    return {
+      x: -activeNodeRect.width - itemGap,
+      y: 0,
+      ...defaultScale
+    };
+  }
+
+  if (index < activeIndex && index >= overIndex) {
+    return {
+      x: activeNodeRect.width + itemGap,
+      y: 0,
+      ...defaultScale
+    };
+  }
+
+  return {
+    x: 0,
+    y: 0,
+    ...defaultScale
+  };
+};
+
+function getItemGap(rects, index, activeIndex) {
+  const currentRect = rects[index];
+  const previousRect = rects[index - 1];
+  const nextRect = rects[index + 1];
+
+  if (!currentRect || !previousRect && !nextRect) {
+    return 0;
+  }
+
+  if (activeIndex < index) {
+    return previousRect ? currentRect.left - (previousRect.left + previousRect.width) : nextRect.left - (currentRect.left + currentRect.width);
+  }
+
+  return nextRect ? nextRect.left - (currentRect.left + currentRect.width) : currentRect.left - (previousRect.left + previousRect.width);
+}
+
+const rectSortingStrategy = _ref => {
+  let {
+    rects,
+    activeIndex,
+    overIndex,
+    index
+  } = _ref;
+  const newRects = arrayMove(rects, overIndex, activeIndex);
+  const oldRect = rects[index];
+  const newRect = newRects[index];
+
+  if (!newRect || !oldRect) {
+    return null;
+  }
+
+  return {
+    x: newRect.left - oldRect.left,
+    y: newRect.top - oldRect.top,
+    scaleX: newRect.width / oldRect.width,
+    scaleY: newRect.height / oldRect.height
+  };
+};
+
+const rectSwappingStrategy = _ref => {
+  let {
+    activeIndex,
+    index,
+    rects,
+    overIndex
+  } = _ref;
+  let oldRect;
+  let newRect;
+
+  if (index === activeIndex) {
+    oldRect = rects[index];
+    newRect = rects[overIndex];
+  }
+
+  if (index === overIndex) {
+    oldRect = rects[index];
+    newRect = rects[activeIndex];
+  }
+
+  if (!newRect || !oldRect) {
+    return null;
+  }
+
+  return {
+    x: newRect.left - oldRect.left,
+    y: newRect.top - oldRect.top,
+    scaleX: newRect.width / oldRect.width,
+    scaleY: newRect.height / oldRect.height
+  };
+};
+
+// To-do: We should be calculating scale transformation
+const defaultScale$1 = {
+  scaleX: 1,
+  scaleY: 1
+};
+const verticalListSortingStrategy = _ref => {
+  var _rects$activeIndex;
+
+  let {
+    activeIndex,
+    activeNodeRect: fallbackActiveRect,
+    index,
+    rects,
+    overIndex
+  } = _ref;
+  const activeNodeRect = (_rects$activeIndex = rects[activeIndex]) != null ? _rects$activeIndex : fallbackActiveRect;
+
+  if (!activeNodeRect) {
+    return null;
+  }
+
+  if (index === activeIndex) {
+    const overIndexRect = rects[overIndex];
+
+    if (!overIndexRect) {
+      return null;
+    }
+
+    return {
+      x: 0,
+      y: activeIndex < overIndex ? overIndexRect.top + overIndexRect.height - (activeNodeRect.top + activeNodeRect.height) : overIndexRect.top - activeNodeRect.top,
+      ...defaultScale$1
+    };
+  }
+
+  const itemGap = getItemGap$1(rects, index, activeIndex);
+
+  if (index > activeIndex && index <= overIndex) {
+    return {
+      x: 0,
+      y: -activeNodeRect.height - itemGap,
+      ...defaultScale$1
+    };
+  }
+
+  if (index < activeIndex && index >= overIndex) {
+    return {
+      x: 0,
+      y: activeNodeRect.height + itemGap,
+      ...defaultScale$1
+    };
+  }
+
+  return {
+    x: 0,
+    y: 0,
+    ...defaultScale$1
+  };
+};
+
+function getItemGap$1(clientRects, index, activeIndex) {
+  const currentRect = clientRects[index];
+  const previousRect = clientRects[index - 1];
+  const nextRect = clientRects[index + 1];
+
+  if (!currentRect) {
+    return 0;
+  }
+
+  if (activeIndex < index) {
+    return previousRect ? currentRect.top - (previousRect.top + previousRect.height) : nextRect ? nextRect.top - (currentRect.top + currentRect.height) : 0;
+  }
+
+  return nextRect ? nextRect.top - (currentRect.top + currentRect.height) : previousRect ? currentRect.top - (previousRect.top + previousRect.height) : 0;
+}
+
+const ID_PREFIX = 'Sortable';
+const Context = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createContext({
+  activeIndex: -1,
+  containerId: ID_PREFIX,
+  disableTransforms: false,
+  items: [],
+  overIndex: -1,
+  useDragOverlay: false,
+  sortedRects: [],
+  strategy: rectSortingStrategy,
+  disabled: {
+    draggable: false,
+    droppable: false
+  }
+});
+function SortableContext(_ref) {
+  let {
+    children,
+    id,
+    items: userDefinedItems,
+    strategy = rectSortingStrategy,
+    disabled: disabledProp = false
+  } = _ref;
+  const {
+    active,
+    dragOverlay,
+    droppableRects,
+    over,
+    measureDroppableContainers
+  } = (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.useDndContext)();
+  const containerId = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useUniqueId)(ID_PREFIX, id);
+  const useDragOverlay = Boolean(dragOverlay.rect !== null);
+  const items = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => userDefinedItems.map(item => typeof item === 'object' && 'id' in item ? item.id : item), [userDefinedItems]);
+  const isDragging = active != null;
+  const activeIndex = active ? items.indexOf(active.id) : -1;
+  const overIndex = over ? items.indexOf(over.id) : -1;
+  const previousItemsRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(items);
+  const itemsHaveChanged = !itemsEqual(items, previousItemsRef.current);
+  const disableTransforms = overIndex !== -1 && activeIndex === -1 || itemsHaveChanged;
+  const disabled = normalizeDisabled(disabledProp);
+  (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useIsomorphicLayoutEffect)(() => {
+    if (itemsHaveChanged && isDragging) {
+      measureDroppableContainers(items);
+    }
+  }, [itemsHaveChanged, items, isDragging, measureDroppableContainers]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    previousItemsRef.current = items;
+  }, [items]);
+  const contextValue = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => ({
+    activeIndex,
+    containerId,
+    disabled,
+    disableTransforms,
+    items,
+    overIndex,
+    useDragOverlay,
+    sortedRects: getSortedRects(items, droppableRects),
+    strategy
+  }), // eslint-disable-next-line react-hooks/exhaustive-deps
+  [activeIndex, containerId, disabled.draggable, disabled.droppable, disableTransforms, items, overIndex, droppableRects, useDragOverlay, strategy]);
+  return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Context.Provider, {
+    value: contextValue
+  }, children);
+}
+
+const defaultNewIndexGetter = _ref => {
+  let {
+    id,
+    items,
+    activeIndex,
+    overIndex
+  } = _ref;
+  return arrayMove(items, activeIndex, overIndex).indexOf(id);
+};
+const defaultAnimateLayoutChanges = _ref2 => {
+  let {
+    containerId,
+    isSorting,
+    wasDragging,
+    index,
+    items,
+    newIndex,
+    previousItems,
+    previousContainerId,
+    transition
+  } = _ref2;
+
+  if (!transition || !wasDragging) {
+    return false;
+  }
+
+  if (previousItems !== items && index === newIndex) {
+    return false;
+  }
+
+  if (isSorting) {
+    return true;
+  }
+
+  return newIndex !== index && containerId === previousContainerId;
+};
+const defaultTransition = {
+  duration: 200,
+  easing: 'ease'
+};
+const transitionProperty = 'transform';
+const disabledTransition = /*#__PURE__*/_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.CSS.Transition.toString({
+  property: transitionProperty,
+  duration: 0,
+  easing: 'linear'
+});
+const defaultAttributes = {
+  roleDescription: 'sortable'
+};
+
+/*
+ * When the index of an item changes while sorting,
+ * we need to temporarily disable the transforms
+ */
+
+function useDerivedTransform(_ref) {
+  let {
+    disabled,
+    index,
+    node,
+    rect
+  } = _ref;
+  const [derivedTransform, setDerivedtransform] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const previousIndex = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(index);
+  (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useIsomorphicLayoutEffect)(() => {
+    if (!disabled && index !== previousIndex.current && node.current) {
+      const initial = rect.current;
+
+      if (initial) {
+        const current = (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.getClientRect)(node.current, {
+          ignoreTransform: true
+        });
+        const delta = {
+          x: initial.left - current.left,
+          y: initial.top - current.top,
+          scaleX: initial.width / current.width,
+          scaleY: initial.height / current.height
+        };
+
+        if (delta.x || delta.y) {
+          setDerivedtransform(delta);
+        }
+      }
+    }
+
+    if (index !== previousIndex.current) {
+      previousIndex.current = index;
+    }
+  }, [disabled, index, node, rect]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (derivedTransform) {
+      setDerivedtransform(null);
+    }
+  }, [derivedTransform]);
+  return derivedTransform;
+}
+
+function useSortable(_ref) {
+  let {
+    animateLayoutChanges = defaultAnimateLayoutChanges,
+    attributes: userDefinedAttributes,
+    disabled: localDisabled,
+    data: customData,
+    getNewIndex = defaultNewIndexGetter,
+    id,
+    strategy: localStrategy,
+    resizeObserverConfig,
+    transition = defaultTransition
+  } = _ref;
+  const {
+    items,
+    containerId,
+    activeIndex,
+    disabled: globalDisabled,
+    disableTransforms,
+    sortedRects,
+    overIndex,
+    useDragOverlay,
+    strategy: globalStrategy
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(Context);
+  const disabled = normalizeLocalDisabled(localDisabled, globalDisabled);
+  const index = items.indexOf(id);
+  const data = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => ({
+    sortable: {
+      containerId,
+      index,
+      items
+    },
+    ...customData
+  }), [containerId, customData, index, items]);
+  const itemsAfterCurrentSortable = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => items.slice(items.indexOf(id)), [items, id]);
+  const {
+    rect,
+    node,
+    isOver,
+    setNodeRef: setDroppableNodeRef
+  } = (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.useDroppable)({
+    id,
+    data,
+    disabled: disabled.droppable,
+    resizeObserverConfig: {
+      updateMeasurementsFor: itemsAfterCurrentSortable,
+      ...resizeObserverConfig
+    }
+  });
+  const {
+    active,
+    activatorEvent,
+    activeNodeRect,
+    attributes,
+    setNodeRef: setDraggableNodeRef,
+    listeners,
+    isDragging,
+    over,
+    setActivatorNodeRef,
+    transform
+  } = (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.useDraggable)({
+    id,
+    data,
+    attributes: { ...defaultAttributes,
+      ...userDefinedAttributes
+    },
+    disabled: disabled.draggable
+  });
+  const setNodeRef = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useCombinedRefs)(setDroppableNodeRef, setDraggableNodeRef);
+  const isSorting = Boolean(active);
+  const displaceItem = isSorting && !disableTransforms && isValidIndex(activeIndex) && isValidIndex(overIndex);
+  const shouldDisplaceDragSource = !useDragOverlay && isDragging;
+  const dragSourceDisplacement = shouldDisplaceDragSource && displaceItem ? transform : null;
+  const strategy = localStrategy != null ? localStrategy : globalStrategy;
+  const finalTransform = displaceItem ? dragSourceDisplacement != null ? dragSourceDisplacement : strategy({
+    rects: sortedRects,
+    activeNodeRect,
+    activeIndex,
+    overIndex,
+    index
+  }) : null;
+  const newIndex = isValidIndex(activeIndex) && isValidIndex(overIndex) ? getNewIndex({
+    id,
+    items,
+    activeIndex,
+    overIndex
+  }) : index;
+  const activeId = active == null ? void 0 : active.id;
+  const previous = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)({
+    activeId,
+    items,
+    newIndex,
+    containerId
+  });
+  const itemsHaveChanged = items !== previous.current.items;
+  const shouldAnimateLayoutChanges = animateLayoutChanges({
+    active,
+    containerId,
+    isDragging,
+    isSorting,
+    id,
+    index,
+    items,
+    newIndex: previous.current.newIndex,
+    previousItems: previous.current.items,
+    previousContainerId: previous.current.containerId,
+    transition,
+    wasDragging: previous.current.activeId != null
+  });
+  const derivedTransform = useDerivedTransform({
+    disabled: !shouldAnimateLayoutChanges,
+    index,
+    node,
+    rect
+  });
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (isSorting && previous.current.newIndex !== newIndex) {
+      previous.current.newIndex = newIndex;
+    }
+
+    if (containerId !== previous.current.containerId) {
+      previous.current.containerId = containerId;
+    }
+
+    if (items !== previous.current.items) {
+      previous.current.items = items;
+    }
+  }, [isSorting, newIndex, containerId, items]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (activeId === previous.current.activeId) {
+      return;
+    }
+
+    if (activeId && !previous.current.activeId) {
+      previous.current.activeId = activeId;
+      return;
+    }
+
+    const timeoutId = setTimeout(() => {
+      previous.current.activeId = activeId;
+    }, 50);
+    return () => clearTimeout(timeoutId);
+  }, [activeId]);
+  return {
+    active,
+    activeIndex,
+    attributes,
+    data,
+    rect,
+    index,
+    newIndex,
+    items,
+    isOver,
+    isSorting,
+    isDragging,
+    listeners,
+    node,
+    overIndex,
+    over,
+    setNodeRef,
+    setActivatorNodeRef,
+    setDroppableNodeRef,
+    setDraggableNodeRef,
+    transform: derivedTransform != null ? derivedTransform : finalTransform,
+    transition: getTransition()
+  };
+
+  function getTransition() {
+    if ( // Temporarily disable transitions for a single frame to set up derived transforms
+    derivedTransform || // Or to prevent items jumping to back to their "new" position when items change
+    itemsHaveChanged && previous.current.newIndex === index) {
+      return disabledTransition;
+    }
+
+    if (shouldDisplaceDragSource && !(0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.isKeyboardEvent)(activatorEvent) || !transition) {
+      return undefined;
+    }
+
+    if (isSorting || shouldAnimateLayoutChanges) {
+      return _dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.CSS.Transition.toString({ ...transition,
+        property: transitionProperty
+      });
+    }
+
+    return undefined;
+  }
+}
+
+function normalizeLocalDisabled(localDisabled, globalDisabled) {
+  var _localDisabled$dragga, _localDisabled$droppa;
+
+  if (typeof localDisabled === 'boolean') {
+    return {
+      draggable: localDisabled,
+      // Backwards compatibility
+      droppable: false
+    };
+  }
+
+  return {
+    draggable: (_localDisabled$dragga = localDisabled == null ? void 0 : localDisabled.draggable) != null ? _localDisabled$dragga : globalDisabled.draggable,
+    droppable: (_localDisabled$droppa = localDisabled == null ? void 0 : localDisabled.droppable) != null ? _localDisabled$droppa : globalDisabled.droppable
+  };
+}
+
+function hasSortableData(entry) {
+  if (!entry) {
+    return false;
+  }
+
+  const data = entry.data.current;
+
+  if (data && 'sortable' in data && typeof data.sortable === 'object' && 'containerId' in data.sortable && 'items' in data.sortable && 'index' in data.sortable) {
+    return true;
+  }
+
+  return false;
+}
+
+const directions = [_dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.KeyboardCode.Down, _dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.KeyboardCode.Right, _dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.KeyboardCode.Up, _dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.KeyboardCode.Left];
+const sortableKeyboardCoordinates = (event, _ref) => {
+  let {
+    context: {
+      active,
+      collisionRect,
+      droppableRects,
+      droppableContainers,
+      over,
+      scrollableAncestors
+    }
+  } = _ref;
+
+  if (directions.includes(event.code)) {
+    event.preventDefault();
+
+    if (!active || !collisionRect) {
+      return;
+    }
+
+    const filteredContainers = [];
+    droppableContainers.getEnabled().forEach(entry => {
+      if (!entry || entry != null && entry.disabled) {
+        return;
+      }
+
+      const rect = droppableRects.get(entry.id);
+
+      if (!rect) {
+        return;
+      }
+
+      switch (event.code) {
+        case _dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.KeyboardCode.Down:
+          if (collisionRect.top < rect.top) {
+            filteredContainers.push(entry);
+          }
+
+          break;
+
+        case _dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.KeyboardCode.Up:
+          if (collisionRect.top > rect.top) {
+            filteredContainers.push(entry);
+          }
+
+          break;
+
+        case _dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.KeyboardCode.Left:
+          if (collisionRect.left > rect.left) {
+            filteredContainers.push(entry);
+          }
+
+          break;
+
+        case _dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.KeyboardCode.Right:
+          if (collisionRect.left < rect.left) {
+            filteredContainers.push(entry);
+          }
+
+          break;
+      }
+    });
+    const collisions = (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.closestCorners)({
+      active,
+      collisionRect: collisionRect,
+      droppableRects,
+      droppableContainers: filteredContainers,
+      pointerCoordinates: null
+    });
+    let closestId = (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.getFirstCollision)(collisions, 'id');
+
+    if (closestId === (over == null ? void 0 : over.id) && collisions.length > 1) {
+      closestId = collisions[1].id;
+    }
+
+    if (closestId != null) {
+      const activeDroppable = droppableContainers.get(active.id);
+      const newDroppable = droppableContainers.get(closestId);
+      const newRect = newDroppable ? droppableRects.get(newDroppable.id) : null;
+      const newNode = newDroppable == null ? void 0 : newDroppable.node.current;
+
+      if (newNode && newRect && activeDroppable && newDroppable) {
+        const newScrollAncestors = (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.getScrollableAncestors)(newNode);
+        const hasDifferentScrollAncestors = newScrollAncestors.some((element, index) => scrollableAncestors[index] !== element);
+        const hasSameContainer = isSameContainer(activeDroppable, newDroppable);
+        const isAfterActive = isAfter(activeDroppable, newDroppable);
+        const offset = hasDifferentScrollAncestors || !hasSameContainer ? {
+          x: 0,
+          y: 0
+        } : {
+          x: isAfterActive ? collisionRect.width - newRect.width : 0,
+          y: isAfterActive ? collisionRect.height - newRect.height : 0
+        };
+        const rectCoordinates = {
+          x: newRect.left,
+          y: newRect.top
+        };
+        const newCoordinates = offset.x && offset.y ? rectCoordinates : (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.subtract)(rectCoordinates, offset);
+        return newCoordinates;
+      }
+    }
+  }
+
+  return undefined;
+};
+
+function isSameContainer(a, b) {
+  if (!hasSortableData(a) || !hasSortableData(b)) {
+    return false;
+  }
+
+  return a.data.current.sortable.containerId === b.data.current.sortable.containerId;
+}
+
+function isAfter(a, b) {
+  if (!hasSortableData(a) || !hasSortableData(b)) {
+    return false;
+  }
+
+  if (!isSameContainer(a, b)) {
+    return false;
+  }
+
+  return a.data.current.sortable.index < b.data.current.sortable.index;
+}
+
+
+//# sourceMappingURL=sortable.esm.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/@dnd-kit/utilities/dist/utilities.esm.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@dnd-kit/utilities/dist/utilities.esm.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   CSS: () => (/* binding */ CSS),
+/* harmony export */   add: () => (/* binding */ add),
+/* harmony export */   canUseDOM: () => (/* binding */ canUseDOM),
+/* harmony export */   findFirstFocusableNode: () => (/* binding */ findFirstFocusableNode),
+/* harmony export */   getEventCoordinates: () => (/* binding */ getEventCoordinates),
+/* harmony export */   getOwnerDocument: () => (/* binding */ getOwnerDocument),
+/* harmony export */   getWindow: () => (/* binding */ getWindow),
+/* harmony export */   hasViewportRelativeCoordinates: () => (/* binding */ hasViewportRelativeCoordinates),
+/* harmony export */   isDocument: () => (/* binding */ isDocument),
+/* harmony export */   isHTMLElement: () => (/* binding */ isHTMLElement),
+/* harmony export */   isKeyboardEvent: () => (/* binding */ isKeyboardEvent),
+/* harmony export */   isNode: () => (/* binding */ isNode),
+/* harmony export */   isSVGElement: () => (/* binding */ isSVGElement),
+/* harmony export */   isTouchEvent: () => (/* binding */ isTouchEvent),
+/* harmony export */   isWindow: () => (/* binding */ isWindow),
+/* harmony export */   subtract: () => (/* binding */ subtract),
+/* harmony export */   useCombinedRefs: () => (/* binding */ useCombinedRefs),
+/* harmony export */   useEvent: () => (/* binding */ useEvent),
+/* harmony export */   useInterval: () => (/* binding */ useInterval),
+/* harmony export */   useIsomorphicLayoutEffect: () => (/* binding */ useIsomorphicLayoutEffect),
+/* harmony export */   useLatestValue: () => (/* binding */ useLatestValue),
+/* harmony export */   useLazyMemo: () => (/* binding */ useLazyMemo),
+/* harmony export */   useNodeRef: () => (/* binding */ useNodeRef),
+/* harmony export */   usePrevious: () => (/* binding */ usePrevious),
+/* harmony export */   useUniqueId: () => (/* binding */ useUniqueId)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function useCombinedRefs() {
+  for (var _len = arguments.length, refs = new Array(_len), _key = 0; _key < _len; _key++) {
+    refs[_key] = arguments[_key];
+  }
+
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => node => {
+    refs.forEach(ref => ref(node));
+  }, // eslint-disable-next-line react-hooks/exhaustive-deps
+  refs);
+}
+
+// https://github.com/facebook/react/blob/master/packages/shared/ExecutionEnvironment.js
+const canUseDOM = typeof window !== 'undefined' && typeof window.document !== 'undefined' && typeof window.document.createElement !== 'undefined';
+
+function isWindow(element) {
+  const elementString = Object.prototype.toString.call(element);
+  return elementString === '[object Window]' || // In Electron context the Window object serializes to [object global]
+  elementString === '[object global]';
+}
+
+function isNode(node) {
+  return 'nodeType' in node;
+}
+
+function getWindow(target) {
+  var _target$ownerDocument, _target$ownerDocument2;
+
+  if (!target) {
+    return window;
+  }
+
+  if (isWindow(target)) {
+    return target;
+  }
+
+  if (!isNode(target)) {
+    return window;
+  }
+
+  return (_target$ownerDocument = (_target$ownerDocument2 = target.ownerDocument) == null ? void 0 : _target$ownerDocument2.defaultView) != null ? _target$ownerDocument : window;
+}
+
+function isDocument(node) {
+  const {
+    Document
+  } = getWindow(node);
+  return node instanceof Document;
+}
+
+function isHTMLElement(node) {
+  if (isWindow(node)) {
+    return false;
+  }
+
+  return node instanceof getWindow(node).HTMLElement;
+}
+
+function isSVGElement(node) {
+  return node instanceof getWindow(node).SVGElement;
+}
+
+function getOwnerDocument(target) {
+  if (!target) {
+    return document;
+  }
+
+  if (isWindow(target)) {
+    return target.document;
+  }
+
+  if (!isNode(target)) {
+    return document;
+  }
+
+  if (isDocument(target)) {
+    return target;
+  }
+
+  if (isHTMLElement(target)) {
+    return target.ownerDocument;
+  }
+
+  return document;
+}
+
+/**
+ * A hook that resolves to useEffect on the server and useLayoutEffect on the client
+ * @param callback {function} Callback function that is invoked when the dependencies of the hook change
+ */
+
+const useIsomorphicLayoutEffect = canUseDOM ? react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect : react__WEBPACK_IMPORTED_MODULE_0__.useEffect;
+
+function useEvent(handler) {
+  const handlerRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(handler);
+  useIsomorphicLayoutEffect(() => {
+    handlerRef.current = handler;
+  });
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return handlerRef.current == null ? void 0 : handlerRef.current(...args);
+  }, []);
+}
+
+function useInterval() {
+  const intervalRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  const set = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)((listener, duration) => {
+    intervalRef.current = setInterval(listener, duration);
+  }, []);
+  const clear = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(() => {
+    if (intervalRef.current !== null) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+  }, []);
+  return [set, clear];
+}
+
+function useLatestValue(value, dependencies) {
+  if (dependencies === void 0) {
+    dependencies = [value];
+  }
+
+  const valueRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(value);
+  useIsomorphicLayoutEffect(() => {
+    if (valueRef.current !== value) {
+      valueRef.current = value;
+    }
+  }, dependencies);
+  return valueRef;
+}
+
+function useLazyMemo(callback, dependencies) {
+  const valueRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
+    const newValue = callback(valueRef.current);
+    valueRef.current = newValue;
+    return newValue;
+  }, // eslint-disable-next-line react-hooks/exhaustive-deps
+  [...dependencies]);
+}
+
+function useNodeRef(onChange) {
+  const onChangeHandler = useEvent(onChange);
+  const node = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  const setNodeRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(element => {
+    if (element !== node.current) {
+      onChangeHandler == null ? void 0 : onChangeHandler(element, node.current);
+    }
+
+    node.current = element;
+  }, //eslint-disable-next-line
+  []);
+  return [node, setNodeRef];
+}
+
+function usePrevious(value) {
+  const ref = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    ref.current = value;
+  }, [value]);
+  return ref.current;
+}
+
+let ids = {};
+function useUniqueId(prefix, value) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
+    if (value) {
+      return value;
+    }
+
+    const id = ids[prefix] == null ? 0 : ids[prefix] + 1;
+    ids[prefix] = id;
+    return prefix + "-" + id;
+  }, [prefix, value]);
+}
+
+function createAdjustmentFn(modifier) {
+  return function (object) {
+    for (var _len = arguments.length, adjustments = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      adjustments[_key - 1] = arguments[_key];
+    }
+
+    return adjustments.reduce((accumulator, adjustment) => {
+      const entries = Object.entries(adjustment);
+
+      for (const [key, valueAdjustment] of entries) {
+        const value = accumulator[key];
+
+        if (value != null) {
+          accumulator[key] = value + modifier * valueAdjustment;
+        }
+      }
+
+      return accumulator;
+    }, { ...object
+    });
+  };
+}
+
+const add = /*#__PURE__*/createAdjustmentFn(1);
+const subtract = /*#__PURE__*/createAdjustmentFn(-1);
+
+function hasViewportRelativeCoordinates(event) {
+  return 'clientX' in event && 'clientY' in event;
+}
+
+function isKeyboardEvent(event) {
+  if (!event) {
+    return false;
+  }
+
+  const {
+    KeyboardEvent
+  } = getWindow(event.target);
+  return KeyboardEvent && event instanceof KeyboardEvent;
+}
+
+function isTouchEvent(event) {
+  if (!event) {
+    return false;
+  }
+
+  const {
+    TouchEvent
+  } = getWindow(event.target);
+  return TouchEvent && event instanceof TouchEvent;
+}
+
+/**
+ * Returns the normalized x and y coordinates for mouse and touch events.
+ */
+
+function getEventCoordinates(event) {
+  if (isTouchEvent(event)) {
+    if (event.touches && event.touches.length) {
+      const {
+        clientX: x,
+        clientY: y
+      } = event.touches[0];
+      return {
+        x,
+        y
+      };
+    } else if (event.changedTouches && event.changedTouches.length) {
+      const {
+        clientX: x,
+        clientY: y
+      } = event.changedTouches[0];
+      return {
+        x,
+        y
+      };
+    }
+  }
+
+  if (hasViewportRelativeCoordinates(event)) {
+    return {
+      x: event.clientX,
+      y: event.clientY
+    };
+  }
+
+  return null;
+}
+
+const CSS = /*#__PURE__*/Object.freeze({
+  Translate: {
+    toString(transform) {
+      if (!transform) {
+        return;
+      }
+
+      const {
+        x,
+        y
+      } = transform;
+      return "translate3d(" + (x ? Math.round(x) : 0) + "px, " + (y ? Math.round(y) : 0) + "px, 0)";
+    }
+
+  },
+  Scale: {
+    toString(transform) {
+      if (!transform) {
+        return;
+      }
+
+      const {
+        scaleX,
+        scaleY
+      } = transform;
+      return "scaleX(" + scaleX + ") scaleY(" + scaleY + ")";
+    }
+
+  },
+  Transform: {
+    toString(transform) {
+      if (!transform) {
+        return;
+      }
+
+      return [CSS.Translate.toString(transform), CSS.Scale.toString(transform)].join(' ');
+    }
+
+  },
+  Transition: {
+    toString(_ref) {
+      let {
+        property,
+        duration,
+        easing
+      } = _ref;
+      return property + " " + duration + "ms " + easing;
+    }
+
+  }
+});
+
+const SELECTOR = 'a,frame,iframe,input:not([type=hidden]):not(:disabled),select:not(:disabled),textarea:not(:disabled),button:not(:disabled),*[tabindex]';
+function findFirstFocusableNode(element) {
+  if (element.matches(SELECTOR)) {
+    return element;
+  }
+
+  return element.querySelector(SELECTOR);
+}
+
+
+//# sourceMappingURL=utilities.esm.js.map
+
+
+/***/ }),
+
 /***/ "./src/components/Configuration.js":
 /*!*****************************************!*\
   !*** ./src/components/Configuration.js ***!
@@ -80,6 +5278,2062 @@ function Configuration(_ref) {
 
 /***/ }),
 
+/***/ "./src/components/DnD/Tree/SortableTree.tsx":
+/*!**************************************************!*\
+  !*** ./src/components/DnD/Tree/SortableTree.tsx ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   SortableTree: () => (/* binding */ SortableTree)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "react-dom");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _dnd_kit_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @dnd-kit/core */ "./node_modules/@dnd-kit/core/dist/core.esm.js");
+/* harmony import */ var _dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @dnd-kit/sortable */ "./node_modules/@dnd-kit/sortable/dist/sortable.esm.js");
+/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utilities */ "./src/components/DnD/Tree/utilities.ts");
+/* harmony import */ var _keyboardCoordinates__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./keyboardCoordinates */ "./src/components/DnD/Tree/keyboardCoordinates.ts");
+/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components */ "./src/components/DnD/Tree/components/index.ts");
+/* harmony import */ var _dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @dnd-kit/utilities */ "./node_modules/@dnd-kit/utilities/dist/utilities.esm.js");
+
+
+
+
+
+
+
+
+
+const initialItems = [{
+  id: 'Home',
+  children: []
+}, {
+  id: 'Collections',
+  children: [{
+    id: 'Spring',
+    children: []
+  }, {
+    id: 'Summer',
+    children: []
+  }, {
+    id: 'Fall',
+    children: []
+  }, {
+    id: 'Winter',
+    children: []
+  }]
+}, {
+  id: 'About Us',
+  children: []
+}, {
+  id: 'My Account',
+  children: [{
+    id: 'Addresses',
+    children: []
+  }, {
+    id: 'Order History',
+    children: []
+  }]
+}];
+const measuring = {
+  droppable: {
+    strategy: _dnd_kit_core__WEBPACK_IMPORTED_MODULE_2__.MeasuringStrategy.Always
+  }
+};
+const dropAnimationConfig = {
+  keyframes(_ref) {
+    let {
+      transform
+    } = _ref;
+    return [{
+      opacity: 1,
+      transform: _dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_7__.CSS.Transform.toString(transform.initial)
+    }, {
+      opacity: 0,
+      transform: _dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_7__.CSS.Transform.toString({
+        ...transform.final,
+        x: transform.final.x + 5,
+        y: transform.final.y + 5
+      })
+    }];
+  },
+  easing: 'ease-out',
+  sideEffects(_ref2) {
+    let {
+      active
+    } = _ref2;
+    active.node.animate([{
+      opacity: 0
+    }, {
+      opacity: 1
+    }], {
+      duration: _dnd_kit_core__WEBPACK_IMPORTED_MODULE_2__.defaultDropAnimation.duration,
+      easing: _dnd_kit_core__WEBPACK_IMPORTED_MODULE_2__.defaultDropAnimation.easing
+    });
+  }
+};
+function SortableTree(_ref3) {
+  let {
+    collapsible,
+    defaultItems,
+    indicator = false,
+    indentationWidth = 50,
+    removable
+  } = _ref3;
+  console.log('defaultItems', defaultItems);
+  const [items, setItems] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(() => defaultItems);
+  const [activeId, setActiveId] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const [overId, setOverId] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const [offsetLeft, setOffsetLeft] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(0);
+  const [currentPosition, setCurrentPosition] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const flattenedItems = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
+    const flattenedTree = (0,_utilities__WEBPACK_IMPORTED_MODULE_4__.flattenTree)(items);
+    const collapsedItems = flattenedTree.reduce((acc, _ref4) => {
+      let {
+        children,
+        collapsed,
+        id
+      } = _ref4;
+      return collapsed && children.length ? [...acc, id] : acc;
+    }, []);
+    return (0,_utilities__WEBPACK_IMPORTED_MODULE_4__.removeChildrenOf)(flattenedTree, activeId ? [activeId, ...collapsedItems] : collapsedItems);
+  }, [activeId, items]);
+  const projected = activeId && overId ? (0,_utilities__WEBPACK_IMPORTED_MODULE_4__.getProjection)(flattenedItems, activeId, overId, offsetLeft, indentationWidth) : null;
+  const sensorContext = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useRef)({
+    items: flattenedItems,
+    offset: offsetLeft
+  });
+  const [coordinateGetter] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(() => (0,_keyboardCoordinates__WEBPACK_IMPORTED_MODULE_5__.sortableTreeKeyboardCoordinates)(sensorContext, indicator, indentationWidth));
+  const sensors = (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_2__.useSensors)((0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_2__.useSensor)(_dnd_kit_core__WEBPACK_IMPORTED_MODULE_2__.PointerSensor), (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_2__.useSensor)(_dnd_kit_core__WEBPACK_IMPORTED_MODULE_2__.KeyboardSensor, {
+    coordinateGetter
+  }));
+  const sortedIds = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => flattenedItems.map(_ref5 => {
+    let {
+      id
+    } = _ref5;
+    return id;
+  }), [flattenedItems]);
+  const activeItem = activeId ? flattenedItems.find(_ref6 => {
+    let {
+      id
+    } = _ref6;
+    return id === activeId;
+  }) : null;
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    sensorContext.current = {
+      items: flattenedItems,
+      offset: offsetLeft
+    };
+  }, [flattenedItems, offsetLeft]);
+  const announcements = {
+    onDragStart(_ref7) {
+      let {
+        active
+      } = _ref7;
+      return `Picked up ${active.id}.`;
+    },
+    onDragMove(_ref8) {
+      let {
+        active,
+        over
+      } = _ref8;
+      return getMovementAnnouncement('onDragMove', active.id, over?.id);
+    },
+    onDragOver(_ref9) {
+      let {
+        active,
+        over
+      } = _ref9;
+      return getMovementAnnouncement('onDragOver', active.id, over?.id);
+    },
+    onDragEnd(_ref10) {
+      let {
+        active,
+        over
+      } = _ref10;
+      return getMovementAnnouncement('onDragEnd', active.id, over?.id);
+    },
+    onDragCancel(_ref11) {
+      let {
+        active
+      } = _ref11;
+      return `Moving was cancelled. ${active.id} was dropped in its original position.`;
+    }
+  };
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_dnd_kit_core__WEBPACK_IMPORTED_MODULE_2__.DndContext, {
+    accessibility: {
+      announcements
+    },
+    sensors: sensors,
+    collisionDetection: _dnd_kit_core__WEBPACK_IMPORTED_MODULE_2__.closestCenter,
+    measuring: measuring,
+    onDragStart: handleDragStart,
+    onDragMove: handleDragMove,
+    onDragOver: handleDragOver,
+    onDragEnd: handleDragEnd,
+    onDragCancel: handleDragCancel
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_3__.SortableContext, {
+    items: sortedIds,
+    strategy: _dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_3__.verticalListSortingStrategy
+  }, flattenedItems.map(_ref12 => {
+    let {
+      id,
+      children,
+      collapsed,
+      depth
+    } = _ref12;
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components__WEBPACK_IMPORTED_MODULE_6__.SortableTreeItem, {
+      key: id,
+      id: id,
+      value: id,
+      depth: id === activeId && projected ? projected.depth : depth,
+      indentationWidth: indentationWidth,
+      indicator: indicator,
+      collapsed: Boolean(collapsed && children.length),
+      onCollapse: collapsible && children.length ? () => handleCollapse(id) : undefined,
+      onRemove: removable ? () => handleRemove(id) : undefined
+    });
+  }), (0,react_dom__WEBPACK_IMPORTED_MODULE_1__.createPortal)((0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_dnd_kit_core__WEBPACK_IMPORTED_MODULE_2__.DragOverlay, {
+    dropAnimation: dropAnimationConfig,
+    modifiers: indicator ? [adjustTranslate] : undefined
+  }, activeId && activeItem ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components__WEBPACK_IMPORTED_MODULE_6__.SortableTreeItem, {
+    id: activeId,
+    depth: activeItem.depth,
+    clone: true,
+    childCount: (0,_utilities__WEBPACK_IMPORTED_MODULE_4__.getChildCount)(items, activeId) + 1,
+    value: activeId.toString(),
+    indentationWidth: indentationWidth
+  }) : null), document.body)));
+  function handleDragStart(_ref13) {
+    let {
+      active: {
+        id: activeId
+      }
+    } = _ref13;
+    setActiveId(activeId);
+    setOverId(activeId);
+    const activeItem = flattenedItems.find(_ref14 => {
+      let {
+        id
+      } = _ref14;
+      return id === activeId;
+    });
+    if (activeItem) {
+      setCurrentPosition({
+        parentId: activeItem.parentId,
+        overId: activeId
+      });
+    }
+    document.body.style.setProperty('cursor', 'grabbing');
+  }
+  function handleDragMove(_ref15) {
+    let {
+      delta
+    } = _ref15;
+    setOffsetLeft(delta.x);
+  }
+  function handleDragOver(_ref16) {
+    var _over$id;
+    let {
+      over
+    } = _ref16;
+    setOverId((_over$id = over?.id) !== null && _over$id !== void 0 ? _over$id : null);
+  }
+  function handleDragEnd(_ref17) {
+    let {
+      active,
+      over
+    } = _ref17;
+    resetState();
+    if (projected && over) {
+      const {
+        depth,
+        parentId
+      } = projected;
+      const clonedItems = JSON.parse(JSON.stringify((0,_utilities__WEBPACK_IMPORTED_MODULE_4__.flattenTree)(items)));
+      const overIndex = clonedItems.findIndex(_ref18 => {
+        let {
+          id
+        } = _ref18;
+        return id === over.id;
+      });
+      const activeIndex = clonedItems.findIndex(_ref19 => {
+        let {
+          id
+        } = _ref19;
+        return id === active.id;
+      });
+      const activeTreeItem = clonedItems[activeIndex];
+      clonedItems[activeIndex] = {
+        ...activeTreeItem,
+        depth,
+        parentId
+      };
+      const sortedItems = (0,_dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_3__.arrayMove)(clonedItems, activeIndex, overIndex);
+      const newItems = (0,_utilities__WEBPACK_IMPORTED_MODULE_4__.buildTree)(sortedItems);
+      setItems(newItems);
+    }
+  }
+  function handleDragCancel() {
+    resetState();
+  }
+  function resetState() {
+    setOverId(null);
+    setActiveId(null);
+    setOffsetLeft(0);
+    setCurrentPosition(null);
+    document.body.style.setProperty('cursor', '');
+  }
+  function handleRemove(id) {
+    setItems(items => (0,_utilities__WEBPACK_IMPORTED_MODULE_4__.removeItem)(items, id));
+  }
+  function handleCollapse(id) {
+    setItems(items => (0,_utilities__WEBPACK_IMPORTED_MODULE_4__.setProperty)(items, id, 'collapsed', value => {
+      return !value;
+    }));
+  }
+  function getMovementAnnouncement(eventName, activeId, overId) {
+    if (overId && projected) {
+      if (eventName !== 'onDragEnd') {
+        if (currentPosition && projected.parentId === currentPosition.parentId && overId === currentPosition.overId) {
+          return;
+        } else {
+          setCurrentPosition({
+            parentId: projected.parentId,
+            overId
+          });
+        }
+      }
+      const clonedItems = JSON.parse(JSON.stringify((0,_utilities__WEBPACK_IMPORTED_MODULE_4__.flattenTree)(items)));
+      const overIndex = clonedItems.findIndex(_ref20 => {
+        let {
+          id
+        } = _ref20;
+        return id === overId;
+      });
+      const activeIndex = clonedItems.findIndex(_ref21 => {
+        let {
+          id
+        } = _ref21;
+        return id === activeId;
+      });
+      const sortedItems = (0,_dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_3__.arrayMove)(clonedItems, activeIndex, overIndex);
+      const previousItem = sortedItems[overIndex - 1];
+      let announcement;
+      const movedVerb = eventName === 'onDragEnd' ? 'dropped' : 'moved';
+      const nestedVerb = eventName === 'onDragEnd' ? 'dropped' : 'nested';
+      if (!previousItem) {
+        const nextItem = sortedItems[overIndex + 1];
+        announcement = `${activeId} was ${movedVerb} before ${nextItem.id}.`;
+      } else {
+        if (projected.depth > previousItem.depth) {
+          announcement = `${activeId} was ${nestedVerb} under ${previousItem.id}.`;
+        } else {
+          let previousSibling = previousItem;
+          while (previousSibling && projected.depth < previousSibling.depth) {
+            const parentId = previousSibling.parentId;
+            previousSibling = sortedItems.find(_ref22 => {
+              let {
+                id
+              } = _ref22;
+              return id === parentId;
+            });
+          }
+          if (previousSibling) {
+            announcement = `${activeId} was ${movedVerb} after ${previousSibling.id}.`;
+          }
+        }
+      }
+      return announcement;
+    }
+    return;
+  }
+}
+const adjustTranslate = _ref23 => {
+  let {
+    transform
+  } = _ref23;
+  return {
+    ...transform,
+    y: transform.y - 25
+  };
+};
+
+/***/ }),
+
+/***/ "./src/components/DnD/Tree/components/TreeItem/SortableTreeItem.tsx":
+/*!**************************************************************************!*\
+  !*** ./src/components/DnD/Tree/components/TreeItem/SortableTreeItem.tsx ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   SortableTreeItem: () => (/* binding */ SortableTreeItem)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @dnd-kit/sortable */ "./node_modules/@dnd-kit/sortable/dist/sortable.esm.js");
+/* harmony import */ var _dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @dnd-kit/utilities */ "./node_modules/@dnd-kit/utilities/dist/utilities.esm.js");
+/* harmony import */ var _TreeItem__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./TreeItem */ "./src/components/DnD/Tree/components/TreeItem/TreeItem.tsx");
+/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utilities */ "./src/components/DnD/Tree/utilities.ts");
+
+
+
+
+
+
+const animateLayoutChanges = _ref => {
+  let {
+    isSorting,
+    wasDragging
+  } = _ref;
+  return isSorting || wasDragging ? false : true;
+};
+function SortableTreeItem(_ref2) {
+  let {
+    id,
+    depth,
+    ...props
+  } = _ref2;
+  const {
+    attributes,
+    isDragging,
+    isSorting,
+    listeners,
+    setDraggableNodeRef,
+    setDroppableNodeRef,
+    transform,
+    transition
+  } = (0,_dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_2__.useSortable)({
+    id,
+    animateLayoutChanges
+  });
+  const style = {
+    transform: _dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_3__.CSS.Translate.toString(transform),
+    transition
+  };
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_TreeItem__WEBPACK_IMPORTED_MODULE_4__.TreeItem, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    ref: setDraggableNodeRef,
+    wrapperRef: setDroppableNodeRef,
+    style: style,
+    depth: depth,
+    ghost: isDragging,
+    disableSelection: _utilities__WEBPACK_IMPORTED_MODULE_5__.iOS,
+    disableInteraction: isSorting,
+    handleProps: {
+      ...attributes,
+      ...listeners
+    }
+  }, props));
+}
+
+/***/ }),
+
+/***/ "./src/components/DnD/Tree/components/TreeItem/TreeItem.tsx":
+/*!******************************************************************!*\
+  !*** ./src/components/DnD/Tree/components/TreeItem/TreeItem.tsx ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   TreeItem: () => (/* binding */ TreeItem)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../components */ "./src/components/DnD/components/index.ts");
+/* harmony import */ var _TreeItem_module_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./TreeItem.module.css */ "./src/components/DnD/Tree/components/TreeItem/TreeItem.module.css");
+
+
+
+
+
+
+const TreeItem = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.forwardRef)((_ref, ref) => {
+  let {
+    childCount,
+    clone,
+    depth,
+    disableSelection,
+    disableInteraction,
+    ghost,
+    handleProps,
+    indentationWidth,
+    indicator,
+    collapsed,
+    onCollapse,
+    onRemove,
+    style,
+    value,
+    wrapperRef,
+    ...props
+  } = _ref;
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("li", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()(_TreeItem_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].Wrapper, clone && _TreeItem_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].clone, ghost && _TreeItem_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].ghost, indicator && _TreeItem_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].indicator, disableSelection && _TreeItem_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].disableSelection, disableInteraction && _TreeItem_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].disableInteraction),
+    ref: wrapperRef,
+    style: {
+      '--spacing': `${indentationWidth * depth}px`
+    }
+  }, props), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    className: _TreeItem_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].TreeItem,
+    ref: ref,
+    style: style
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components__WEBPACK_IMPORTED_MODULE_3__.Handle, handleProps), onCollapse && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components__WEBPACK_IMPORTED_MODULE_3__.Action, {
+    onClick: onCollapse,
+    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()(_TreeItem_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].Collapse, collapsed && _TreeItem_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].collapsed)
+  }, collapseIcon), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+    className: _TreeItem_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].Text
+  }, value), !clone && onRemove && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components__WEBPACK_IMPORTED_MODULE_3__.Remove, {
+    onClick: onRemove
+  }), clone && childCount && childCount > 1 ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+    className: _TreeItem_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].Count
+  }, childCount) : null));
+});
+const collapseIcon = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("svg", {
+  width: "10",
+  xmlns: "http://www.w3.org/2000/svg",
+  viewBox: "0 0 70 41"
+}, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("path", {
+  d: "M30.76 39.2402C31.885 40.3638 33.41 40.995 35 40.995C36.59 40.995 38.115 40.3638 39.24 39.2402L68.24 10.2402C69.2998 9.10284 69.8768 7.59846 69.8494 6.04406C69.822 4.48965 69.1923 3.00657 68.093 1.90726C66.9937 0.807959 65.5106 0.178263 63.9562 0.150837C62.4018 0.123411 60.8974 0.700397 59.76 1.76024L35 26.5102L10.24 1.76024C9.10259 0.700397 7.59822 0.123411 6.04381 0.150837C4.4894 0.178263 3.00632 0.807959 1.90702 1.90726C0.807714 3.00657 0.178019 4.48965 0.150593 6.04406C0.123167 7.59846 0.700153 9.10284 1.75999 10.2402L30.76 39.2402Z"
+}));
+
+/***/ }),
+
+/***/ "./src/components/DnD/Tree/components/TreeItem/index.ts":
+/*!**************************************************************!*\
+  !*** ./src/components/DnD/Tree/components/TreeItem/index.ts ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   SortableTreeItem: () => (/* reexport safe */ _SortableTreeItem__WEBPACK_IMPORTED_MODULE_1__.SortableTreeItem),
+/* harmony export */   TreeItem: () => (/* reexport safe */ _TreeItem__WEBPACK_IMPORTED_MODULE_0__.TreeItem)
+/* harmony export */ });
+/* harmony import */ var _TreeItem__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TreeItem */ "./src/components/DnD/Tree/components/TreeItem/TreeItem.tsx");
+/* harmony import */ var _SortableTreeItem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SortableTreeItem */ "./src/components/DnD/Tree/components/TreeItem/SortableTreeItem.tsx");
+
+
+
+/***/ }),
+
+/***/ "./src/components/DnD/Tree/components/index.ts":
+/*!*****************************************************!*\
+  !*** ./src/components/DnD/Tree/components/index.ts ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   SortableTreeItem: () => (/* reexport safe */ _TreeItem__WEBPACK_IMPORTED_MODULE_0__.SortableTreeItem),
+/* harmony export */   TreeItem: () => (/* reexport safe */ _TreeItem__WEBPACK_IMPORTED_MODULE_0__.TreeItem)
+/* harmony export */ });
+/* harmony import */ var _TreeItem__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TreeItem */ "./src/components/DnD/Tree/components/TreeItem/index.ts");
+
+
+/***/ }),
+
+/***/ "./src/components/DnD/Tree/keyboardCoordinates.ts":
+/*!********************************************************!*\
+  !*** ./src/components/DnD/Tree/keyboardCoordinates.ts ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   sortableTreeKeyboardCoordinates: () => (/* binding */ sortableTreeKeyboardCoordinates)
+/* harmony export */ });
+/* harmony import */ var _dnd_kit_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @dnd-kit/core */ "./node_modules/@dnd-kit/core/dist/core.esm.js");
+/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utilities */ "./src/components/DnD/Tree/utilities.ts");
+
+
+const directions = [_dnd_kit_core__WEBPACK_IMPORTED_MODULE_0__.KeyboardCode.Down, _dnd_kit_core__WEBPACK_IMPORTED_MODULE_0__.KeyboardCode.Right, _dnd_kit_core__WEBPACK_IMPORTED_MODULE_0__.KeyboardCode.Up, _dnd_kit_core__WEBPACK_IMPORTED_MODULE_0__.KeyboardCode.Left];
+const horizontal = [_dnd_kit_core__WEBPACK_IMPORTED_MODULE_0__.KeyboardCode.Left, _dnd_kit_core__WEBPACK_IMPORTED_MODULE_0__.KeyboardCode.Right];
+const sortableTreeKeyboardCoordinates = (context, indicator, indentationWidth) => (event, _ref) => {
+  let {
+    currentCoordinates,
+    context: {
+      active,
+      over,
+      collisionRect,
+      droppableRects,
+      droppableContainers
+    }
+  } = _ref;
+  if (directions.includes(event.code)) {
+    if (!active || !collisionRect) {
+      return;
+    }
+    event.preventDefault();
+    const {
+      current: {
+        items,
+        offset
+      }
+    } = context;
+    if (horizontal.includes(event.code) && over?.id) {
+      const {
+        depth,
+        maxDepth,
+        minDepth
+      } = (0,_utilities__WEBPACK_IMPORTED_MODULE_1__.getProjection)(items, active.id, over.id, offset, indentationWidth);
+      switch (event.code) {
+        case _dnd_kit_core__WEBPACK_IMPORTED_MODULE_0__.KeyboardCode.Left:
+          if (depth > minDepth) {
+            return {
+              ...currentCoordinates,
+              x: currentCoordinates.x - indentationWidth
+            };
+          }
+          break;
+        case _dnd_kit_core__WEBPACK_IMPORTED_MODULE_0__.KeyboardCode.Right:
+          if (depth < maxDepth) {
+            return {
+              ...currentCoordinates,
+              x: currentCoordinates.x + indentationWidth
+            };
+          }
+          break;
+      }
+      return undefined;
+    }
+    const containers = [];
+    droppableContainers.forEach(container => {
+      if (container?.disabled || container.id === over?.id) {
+        return;
+      }
+      const rect = droppableRects.get(container.id);
+      if (!rect) {
+        return;
+      }
+      switch (event.code) {
+        case _dnd_kit_core__WEBPACK_IMPORTED_MODULE_0__.KeyboardCode.Down:
+          if (collisionRect.top < rect.top) {
+            containers.push(container);
+          }
+          break;
+        case _dnd_kit_core__WEBPACK_IMPORTED_MODULE_0__.KeyboardCode.Up:
+          if (collisionRect.top > rect.top) {
+            containers.push(container);
+          }
+          break;
+      }
+    });
+    const collisions = (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_0__.closestCorners)({
+      active,
+      collisionRect,
+      pointerCoordinates: null,
+      droppableRects,
+      droppableContainers: containers
+    });
+    let closestId = (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_0__.getFirstCollision)(collisions, 'id');
+    if (closestId === over?.id && collisions.length > 1) {
+      closestId = collisions[1].id;
+    }
+    if (closestId && over?.id) {
+      const activeRect = droppableRects.get(active.id);
+      const newRect = droppableRects.get(closestId);
+      const newDroppable = droppableContainers.get(closestId);
+      if (activeRect && newRect && newDroppable) {
+        const newIndex = items.findIndex(_ref2 => {
+          let {
+            id
+          } = _ref2;
+          return id === closestId;
+        });
+        const newItem = items[newIndex];
+        const activeIndex = items.findIndex(_ref3 => {
+          let {
+            id
+          } = _ref3;
+          return id === active.id;
+        });
+        const activeItem = items[activeIndex];
+        if (newItem && activeItem) {
+          const {
+            depth
+          } = (0,_utilities__WEBPACK_IMPORTED_MODULE_1__.getProjection)(items, active.id, closestId, (newItem.depth - activeItem.depth) * indentationWidth, indentationWidth);
+          const isBelow = newIndex > activeIndex;
+          const modifier = isBelow ? 1 : -1;
+          const offset = indicator ? (collisionRect.height - activeRect.height) / 2 : 0;
+          const newCoordinates = {
+            x: newRect.left + depth * indentationWidth,
+            y: newRect.top + modifier * offset
+          };
+          return newCoordinates;
+        }
+      }
+    }
+  }
+  return undefined;
+};
+
+/***/ }),
+
+/***/ "./src/components/DnD/Tree/utilities.ts":
+/*!**********************************************!*\
+  !*** ./src/components/DnD/Tree/utilities.ts ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   buildTree: () => (/* binding */ buildTree),
+/* harmony export */   findItem: () => (/* binding */ findItem),
+/* harmony export */   findItemDeep: () => (/* binding */ findItemDeep),
+/* harmony export */   flattenTree: () => (/* binding */ flattenTree),
+/* harmony export */   getChildCount: () => (/* binding */ getChildCount),
+/* harmony export */   getProjection: () => (/* binding */ getProjection),
+/* harmony export */   iOS: () => (/* binding */ iOS),
+/* harmony export */   removeChildrenOf: () => (/* binding */ removeChildrenOf),
+/* harmony export */   removeItem: () => (/* binding */ removeItem),
+/* harmony export */   setProperty: () => (/* binding */ setProperty)
+/* harmony export */ });
+/* harmony import */ var _dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @dnd-kit/sortable */ "./node_modules/@dnd-kit/sortable/dist/sortable.esm.js");
+
+const iOS = /iPad|iPhone|iPod/.test(navigator.platform);
+function getDragDepth(offset, indentationWidth) {
+  return Math.round(offset / indentationWidth);
+}
+function getProjection(items, activeId, overId, dragOffset, indentationWidth) {
+  const overItemIndex = items.findIndex(_ref => {
+    let {
+      id
+    } = _ref;
+    return id === overId;
+  });
+  const activeItemIndex = items.findIndex(_ref2 => {
+    let {
+      id
+    } = _ref2;
+    return id === activeId;
+  });
+  const activeItem = items[activeItemIndex];
+  const newItems = (0,_dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_0__.arrayMove)(items, activeItemIndex, overItemIndex);
+  const previousItem = newItems[overItemIndex - 1];
+  const nextItem = newItems[overItemIndex + 1];
+  const dragDepth = getDragDepth(dragOffset, indentationWidth);
+  const projectedDepth = activeItem.depth + dragDepth;
+  const maxDepth = getMaxDepth({
+    previousItem
+  });
+  const minDepth = getMinDepth({
+    nextItem
+  });
+  let depth = projectedDepth;
+  if (projectedDepth >= maxDepth) {
+    depth = maxDepth;
+  } else if (projectedDepth < minDepth) {
+    depth = minDepth;
+  }
+  return {
+    depth,
+    maxDepth,
+    minDepth,
+    parentId: getParentId()
+  };
+  function getParentId() {
+    if (depth === 0 || !previousItem) {
+      return null;
+    }
+    if (depth === previousItem.depth) {
+      return previousItem.parentId;
+    }
+    if (depth > previousItem.depth) {
+      return previousItem.id;
+    }
+    const newParent = newItems.slice(0, overItemIndex).reverse().find(item => item.depth === depth)?.parentId;
+    return newParent !== null && newParent !== void 0 ? newParent : null;
+  }
+}
+function getMaxDepth(_ref3) {
+  let {
+    previousItem
+  } = _ref3;
+  if (previousItem) {
+    return previousItem.depth + 1;
+  }
+  return 0;
+}
+function getMinDepth(_ref4) {
+  let {
+    nextItem
+  } = _ref4;
+  if (nextItem) {
+    return nextItem.depth;
+  }
+  return 0;
+}
+function flatten(items) {
+  let parentId = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  let depth = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+  return items.reduce((acc, item, index) => {
+    return [...acc, {
+      ...item,
+      parentId,
+      depth,
+      index
+    }, ...flatten(item.children, item.id, depth + 1)];
+  }, []);
+}
+function flattenTree(items) {
+  return flatten(items);
+}
+function buildTree(flattenedItems) {
+  const root = {
+    id: 'root',
+    children: []
+  };
+  const nodes = {
+    [root.id]: root
+  };
+  const items = flattenedItems.map(item => ({
+    ...item,
+    children: []
+  }));
+  for (const item of items) {
+    var _item$parentId, _nodes$parentId;
+    const {
+      id,
+      children
+    } = item;
+    const parentId = (_item$parentId = item.parentId) !== null && _item$parentId !== void 0 ? _item$parentId : root.id;
+    const parent = (_nodes$parentId = nodes[parentId]) !== null && _nodes$parentId !== void 0 ? _nodes$parentId : findItem(items, parentId);
+    nodes[id] = {
+      id,
+      children
+    };
+    parent.children.push(item);
+  }
+  return root.children;
+}
+function findItem(items, itemId) {
+  return items.find(_ref5 => {
+    let {
+      id
+    } = _ref5;
+    return id === itemId;
+  });
+}
+function findItemDeep(items, itemId) {
+  for (const item of items) {
+    const {
+      id,
+      children
+    } = item;
+    if (id === itemId) {
+      return item;
+    }
+    if (children.length) {
+      const child = findItemDeep(children, itemId);
+      if (child) {
+        return child;
+      }
+    }
+  }
+  return undefined;
+}
+function removeItem(items, id) {
+  const newItems = [];
+  for (const item of items) {
+    if (item.id === id) {
+      continue;
+    }
+    if (item.children.length) {
+      item.children = removeItem(item.children, id);
+    }
+    newItems.push(item);
+  }
+  return newItems;
+}
+function setProperty(items, id, property, setter) {
+  for (const item of items) {
+    if (item.id === id) {
+      item[property] = setter(item[property]);
+      continue;
+    }
+    if (item.children.length) {
+      item.children = setProperty(item.children, id, property, setter);
+    }
+  }
+  return [...items];
+}
+function countChildren(items) {
+  let count = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  return items.reduce((acc, _ref6) => {
+    let {
+      children
+    } = _ref6;
+    if (children.length) {
+      return countChildren(children, acc + 1);
+    }
+    return acc + 1;
+  }, count);
+}
+function getChildCount(items, id) {
+  const item = findItemDeep(items, id);
+  return item ? countChildren(item.children) : 0;
+}
+function removeChildrenOf(items, ids) {
+  const excludeParentIds = [...ids];
+  return items.filter(item => {
+    if (item.parentId && excludeParentIds.includes(item.parentId)) {
+      if (item.children.length) {
+        excludeParentIds.push(item.id);
+      }
+      return false;
+    }
+    return true;
+  });
+}
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/Button/Button.tsx":
+/*!*********************************************************!*\
+  !*** ./src/components/DnD/components/Button/Button.tsx ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Button: () => (/* binding */ Button)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Button_module_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Button.module.css */ "./src/components/DnD/components/Button/Button.module.css");
+
+
+
+
+function Button(_ref) {
+  let {
+    children,
+    ...props
+  } = _ref;
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("button", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()(_Button_module_css__WEBPACK_IMPORTED_MODULE_3__["default"].Button)
+  }, props), children);
+}
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/Button/index.ts":
+/*!*******************************************************!*\
+  !*** ./src/components/DnD/components/Button/index.ts ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Button: () => (/* reexport safe */ _Button__WEBPACK_IMPORTED_MODULE_0__.Button)
+/* harmony export */ });
+/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Button */ "./src/components/DnD/components/Button/Button.tsx");
+
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/ConfirmModal/ConfirmModal.tsx":
+/*!*********************************************************************!*\
+  !*** ./src/components/DnD/components/ConfirmModal/ConfirmModal.tsx ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ConfirmModal: () => (/* binding */ ConfirmModal)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _ConfirmModal_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ConfirmModal.module.css */ "./src/components/DnD/components/ConfirmModal/ConfirmModal.module.css");
+
+
+const ConfirmModal = _ref => {
+  let {
+    onConfirm,
+    onDeny,
+    children
+  } = _ref;
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: _ConfirmModal_module_css__WEBPACK_IMPORTED_MODULE_1__["default"].ConfirmModal
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", null, children), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    onClick: onConfirm
+  }, "Yes"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    onClick: onDeny
+  }, "No")));
+};
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/ConfirmModal/index.ts":
+/*!*************************************************************!*\
+  !*** ./src/components/DnD/components/ConfirmModal/index.ts ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ConfirmModal: () => (/* reexport safe */ _ConfirmModal__WEBPACK_IMPORTED_MODULE_0__.ConfirmModal)
+/* harmony export */ });
+/* harmony import */ var _ConfirmModal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ConfirmModal */ "./src/components/DnD/components/ConfirmModal/ConfirmModal.tsx");
+
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/Container/Container.tsx":
+/*!***************************************************************!*\
+  !*** ./src/components/DnD/components/Container/Container.tsx ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Container: () => (/* binding */ Container)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Item__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Item */ "./src/components/DnD/components/Item/index.ts");
+/* harmony import */ var _Container_module_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Container.module.css */ "./src/components/DnD/components/Container/Container.module.css");
+
+
+
+
+
+
+const Container = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.forwardRef)((_ref, ref) => {
+  let {
+    children,
+    columns = 1,
+    handleProps,
+    horizontal,
+    hover,
+    onClick,
+    onRemove,
+    label,
+    placeholder,
+    style,
+    scrollable,
+    shadow,
+    unstyled,
+    ...props
+  } = _ref;
+  const Component = onClick ? 'button' : 'div';
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Component, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
+    ref: ref,
+    style: {
+      ...style,
+      '--columns': columns
+    },
+    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()(_Container_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].Container, unstyled && _Container_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].unstyled, horizontal && _Container_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].horizontal, hover && _Container_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].hover, placeholder && _Container_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].placeholder, scrollable && _Container_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].scrollable, shadow && _Container_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].shadow),
+    onClick: onClick,
+    tabIndex: onClick ? 0 : undefined
+  }), label ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    className: _Container_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].Header
+  }, label, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    className: _Container_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].Actions
+  }, onRemove ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_Item__WEBPACK_IMPORTED_MODULE_3__.Remove, {
+    onClick: onRemove
+  }) : undefined, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_Item__WEBPACK_IMPORTED_MODULE_3__.Handle, handleProps))) : null, placeholder ? children : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("ul", null, children));
+});
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/Container/index.ts":
+/*!**********************************************************!*\
+  !*** ./src/components/DnD/components/Container/index.ts ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Container: () => (/* reexport safe */ _Container__WEBPACK_IMPORTED_MODULE_0__.Container)
+/* harmony export */ });
+/* harmony import */ var _Container__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Container */ "./src/components/DnD/components/Container/Container.tsx");
+
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/Draggable/Draggable.tsx":
+/*!***************************************************************!*\
+  !*** ./src/components/DnD/components/Draggable/Draggable.tsx ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Axis: () => (/* binding */ Axis),
+/* harmony export */   Draggable: () => (/* binding */ Draggable)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Item_components_Handle__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Item/components/Handle */ "./src/components/DnD/components/Item/components/Handle/index.ts");
+/* harmony import */ var _draggable_svg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./draggable-svg */ "./src/components/DnD/components/Draggable/draggable-svg.tsx");
+/* harmony import */ var _Draggable_module_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Draggable.module.css */ "./src/components/DnD/components/Draggable/Draggable.module.css");
+
+
+
+
+
+
+
+let Axis = /*#__PURE__*/function (Axis) {
+  Axis[Axis["All"] = 0] = "All";
+  Axis[Axis["Vertical"] = 1] = "Vertical";
+  Axis[Axis["Horizontal"] = 2] = "Horizontal";
+  return Axis;
+}({});
+const Draggable = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.forwardRef)(function Draggable(_ref, ref) {
+  var _transform$x, _transform$y;
+  let {
+    axis,
+    dragOverlay,
+    dragging,
+    handle,
+    label,
+    listeners,
+    transform,
+    style,
+    buttonStyle,
+    ...props
+  } = _ref;
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()(_Draggable_module_css__WEBPACK_IMPORTED_MODULE_5__["default"].Draggable, dragOverlay && _Draggable_module_css__WEBPACK_IMPORTED_MODULE_5__["default"].dragOverlay, dragging && _Draggable_module_css__WEBPACK_IMPORTED_MODULE_5__["default"].dragging, handle && _Draggable_module_css__WEBPACK_IMPORTED_MODULE_5__["default"].handle),
+    style: {
+      ...style,
+      '--translate-x': `${(_transform$x = transform?.x) !== null && _transform$x !== void 0 ? _transform$x : 0}px`,
+      '--translate-y': `${(_transform$y = transform?.y) !== null && _transform$y !== void 0 ? _transform$y : 0}px`
+    }
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("button", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
+    "aria-label": "Draggable",
+    "data-cypress": "draggable-item"
+  }, handle ? {} : listeners, {
+    tabIndex: handle ? -1 : undefined,
+    ref: ref,
+    style: buttonStyle
+  }), axis === Axis.Vertical ? _draggable_svg__WEBPACK_IMPORTED_MODULE_4__.draggableVertical : axis === Axis.Horizontal ? _draggable_svg__WEBPACK_IMPORTED_MODULE_4__.draggableHorizontal : _draggable_svg__WEBPACK_IMPORTED_MODULE_4__.draggable, handle ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_Item_components_Handle__WEBPACK_IMPORTED_MODULE_3__.Handle, handle ? listeners : {}) : null), label ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, label) : null);
+});
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/Draggable/DraggableOverlay.tsx":
+/*!**********************************************************************!*\
+  !*** ./src/components/DnD/components/Draggable/DraggableOverlay.tsx ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DraggableOverlay: () => (/* binding */ DraggableOverlay)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "react-dom");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _dnd_kit_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @dnd-kit/core */ "./node_modules/@dnd-kit/core/dist/core.esm.js");
+/* harmony import */ var _dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @dnd-kit/utilities */ "./node_modules/@dnd-kit/utilities/dist/utilities.esm.js");
+/* harmony import */ var _Draggable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Draggable */ "./src/components/DnD/components/Draggable/Draggable.tsx");
+
+
+
+
+
+const dropAnimationConfig = {
+  keyframes(_ref) {
+    let {
+      transform
+    } = _ref;
+    return [{
+      transform: _dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_3__.CSS.Transform.toString(transform.initial)
+    }, {
+      transform: _dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_3__.CSS.Transform.toString({
+        ...transform.final,
+        scaleX: 0.94,
+        scaleY: 0.94
+      })
+    }];
+  },
+  sideEffects(_ref2) {
+    let {
+      active,
+      dragOverlay
+    } = _ref2;
+    active.node.style.opacity = '0';
+    const button = dragOverlay.node.querySelector('button');
+    if (button) {
+      button.animate([{
+        boxShadow: '-1px 0 15px 0 rgba(34, 33, 81, 0.01), 0px 15px 15px 0 rgba(34, 33, 81, 0.25)'
+      }, {
+        boxShadow: '-1px 0 15px 0 rgba(34, 33, 81, 0), 0px 15px 15px 0 rgba(34, 33, 81, 0)'
+      }], {
+        duration: 250,
+        easing: 'ease',
+        fill: 'forwards'
+      });
+    }
+    return () => {
+      active.node.style.opacity = '';
+    };
+  }
+};
+function DraggableOverlay(_ref3) {
+  let {
+    axis,
+    dropAnimation = dropAnimationConfig
+  } = _ref3;
+  const {
+    active
+  } = (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_2__.useDndContext)();
+  return (0,react_dom__WEBPACK_IMPORTED_MODULE_1__.createPortal)((0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_dnd_kit_core__WEBPACK_IMPORTED_MODULE_2__.DragOverlay, {
+    dropAnimation: dropAnimation
+  }, active ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Draggable__WEBPACK_IMPORTED_MODULE_4__.Draggable, {
+    axis: axis,
+    dragging: true,
+    dragOverlay: true
+  }) : null), document.body);
+}
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/Draggable/draggable-svg.tsx":
+/*!*******************************************************************!*\
+  !*** ./src/components/DnD/components/Draggable/draggable-svg.tsx ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   draggable: () => (/* binding */ draggable),
+/* harmony export */   draggableHorizontal: () => (/* binding */ draggableHorizontal),
+/* harmony export */   draggableVertical: () => (/* binding */ draggableVertical)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+
+const draggable = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+  width: "164px",
+  height: "43px",
+  viewBox: "0 0 164 43",
+  version: "1.1",
+  xmlns: "http://www.w3.org/2000/svg"
+}, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
+  stroke: "none",
+  strokeWidth: "1",
+  fill: "none",
+  fillRule: "evenodd"
+}, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+  d: "M42.3045805,21.1324327 L36.2525369,27.1844763 L34.5266208,25.4585603 L37.6269502,22.3582309 L26.7555941,22.3684498 L26.7578974,19.9255979 L37.6292535,19.915379 L34.5347379,16.8208634 L36.2638746,15.0917268 L42.3045805,21.1324327 Z M-7.10542736e-15,21.1721478 L6.05204361,15.1201042 L7.77795964,16.8460202 L4.67763031,19.9463495 L15.5489864,19.9361307 L15.5466831,22.3789826 L4.67532697,22.3892015 L7.76984257,25.4837171 L6.04070592,27.2128537 L-7.10542736e-15,21.1721478 Z M27.2130082,6.04086037 L25.4838715,7.76999702 L22.3893559,4.67548142 L22.3791371,15.5468375 L19.9362851,15.5491408 L19.946504,4.67778476 L16.8461747,7.77811409 L15.1202586,6.05219806 L21.1723023,0.000154447508 L27.2130082,6.04086037 Z M22.3686045,26.7554394 L22.3584184,37.6267628 L25.4587477,34.5264334 L27.1846637,36.2523495 L21.1325874,42.3044257 L15.0918815,36.2637198 L16.8210508,34.5345505 L19.9155664,37.6290661 L19.9257526,26.7577427 L22.3686045,26.7554394 Z M53.0741994,21.9176266 C53.0741994,19.9403826 53.522128,18.3656447 54.4179988,17.1933657 C55.3138695,16.0210866 56.5392602,15.4349559 58.0942076,15.4349559 C59.3413228,15.4349559 60.3713614,15.8960454 61.1843542,16.8182383 L61.1843542,10.3472902 L64.6178504,10.3472902 L64.6178504,28.3534065 L61.5277038,28.3534065 L61.3619489,27.0052923 C60.5094904,28.0603434 59.4123612,28.5878611 58.0705284,28.5878611 C56.5629397,28.5878611 55.3533351,27.9997766 54.4416781,26.8235899 C53.5300211,25.6474033 53.0741994,24.0120985 53.0741994,21.9176266 Z M56.495856,22.163804 C56.495856,23.3517134 56.7050209,24.2621699 57.123357,24.8952005 C57.5416931,25.5282312 58.1494553,25.8447418 58.9466619,25.8447418 C60.0043418,25.8447418 60.7502318,25.40319 61.1843542,24.5200731 L61.1843542,19.5144666 C60.758125,18.6313497 60.020128,18.1897979 58.9703412,18.1897979 C57.3206761,18.1897979 56.495856,19.5144533 56.495856,22.163804 Z M74.7671193,18.8462709 C74.3014244,18.7837493 73.8909875,18.752489 73.5357965,18.752489 C72.2413225,18.752489 71.3928233,19.1862258 70.9902735,20.0537123 L70.9902735,28.3534065 L67.5686169,28.3534065 L67.5686169,15.6694105 L70.8008392,15.6694105 L70.8955563,17.1816429 C71.582259,16.0171791 72.5333674,15.4349559 73.7489101,15.4349559 C74.1277805,15.4349559 74.4829662,15.4857539 74.8144778,15.5873514 L74.7671193,18.8462709 Z M83.7797825,28.3534065 C83.6219198,28.0486139 83.5074711,27.6695827 83.4364329,27.2163015 C82.6076538,28.1306791 81.5302571,28.5878611 80.2042106,28.5878611 C78.9492022,28.5878611 77.9092974,28.2283676 77.0844649,27.5093698 C76.2596324,26.7903719 75.8472223,25.8838231 75.8472223,24.789696 C75.8472223,23.4454826 76.3504021,22.4138925 77.3567767,21.6948947 C78.3631513,20.9758969 79.8174394,20.6124959 81.7196848,20.6046807 L83.2943572,20.6046807 L83.2943572,19.8778713 C83.2943572,19.2917318 83.1424166,18.8228272 82.8385309,18.4711435 C82.5346453,18.1194597 82.0551446,17.9436205 81.4000144,17.9436205 C80.8238156,17.9436205 80.3719405,18.0803844 80.0443754,18.3539161 C79.7168103,18.6274479 79.5530303,19.0025716 79.5530303,19.4792984 L76.1313737,19.4792984 C76.1313737,18.7446702 76.3602712,18.0647585 76.8180729,17.439543 C77.2758747,16.8143276 77.923102,16.3239315 78.7597742,15.9683402 C79.5964465,15.6127489 80.5357153,15.4349559 81.5776091,15.4349559 C83.1562359,15.4349559 84.4092522,15.8276635 85.3366954,16.6130904 C86.2641387,17.3985174 86.7278534,18.502397 86.7278534,19.9247622 L86.7278534,25.4227235 C86.7357465,26.6262633 86.9054463,27.5367197 87.236958,28.15412 L87.236958,28.3534065 L83.7797825,28.3534065 Z M80.950108,25.9971373 C81.4552686,25.9971373 81.9209566,25.8857725 82.3471858,25.6630395 C82.773415,25.4403065 83.0891357,25.1413798 83.2943572,24.7662505 L83.2943572,22.5858224 L82.0156758,22.5858224 C80.3028657,22.5858224 79.3912224,23.1719531 79.2807185,24.3442321 L79.2688789,24.5435186 C79.2688789,24.965539 79.4188462,25.3133099 79.7187853,25.5868417 C80.0187244,25.8603735 80.4291612,25.9971373 80.950108,25.9971373 Z M89.1576756,21.9176266 C89.1576756,19.9716434 89.6253368,18.4047206 90.5606732,17.2168111 C91.4960096,16.0289017 92.7569188,15.4349559 94.3434388,15.4349559 C95.7484167,15.4349559 96.8415994,15.9116756 97.6230197,16.8651292 L97.7650954,15.6694105 L100.867082,15.6694105 L100.867082,27.9313881 C100.867082,29.0411456 100.612532,30.0063075 100.103425,30.8269029 C99.5943175,31.6474982 98.8780263,32.2727043 97.9545296,32.70254 C97.0310329,33.1323756 95.9496898,33.3472902 94.7104677,33.3472902 C93.7711848,33.3472902 92.8555949,33.1616822 91.9636708,32.7904605 C91.0717466,32.4192388 90.3968937,31.9405653 89.939092,31.3544258 L91.4545661,29.291225 C92.3070246,30.2368634 93.3410097,30.7096756 94.5565524,30.7096756 C95.4642628,30.7096756 96.1706877,30.469362 96.6758483,29.9887276 C97.1810089,29.5080931 97.4335854,28.8262277 97.4335854,27.9431108 L97.4335854,27.2631924 C96.644272,28.1463093 95.6063404,28.5878611 94.3197595,28.5878611 C92.7805984,28.5878611 91.5354751,27.9919615 90.5843525,26.8001445 C89.6332298,25.6083274 89.1576756,24.0277282 89.1576756,22.0582994 L89.1576756,21.9176266 Z M92.5793321,22.163804 C92.5793321,23.3126375 92.8121761,24.213325 93.277871,24.8658937 C93.7435659,25.5184624 94.3829002,25.8447418 95.195893,25.8447418 C96.2377868,25.8447418 96.9836767,25.4578955 97.4335854,24.6841914 L97.4335854,19.3503483 C96.9757836,18.5766442 96.2377866,18.1897979 95.2195723,18.1897979 C94.3986864,18.1897979 93.7534323,18.5219386 93.2837908,19.1862301 C92.8141494,19.8505216 92.5793321,20.8430363 92.5793321,22.163804 Z M103.296904,21.9176266 C103.296904,19.9716434 103.764565,18.4047206 104.699901,17.2168111 C105.635238,16.0289017 106.896147,15.4349559 108.482667,15.4349559 C109.887645,15.4349559 110.980828,15.9116756 111.762248,16.8651292 L111.904324,15.6694105 L115.00631,15.6694105 L115.00631,27.9313881 C115.00631,29.0411456 114.75176,30.0063075 114.242653,30.8269029 C113.733546,31.6474982 113.017255,32.2727043 112.093758,32.70254 C111.170261,33.1323756 110.088918,33.3472902 108.849696,33.3472902 C107.910413,33.3472902 106.994823,33.1616822 106.102899,32.7904605 C105.210975,32.4192388 104.536122,31.9405653 104.07832,31.3544258 L105.593794,29.291225 C106.446253,30.2368634 107.480238,30.7096756 108.695781,30.7096756 C109.603491,30.7096756 110.309916,30.469362 110.815077,29.9887276 C111.320237,29.5080931 111.572814,28.8262277 111.572814,27.9431108 L111.572814,27.2631924 C110.7835,28.1463093 109.745569,28.5878611 108.458988,28.5878611 C106.919827,28.5878611 105.674703,27.9919615 104.723581,26.8001445 C103.772458,25.6083274 103.296904,24.0277282 103.296904,22.0582994 L103.296904,21.9176266 Z M106.71856,22.163804 C106.71856,23.3126375 106.951404,24.213325 107.417099,24.8658937 C107.882794,25.5184624 108.522128,25.8447418 109.335121,25.8447418 C110.377015,25.8447418 111.122905,25.4578955 111.572814,24.6841914 L111.572814,19.3503483 C111.115012,18.5766442 110.377015,18.1897979 109.358801,18.1897979 C108.537915,18.1897979 107.892661,18.5219386 107.423019,19.1862301 C106.953378,19.8505216 106.71856,20.8430363 106.71856,22.163804 Z M125.356853,28.3534065 C125.19899,28.0486139 125.084541,27.6695827 125.013503,27.2163015 C124.184724,28.1306791 123.107327,28.5878611 121.781281,28.5878611 C120.526272,28.5878611 119.486368,28.2283676 118.661535,27.5093698 C117.836702,26.7903719 117.424292,25.8838231 117.424292,24.789696 C117.424292,23.4454826 117.927472,22.4138925 118.933847,21.6948947 C119.940221,20.9758969 121.39451,20.6124959 123.296755,20.6046807 L124.871427,20.6046807 L124.871427,19.8778713 C124.871427,19.2917318 124.719487,18.8228272 124.415601,18.4711435 C124.111715,18.1194597 123.632215,17.9436205 122.977085,17.9436205 C122.400886,17.9436205 121.949011,18.0803844 121.621446,18.3539161 C121.29388,18.6274479 121.1301,19.0025716 121.1301,19.4792984 L117.708444,19.4792984 C117.708444,18.7446702 117.937341,18.0647585 118.395143,17.439543 C118.852945,16.8143276 119.500172,16.3239315 120.336844,15.9683402 C121.173517,15.6127489 122.112785,15.4349559 123.154679,15.4349559 C124.733306,15.4349559 125.986322,15.8276635 126.913766,16.6130904 C127.841209,17.3985174 128.304923,18.502397 128.304923,19.9247622 L128.304923,25.4227235 C128.312817,26.6262633 128.482516,27.5367197 128.814028,28.15412 L128.814028,28.3534065 L125.356853,28.3534065 Z M122.527178,25.9971373 C123.032339,25.9971373 123.498027,25.8857725 123.924256,25.6630395 C124.350485,25.4403065 124.666206,25.1413798 124.871427,24.7662505 L124.871427,22.5858224 L123.592746,22.5858224 C121.879936,22.5858224 120.968292,23.1719531 120.857789,24.3442321 L120.845949,24.5435186 C120.845949,24.965539 120.995916,25.3133099 121.295855,25.5868417 C121.595794,25.8603735 122.006231,25.9971373 122.527178,25.9971373 Z M142.775662,22.1286358 C142.775662,24.1605862 142.337599,25.7450929 141.461461,26.8822036 C140.585324,28.0193143 139.361906,28.5878611 137.791172,28.5878611 C136.401981,28.5878611 135.293012,28.0603434 134.464233,27.0052923 L134.310318,28.3534065 L131.232011,28.3534065 L131.232011,10.3472902 L134.653667,10.3472902 L134.653667,16.8065155 C135.442981,15.8921379 136.480912,15.4349559 137.767493,15.4349559 C139.330334,15.4349559 140.555724,16.0035027 141.443702,17.1406134 C142.33168,18.2777241 142.775662,19.877861 142.775662,21.9410721 L142.775662,22.1286358 Z M139.354005,21.8824584 C139.354005,20.6007667 139.148787,19.6649113 138.738344,19.0748641 C138.327901,18.484817 137.716192,18.1897979 136.903199,18.1897979 C135.813947,18.1897979 135.06411,18.6313497 134.653667,19.5144666 L134.653667,24.5200731 C135.072003,25.4110052 135.829733,25.8564646 136.926879,25.8564646 C138.031917,25.8564646 138.758075,25.3172243 139.105373,24.2387276 C139.271128,23.7229248 139.354005,22.9375096 139.354005,21.8824584 Z M148.792895,28.3534065 L145.359399,28.3534065 L145.359399,10.3472902 L148.792895,10.3472902 L148.792895,28.3534065 Z M157.805559,28.5878611 C155.926993,28.5878611 154.397721,28.0173605 153.217697,26.8763422 C152.037674,25.735324 151.447671,24.2152916 151.447671,22.3161995 L151.447671,21.987963 C151.447671,20.7140865 151.696301,19.5750391 152.193568,18.5707867 C152.690836,17.5665343 153.395287,16.7928417 154.306944,16.2496858 C155.218601,15.7065298 156.258506,15.4349559 157.42669,15.4349559 C159.178966,15.4349559 160.55827,15.9820112 161.564645,17.0761384 C162.57102,18.1702655 163.074199,19.7215581 163.074199,21.7300629 L163.074199,23.1133453 L154.916686,23.1133453 C155.02719,23.9417558 155.36067,24.6060373 155.917136,25.1062097 C156.473602,25.6063821 157.178053,25.8564646 158.030512,25.8564646 C159.348665,25.8564646 160.378704,25.3836524 161.120658,24.438014 L162.801888,26.3019284 C162.288834,27.0209262 161.594249,27.5816579 160.718111,27.9841404 C159.841973,28.3866229 158.871132,28.5878611 157.805559,28.5878611 Z M157.41485,18.1780752 C156.736041,18.1780752 156.185503,18.4047124 155.76322,18.8579936 C155.340938,19.3112748 155.070602,19.9599262 154.952205,20.8039671 L159.711741,20.8039671 L159.711741,20.5343443 C159.695955,19.7840857 159.490736,19.2038162 159.09608,18.7935186 C158.701423,18.3832209 158.141019,18.1780752 157.41485,18.1780752 Z",
+  fill: "#FFFFFF"
+})));
+const draggableVertical = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+  width: "137",
+  height: "39",
+  viewBox: "0 0 137 39",
+  fill: "none",
+  xmlns: "http://www.w3.org/2000/svg"
+}, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+  d: "M12.2129 6.04071L10.4838 7.76984L7.38927 4.67533L7.37905 15.5467L4.9362 15.549L4.94642 4.67763L1.84609 7.77796L0.120174 6.05204L6.17222 0L12.2129 6.04071ZM7.36852 22.7553L7.35833 33.6266L10.4587 30.5263L12.1846 32.2522L6.1325 38.3043L0.0917969 32.2636L1.82097 30.5344L4.91548 33.6289L4.92567 22.7576L7.36852 22.7553ZM26.0741 19.9175C26.0741 17.9402 26.522 16.3655 27.4179 15.1932C28.3138 14.0209 29.5392 13.4348 31.0941 13.4348C32.3412 13.4348 33.3713 13.8959 34.1843 14.8181V8.34714H37.6178V26.3533H34.5276L34.3619 25.0051C33.5094 26.0602 32.4123 26.5877 31.0704 26.5877C29.5629 26.5877 28.3533 25.9996 27.4416 24.8234C26.5299 23.6472 26.0741 22.0119 26.0741 19.9175ZM29.4958 20.1636C29.4958 21.3516 29.7049 22.262 30.1233 22.895C30.5416 23.5281 31.1494 23.8446 31.9466 23.8446C33.0043 23.8446 33.7501 23.403 34.1843 22.5199V17.5143C33.758 16.6312 33.02 16.1896 31.9703 16.1896C30.3206 16.1896 29.4958 17.5143 29.4958 20.1636ZM47.767 16.8461C47.3013 16.7836 46.8909 16.7523 46.5357 16.7523C45.2412 16.7523 44.3927 17.1861 43.9902 18.0536V26.3533H40.5685V13.6693H43.8008L43.8955 15.1815C44.5822 14.017 45.5333 13.4348 46.7488 13.4348C47.1277 13.4348 47.4829 13.4856 47.8144 13.5872L47.767 16.8461ZM56.7797 26.3533C56.6218 26.0485 56.5074 25.6694 56.4363 25.2161C55.6076 26.1305 54.5302 26.5877 53.2041 26.5877C51.9491 26.5877 50.9092 26.2282 50.0844 25.5092C49.2595 24.7902 48.8471 23.8837 48.8471 22.7895C48.8471 21.4453 49.3503 20.4137 50.3567 19.6947C51.3631 18.9757 52.8174 18.6123 54.7196 18.6045H56.2943V17.8777C56.2943 17.2916 56.1423 16.8227 55.8384 16.471C55.5346 16.1193 55.0551 15.9435 54.3999 15.9435C53.8237 15.9435 53.3719 16.0802 53.0443 16.3538C52.7167 16.6273 52.5529 17.0024 52.5529 17.4791H49.1313C49.1313 16.7445 49.3602 16.0646 49.818 15.4394C50.2758 14.8142 50.923 14.3238 51.7597 13.9682C52.5964 13.6126 53.5356 13.4348 54.5775 13.4348C56.1561 13.4348 57.4092 13.8275 58.3366 14.6129C59.2641 15.3984 59.7278 16.5022 59.7278 17.9246V23.4226C59.7357 24.6261 59.9054 25.5366 60.2369 26.154V26.3533H56.7797ZM53.95 23.997C54.4552 23.997 54.9209 23.8856 55.3471 23.6629C55.7733 23.4402 56.0891 23.1412 56.2943 22.7661V20.5857H55.0156C53.3028 20.5857 52.3911 21.1718 52.2806 22.3441L52.2688 22.5434C52.2688 22.9654 52.4188 23.3132 52.7187 23.5867C53.0186 23.8602 53.4291 23.997 53.95 23.997ZM62.1576 19.9175C62.1576 17.9715 62.6253 16.4046 63.5606 15.2167C64.4959 14.0287 65.7568 13.4348 67.3434 13.4348C68.7483 13.4348 69.8415 13.9115 70.6229 14.865L70.765 13.6693H73.867V25.9312C73.867 27.041 73.6124 28.0062 73.1033 28.8267C72.5942 29.6473 71.8779 30.2726 70.9544 30.7024C70.0309 31.1322 68.9496 31.3471 67.7104 31.3471C66.7711 31.3471 65.8555 31.1615 64.9636 30.7903C64.0717 30.4191 63.3968 29.9404 62.939 29.3543L64.4545 27.2911C65.3069 28.2367 66.3409 28.7095 67.5565 28.7095C68.4642 28.7095 69.1706 28.4692 69.6758 27.9886C70.1809 27.5079 70.4335 26.8261 70.4335 25.943V25.263C69.6442 26.1462 68.6063 26.5877 67.3197 26.5877C65.7805 26.5877 64.5354 25.9918 63.5843 24.8C62.6331 23.6082 62.1576 22.0276 62.1576 20.0581V19.9175ZM65.5792 20.1636C65.5792 21.3125 65.8121 22.2132 66.2778 22.8657C66.7435 23.5183 67.3828 23.8446 68.1958 23.8446C69.2377 23.8446 69.9836 23.4577 70.4335 22.684V17.3502C69.9757 16.5765 69.2377 16.1896 68.2195 16.1896C67.3986 16.1896 66.7533 16.5218 66.2837 17.1861C65.8141 17.8504 65.5792 18.8429 65.5792 20.1636ZM76.2968 19.9175C76.2968 17.9715 76.7645 16.4046 77.6998 15.2167C78.6352 14.0287 79.8961 13.4348 81.4826 13.4348C82.8876 13.4348 83.9807 13.9115 84.7622 14.865L84.9042 13.6693H88.0062V25.9312C88.0062 27.041 87.7517 28.0062 87.2426 28.8267C86.7335 29.6473 86.0172 30.2726 85.0937 30.7024C84.1702 31.1322 83.0888 31.3471 81.8496 31.3471C80.9103 31.3471 79.9947 31.1615 79.1028 30.7903C78.2109 30.4191 77.536 29.9404 77.0782 29.3543L78.5937 27.2911C79.4462 28.2367 80.4802 28.7095 81.6957 28.7095C82.6034 28.7095 83.3098 28.4692 83.815 27.9886C84.3202 27.5079 84.5727 26.8261 84.5727 25.943V25.263C83.7834 26.1462 82.7455 26.5877 81.4589 26.5877C79.9197 26.5877 78.6746 25.9918 77.7235 24.8C76.7724 23.6082 76.2968 22.0276 76.2968 20.0581V19.9175ZM79.7185 20.1636C79.7185 21.3125 79.9513 22.2132 80.417 22.8657C80.8827 23.5183 81.522 23.8446 82.335 23.8446C83.3769 23.8446 84.1228 23.4577 84.5727 22.684V17.3502C84.1149 16.5765 83.3769 16.1896 82.3587 16.1896C81.5378 16.1896 80.8926 16.5218 80.4229 17.1861C79.9533 17.8504 79.7185 18.8429 79.7185 20.1636ZM98.3568 26.3533C98.1989 26.0485 98.0845 25.6694 98.0134 25.2161C97.1846 26.1305 96.1072 26.5877 94.7812 26.5877C93.5262 26.5877 92.4863 26.2282 91.6615 25.5092C90.8366 24.7902 90.4242 23.8837 90.4242 22.7895C90.4242 21.4453 90.9274 20.4137 91.9338 19.6947C92.9401 18.9757 94.3944 18.6123 96.2967 18.6045H97.8713V17.8777C97.8713 17.2916 97.7194 16.8227 97.4155 16.471C97.1116 16.1193 96.6321 15.9435 95.977 15.9435C95.4008 15.9435 94.9489 16.0802 94.6214 16.3538C94.2938 16.6273 94.13 17.0024 94.13 17.4791H90.7084C90.7084 16.7445 90.9373 16.0646 91.3951 15.4394C91.8529 14.8142 92.5001 14.3238 93.3368 13.9682C94.1734 13.6126 95.1127 13.4348 96.1546 13.4348C97.7332 13.4348 98.9862 13.8275 99.9137 14.6129C100.841 15.3984 101.305 16.5022 101.305 17.9246V23.4226C101.313 24.6261 101.482 25.5366 101.814 26.154V26.3533H98.3568ZM95.5271 23.997C96.0323 23.997 96.4979 23.8856 96.9242 23.6629C97.3504 23.4402 97.6661 23.1412 97.8713 22.7661V20.5857H96.5927C94.8798 20.5857 93.9682 21.1718 93.8577 22.3441L93.8459 22.5434C93.8459 22.9654 93.9958 23.3132 94.2958 23.5867C94.5957 23.8602 95.0061 23.997 95.5271 23.997ZM115.776 20.1285C115.776 22.1604 115.338 23.7449 114.461 24.882C113.585 26.0192 112.362 26.5877 110.791 26.5877C109.402 26.5877 108.293 26.0602 107.464 25.0051L107.31 26.3533H104.232V8.34714H107.654V14.8064C108.443 13.892 109.481 13.4348 110.767 13.4348C112.33 13.4348 113.556 14.0033 114.444 15.1405C115.332 16.2776 115.776 17.8777 115.776 19.9409V20.1285ZM112.354 19.8823C112.354 18.6006 112.149 17.6648 111.738 17.0747C111.328 16.4847 110.716 16.1896 109.903 16.1896C108.814 16.1896 108.064 16.6312 107.654 17.5143V22.5199C108.072 23.4109 108.83 23.8563 109.927 23.8563C111.032 23.8563 111.758 23.3171 112.105 22.2386C112.271 21.7228 112.354 20.9374 112.354 19.8823ZM121.793 26.3533H118.359V8.34714H121.793V26.3533ZM130.805 26.5877C128.927 26.5877 127.398 26.0172 126.218 24.8762C125.038 23.7352 124.448 22.2151 124.448 20.316V19.9878C124.448 18.7139 124.696 17.5749 125.193 16.5706C125.691 15.5664 126.395 14.7927 127.307 14.2495C128.219 13.7064 129.258 13.4348 130.427 13.4348C132.179 13.4348 133.558 13.9819 134.565 15.076C135.571 16.1701 136.074 17.7214 136.074 19.7299V21.1132H127.917C128.027 21.9416 128.361 22.6059 128.917 23.1061C129.474 23.6062 130.178 23.8563 131.03 23.8563C132.349 23.8563 133.379 23.3835 134.121 22.4379L135.802 24.3018C135.289 25.0208 134.594 25.5815 133.718 25.984C132.842 26.3865 131.871 26.5877 130.805 26.5877ZM130.415 16.1779C129.736 16.1779 129.185 16.4046 128.763 16.8578C128.341 17.3111 128.071 17.9598 127.952 18.8038H132.712V18.5342C132.696 17.7839 132.491 17.2037 132.096 16.7934C131.701 16.3831 131.141 16.1779 130.415 16.1779Z",
+  fill: "#FFFFFF"
+}));
+const draggableHorizontal = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+  width: "164px",
+  height: "24px",
+  viewBox: "0 0 164 24",
+  fill: "none",
+  xmlns: "http://www.w3.org/2000/svg"
+}, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+  d: "M42.3045805,11.1324327 L36.2525369,17.1844763 L34.5266208,15.4585603 L37.6269502,12.3582309 L26.7555941,12.3684498 L26.7578974,9.9255979 L37.6292535,9.915379 L34.5347379,6.8208634 L36.2638746,5.0917268 L42.3045805,11.1324327 Z M-1.42108547e-14,11.1721478 L6.05204361,5.1201042 L7.77795964,6.8460202 L4.67763031,9.9463495 L15.5489864,9.9361307 L15.5466831,12.3789826 L4.67532697,12.3892015 L7.76984257,15.4837171 L6.04070592,17.2128537 L-1.42108547e-14,11.1721478 Z M53.0741994,11.9176266 C53.0741994,9.9403826 53.522128,8.3656447 54.4179988,7.1933657 C55.3138695,6.0210866 56.5392602,5.4349559 58.0942076,5.4349559 C59.3413228,5.4349559 60.3713614,5.8960454 61.1843542,6.8182383 L61.1843542,0.3472902 L64.6178504,0.3472902 L64.6178504,18.3534065 L61.5277038,18.3534065 L61.3619489,17.0052923 C60.5094904,18.0603434 59.4123612,18.5878611 58.0705284,18.5878611 C56.5629397,18.5878611 55.3533351,17.9997766 54.4416781,16.8235899 C53.5300211,15.6474033 53.0741994,14.0120985 53.0741994,11.9176266 Z M56.495856,12.163804 C56.495856,13.3517134 56.7050209,14.2621699 57.123357,14.8952005 C57.5416931,15.5282312 58.1494553,15.8447418 58.9466619,15.8447418 C60.0043418,15.8447418 60.7502318,15.40319 61.1843542,14.5200731 L61.1843542,9.5144666 C60.758125,8.6313497 60.020128,8.1897979 58.9703412,8.1897979 C57.3206761,8.1897979 56.495856,9.5144533 56.495856,12.163804 Z M74.7671193,8.8462709 C74.3014244,8.7837493 73.8909875,8.752489 73.5357965,8.752489 C72.2413225,8.752489 71.3928233,9.1862258 70.9902735,10.0537123 L70.9902735,18.3534065 L67.5686169,18.3534065 L67.5686169,5.6694105 L70.8008392,5.6694105 L70.8955563,7.1816429 C71.582259,6.0171791 72.5333674,5.4349559 73.7489101,5.4349559 C74.1277805,5.4349559 74.4829662,5.4857539 74.8144778,5.5873514 L74.7671193,8.8462709 Z M83.7797825,18.3534065 C83.6219198,18.0486139 83.5074711,17.6695827 83.4364329,17.2163015 C82.6076538,18.1306791 81.5302571,18.5878611 80.2042106,18.5878611 C78.9492022,18.5878611 77.9092974,18.2283676 77.0844649,17.5093698 C76.2596324,16.7903719 75.8472223,15.8838231 75.8472223,14.789696 C75.8472223,13.4454826 76.3504021,12.4138925 77.3567767,11.6948947 C78.3631513,10.9758969 79.8174394,10.6124959 81.7196848,10.6046807 L83.2943572,10.6046807 L83.2943572,9.8778713 C83.2943572,9.2917318 83.1424166,8.8228272 82.8385309,8.4711435 C82.5346453,8.1194597 82.0551446,7.9436205 81.4000144,7.9436205 C80.8238156,7.9436205 80.3719405,8.0803844 80.0443754,8.3539161 C79.7168103,8.6274479 79.5530303,9.0025716 79.5530303,9.4792984 L76.1313737,9.4792984 C76.1313737,8.7446702 76.3602712,8.0647585 76.8180729,7.439543 C77.2758747,6.8143276 77.923102,6.3239315 78.7597742,5.9683402 C79.5964465,5.6127489 80.5357153,5.4349559 81.5776091,5.4349559 C83.1562359,5.4349559 84.4092522,5.8276635 85.3366954,6.6130904 C86.2641387,7.3985174 86.7278534,8.502397 86.7278534,9.9247622 L86.7278534,15.4227235 C86.7357465,16.6262633 86.9054463,17.5367197 87.236958,18.15412 L87.236958,18.3534065 L83.7797825,18.3534065 Z M80.950108,15.9971373 C81.4552686,15.9971373 81.9209566,15.8857725 82.3471858,15.6630395 C82.773415,15.4403065 83.0891357,15.1413798 83.2943572,14.7662505 L83.2943572,12.5858224 L82.0156758,12.5858224 C80.3028657,12.5858224 79.3912224,13.1719531 79.2807185,14.3442321 L79.2688789,14.5435186 C79.2688789,14.965539 79.4188462,15.3133099 79.7187853,15.5868417 C80.0187244,15.8603735 80.4291612,15.9971373 80.950108,15.9971373 Z M89.1576756,11.9176266 C89.1576756,9.9716434 89.6253368,8.4047206 90.5606732,7.2168111 C91.4960096,6.0289017 92.7569188,5.4349559 94.3434388,5.4349559 C95.7484167,5.4349559 96.8415994,5.9116756 97.6230197,6.8651292 L97.7650954,5.6694105 L100.867082,5.6694105 L100.867082,17.9313881 C100.867082,19.0411456 100.612532,20.0063075 100.103425,20.8269029 C99.5943175,21.6474982 98.8780263,22.2727043 97.9545296,22.70254 C97.0310329,23.1323756 95.9496898,23.3472902 94.7104677,23.3472902 C93.7711848,23.3472902 92.8555949,23.1616822 91.9636708,22.7904605 C91.0717466,22.4192388 90.3968937,21.9405653 89.939092,21.3544258 L91.4545661,19.291225 C92.3070246,20.2368634 93.3410097,20.7096756 94.5565524,20.7096756 C95.4642628,20.7096756 96.1706877,20.469362 96.6758483,19.9887276 C97.1810089,19.5080931 97.4335854,18.8262277 97.4335854,17.9431108 L97.4335854,17.2631924 C96.644272,18.1463093 95.6063404,18.5878611 94.3197595,18.5878611 C92.7805984,18.5878611 91.5354751,17.9919615 90.5843525,16.8001445 C89.6332298,15.6083274 89.1576756,14.0277282 89.1576756,12.0582994 L89.1576756,11.9176266 Z M92.5793321,12.163804 C92.5793321,13.3126375 92.8121761,14.213325 93.277871,14.8658937 C93.7435659,15.5184624 94.3829002,15.8447418 95.195893,15.8447418 C96.2377868,15.8447418 96.9836767,15.4578955 97.4335854,14.6841914 L97.4335854,9.3503483 C96.9757836,8.5766442 96.2377866,8.1897979 95.2195723,8.1897979 C94.3986864,8.1897979 93.7534323,8.5219386 93.2837908,9.1862301 C92.8141494,9.8505216 92.5793321,10.8430363 92.5793321,12.163804 Z M103.296904,11.9176266 C103.296904,9.9716434 103.764565,8.4047206 104.699901,7.2168111 C105.635238,6.0289017 106.896147,5.4349559 108.482667,5.4349559 C109.887645,5.4349559 110.980828,5.9116756 111.762248,6.8651292 L111.904324,5.6694105 L115.00631,5.6694105 L115.00631,17.9313881 C115.00631,19.0411456 114.75176,20.0063075 114.242653,20.8269029 C113.733546,21.6474982 113.017255,22.2727043 112.093758,22.70254 C111.170261,23.1323756 110.088918,23.3472902 108.849696,23.3472902 C107.910413,23.3472902 106.994823,23.1616822 106.102899,22.7904605 C105.210975,22.4192388 104.536122,21.9405653 104.07832,21.3544258 L105.593794,19.291225 C106.446253,20.2368634 107.480238,20.7096756 108.695781,20.7096756 C109.603491,20.7096756 110.309916,20.469362 110.815077,19.9887276 C111.320237,19.5080931 111.572814,18.8262277 111.572814,17.9431108 L111.572814,17.2631924 C110.7835,18.1463093 109.745569,18.5878611 108.458988,18.5878611 C106.919827,18.5878611 105.674703,17.9919615 104.723581,16.8001445 C103.772458,15.6083274 103.296904,14.0277282 103.296904,12.0582994 L103.296904,11.9176266 Z M106.71856,12.163804 C106.71856,13.3126375 106.951404,14.213325 107.417099,14.8658937 C107.882794,15.5184624 108.522128,15.8447418 109.335121,15.8447418 C110.377015,15.8447418 111.122905,15.4578955 111.572814,14.6841914 L111.572814,9.3503483 C111.115012,8.5766442 110.377015,8.1897979 109.358801,8.1897979 C108.537915,8.1897979 107.892661,8.5219386 107.423019,9.1862301 C106.953378,9.8505216 106.71856,10.8430363 106.71856,12.163804 Z M125.356853,18.3534065 C125.19899,18.0486139 125.084541,17.6695827 125.013503,17.2163015 C124.184724,18.1306791 123.107327,18.5878611 121.781281,18.5878611 C120.526272,18.5878611 119.486368,18.2283676 118.661535,17.5093698 C117.836702,16.7903719 117.424292,15.8838231 117.424292,14.789696 C117.424292,13.4454826 117.927472,12.4138925 118.933847,11.6948947 C119.940221,10.9758969 121.39451,10.6124959 123.296755,10.6046807 L124.871427,10.6046807 L124.871427,9.8778713 C124.871427,9.2917318 124.719487,8.8228272 124.415601,8.4711435 C124.111715,8.1194597 123.632215,7.9436205 122.977085,7.9436205 C122.400886,7.9436205 121.949011,8.0803844 121.621446,8.3539161 C121.29388,8.6274479 121.1301,9.0025716 121.1301,9.4792984 L117.708444,9.4792984 C117.708444,8.7446702 117.937341,8.0647585 118.395143,7.439543 C118.852945,6.8143276 119.500172,6.3239315 120.336844,5.9683402 C121.173517,5.6127489 122.112785,5.4349559 123.154679,5.4349559 C124.733306,5.4349559 125.986322,5.8276635 126.913766,6.6130904 C127.841209,7.3985174 128.304923,8.502397 128.304923,9.9247622 L128.304923,15.4227235 C128.312817,16.6262633 128.482516,17.5367197 128.814028,18.15412 L128.814028,18.3534065 L125.356853,18.3534065 Z M122.527178,15.9971373 C123.032339,15.9971373 123.498027,15.8857725 123.924256,15.6630395 C124.350485,15.4403065 124.666206,15.1413798 124.871427,14.7662505 L124.871427,12.5858224 L123.592746,12.5858224 C121.879936,12.5858224 120.968292,13.1719531 120.857789,14.3442321 L120.845949,14.5435186 C120.845949,14.965539 120.995916,15.3133099 121.295855,15.5868417 C121.595794,15.8603735 122.006231,15.9971373 122.527178,15.9971373 Z M142.775662,12.1286358 C142.775662,14.1605862 142.337599,15.7450929 141.461461,16.8822036 C140.585324,18.0193143 139.361906,18.5878611 137.791172,18.5878611 C136.401981,18.5878611 135.293012,18.0603434 134.464233,17.0052923 L134.310318,18.3534065 L131.232011,18.3534065 L131.232011,0.3472902 L134.653667,0.3472902 L134.653667,6.8065155 C135.442981,5.8921379 136.480912,5.4349559 137.767493,5.4349559 C139.330334,5.4349559 140.555724,6.0035027 141.443702,7.1406134 C142.33168,8.2777241 142.775662,9.877861 142.775662,11.9410721 L142.775662,12.1286358 Z M139.354005,11.8824584 C139.354005,10.6007667 139.148787,9.6649113 138.738344,9.0748641 C138.327901,8.484817 137.716192,8.1897979 136.903199,8.1897979 C135.813947,8.1897979 135.06411,8.6313497 134.653667,9.5144666 L134.653667,14.5200731 C135.072003,15.4110052 135.829733,15.8564646 136.926879,15.8564646 C138.031917,15.8564646 138.758075,15.3172243 139.105373,14.2387276 C139.271128,13.7229248 139.354005,12.9375096 139.354005,11.8824584 Z M148.792895,18.3534065 L145.359399,18.3534065 L145.359399,0.3472902 L148.792895,0.3472902 L148.792895,18.3534065 Z M157.805559,18.5878611 C155.926993,18.5878611 154.397721,18.0173605 153.217697,16.8763422 C152.037674,15.735324 151.447671,14.2152916 151.447671,12.3161995 L151.447671,11.987963 C151.447671,10.7140865 151.696301,9.5750391 152.193568,8.5707867 C152.690836,7.5665343 153.395287,6.7928417 154.306944,6.2496858 C155.218601,5.7065298 156.258506,5.4349559 157.42669,5.4349559 C159.178966,5.4349559 160.55827,5.9820112 161.564645,7.0761384 C162.57102,8.1702655 163.074199,9.7215581 163.074199,11.7300629 L163.074199,13.1133453 L154.916686,13.1133453 C155.02719,13.9417558 155.36067,14.6060373 155.917136,15.1062097 C156.473602,15.6063821 157.178053,15.8564646 158.030512,15.8564646 C159.348665,15.8564646 160.378704,15.3836524 161.120658,14.438014 L162.801888,16.3019284 C162.288834,17.0209262 161.594249,17.5816579 160.718111,17.9841404 C159.841973,18.3866229 158.871132,18.5878611 157.805559,18.5878611 Z M157.41485,8.1780752 C156.736041,8.1780752 156.185503,8.4047124 155.76322,8.8579936 C155.340938,9.3112748 155.070602,9.9599262 154.952205,10.8039671 L159.711741,10.8039671 L159.711741,10.5343443 C159.695955,9.7840857 159.490736,9.2038162 159.09608,8.7935186 C158.701423,8.3832209 158.141019,8.1780752 157.41485,8.1780752 Z",
+  fill: "#FFFFFF"
+}));
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/Draggable/index.ts":
+/*!**********************************************************!*\
+  !*** ./src/components/DnD/components/Draggable/index.ts ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Axis: () => (/* reexport safe */ _Draggable__WEBPACK_IMPORTED_MODULE_0__.Axis),
+/* harmony export */   Draggable: () => (/* reexport safe */ _Draggable__WEBPACK_IMPORTED_MODULE_0__.Draggable),
+/* harmony export */   DraggableOverlay: () => (/* reexport safe */ _DraggableOverlay__WEBPACK_IMPORTED_MODULE_1__.DraggableOverlay)
+/* harmony export */ });
+/* harmony import */ var _Draggable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Draggable */ "./src/components/DnD/components/Draggable/Draggable.tsx");
+/* harmony import */ var _DraggableOverlay__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DraggableOverlay */ "./src/components/DnD/components/Draggable/DraggableOverlay.tsx");
+
+
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/Droppable/Droppable.tsx":
+/*!***************************************************************!*\
+  !*** ./src/components/DnD/components/Droppable/Droppable.tsx ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Droppable: () => (/* binding */ Droppable)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @dnd-kit/core */ "./node_modules/@dnd-kit/core/dist/core.esm.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _droppable_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./droppable-svg */ "./src/components/DnD/components/Droppable/droppable-svg.tsx");
+/* harmony import */ var _Droppable_module_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Droppable.module.css */ "./src/components/DnD/components/Droppable/Droppable.module.css");
+
+
+
+
+
+function Droppable(_ref) {
+  let {
+    children,
+    id,
+    dragging
+  } = _ref;
+  const {
+    isOver,
+    setNodeRef
+  } = (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.useDroppable)({
+    id
+  });
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    ref: setNodeRef,
+    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()(_Droppable_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].Droppable, isOver && _Droppable_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].over, dragging && _Droppable_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].dragging, children && _Droppable_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].dropped),
+    "aria-label": "Droppable region"
+  }, children, _droppable_svg__WEBPACK_IMPORTED_MODULE_3__.droppable);
+}
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/Droppable/droppable-svg.tsx":
+/*!*******************************************************************!*\
+  !*** ./src/components/DnD/components/Droppable/droppable-svg.tsx ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   droppable: () => (/* binding */ droppable)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+
+const droppable = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+  width: "277px",
+  height: "67px",
+  viewBox: "0 0 277 67",
+  version: "1.1",
+  xmlns: "http://www.w3.org/2000/svg"
+}, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
+  stroke: "none",
+  strokeWidth: "1",
+  fill: "none",
+  fillRule: "evenodd"
+}, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+  d: "M12,0 L55,0 C61.627417,-1.21743675e-15 67,5.372583 67,12 L67,55 C67,61.627417 61.627417,67 55,67 L12,67 C5.372583,67 8.11624501e-16,61.627417 0,55 L0,12 C-8.11624501e-16,5.372583 5.372583,-2.33527693e-15 12,-3.55271368e-15 Z M47.2082502,44.0547945 L44.0871636,47.0285811 L51.6380737,54.5794638 L44.1788904,54.5794638 L44.1788904,58.739726 L58.739726,58.739726 L58.739726,44.1788476 L54.5794872,44.1788476 L54.5794872,51.6380263 L47.2082502,44.0547945 Z M19.3652148,44.0547945 L11.9939778,51.6380263 L11.9939778,44.1788476 L7.83373894,44.1788476 L7.83373894,58.739726 L22.3945746,58.739726 L22.3945746,54.5794638 L14.9353912,54.5794638 L22.4863014,47.0285811 L19.3652148,44.0547945 Z M19.3652148,22.4863014 L22.4863014,19.5125148 L14.9353912,11.9616321 L22.3945746,11.9616321 L22.3945746,7.80136986 L7.83373894,7.80136986 L7.83373894,22.3622483 L11.9939778,22.3622483 L11.9939778,14.9030696 L19.3652148,22.4863014 Z M47.2082502,22.4863014 L54.5794872,14.9030696 L54.5794872,22.3622483 L58.739726,22.3622483 L58.739726,7.80136986 L44.1788904,7.80136986 L44.1788904,11.9616321 L51.6380737,11.9616321 L44.0871636,19.5125148 L47.2082502,22.4863014 Z M88,33.7197746 C88,30.3498807 88.7678047,27.6659936 90.3034373,25.6680328 C91.8390698,23.670072 93.9395401,22.6711066 96.6049111,22.6711066 C98.7426198,22.6711066 100.508232,23.4569594 101.901802,25.0286885 L101.901802,14 L107.787237,14 L107.787237,44.6885246 L102.490346,44.6885246 L102.206221,42.3908811 C100.745003,44.1890459 98.8643882,45.0881148 96.5643219,45.0881148 C93.9801297,45.0881148 91.9067186,44.0858194 90.3440265,42.0811988 C88.7813343,40.0765781 88,37.2894646 88,33.7197746 Z M93.8651399,34.1393443 C93.8651399,36.1639445 94.2236742,37.7156708 94.9407538,38.7945697 C95.6578333,39.8734685 96.6996124,40.4129098 98.0661224,40.4129098 C99.8791159,40.4129098 101.157663,39.6603559 101.901802,38.1552254 L101.901802,29.6239754 C101.171193,28.1188449 99.9061753,27.366291 98.1067116,27.366291 C95.278983,27.366291 93.8651399,29.6239528 93.8651399,34.1393443 Z M125.184331,28.4851434 C124.386072,28.3785855 123.682533,28.3253074 123.073692,28.3253074 C120.854805,28.3253074 119.400373,29.0645418 118.710353,30.5430328 L118.710353,44.6885246 L112.845213,44.6885246 L112.845213,23.0706967 L118.385639,23.0706967 L118.547996,25.6480533 C119.725089,23.6634122 121.355405,22.6711066 123.438995,22.6711066 C124.088425,22.6711066 124.697257,22.7576836 125.265509,22.9308402 L125.184331,28.4851434 Z M126.873403,33.6798156 C126.873403,31.5353376 127.292821,29.6239838 128.131668,27.9456967 C128.970516,26.2674096 130.178033,24.9687546 131.754255,24.0496926 C133.330477,23.1306307 135.160355,22.6711066 137.243945,22.6711066 C140.206971,22.6711066 142.625387,23.5635157 144.499265,25.3483607 C146.373142,27.1332056 147.418304,29.5573617 147.634781,32.6209016 L147.67537,34.0993852 C147.67537,37.4160002 146.735063,40.0765781 144.85442,42.0811988 C142.973778,44.0858194 140.450507,45.0881148 137.284534,45.0881148 C134.11856,45.0881148 131.591907,44.0891493 129.7045,42.0911885 C127.817093,40.0932277 126.873403,37.3760418 126.873403,33.9395492 L126.873403,33.6798156 Z M132.738543,34.0993852 C132.738543,36.150625 133.130901,37.7190007 133.91563,38.8045594 C134.700358,39.8901181 135.823315,40.4328893 137.284534,40.4328893 C138.705163,40.4328893 139.81459,39.8967779 140.612848,38.8245389 C141.411107,37.7523 141.81023,36.0374093 141.81023,33.6798156 C141.81023,31.668535 141.411107,30.110149 140.612848,29.0046107 C139.81459,27.8990723 138.691633,27.3463115 137.243945,27.3463115 C135.809786,27.3463115 134.700358,27.8957425 133.91563,28.9946209 C133.130901,30.0934993 132.738543,31.7950704 132.738543,34.0993852 Z M171.566736,34.0794057 C171.566736,37.4093404 170.798932,40.0765781 169.263299,42.0811988 C167.727667,44.0858194 165.654256,45.0881148 163.043004,45.0881148 C160.824116,45.0881148 159.031444,44.328901 157.664934,42.8104508 L157.664934,53 L151.799795,53 L151.799795,23.0706967 L157.238748,23.0706967 L157.441694,25.1885246 C158.862323,23.5102375 160.715878,22.6711066 163.002415,22.6711066 C165.708375,22.6711066 167.812228,23.6567524 169.314036,25.6280738 C170.815844,27.5993951 171.566736,30.316581 171.566736,33.7797131 L171.566736,34.0794057 Z M165.701597,33.6598361 C165.701597,31.6485555 165.33968,30.0968292 164.615835,29.0046107 C163.891991,27.9123921 162.840065,27.366291 161.460025,27.366291 C159.619972,27.366291 158.354954,28.058907 157.664934,29.4441598 L157.664934,38.295082 C158.382014,39.720294 159.660561,40.4328893 161.500614,40.4328893 C164.301283,40.4328893 165.701597,38.1752275 165.701597,33.6598361 Z M195.478398,34.0794057 C195.478398,37.4093404 194.710593,40.0765781 193.17496,42.0811988 C191.639328,44.0858194 189.565917,45.0881148 186.954665,45.0881148 C184.735778,45.0881148 182.943106,44.328901 181.576596,42.8104508 L181.576596,53 L175.711456,53 L175.711456,23.0706967 L181.150409,23.0706967 L181.353355,25.1885246 C182.773984,23.5102375 184.627539,22.6711066 186.914076,22.6711066 C189.620036,22.6711066 191.723889,23.6567524 193.225697,25.6280738 C194.727505,27.5993951 195.478398,30.316581 195.478398,33.7797131 L195.478398,34.0794057 Z M189.613258,33.6598361 C189.613258,31.6485555 189.251341,30.0968292 188.527497,29.0046107 C187.803652,27.9123921 186.751726,27.366291 185.371686,27.366291 C183.531633,27.366291 182.266616,28.058907 181.576596,29.4441598 L181.576596,38.295082 C182.293675,39.720294 183.572222,40.4328893 185.412275,40.4328893 C188.212944,40.4328893 189.613258,38.1752275 189.613258,33.6598361 Z M212.347832,44.6885246 C212.077236,44.1690548 211.881057,43.5230571 211.759289,42.7505123 C210.33866,44.3089217 208.491869,45.0881148 206.218863,45.0881148 C204.067624,45.0881148 202.285099,44.475416 200.871235,43.25 C199.457371,42.024584 198.750449,40.4795175 198.750449,38.6147541 C198.750449,36.323759 199.612961,34.5655799 201.338011,33.3401639 C203.063061,32.114748 205.555889,31.4953894 208.816572,31.4820697 L211.515754,31.4820697 L211.515754,30.2433402 C211.515754,29.2443598 211.255309,28.4451874 210.734411,27.8457992 C210.213514,27.2464109 209.391591,26.9467213 208.268617,26.9467213 C207.280942,26.9467213 206.506372,27.1798132 205.944885,27.6460041 C205.383399,28.112195 205.102659,28.7515328 205.102659,29.5640369 L199.23752,29.5640369 C199.23752,28.3119814 199.629878,27.1531816 200.414606,26.0876025 C201.199335,25.0220234 202.308762,24.1862223 203.742921,23.5801742 C205.17708,22.9741261 206.787102,22.6711066 208.573036,22.6711066 C211.278997,22.6711066 213.426821,23.3404134 215.016572,24.6790471 C216.606324,26.0176809 217.401188,27.8990657 217.401188,30.3232582 L217.401188,39.6936475 C217.414718,41.7448873 217.705604,43.2966136 218.273856,44.348873 L218.273856,44.6885246 L212.347832,44.6885246 Z M207.497422,40.6726434 C208.36333,40.6726434 209.161576,40.48284 209.892185,40.1032275 C210.622795,39.7236149 211.163979,39.2141425 211.515754,38.5747951 L211.515754,34.8586066 L209.323937,34.8586066 C206.38797,34.8586066 204.825301,35.857572 204.635884,37.8555328 L204.615589,38.1951844 C204.615589,38.9144503 204.872651,39.5071698 205.386784,39.9733607 C205.900916,40.4395515 206.604455,40.6726434 207.497422,40.6726434 Z M242.205812,34.0794057 C242.205812,37.5425378 241.454919,40.2430743 239.953111,42.1810963 C238.451303,44.1191183 236.354215,45.0881148 233.661784,45.0881148 C231.280539,45.0881148 229.379631,44.1890459 227.959001,42.3908811 L227.695172,44.6885246 L222.418575,44.6885246 L222.418575,14 L228.283715,14 L228.283715,25.008709 C229.636695,23.4502996 231.415838,22.6711066 233.621195,22.6711066 C236.300096,22.6711066 238.400566,23.640103 239.922669,25.578125 C241.444772,27.516147 242.205812,30.2433226 242.205812,33.7597336 L242.205812,34.0794057 Z M236.340672,33.6598361 C236.340672,31.4753989 235.988902,29.8803841 235.285353,28.8747439 C234.581803,27.8691036 233.533259,27.366291 232.139689,27.366291 C230.272577,27.366291 228.987265,28.1188449 228.283715,29.6239754 L228.283715,38.1552254 C229.000795,39.6736756 230.299636,40.4328893 232.180279,40.4328893 C234.074451,40.4328893 235.319174,39.5138412 235.914485,37.6757172 C236.198611,36.7966145 236.340672,35.4580008 236.340672,33.6598361 Z M252.52009,44.6885246 L246.634655,44.6885246 L246.634655,14 L252.52009,14 L252.52009,44.6885246 Z M267.968902,45.0881148 C264.748809,45.0881148 262.12745,44.1157884 260.104744,42.1711066 C258.082039,40.2264247 257.070701,37.6357744 257.070701,34.3990779 L257.070701,33.8396516 C257.070701,31.6685342 257.496884,29.7272114 258.349261,28.015625 C259.201639,26.3040386 260.409155,24.9854042 261.971848,24.0596824 C263.53454,23.1339605 265.317064,22.6711066 267.319475,22.6711066 C270.323091,22.6711066 272.687389,23.6034743 274.412438,25.4682377 C276.137488,27.3330011 277,29.9769296 277,33.4001025 L277,35.7576844 L263.017019,35.7576844 C263.206437,37.1695767 263.778062,38.3017375 264.731913,39.1542008 C265.685764,40.0066641 266.893281,40.4328893 268.3545,40.4328893 C270.613977,40.4328893 272.379589,39.6270572 273.651391,38.0153689 L276.533224,41.1921107 C275.653787,42.4175266 274.463182,43.3732035 272.961374,44.0591701 C271.459566,44.7451366 269.795426,45.0881148 267.968902,45.0881148 Z M267.29918,27.3463115 C266.135617,27.3463115 265.191928,27.7325781 264.468084,28.505123 C263.744239,29.2776678 263.28085,30.3831895 263.077903,31.8217213 L271.236333,31.8217213 L271.236333,31.3621926 C271.209274,30.0834977 270.857504,29.0945219 270.181014,28.3952357 C269.504524,27.6959494 268.543922,27.3463115 267.29918,27.3463115 Z",
+  fill: "#7F8C96"
+})));
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/Droppable/index.ts":
+/*!**********************************************************!*\
+  !*** ./src/components/DnD/components/Droppable/index.ts ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Droppable: () => (/* reexport safe */ _Droppable__WEBPACK_IMPORTED_MODULE_0__.Droppable)
+/* harmony export */ });
+/* harmony import */ var _Droppable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Droppable */ "./src/components/DnD/components/Droppable/Droppable.tsx");
+
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/FloatingControls/FloatingControls.tsx":
+/*!*****************************************************************************!*\
+  !*** ./src/components/DnD/components/FloatingControls/FloatingControls.tsx ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   FloatingControls: () => (/* binding */ FloatingControls)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _FloatingControls_module_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FloatingControls.module.css */ "./src/components/DnD/components/FloatingControls/FloatingControls.module.css");
+
+
+
+function FloatingControls(_ref) {
+  let {
+    children
+  } = _ref;
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(_FloatingControls_module_css__WEBPACK_IMPORTED_MODULE_2__["default"].FloatingControls)
+  }, children);
+}
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/FloatingControls/index.ts":
+/*!*****************************************************************!*\
+  !*** ./src/components/DnD/components/FloatingControls/index.ts ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   FloatingControls: () => (/* reexport safe */ _FloatingControls__WEBPACK_IMPORTED_MODULE_0__.FloatingControls)
+/* harmony export */ });
+/* harmony import */ var _FloatingControls__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FloatingControls */ "./src/components/DnD/components/FloatingControls/FloatingControls.tsx");
+
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/Grid/Grid.tsx":
+/*!*****************************************************!*\
+  !*** ./src/components/DnD/components/Grid/Grid.tsx ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Grid: () => (/* binding */ Grid)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Grid_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Grid.module.css */ "./src/components/DnD/components/Grid/Grid.module.css");
+
+
+function Grid(_ref) {
+  let {
+    size
+  } = _ref;
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: _Grid_module_css__WEBPACK_IMPORTED_MODULE_1__["default"].Grid,
+    style: {
+      '--grid-size': `${size}px`
+    }
+  });
+}
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/Grid/index.ts":
+/*!*****************************************************!*\
+  !*** ./src/components/DnD/components/Grid/index.ts ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Grid: () => (/* reexport safe */ _Grid__WEBPACK_IMPORTED_MODULE_0__.Grid)
+/* harmony export */ });
+/* harmony import */ var _Grid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Grid */ "./src/components/DnD/components/Grid/Grid.tsx");
+
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/GridContainer/GridContainer.tsx":
+/*!***********************************************************************!*\
+  !*** ./src/components/DnD/components/GridContainer/GridContainer.tsx ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   GridContainer: () => (/* binding */ GridContainer)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _GridContainer_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GridContainer.module.css */ "./src/components/DnD/components/GridContainer/GridContainer.module.css");
+
+
+function GridContainer(_ref) {
+  let {
+    children,
+    columns
+  } = _ref;
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", {
+    className: _GridContainer_module_css__WEBPACK_IMPORTED_MODULE_1__["default"].GridContainer,
+    style: {
+      '--col-count': columns
+    }
+  }, children);
+}
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/GridContainer/index.ts":
+/*!**************************************************************!*\
+  !*** ./src/components/DnD/components/GridContainer/index.ts ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   GridContainer: () => (/* reexport safe */ _GridContainer__WEBPACK_IMPORTED_MODULE_0__.GridContainer)
+/* harmony export */ });
+/* harmony import */ var _GridContainer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GridContainer */ "./src/components/DnD/components/GridContainer/GridContainer.tsx");
+
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/Item/Item.tsx":
+/*!*****************************************************!*\
+  !*** ./src/components/DnD/components/Item/Item.tsx ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Item: () => (/* binding */ Item)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components */ "./src/components/DnD/components/Item/components/index.ts");
+/* harmony import */ var _Item_module_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Item.module.css */ "./src/components/DnD/components/Item/Item.module.css");
+
+
+
+
+
+
+const Item = React.memo(React.forwardRef((_ref, ref) => {
+  let {
+    color,
+    dragOverlay,
+    dragging,
+    disabled,
+    fadeIn,
+    handle,
+    handleProps,
+    height,
+    index,
+    listeners,
+    onRemove,
+    renderItem,
+    sorting,
+    style,
+    transition,
+    transform,
+    value,
+    wrapperStyle,
+    ...props
+  } = _ref;
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    if (!dragOverlay) {
+      return;
+    }
+    document.body.style.cursor = 'grabbing';
+    return () => {
+      document.body.style.cursor = '';
+    };
+  }, [dragOverlay]);
+  return renderItem ? renderItem({
+    dragOverlay: Boolean(dragOverlay),
+    dragging: Boolean(dragging),
+    sorting: Boolean(sorting),
+    index,
+    fadeIn: Boolean(fadeIn),
+    listeners,
+    ref,
+    style,
+    transform,
+    transition,
+    value
+  }) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("li", {
+    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()(_Item_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].Wrapper, fadeIn && _Item_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].fadeIn, sorting && _Item_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].sorting, dragOverlay && _Item_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].dragOverlay),
+    style: {
+      ...wrapperStyle,
+      transition: [transition, wrapperStyle?.transition].filter(Boolean).join(', '),
+      '--translate-x': transform ? `${Math.round(transform.x)}px` : undefined,
+      '--translate-y': transform ? `${Math.round(transform.y)}px` : undefined,
+      '--scale-x': transform?.scaleX ? `${transform.scaleX}` : undefined,
+      '--scale-y': transform?.scaleY ? `${transform.scaleY}` : undefined,
+      '--index': index,
+      '--color': color
+    },
+    ref: ref
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()(_Item_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].Item, dragging && _Item_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].dragging, handle && _Item_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].withHandle, dragOverlay && _Item_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].dragOverlay, disabled && _Item_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].disabled, color && _Item_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].color),
+    style: style,
+    "data-cypress": "draggable-item"
+  }, !handle ? listeners : undefined, props, {
+    tabIndex: !handle ? 0 : undefined
+  }), value, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+    className: _Item_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].Actions
+  }, onRemove ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components__WEBPACK_IMPORTED_MODULE_3__.Remove, {
+    className: _Item_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].Remove,
+    onClick: onRemove
+  }) : null, handle ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components__WEBPACK_IMPORTED_MODULE_3__.Handle, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, handleProps, listeners)) : null)));
+}));
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/Item/components/Action/Action.tsx":
+/*!*************************************************************************!*\
+  !*** ./src/components/DnD/components/Item/components/Action/Action.tsx ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Action: () => (/* binding */ Action)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Action_module_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Action.module.css */ "./src/components/DnD/components/Item/components/Action/Action.module.css");
+
+
+
+
+
+const Action = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.forwardRef)((_ref, ref) => {
+  let {
+    active,
+    className,
+    cursor,
+    style,
+    ...props
+  } = _ref;
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("button", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    ref: ref
+  }, props, {
+    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()(_Action_module_css__WEBPACK_IMPORTED_MODULE_3__["default"].Action, className),
+    tabIndex: 0,
+    style: {
+      ...style,
+      cursor,
+      '--fill': active?.fill,
+      '--background': active?.background
+    }
+  }));
+});
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/Item/components/Action/index.ts":
+/*!***********************************************************************!*\
+  !*** ./src/components/DnD/components/Item/components/Action/index.ts ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Action: () => (/* reexport safe */ _Action__WEBPACK_IMPORTED_MODULE_0__.Action)
+/* harmony export */ });
+/* harmony import */ var _Action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Action */ "./src/components/DnD/components/Item/components/Action/Action.tsx");
+
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/Item/components/Handle/Handle.tsx":
+/*!*************************************************************************!*\
+  !*** ./src/components/DnD/components/Item/components/Handle/Handle.tsx ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Handle: () => (/* binding */ Handle)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Action__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Action */ "./src/components/DnD/components/Item/components/Action/index.ts");
+
+
+
+
+const Handle = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.forwardRef)((props, ref) => {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_Action__WEBPACK_IMPORTED_MODULE_2__.Action, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    ref: ref,
+    cursor: "grab",
+    "data-cypress": "draggable-handle"
+  }, props), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("svg", {
+    viewBox: "0 0 20 20",
+    width: "12"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("path", {
+    d: "M7 2a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 2zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 8zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 14zm6-8a2 2 0 1 0-.001-4.001A2 2 0 0 0 13 6zm0 2a2 2 0 1 0 .001 4.001A2 2 0 0 0 13 8zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 13 14z"
+  })));
+});
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/Item/components/Handle/index.ts":
+/*!***********************************************************************!*\
+  !*** ./src/components/DnD/components/Item/components/Handle/index.ts ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Handle: () => (/* reexport safe */ _Handle__WEBPACK_IMPORTED_MODULE_0__.Handle)
+/* harmony export */ });
+/* harmony import */ var _Handle__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Handle */ "./src/components/DnD/components/Item/components/Handle/Handle.tsx");
+
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/Item/components/Remove/Remove.tsx":
+/*!*************************************************************************!*\
+  !*** ./src/components/DnD/components/Item/components/Remove/Remove.tsx ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Remove: () => (/* binding */ Remove)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Action__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Action */ "./src/components/DnD/components/Item/components/Action/index.ts");
+
+
+
+function Remove(props) {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_Action__WEBPACK_IMPORTED_MODULE_2__.Action, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
+    active: {
+      fill: 'rgba(255, 70, 70, 0.95)',
+      background: 'rgba(255, 70, 70, 0.1)'
+    }
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("svg", {
+    width: "8",
+    viewBox: "0 0 22 22",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("path", {
+    d: "M2.99998 -0.000206962C2.7441 -0.000206962 2.48794 0.0972617 2.29294 0.292762L0.292945 2.29276C-0.0980552 2.68376 -0.0980552 3.31682 0.292945 3.70682L7.58591 10.9998L0.292945 18.2928C-0.0980552 18.6838 -0.0980552 19.3168 0.292945 19.7068L2.29294 21.7068C2.68394 22.0978 3.31701 22.0978 3.70701 21.7068L11 14.4139L18.2929 21.7068C18.6829 22.0978 19.317 22.0978 19.707 21.7068L21.707 19.7068C22.098 19.3158 22.098 18.6828 21.707 18.2928L14.414 10.9998L21.707 3.70682C22.098 3.31682 22.098 2.68276 21.707 2.29276L19.707 0.292762C19.316 -0.0982383 18.6829 -0.0982383 18.2929 0.292762L11 7.58573L3.70701 0.292762C3.51151 0.0972617 3.25585 -0.000206962 2.99998 -0.000206962Z"
+  })));
+}
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/Item/components/Remove/index.ts":
+/*!***********************************************************************!*\
+  !*** ./src/components/DnD/components/Item/components/Remove/index.ts ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Remove: () => (/* reexport safe */ _Remove__WEBPACK_IMPORTED_MODULE_0__.Remove)
+/* harmony export */ });
+/* harmony import */ var _Remove__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Remove */ "./src/components/DnD/components/Item/components/Remove/Remove.tsx");
+
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/Item/components/index.ts":
+/*!****************************************************************!*\
+  !*** ./src/components/DnD/components/Item/components/index.ts ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Action: () => (/* reexport safe */ _Action__WEBPACK_IMPORTED_MODULE_0__.Action),
+/* harmony export */   Handle: () => (/* reexport safe */ _Handle__WEBPACK_IMPORTED_MODULE_1__.Handle),
+/* harmony export */   Remove: () => (/* reexport safe */ _Remove__WEBPACK_IMPORTED_MODULE_2__.Remove)
+/* harmony export */ });
+/* harmony import */ var _Action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Action */ "./src/components/DnD/components/Item/components/Action/index.ts");
+/* harmony import */ var _Handle__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Handle */ "./src/components/DnD/components/Item/components/Handle/index.ts");
+/* harmony import */ var _Remove__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Remove */ "./src/components/DnD/components/Item/components/Remove/index.ts");
+
+
+
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/Item/index.ts":
+/*!*****************************************************!*\
+  !*** ./src/components/DnD/components/Item/index.ts ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Action: () => (/* reexport safe */ _components__WEBPACK_IMPORTED_MODULE_1__.Action),
+/* harmony export */   Handle: () => (/* reexport safe */ _components__WEBPACK_IMPORTED_MODULE_1__.Handle),
+/* harmony export */   Item: () => (/* reexport safe */ _Item__WEBPACK_IMPORTED_MODULE_0__.Item),
+/* harmony export */   Remove: () => (/* reexport safe */ _components__WEBPACK_IMPORTED_MODULE_1__.Remove)
+/* harmony export */ });
+/* harmony import */ var _Item__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Item */ "./src/components/DnD/components/Item/Item.tsx");
+/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components */ "./src/components/DnD/components/Item/components/index.ts");
+
+
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/List/List.tsx":
+/*!*****************************************************!*\
+  !*** ./src/components/DnD/components/List/List.tsx ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   List: () => (/* binding */ List)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _List_module_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./List.module.css */ "./src/components/DnD/components/List/List.module.css");
+
+
+
+
+const List = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.forwardRef)((_ref, ref) => {
+  let {
+    children,
+    columns = 1,
+    horizontal,
+    style
+  } = _ref;
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", {
+    ref: ref,
+    style: {
+      ...style,
+      '--columns': columns
+    },
+    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(_List_module_css__WEBPACK_IMPORTED_MODULE_2__["default"].List, horizontal && _List_module_css__WEBPACK_IMPORTED_MODULE_2__["default"].horizontal)
+  }, children);
+});
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/List/index.ts":
+/*!*****************************************************!*\
+  !*** ./src/components/DnD/components/List/index.ts ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   List: () => (/* reexport safe */ _List__WEBPACK_IMPORTED_MODULE_0__.List)
+/* harmony export */ });
+/* harmony import */ var _List__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./List */ "./src/components/DnD/components/List/List.tsx");
+
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/OverflowWrapper/OverflowWrapper.tsx":
+/*!***************************************************************************!*\
+  !*** ./src/components/DnD/components/OverflowWrapper/OverflowWrapper.tsx ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   OverflowWrapper: () => (/* binding */ OverflowWrapper)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _OverflowWrapper_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./OverflowWrapper.module.css */ "./src/components/DnD/components/OverflowWrapper/OverflowWrapper.module.css");
+
+
+function OverflowWrapper(_ref) {
+  let {
+    children
+  } = _ref;
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: _OverflowWrapper_module_css__WEBPACK_IMPORTED_MODULE_1__["default"].OverflowWrapper
+  }, children);
+}
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/OverflowWrapper/index.ts":
+/*!****************************************************************!*\
+  !*** ./src/components/DnD/components/OverflowWrapper/index.ts ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   OverflowWrapper: () => (/* reexport safe */ _OverflowWrapper__WEBPACK_IMPORTED_MODULE_0__.OverflowWrapper)
+/* harmony export */ });
+/* harmony import */ var _OverflowWrapper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./OverflowWrapper */ "./src/components/DnD/components/OverflowWrapper/OverflowWrapper.tsx");
+
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/Wrapper/Wrapper.tsx":
+/*!***********************************************************!*\
+  !*** ./src/components/DnD/components/Wrapper/Wrapper.tsx ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Wrapper: () => (/* binding */ Wrapper)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Wrapper_module_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Wrapper.module.css */ "./src/components/DnD/components/Wrapper/Wrapper.module.css");
+
+
+
+function Wrapper(_ref) {
+  let {
+    children,
+    center,
+    style
+  } = _ref;
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(_Wrapper_module_css__WEBPACK_IMPORTED_MODULE_2__["default"].Wrapper, center && _Wrapper_module_css__WEBPACK_IMPORTED_MODULE_2__["default"].center),
+    style: style
+  }, children);
+}
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/Wrapper/index.ts":
+/*!********************************************************!*\
+  !*** ./src/components/DnD/components/Wrapper/index.ts ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Wrapper: () => (/* reexport safe */ _Wrapper__WEBPACK_IMPORTED_MODULE_0__.Wrapper)
+/* harmony export */ });
+/* harmony import */ var _Wrapper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Wrapper */ "./src/components/DnD/components/Wrapper/Wrapper.tsx");
+
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/index.ts":
+/*!************************************************!*\
+  !*** ./src/components/DnD/components/index.ts ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Action: () => (/* reexport safe */ _Item__WEBPACK_IMPORTED_MODULE_5__.Action),
+/* harmony export */   Axis: () => (/* reexport safe */ _Draggable__WEBPACK_IMPORTED_MODULE_3__.Axis),
+/* harmony export */   Button: () => (/* reexport safe */ _Button__WEBPACK_IMPORTED_MODULE_0__.Button),
+/* harmony export */   ConfirmModal: () => (/* reexport safe */ _ConfirmModal__WEBPACK_IMPORTED_MODULE_1__.ConfirmModal),
+/* harmony export */   Container: () => (/* reexport safe */ _Container__WEBPACK_IMPORTED_MODULE_2__.Container),
+/* harmony export */   Draggable: () => (/* reexport safe */ _Draggable__WEBPACK_IMPORTED_MODULE_3__.Draggable),
+/* harmony export */   DraggableOverlay: () => (/* reexport safe */ _Draggable__WEBPACK_IMPORTED_MODULE_3__.DraggableOverlay),
+/* harmony export */   Droppable: () => (/* reexport safe */ _Droppable__WEBPACK_IMPORTED_MODULE_4__.Droppable),
+/* harmony export */   FloatingControls: () => (/* reexport safe */ _FloatingControls__WEBPACK_IMPORTED_MODULE_6__.FloatingControls),
+/* harmony export */   Grid: () => (/* reexport safe */ _Grid__WEBPACK_IMPORTED_MODULE_7__.Grid),
+/* harmony export */   GridContainer: () => (/* reexport safe */ _GridContainer__WEBPACK_IMPORTED_MODULE_8__.GridContainer),
+/* harmony export */   Handle: () => (/* reexport safe */ _Item__WEBPACK_IMPORTED_MODULE_5__.Handle),
+/* harmony export */   Item: () => (/* reexport safe */ _Item__WEBPACK_IMPORTED_MODULE_5__.Item),
+/* harmony export */   List: () => (/* reexport safe */ _List__WEBPACK_IMPORTED_MODULE_9__.List),
+/* harmony export */   OverflowWrapper: () => (/* reexport safe */ _OverflowWrapper__WEBPACK_IMPORTED_MODULE_10__.OverflowWrapper),
+/* harmony export */   Remove: () => (/* reexport safe */ _Item__WEBPACK_IMPORTED_MODULE_5__.Remove),
+/* harmony export */   Wrapper: () => (/* reexport safe */ _Wrapper__WEBPACK_IMPORTED_MODULE_11__.Wrapper)
+/* harmony export */ });
+/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Button */ "./src/components/DnD/components/Button/index.ts");
+/* harmony import */ var _ConfirmModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ConfirmModal */ "./src/components/DnD/components/ConfirmModal/index.ts");
+/* harmony import */ var _Container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Container */ "./src/components/DnD/components/Container/index.ts");
+/* harmony import */ var _Draggable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Draggable */ "./src/components/DnD/components/Draggable/index.ts");
+/* harmony import */ var _Droppable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Droppable */ "./src/components/DnD/components/Droppable/index.ts");
+/* harmony import */ var _Item__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Item */ "./src/components/DnD/components/Item/index.ts");
+/* harmony import */ var _FloatingControls__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./FloatingControls */ "./src/components/DnD/components/FloatingControls/index.ts");
+/* harmony import */ var _Grid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Grid */ "./src/components/DnD/components/Grid/index.ts");
+/* harmony import */ var _GridContainer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./GridContainer */ "./src/components/DnD/components/GridContainer/index.ts");
+/* harmony import */ var _List__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./List */ "./src/components/DnD/components/List/index.ts");
+/* harmony import */ var _OverflowWrapper__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./OverflowWrapper */ "./src/components/DnD/components/OverflowWrapper/index.ts");
+/* harmony import */ var _Wrapper__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./Wrapper */ "./src/components/DnD/components/Wrapper/index.ts");
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+
 /***/ "./src/components/Error.js":
 /*!*********************************!*\
   !*** ./src/components/Error.js ***!
@@ -123,10 +7377,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-beautiful-dnd */ "./node_modules/react-beautiful-dnd/dist/react-beautiful-dnd.esm.js");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @dnd-kit/core */ "./node_modules/@dnd-kit/core/dist/core.esm.js");
+/* harmony import */ var _DnD_Tree_SortableTree__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DnD/Tree/SortableTree */ "./src/components/DnD/Tree/SortableTree.tsx");
+/* harmony import */ var _utils_outlineToTree__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/outlineToTree */ "./src/utils/outlineToTree.js");
+/* harmony import */ var _utils_treeToOutline__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/treeToOutline */ "./src/utils/treeToOutline.js");
+
+
 
 
 
@@ -136,53 +7394,35 @@ function Outline(_ref) {
     outline,
     onOutlineSubmit
   } = _ref;
-  const [newOutline, setNewOutline] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+  const [h1, setH1] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+  const [newOutline, setNewOutline] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     if (typeof outline === 'string') {
-      const lines = outline.split('\n');
-      const parsedOutline = lines.map((line, index) => {
-        const isHeading = line.match(/^[IVXLCDM]+\./);
-        return {
-          id: `item-${index}`,
-          text: line.trim(),
-          level: isHeading ? 'h2' : 'h3'
-        };
-      });
-      setNewOutline(parsedOutline);
+      const {
+        h1,
+        tree
+      } = (0,_utils_outlineToTree__WEBPACK_IMPORTED_MODULE_3__["default"])(outline);
+      setH1(h1);
+      setNewOutline(tree);
     }
   }, [outline]);
-  const handleDragEnd = result => {
-    if (!result.destination) return;
-    const items = Array.from(newOutline);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
+  const handleChange = _ref2 => {
+    let {
+      items
+    } = _ref2;
     setNewOutline(items);
   };
   const handleSubmit = () => {
-    onOutlineSubmit(newOutline);
+    onOutlineSubmit(h1 + '\n' + (0,_utils_treeToOutline__WEBPACK_IMPORTED_MODULE_4__["default"])(newOutline));
   };
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("h2", null, "Outline"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_2__.DragDropContext, {
-    onDragEnd: handleDragEnd
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_2__.Droppable, {
-    droppableId: "outline"
-  }, provided => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("ul", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, provided.droppableProps, {
-    ref: provided.innerRef
-  }), newOutline.map((_ref2, index) => {
-    let {
-      id,
-      text,
-      level
-    } = _ref2;
-    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_2__.Draggable, {
-      key: id,
-      draggableId: id,
-      index: index
-    }, provided => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("li", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, provided.draggableProps, provided.dragHandleProps, {
-      ref: provided.innerRef
-    }), level === 'h2' ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("h2", null, text) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("h3", null, text)));
-  }), provided.placeholder))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("button", {
-    onClick: handleSubmit
-  }, "Submit Outline"));
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, "Outline"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", null, h1), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.DndContext, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_DnD_Tree_SortableTree__WEBPACK_IMPORTED_MODULE_2__.SortableTree, {
+    defaultItems: newOutline,
+    onChange: handleChange
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    onClick: handleSubmit,
+    type: "submit",
+    className: "w-full p-2 bg-teal-600 rounded-md hover:bg-teal-700 text-slate-100"
+  }, "Generate Blog Post"));
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Outline);
 
@@ -477,500 +7717,395 @@ function save() {
 
 /***/ }),
 
-/***/ "./node_modules/css-box-model/dist/css-box-model.esm.js":
-/*!**************************************************************!*\
-  !*** ./node_modules/css-box-model/dist/css-box-model.esm.js ***!
-  \**************************************************************/
+/***/ "./src/utils/outlineToTree.js":
+/*!************************************!*\
+  !*** ./src/utils/outlineToTree.js ***!
+  \************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   calculateBox: () => (/* binding */ calculateBox),
-/* harmony export */   createBox: () => (/* binding */ createBox),
-/* harmony export */   expand: () => (/* binding */ expand),
-/* harmony export */   getBox: () => (/* binding */ getBox),
-/* harmony export */   getRect: () => (/* binding */ getRect),
-/* harmony export */   offset: () => (/* binding */ offset),
-/* harmony export */   shrink: () => (/* binding */ shrink),
-/* harmony export */   withScroll: () => (/* binding */ withScroll)
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var tiny_invariant__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tiny-invariant */ "./node_modules/tiny-invariant/dist/esm/tiny-invariant.js");
-
-
-var getRect = function getRect(_ref) {
-  var top = _ref.top,
-      right = _ref.right,
-      bottom = _ref.bottom,
-      left = _ref.left;
-  var width = right - left;
-  var height = bottom - top;
-  var rect = {
-    top: top,
-    right: right,
-    bottom: bottom,
-    left: left,
-    width: width,
-    height: height,
-    x: left,
-    y: top,
-    center: {
-      x: (right + left) / 2,
-      y: (bottom + top) / 2
+/**
+ * Convert outline string to tree structure.
+ *
+ * @param {string} outline - The outline string.
+ * @returns {Object} The tree structure.
+ */
+function outlineToTree(outline) {
+  const lines = outline.split('\n');
+  let tree = [];
+  let h1 = '';
+  let currentSection;
+  let idCounter = 0;
+  lines.forEach(line => {
+    if (line.startsWith('# ')) {
+      // This is an H1 element.
+      h1 = line.slice(2);
+    } else if (line.startsWith('## ')) {
+      // This is an H2 element.
+      if (currentSection) {
+        tree.push(currentSection);
+      }
+      currentSection = {
+        id: `item-${idCounter++}`,
+        title: line.slice(3),
+        children: []
+      };
+    } else if (line.startsWith('### ')) {
+      // This is an H3 element.
+      if (currentSection) {
+        currentSection.children.push({
+          id: `item-${idCounter++}`,
+          title: line.slice(4),
+          children: []
+        });
+      }
     }
-  };
-  return rect;
-};
-var expand = function expand(target, expandBy) {
-  return {
-    top: target.top - expandBy.top,
-    left: target.left - expandBy.left,
-    bottom: target.bottom + expandBy.bottom,
-    right: target.right + expandBy.right
-  };
-};
-var shrink = function shrink(target, shrinkBy) {
-  return {
-    top: target.top + shrinkBy.top,
-    left: target.left + shrinkBy.left,
-    bottom: target.bottom - shrinkBy.bottom,
-    right: target.right - shrinkBy.right
-  };
-};
-
-var shift = function shift(target, shiftBy) {
-  return {
-    top: target.top + shiftBy.y,
-    left: target.left + shiftBy.x,
-    bottom: target.bottom + shiftBy.y,
-    right: target.right + shiftBy.x
-  };
-};
-
-var noSpacing = {
-  top: 0,
-  right: 0,
-  bottom: 0,
-  left: 0
-};
-var createBox = function createBox(_ref2) {
-  var borderBox = _ref2.borderBox,
-      _ref2$margin = _ref2.margin,
-      margin = _ref2$margin === void 0 ? noSpacing : _ref2$margin,
-      _ref2$border = _ref2.border,
-      border = _ref2$border === void 0 ? noSpacing : _ref2$border,
-      _ref2$padding = _ref2.padding,
-      padding = _ref2$padding === void 0 ? noSpacing : _ref2$padding;
-  var marginBox = getRect(expand(borderBox, margin));
-  var paddingBox = getRect(shrink(borderBox, border));
-  var contentBox = getRect(shrink(paddingBox, padding));
-  return {
-    marginBox: marginBox,
-    borderBox: getRect(borderBox),
-    paddingBox: paddingBox,
-    contentBox: contentBox,
-    margin: margin,
-    border: border,
-    padding: padding
-  };
-};
-
-var parse = function parse(raw) {
-  var value = raw.slice(0, -2);
-  var suffix = raw.slice(-2);
-
-  if (suffix !== 'px') {
-    return 0;
-  }
-
-  var result = Number(value);
-  !!isNaN(result) ?  true ? (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_0__["default"])(false, "Could not parse value [raw: " + raw + ", without suffix: " + value + "]") : 0 : void 0;
-  return result;
-};
-
-var getWindowScroll = function getWindowScroll() {
-  return {
-    x: window.pageXOffset,
-    y: window.pageYOffset
-  };
-};
-
-var offset = function offset(original, change) {
-  var borderBox = original.borderBox,
-      border = original.border,
-      margin = original.margin,
-      padding = original.padding;
-  var shifted = shift(borderBox, change);
-  return createBox({
-    borderBox: shifted,
-    border: border,
-    margin: margin,
-    padding: padding
   });
-};
-var withScroll = function withScroll(original, scroll) {
-  if (scroll === void 0) {
-    scroll = getWindowScroll();
+
+  // Push the last section into the tree.
+  if (currentSection) {
+    tree.push(currentSection);
   }
-
-  return offset(original, scroll);
-};
-var calculateBox = function calculateBox(borderBox, styles) {
-  var margin = {
-    top: parse(styles.marginTop),
-    right: parse(styles.marginRight),
-    bottom: parse(styles.marginBottom),
-    left: parse(styles.marginLeft)
+  return {
+    h1,
+    tree
   };
-  var padding = {
-    top: parse(styles.paddingTop),
-    right: parse(styles.paddingRight),
-    bottom: parse(styles.paddingBottom),
-    left: parse(styles.paddingLeft)
-  };
-  var border = {
-    top: parse(styles.borderTopWidth),
-    right: parse(styles.borderRightWidth),
-    bottom: parse(styles.borderBottomWidth),
-    left: parse(styles.borderLeftWidth)
-  };
-  return createBox({
-    borderBox: borderBox,
-    margin: margin,
-    padding: padding,
-    border: border
-  });
-};
-var getBox = function getBox(el) {
-  var borderBox = el.getBoundingClientRect();
-  var styles = window.getComputedStyle(el);
-  return calculateBox(borderBox, styles);
-};
-
-
-
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (outlineToTree);
 
 /***/ }),
 
-/***/ "./node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js":
-/*!**********************************************************************************!*\
-  !*** ./node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js ***!
-  \**********************************************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ "./src/utils/treeToOutline.js":
+/*!************************************!*\
+  !*** ./src/utils/treeToOutline.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-
-
-var reactIs = __webpack_require__(/*! react-is */ "./node_modules/hoist-non-react-statics/node_modules/react-is/index.js");
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// File: /src/utils/treeToOutline.js
 
 /**
- * Copyright 2015, Yahoo! Inc.
- * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
- */
-var REACT_STATICS = {
-  childContextTypes: true,
-  contextType: true,
-  contextTypes: true,
-  defaultProps: true,
-  displayName: true,
-  getDefaultProps: true,
-  getDerivedStateFromError: true,
-  getDerivedStateFromProps: true,
-  mixins: true,
-  propTypes: true,
-  type: true
-};
-var KNOWN_STATICS = {
-  name: true,
-  length: true,
-  prototype: true,
-  caller: true,
-  callee: true,
-  arguments: true,
-  arity: true
-};
-var FORWARD_REF_STATICS = {
-  '$$typeof': true,
-  render: true,
-  defaultProps: true,
-  displayName: true,
-  propTypes: true
-};
-var MEMO_STATICS = {
-  '$$typeof': true,
-  compare: true,
-  defaultProps: true,
-  displayName: true,
-  propTypes: true,
-  type: true
-};
-var TYPE_STATICS = {};
-TYPE_STATICS[reactIs.ForwardRef] = FORWARD_REF_STATICS;
-TYPE_STATICS[reactIs.Memo] = MEMO_STATICS;
-
-function getStatics(component) {
-  // React v16.11 and below
-  if (reactIs.isMemo(component)) {
-    return MEMO_STATICS;
-  } // React v16.12 and above
-
-
-  return TYPE_STATICS[component['$$typeof']] || REACT_STATICS;
-}
-
-var defineProperty = Object.defineProperty;
-var getOwnPropertyNames = Object.getOwnPropertyNames;
-var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
-var getPrototypeOf = Object.getPrototypeOf;
-var objectPrototype = Object.prototype;
-function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
-  if (typeof sourceComponent !== 'string') {
-    // don't hoist over string (html) components
-    if (objectPrototype) {
-      var inheritedComponent = getPrototypeOf(sourceComponent);
-
-      if (inheritedComponent && inheritedComponent !== objectPrototype) {
-        hoistNonReactStatics(targetComponent, inheritedComponent, blacklist);
-      }
-    }
-
-    var keys = getOwnPropertyNames(sourceComponent);
-
-    if (getOwnPropertySymbols) {
-      keys = keys.concat(getOwnPropertySymbols(sourceComponent));
-    }
-
-    var targetStatics = getStatics(targetComponent);
-    var sourceStatics = getStatics(sourceComponent);
-
-    for (var i = 0; i < keys.length; ++i) {
-      var key = keys[i];
-
-      if (!KNOWN_STATICS[key] && !(blacklist && blacklist[key]) && !(sourceStatics && sourceStatics[key]) && !(targetStatics && targetStatics[key])) {
-        var descriptor = getOwnPropertyDescriptor(sourceComponent, key);
-
-        try {
-          // Avoid failures from read-only properties
-          defineProperty(targetComponent, key, descriptor);
-        } catch (e) {}
-      }
-    }
-  }
-
-  return targetComponent;
-}
-
-module.exports = hoistNonReactStatics;
-
-
-/***/ }),
-
-/***/ "./node_modules/hoist-non-react-statics/node_modules/react-is/cjs/react-is.development.js":
-/*!************************************************************************************************!*\
-  !*** ./node_modules/hoist-non-react-statics/node_modules/react-is/cjs/react-is.development.js ***!
-  \************************************************************************************************/
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-/** @license React v16.13.1
- * react-is.development.js
+ * Convert tree structure to outline string.
  *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
+ * @param {Array} tree - The tree structure.
+ * @returns {string} The outline string.
  */
-
-
-
-
-
-if (true) {
-  (function() {
-'use strict';
-
-// The Symbol used to tag the ReactElement-like types. If there is no native Symbol
-// nor polyfill, then a plain number is used for performance.
-var hasSymbol = typeof Symbol === 'function' && Symbol.for;
-var REACT_ELEMENT_TYPE = hasSymbol ? Symbol.for('react.element') : 0xeac7;
-var REACT_PORTAL_TYPE = hasSymbol ? Symbol.for('react.portal') : 0xeaca;
-var REACT_FRAGMENT_TYPE = hasSymbol ? Symbol.for('react.fragment') : 0xeacb;
-var REACT_STRICT_MODE_TYPE = hasSymbol ? Symbol.for('react.strict_mode') : 0xeacc;
-var REACT_PROFILER_TYPE = hasSymbol ? Symbol.for('react.profiler') : 0xead2;
-var REACT_PROVIDER_TYPE = hasSymbol ? Symbol.for('react.provider') : 0xeacd;
-var REACT_CONTEXT_TYPE = hasSymbol ? Symbol.for('react.context') : 0xeace; // TODO: We don't use AsyncMode or ConcurrentMode anymore. They were temporary
-// (unstable) APIs that have been removed. Can we remove the symbols?
-
-var REACT_ASYNC_MODE_TYPE = hasSymbol ? Symbol.for('react.async_mode') : 0xeacf;
-var REACT_CONCURRENT_MODE_TYPE = hasSymbol ? Symbol.for('react.concurrent_mode') : 0xeacf;
-var REACT_FORWARD_REF_TYPE = hasSymbol ? Symbol.for('react.forward_ref') : 0xead0;
-var REACT_SUSPENSE_TYPE = hasSymbol ? Symbol.for('react.suspense') : 0xead1;
-var REACT_SUSPENSE_LIST_TYPE = hasSymbol ? Symbol.for('react.suspense_list') : 0xead8;
-var REACT_MEMO_TYPE = hasSymbol ? Symbol.for('react.memo') : 0xead3;
-var REACT_LAZY_TYPE = hasSymbol ? Symbol.for('react.lazy') : 0xead4;
-var REACT_BLOCK_TYPE = hasSymbol ? Symbol.for('react.block') : 0xead9;
-var REACT_FUNDAMENTAL_TYPE = hasSymbol ? Symbol.for('react.fundamental') : 0xead5;
-var REACT_RESPONDER_TYPE = hasSymbol ? Symbol.for('react.responder') : 0xead6;
-var REACT_SCOPE_TYPE = hasSymbol ? Symbol.for('react.scope') : 0xead7;
-
-function isValidElementType(type) {
-  return typeof type === 'string' || typeof type === 'function' || // Note: its typeof might be other than 'symbol' or 'number' if it's a polyfill.
-  type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || typeof type === 'object' && type !== null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_RESPONDER_TYPE || type.$$typeof === REACT_SCOPE_TYPE || type.$$typeof === REACT_BLOCK_TYPE);
-}
-
-function typeOf(object) {
-  if (typeof object === 'object' && object !== null) {
-    var $$typeof = object.$$typeof;
-
-    switch ($$typeof) {
-      case REACT_ELEMENT_TYPE:
-        var type = object.type;
-
-        switch (type) {
-          case REACT_ASYNC_MODE_TYPE:
-          case REACT_CONCURRENT_MODE_TYPE:
-          case REACT_FRAGMENT_TYPE:
-          case REACT_PROFILER_TYPE:
-          case REACT_STRICT_MODE_TYPE:
-          case REACT_SUSPENSE_TYPE:
-            return type;
-
-          default:
-            var $$typeofType = type && type.$$typeof;
-
-            switch ($$typeofType) {
-              case REACT_CONTEXT_TYPE:
-              case REACT_FORWARD_REF_TYPE:
-              case REACT_LAZY_TYPE:
-              case REACT_MEMO_TYPE:
-              case REACT_PROVIDER_TYPE:
-                return $$typeofType;
-
-              default:
-                return $$typeof;
-            }
-
+function treeToOutline(tree) {
+  let outline = '';
+  tree.forEach(section => {
+    if (section.type === 'h2') {
+      outline += `## ${section.text}\n`;
+      section.children.forEach(item => {
+        if (item.type === 'h3') {
+          outline += `- ${item.text}\n`;
         }
-
-      case REACT_PORTAL_TYPE:
-        return $$typeof;
+      });
     }
-  }
+  });
+  return outline;
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (treeToOutline);
 
-  return undefined;
-} // AsyncMode is deprecated along with isAsyncMode
+/***/ }),
 
-var AsyncMode = REACT_ASYNC_MODE_TYPE;
-var ConcurrentMode = REACT_CONCURRENT_MODE_TYPE;
-var ContextConsumer = REACT_CONTEXT_TYPE;
-var ContextProvider = REACT_PROVIDER_TYPE;
-var Element = REACT_ELEMENT_TYPE;
-var ForwardRef = REACT_FORWARD_REF_TYPE;
-var Fragment = REACT_FRAGMENT_TYPE;
-var Lazy = REACT_LAZY_TYPE;
-var Memo = REACT_MEMO_TYPE;
-var Portal = REACT_PORTAL_TYPE;
-var Profiler = REACT_PROFILER_TYPE;
-var StrictMode = REACT_STRICT_MODE_TYPE;
-var Suspense = REACT_SUSPENSE_TYPE;
-var hasWarnedAboutDeprecatedIsAsyncMode = false; // AsyncMode should be deprecated
+/***/ "./node_modules/classnames/index.js":
+/*!******************************************!*\
+  !*** ./node_modules/classnames/index.js ***!
+  \******************************************/
+/***/ ((module, exports) => {
 
-function isAsyncMode(object) {
-  {
-    if (!hasWarnedAboutDeprecatedIsAsyncMode) {
-      hasWarnedAboutDeprecatedIsAsyncMode = true; // Using console['warn'] to evade Babel and ESLint
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	Copyright (c) 2018 Jed Watson.
+	Licensed under the MIT License (MIT), see
+	http://jedwatson.github.io/classnames
+*/
+/* global define */
 
-      console['warn']('The ReactIs.isAsyncMode() alias has been deprecated, ' + 'and will be removed in React 17+. Update your code to use ' + 'ReactIs.isConcurrentMode() instead. It has the exact same API.');
-    }
-  }
+(function () {
+	'use strict';
 
-  return isConcurrentMode(object) || typeOf(object) === REACT_ASYNC_MODE_TYPE;
-}
-function isConcurrentMode(object) {
-  return typeOf(object) === REACT_CONCURRENT_MODE_TYPE;
-}
-function isContextConsumer(object) {
-  return typeOf(object) === REACT_CONTEXT_TYPE;
-}
-function isContextProvider(object) {
-  return typeOf(object) === REACT_PROVIDER_TYPE;
-}
-function isElement(object) {
-  return typeof object === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
-}
-function isForwardRef(object) {
-  return typeOf(object) === REACT_FORWARD_REF_TYPE;
-}
-function isFragment(object) {
-  return typeOf(object) === REACT_FRAGMENT_TYPE;
-}
-function isLazy(object) {
-  return typeOf(object) === REACT_LAZY_TYPE;
-}
-function isMemo(object) {
-  return typeOf(object) === REACT_MEMO_TYPE;
-}
-function isPortal(object) {
-  return typeOf(object) === REACT_PORTAL_TYPE;
-}
-function isProfiler(object) {
-  return typeOf(object) === REACT_PROFILER_TYPE;
-}
-function isStrictMode(object) {
-  return typeOf(object) === REACT_STRICT_MODE_TYPE;
-}
-function isSuspense(object) {
-  return typeOf(object) === REACT_SUSPENSE_TYPE;
-}
+	var hasOwn = {}.hasOwnProperty;
+	var nativeCodeString = '[native code]';
 
-exports.AsyncMode = AsyncMode;
-exports.ConcurrentMode = ConcurrentMode;
-exports.ContextConsumer = ContextConsumer;
-exports.ContextProvider = ContextProvider;
-exports.Element = Element;
-exports.ForwardRef = ForwardRef;
-exports.Fragment = Fragment;
-exports.Lazy = Lazy;
-exports.Memo = Memo;
-exports.Portal = Portal;
-exports.Profiler = Profiler;
-exports.StrictMode = StrictMode;
-exports.Suspense = Suspense;
-exports.isAsyncMode = isAsyncMode;
-exports.isConcurrentMode = isConcurrentMode;
-exports.isContextConsumer = isContextConsumer;
-exports.isContextProvider = isContextProvider;
-exports.isElement = isElement;
-exports.isForwardRef = isForwardRef;
-exports.isFragment = isFragment;
-exports.isLazy = isLazy;
-exports.isMemo = isMemo;
-exports.isPortal = isPortal;
-exports.isProfiler = isProfiler;
-exports.isStrictMode = isStrictMode;
-exports.isSuspense = isSuspense;
-exports.isValidElementType = isValidElementType;
-exports.typeOf = typeOf;
-  })();
-}
+	function classNames() {
+		var classes = [];
+
+		for (var i = 0; i < arguments.length; i++) {
+			var arg = arguments[i];
+			if (!arg) continue;
+
+			var argType = typeof arg;
+
+			if (argType === 'string' || argType === 'number') {
+				classes.push(arg);
+			} else if (Array.isArray(arg)) {
+				if (arg.length) {
+					var inner = classNames.apply(null, arg);
+					if (inner) {
+						classes.push(inner);
+					}
+				}
+			} else if (argType === 'object') {
+				if (arg.toString !== Object.prototype.toString && !arg.toString.toString().includes('[native code]')) {
+					classes.push(arg.toString());
+					continue;
+				}
+
+				for (var key in arg) {
+					if (hasOwn.call(arg, key) && arg[key]) {
+						classes.push(key);
+					}
+				}
+			}
+		}
+
+		return classes.join(' ');
+	}
+
+	if ( true && module.exports) {
+		classNames.default = classNames;
+		module.exports = classNames;
+	} else if (true) {
+		// register as 'classnames', consistent with npm package name
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
+			return classNames;
+		}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else {}
+}());
 
 
 /***/ }),
 
-/***/ "./node_modules/hoist-non-react-statics/node_modules/react-is/index.js":
-/*!*****************************************************************************!*\
-  !*** ./node_modules/hoist-non-react-statics/node_modules/react-is/index.js ***!
-  \*****************************************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ "./src/components/DnD/Tree/components/TreeItem/TreeItem.module.css":
+/*!*************************************************************************!*\
+  !*** ./src/components/DnD/Tree/components/TreeItem/TreeItem.module.css ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// extracted by mini-css-extract-plugin
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"Wrapper":"V8VE_fSMOx9l1PjYlqmr","clone":"ZESj_aunHXz2Fst5FSAA","TreeItem":"_mKmmdzRsLJXNkExxIlp","ghost":"CBv6yKjw_PW8UZw14WYH","indicator":"bLxrFkmfZ2xNykSdLzTF","Text":"Pxl2hsp2skgeLvWItZK_","Count":"ZMeW0aR1uEeCcwtiwJn1","disableInteraction":"KL5JVH138W3mWDsrcOwi","disableSelection":"hHuPmNOT3rg8Qy0D0WdF","Collapse":"QAcuU4JEY6ssUo_GJDBs","collapsed":"vscC_bwmkWXjMDCoaRwv"});
 
+/***/ }),
 
-if (false) {} else {
-  module.exports = __webpack_require__(/*! ./cjs/react-is.development.js */ "./node_modules/hoist-non-react-statics/node_modules/react-is/cjs/react-is.development.js");
-}
+/***/ "./src/components/DnD/components/Button/Button.module.css":
+/*!****************************************************************!*\
+  !*** ./src/components/DnD/components/Button/Button.module.css ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// extracted by mini-css-extract-plugin
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"Button":"x6VkY6vfzZtROaGagl5J"});
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/ConfirmModal/ConfirmModal.module.css":
+/*!****************************************************************************!*\
+  !*** ./src/components/DnD/components/ConfirmModal/ConfirmModal.module.css ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// extracted by mini-css-extract-plugin
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"ConfirmModal":"RvEzaLfXyMIEA78HWgLT"});
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/Container/Container.module.css":
+/*!**********************************************************************!*\
+  !*** ./src/components/DnD/components/Container/Container.module.css ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// extracted by mini-css-extract-plugin
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"Container":"R0tahmIpczZeehgi1AYZ","scrollable":"SBFmulUia77oqz56qZps","placeholder":"FlXl5CIr9NgsmAECwUy0","hover":"Sx7JDsp0LZ9ety5FXKpv","unstyled":"eE0ZoF9CCmfHZ_vRERsS","horizontal":"EF8D3tRuI1aVmPuEn2Og","shadow":"NNtF1kX1clBQn1FNjHNo","Header":"XBLxhEpfsJfnY8bscIUq","Actions":"aWZRd0xx9thMF3THoJH7"});
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/Draggable/Draggable.module.css":
+/*!**********************************************************************!*\
+  !*** ./src/components/DnD/components/Draggable/Draggable.module.css ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// extracted by mini-css-extract-plugin
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"Draggable":"IyMBph7aqLEnAtjUkUvk","pulse":"ZQzqltJ0rNAXiUXO_EjQ","pop":"tK9BF1Zflg2XFXKgiFk6","handle":"h06xRbMH_SItjgzCBM6U","active":"txaXk21SqB4CfuRHI4gQ","dragging":"nnPgPHYqEN7nAWrFiVmr","dragOverlay":"mMy14LC0mtjwVK2c9weM"});
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/Droppable/Droppable.module.css":
+/*!**********************************************************************!*\
+  !*** ./src/components/DnD/components/Droppable/Droppable.module.css ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// extracted by mini-css-extract-plugin
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"Droppable":"cVOiKziiohqw5OEIIUfS","dragging":"VVrIZcdTQgq6vUuzIjBp","over":"h_w6Fh8nuQbizNfYUDF8","dropped":"a4ZHnJr6owytWKvqHsXQ"});
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/FloatingControls/FloatingControls.module.css":
+/*!************************************************************************************!*\
+  !*** ./src/components/DnD/components/FloatingControls/FloatingControls.module.css ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// extracted by mini-css-extract-plugin
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"FloatingControls":"MX0XmwT0lhVknjSFBYZm"});
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/Grid/Grid.module.css":
+/*!************************************************************!*\
+  !*** ./src/components/DnD/components/Grid/Grid.module.css ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// extracted by mini-css-extract-plugin
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"Grid":"GDXaO3AZ_fyJtXfn4rPF","RangeSlider":"h7hlqRAjVy7btGZiG7RA"});
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/GridContainer/GridContainer.module.css":
+/*!******************************************************************************!*\
+  !*** ./src/components/DnD/components/GridContainer/GridContainer.module.css ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// extracted by mini-css-extract-plugin
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"GridContainer":"Nc0lHXzfUSCKFOS9wJBO"});
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/Item/Item.module.css":
+/*!************************************************************!*\
+  !*** ./src/components/DnD/components/Item/Item.module.css ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// extracted by mini-css-extract-plugin
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"Wrapper":"MGkpH0mxTTQdDMONMgCj","fadeIn":"jHvm2MpnilXRJucJPAEV","dragOverlay":"s6NSamO6GPOtJMLs7wKr","Item":"WiXhCBM9EVaW5m9wdyge","pop":"QQo0oNoYrugyF_JUXTqG","withHandle":"ezzxX8tXZDbT7xUUmwOx","dragging":"_xdJub6MxMT0CuqK1XJH","disabled":"hE3Aj0naP9Q687Oabp04","color":"P6csp9l8lfrFePolhqr4","Remove":"PfPy7zlUq_RZ8NGuLtnj","Actions":"VcXuP_e6qddLugwqgjJ2"});
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/Item/components/Action/Action.module.css":
+/*!********************************************************************************!*\
+  !*** ./src/components/DnD/components/Item/components/Action/Action.module.css ***!
+  \********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// extracted by mini-css-extract-plugin
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"Action":"oZ83SsiBn3n4BI65pUiL"});
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/List/List.module.css":
+/*!************************************************************!*\
+  !*** ./src/components/DnD/components/List/List.module.css ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// extracted by mini-css-extract-plugin
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"List":"H7R8tSzoBIHgPNLN0lXk","horizontal":"pMydCUfLVBsaRJqmhuT5"});
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/OverflowWrapper/OverflowWrapper.module.css":
+/*!**********************************************************************************!*\
+  !*** ./src/components/DnD/components/OverflowWrapper/OverflowWrapper.module.css ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// extracted by mini-css-extract-plugin
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"OverflowWrapper":"lOjrmcJjybYpNxq8Iry0"});
+
+/***/ }),
+
+/***/ "./src/components/DnD/components/Wrapper/Wrapper.module.css":
+/*!******************************************************************!*\
+  !*** ./src/components/DnD/components/Wrapper/Wrapper.module.css ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// extracted by mini-css-extract-plugin
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"Wrapper":"nsr_ED3mxk9L46TL6SmV","center":"XwXE8rTHqLIEJDZLheRr"});
 
 /***/ }),
 
@@ -996,12573 +8131,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./node_modules/object-assign/index.js":
-/*!*********************************************!*\
-  !*** ./node_modules/object-assign/index.js ***!
-  \*********************************************/
-/***/ ((module) => {
-
-"use strict";
-/*
-object-assign
-(c) Sindre Sorhus
-@license MIT
-*/
-
-
-/* eslint-disable no-unused-vars */
-var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-
-function toObject(val) {
-	if (val === null || val === undefined) {
-		throw new TypeError('Object.assign cannot be called with null or undefined');
-	}
-
-	return Object(val);
-}
-
-function shouldUseNative() {
-	try {
-		if (!Object.assign) {
-			return false;
-		}
-
-		// Detect buggy property enumeration order in older V8 versions.
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=4118
-		var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
-		test1[5] = 'de';
-		if (Object.getOwnPropertyNames(test1)[0] === '5') {
-			return false;
-		}
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-		var test2 = {};
-		for (var i = 0; i < 10; i++) {
-			test2['_' + String.fromCharCode(i)] = i;
-		}
-		var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
-			return test2[n];
-		});
-		if (order2.join('') !== '0123456789') {
-			return false;
-		}
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-		var test3 = {};
-		'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
-			test3[letter] = letter;
-		});
-		if (Object.keys(Object.assign({}, test3)).join('') !==
-				'abcdefghijklmnopqrst') {
-			return false;
-		}
-
-		return true;
-	} catch (err) {
-		// We don't expect any of the above to throw, but better to be safe.
-		return false;
-	}
-}
-
-module.exports = shouldUseNative() ? Object.assign : function (target, source) {
-	var from;
-	var to = toObject(target);
-	var symbols;
-
-	for (var s = 1; s < arguments.length; s++) {
-		from = Object(arguments[s]);
-
-		for (var key in from) {
-			if (hasOwnProperty.call(from, key)) {
-				to[key] = from[key];
-			}
-		}
-
-		if (getOwnPropertySymbols) {
-			symbols = getOwnPropertySymbols(from);
-			for (var i = 0; i < symbols.length; i++) {
-				if (propIsEnumerable.call(from, symbols[i])) {
-					to[symbols[i]] = from[symbols[i]];
-				}
-			}
-		}
-	}
-
-	return to;
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/prop-types/checkPropTypes.js":
-/*!***************************************************!*\
-  !*** ./node_modules/prop-types/checkPropTypes.js ***!
-  \***************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-
-
-var printWarning = function() {};
-
-if (true) {
-  var ReactPropTypesSecret = __webpack_require__(/*! ./lib/ReactPropTypesSecret */ "./node_modules/prop-types/lib/ReactPropTypesSecret.js");
-  var loggedTypeFailures = {};
-  var has = __webpack_require__(/*! ./lib/has */ "./node_modules/prop-types/lib/has.js");
-
-  printWarning = function(text) {
-    var message = 'Warning: ' + text;
-    if (typeof console !== 'undefined') {
-      console.error(message);
-    }
-    try {
-      // --- Welcome to debugging React ---
-      // This error was thrown as a convenience so that you can use this stack
-      // to find the callsite that caused this warning to fire.
-      throw new Error(message);
-    } catch (x) { /**/ }
-  };
-}
-
-/**
- * Assert that the values match with the type specs.
- * Error messages are memorized and will only be shown once.
- *
- * @param {object} typeSpecs Map of name to a ReactPropType
- * @param {object} values Runtime values that need to be type-checked
- * @param {string} location e.g. "prop", "context", "child context"
- * @param {string} componentName Name of the component for error messages.
- * @param {?Function} getStack Returns the component stack.
- * @private
- */
-function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
-  if (true) {
-    for (var typeSpecName in typeSpecs) {
-      if (has(typeSpecs, typeSpecName)) {
-        var error;
-        // Prop type validation may throw. In case they do, we don't want to
-        // fail the render phase where it didn't fail before. So we log it.
-        // After these have been cleaned up, we'll let them throw.
-        try {
-          // This is intentionally an invariant that gets caught. It's the same
-          // behavior as without this statement except with a better message.
-          if (typeof typeSpecs[typeSpecName] !== 'function') {
-            var err = Error(
-              (componentName || 'React class') + ': ' + location + ' type `' + typeSpecName + '` is invalid; ' +
-              'it must be a function, usually from the `prop-types` package, but received `' + typeof typeSpecs[typeSpecName] + '`.' +
-              'This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.'
-            );
-            err.name = 'Invariant Violation';
-            throw err;
-          }
-          error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret);
-        } catch (ex) {
-          error = ex;
-        }
-        if (error && !(error instanceof Error)) {
-          printWarning(
-            (componentName || 'React class') + ': type specification of ' +
-            location + ' `' + typeSpecName + '` is invalid; the type checker ' +
-            'function must return `null` or an `Error` but returned a ' + typeof error + '. ' +
-            'You may have forgotten to pass an argument to the type checker ' +
-            'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' +
-            'shape all require an argument).'
-          );
-        }
-        if (error instanceof Error && !(error.message in loggedTypeFailures)) {
-          // Only monitor this failure once because there tends to be a lot of the
-          // same error.
-          loggedTypeFailures[error.message] = true;
-
-          var stack = getStack ? getStack() : '';
-
-          printWarning(
-            'Failed ' + location + ' type: ' + error.message + (stack != null ? stack : '')
-          );
-        }
-      }
-    }
-  }
-}
-
-/**
- * Resets warning cache when testing.
- *
- * @private
- */
-checkPropTypes.resetWarningCache = function() {
-  if (true) {
-    loggedTypeFailures = {};
-  }
-}
-
-module.exports = checkPropTypes;
-
-
-/***/ }),
-
-/***/ "./node_modules/prop-types/factoryWithTypeCheckers.js":
-/*!************************************************************!*\
-  !*** ./node_modules/prop-types/factoryWithTypeCheckers.js ***!
-  \************************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-
-
-var ReactIs = __webpack_require__(/*! react-is */ "./node_modules/prop-types/node_modules/react-is/index.js");
-var assign = __webpack_require__(/*! object-assign */ "./node_modules/object-assign/index.js");
-
-var ReactPropTypesSecret = __webpack_require__(/*! ./lib/ReactPropTypesSecret */ "./node_modules/prop-types/lib/ReactPropTypesSecret.js");
-var has = __webpack_require__(/*! ./lib/has */ "./node_modules/prop-types/lib/has.js");
-var checkPropTypes = __webpack_require__(/*! ./checkPropTypes */ "./node_modules/prop-types/checkPropTypes.js");
-
-var printWarning = function() {};
-
-if (true) {
-  printWarning = function(text) {
-    var message = 'Warning: ' + text;
-    if (typeof console !== 'undefined') {
-      console.error(message);
-    }
-    try {
-      // --- Welcome to debugging React ---
-      // This error was thrown as a convenience so that you can use this stack
-      // to find the callsite that caused this warning to fire.
-      throw new Error(message);
-    } catch (x) {}
-  };
-}
-
-function emptyFunctionThatReturnsNull() {
-  return null;
-}
-
-module.exports = function(isValidElement, throwOnDirectAccess) {
-  /* global Symbol */
-  var ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
-  var FAUX_ITERATOR_SYMBOL = '@@iterator'; // Before Symbol spec.
-
-  /**
-   * Returns the iterator method function contained on the iterable object.
-   *
-   * Be sure to invoke the function with the iterable as context:
-   *
-   *     var iteratorFn = getIteratorFn(myIterable);
-   *     if (iteratorFn) {
-   *       var iterator = iteratorFn.call(myIterable);
-   *       ...
-   *     }
-   *
-   * @param {?object} maybeIterable
-   * @return {?function}
-   */
-  function getIteratorFn(maybeIterable) {
-    var iteratorFn = maybeIterable && (ITERATOR_SYMBOL && maybeIterable[ITERATOR_SYMBOL] || maybeIterable[FAUX_ITERATOR_SYMBOL]);
-    if (typeof iteratorFn === 'function') {
-      return iteratorFn;
-    }
-  }
-
-  /**
-   * Collection of methods that allow declaration and validation of props that are
-   * supplied to React components. Example usage:
-   *
-   *   var Props = require('ReactPropTypes');
-   *   var MyArticle = React.createClass({
-   *     propTypes: {
-   *       // An optional string prop named "description".
-   *       description: Props.string,
-   *
-   *       // A required enum prop named "category".
-   *       category: Props.oneOf(['News','Photos']).isRequired,
-   *
-   *       // A prop named "dialog" that requires an instance of Dialog.
-   *       dialog: Props.instanceOf(Dialog).isRequired
-   *     },
-   *     render: function() { ... }
-   *   });
-   *
-   * A more formal specification of how these methods are used:
-   *
-   *   type := array|bool|func|object|number|string|oneOf([...])|instanceOf(...)
-   *   decl := ReactPropTypes.{type}(.isRequired)?
-   *
-   * Each and every declaration produces a function with the same signature. This
-   * allows the creation of custom validation functions. For example:
-   *
-   *  var MyLink = React.createClass({
-   *    propTypes: {
-   *      // An optional string or URI prop named "href".
-   *      href: function(props, propName, componentName) {
-   *        var propValue = props[propName];
-   *        if (propValue != null && typeof propValue !== 'string' &&
-   *            !(propValue instanceof URI)) {
-   *          return new Error(
-   *            'Expected a string or an URI for ' + propName + ' in ' +
-   *            componentName
-   *          );
-   *        }
-   *      }
-   *    },
-   *    render: function() {...}
-   *  });
-   *
-   * @internal
-   */
-
-  var ANONYMOUS = '<<anonymous>>';
-
-  // Important!
-  // Keep this list in sync with production version in `./factoryWithThrowingShims.js`.
-  var ReactPropTypes = {
-    array: createPrimitiveTypeChecker('array'),
-    bigint: createPrimitiveTypeChecker('bigint'),
-    bool: createPrimitiveTypeChecker('boolean'),
-    func: createPrimitiveTypeChecker('function'),
-    number: createPrimitiveTypeChecker('number'),
-    object: createPrimitiveTypeChecker('object'),
-    string: createPrimitiveTypeChecker('string'),
-    symbol: createPrimitiveTypeChecker('symbol'),
-
-    any: createAnyTypeChecker(),
-    arrayOf: createArrayOfTypeChecker,
-    element: createElementTypeChecker(),
-    elementType: createElementTypeTypeChecker(),
-    instanceOf: createInstanceTypeChecker,
-    node: createNodeChecker(),
-    objectOf: createObjectOfTypeChecker,
-    oneOf: createEnumTypeChecker,
-    oneOfType: createUnionTypeChecker,
-    shape: createShapeTypeChecker,
-    exact: createStrictShapeTypeChecker,
-  };
-
-  /**
-   * inlined Object.is polyfill to avoid requiring consumers ship their own
-   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
-   */
-  /*eslint-disable no-self-compare*/
-  function is(x, y) {
-    // SameValue algorithm
-    if (x === y) {
-      // Steps 1-5, 7-10
-      // Steps 6.b-6.e: +0 != -0
-      return x !== 0 || 1 / x === 1 / y;
-    } else {
-      // Step 6.a: NaN == NaN
-      return x !== x && y !== y;
-    }
-  }
-  /*eslint-enable no-self-compare*/
-
-  /**
-   * We use an Error-like object for backward compatibility as people may call
-   * PropTypes directly and inspect their output. However, we don't use real
-   * Errors anymore. We don't inspect their stack anyway, and creating them
-   * is prohibitively expensive if they are created too often, such as what
-   * happens in oneOfType() for any type before the one that matched.
-   */
-  function PropTypeError(message, data) {
-    this.message = message;
-    this.data = data && typeof data === 'object' ? data: {};
-    this.stack = '';
-  }
-  // Make `instanceof Error` still work for returned errors.
-  PropTypeError.prototype = Error.prototype;
-
-  function createChainableTypeChecker(validate) {
-    if (true) {
-      var manualPropTypeCallCache = {};
-      var manualPropTypeWarningCount = 0;
-    }
-    function checkType(isRequired, props, propName, componentName, location, propFullName, secret) {
-      componentName = componentName || ANONYMOUS;
-      propFullName = propFullName || propName;
-
-      if (secret !== ReactPropTypesSecret) {
-        if (throwOnDirectAccess) {
-          // New behavior only for users of `prop-types` package
-          var err = new Error(
-            'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
-            'Use `PropTypes.checkPropTypes()` to call them. ' +
-            'Read more at http://fb.me/use-check-prop-types'
-          );
-          err.name = 'Invariant Violation';
-          throw err;
-        } else if ( true && typeof console !== 'undefined') {
-          // Old behavior for people using React.PropTypes
-          var cacheKey = componentName + ':' + propName;
-          if (
-            !manualPropTypeCallCache[cacheKey] &&
-            // Avoid spamming the console because they are often not actionable except for lib authors
-            manualPropTypeWarningCount < 3
-          ) {
-            printWarning(
-              'You are manually calling a React.PropTypes validation ' +
-              'function for the `' + propFullName + '` prop on `' + componentName + '`. This is deprecated ' +
-              'and will throw in the standalone `prop-types` package. ' +
-              'You may be seeing this warning due to a third-party PropTypes ' +
-              'library. See https://fb.me/react-warning-dont-call-proptypes ' + 'for details.'
-            );
-            manualPropTypeCallCache[cacheKey] = true;
-            manualPropTypeWarningCount++;
-          }
-        }
-      }
-      if (props[propName] == null) {
-        if (isRequired) {
-          if (props[propName] === null) {
-            return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required ' + ('in `' + componentName + '`, but its value is `null`.'));
-          }
-          return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required in ' + ('`' + componentName + '`, but its value is `undefined`.'));
-        }
-        return null;
-      } else {
-        return validate(props, propName, componentName, location, propFullName);
-      }
-    }
-
-    var chainedCheckType = checkType.bind(null, false);
-    chainedCheckType.isRequired = checkType.bind(null, true);
-
-    return chainedCheckType;
-  }
-
-  function createPrimitiveTypeChecker(expectedType) {
-    function validate(props, propName, componentName, location, propFullName, secret) {
-      var propValue = props[propName];
-      var propType = getPropType(propValue);
-      if (propType !== expectedType) {
-        // `propValue` being instance of, say, date/regexp, pass the 'object'
-        // check, but we can offer a more precise error message here rather than
-        // 'of type `object`'.
-        var preciseType = getPreciseType(propValue);
-
-        return new PropTypeError(
-          'Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + preciseType + '` supplied to `' + componentName + '`, expected ') + ('`' + expectedType + '`.'),
-          {expectedType: expectedType}
-        );
-      }
-      return null;
-    }
-    return createChainableTypeChecker(validate);
-  }
-
-  function createAnyTypeChecker() {
-    return createChainableTypeChecker(emptyFunctionThatReturnsNull);
-  }
-
-  function createArrayOfTypeChecker(typeChecker) {
-    function validate(props, propName, componentName, location, propFullName) {
-      if (typeof typeChecker !== 'function') {
-        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside arrayOf.');
-      }
-      var propValue = props[propName];
-      if (!Array.isArray(propValue)) {
-        var propType = getPropType(propValue);
-        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an array.'));
-      }
-      for (var i = 0; i < propValue.length; i++) {
-        var error = typeChecker(propValue, i, componentName, location, propFullName + '[' + i + ']', ReactPropTypesSecret);
-        if (error instanceof Error) {
-          return error;
-        }
-      }
-      return null;
-    }
-    return createChainableTypeChecker(validate);
-  }
-
-  function createElementTypeChecker() {
-    function validate(props, propName, componentName, location, propFullName) {
-      var propValue = props[propName];
-      if (!isValidElement(propValue)) {
-        var propType = getPropType(propValue);
-        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement.'));
-      }
-      return null;
-    }
-    return createChainableTypeChecker(validate);
-  }
-
-  function createElementTypeTypeChecker() {
-    function validate(props, propName, componentName, location, propFullName) {
-      var propValue = props[propName];
-      if (!ReactIs.isValidElementType(propValue)) {
-        var propType = getPropType(propValue);
-        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement type.'));
-      }
-      return null;
-    }
-    return createChainableTypeChecker(validate);
-  }
-
-  function createInstanceTypeChecker(expectedClass) {
-    function validate(props, propName, componentName, location, propFullName) {
-      if (!(props[propName] instanceof expectedClass)) {
-        var expectedClassName = expectedClass.name || ANONYMOUS;
-        var actualClassName = getClassName(props[propName]);
-        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + actualClassName + '` supplied to `' + componentName + '`, expected ') + ('instance of `' + expectedClassName + '`.'));
-      }
-      return null;
-    }
-    return createChainableTypeChecker(validate);
-  }
-
-  function createEnumTypeChecker(expectedValues) {
-    if (!Array.isArray(expectedValues)) {
-      if (true) {
-        if (arguments.length > 1) {
-          printWarning(
-            'Invalid arguments supplied to oneOf, expected an array, got ' + arguments.length + ' arguments. ' +
-            'A common mistake is to write oneOf(x, y, z) instead of oneOf([x, y, z]).'
-          );
-        } else {
-          printWarning('Invalid argument supplied to oneOf, expected an array.');
-        }
-      }
-      return emptyFunctionThatReturnsNull;
-    }
-
-    function validate(props, propName, componentName, location, propFullName) {
-      var propValue = props[propName];
-      for (var i = 0; i < expectedValues.length; i++) {
-        if (is(propValue, expectedValues[i])) {
-          return null;
-        }
-      }
-
-      var valuesString = JSON.stringify(expectedValues, function replacer(key, value) {
-        var type = getPreciseType(value);
-        if (type === 'symbol') {
-          return String(value);
-        }
-        return value;
-      });
-      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of value `' + String(propValue) + '` ' + ('supplied to `' + componentName + '`, expected one of ' + valuesString + '.'));
-    }
-    return createChainableTypeChecker(validate);
-  }
-
-  function createObjectOfTypeChecker(typeChecker) {
-    function validate(props, propName, componentName, location, propFullName) {
-      if (typeof typeChecker !== 'function') {
-        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside objectOf.');
-      }
-      var propValue = props[propName];
-      var propType = getPropType(propValue);
-      if (propType !== 'object') {
-        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an object.'));
-      }
-      for (var key in propValue) {
-        if (has(propValue, key)) {
-          var error = typeChecker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
-          if (error instanceof Error) {
-            return error;
-          }
-        }
-      }
-      return null;
-    }
-    return createChainableTypeChecker(validate);
-  }
-
-  function createUnionTypeChecker(arrayOfTypeCheckers) {
-    if (!Array.isArray(arrayOfTypeCheckers)) {
-       true ? printWarning('Invalid argument supplied to oneOfType, expected an instance of array.') : 0;
-      return emptyFunctionThatReturnsNull;
-    }
-
-    for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
-      var checker = arrayOfTypeCheckers[i];
-      if (typeof checker !== 'function') {
-        printWarning(
-          'Invalid argument supplied to oneOfType. Expected an array of check functions, but ' +
-          'received ' + getPostfixForTypeWarning(checker) + ' at index ' + i + '.'
-        );
-        return emptyFunctionThatReturnsNull;
-      }
-    }
-
-    function validate(props, propName, componentName, location, propFullName) {
-      var expectedTypes = [];
-      for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
-        var checker = arrayOfTypeCheckers[i];
-        var checkerResult = checker(props, propName, componentName, location, propFullName, ReactPropTypesSecret);
-        if (checkerResult == null) {
-          return null;
-        }
-        if (checkerResult.data && has(checkerResult.data, 'expectedType')) {
-          expectedTypes.push(checkerResult.data.expectedType);
-        }
-      }
-      var expectedTypesMessage = (expectedTypes.length > 0) ? ', expected one of type [' + expectedTypes.join(', ') + ']': '';
-      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`' + expectedTypesMessage + '.'));
-    }
-    return createChainableTypeChecker(validate);
-  }
-
-  function createNodeChecker() {
-    function validate(props, propName, componentName, location, propFullName) {
-      if (!isNode(props[propName])) {
-        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`, expected a ReactNode.'));
-      }
-      return null;
-    }
-    return createChainableTypeChecker(validate);
-  }
-
-  function invalidValidatorError(componentName, location, propFullName, key, type) {
-    return new PropTypeError(
-      (componentName || 'React class') + ': ' + location + ' type `' + propFullName + '.' + key + '` is invalid; ' +
-      'it must be a function, usually from the `prop-types` package, but received `' + type + '`.'
-    );
-  }
-
-  function createShapeTypeChecker(shapeTypes) {
-    function validate(props, propName, componentName, location, propFullName) {
-      var propValue = props[propName];
-      var propType = getPropType(propValue);
-      if (propType !== 'object') {
-        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
-      }
-      for (var key in shapeTypes) {
-        var checker = shapeTypes[key];
-        if (typeof checker !== 'function') {
-          return invalidValidatorError(componentName, location, propFullName, key, getPreciseType(checker));
-        }
-        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
-        if (error) {
-          return error;
-        }
-      }
-      return null;
-    }
-    return createChainableTypeChecker(validate);
-  }
-
-  function createStrictShapeTypeChecker(shapeTypes) {
-    function validate(props, propName, componentName, location, propFullName) {
-      var propValue = props[propName];
-      var propType = getPropType(propValue);
-      if (propType !== 'object') {
-        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
-      }
-      // We need to check all keys in case some are required but missing from props.
-      var allKeys = assign({}, props[propName], shapeTypes);
-      for (var key in allKeys) {
-        var checker = shapeTypes[key];
-        if (has(shapeTypes, key) && typeof checker !== 'function') {
-          return invalidValidatorError(componentName, location, propFullName, key, getPreciseType(checker));
-        }
-        if (!checker) {
-          return new PropTypeError(
-            'Invalid ' + location + ' `' + propFullName + '` key `' + key + '` supplied to `' + componentName + '`.' +
-            '\nBad object: ' + JSON.stringify(props[propName], null, '  ') +
-            '\nValid keys: ' + JSON.stringify(Object.keys(shapeTypes), null, '  ')
-          );
-        }
-        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
-        if (error) {
-          return error;
-        }
-      }
-      return null;
-    }
-
-    return createChainableTypeChecker(validate);
-  }
-
-  function isNode(propValue) {
-    switch (typeof propValue) {
-      case 'number':
-      case 'string':
-      case 'undefined':
-        return true;
-      case 'boolean':
-        return !propValue;
-      case 'object':
-        if (Array.isArray(propValue)) {
-          return propValue.every(isNode);
-        }
-        if (propValue === null || isValidElement(propValue)) {
-          return true;
-        }
-
-        var iteratorFn = getIteratorFn(propValue);
-        if (iteratorFn) {
-          var iterator = iteratorFn.call(propValue);
-          var step;
-          if (iteratorFn !== propValue.entries) {
-            while (!(step = iterator.next()).done) {
-              if (!isNode(step.value)) {
-                return false;
-              }
-            }
-          } else {
-            // Iterator will provide entry [k,v] tuples rather than values.
-            while (!(step = iterator.next()).done) {
-              var entry = step.value;
-              if (entry) {
-                if (!isNode(entry[1])) {
-                  return false;
-                }
-              }
-            }
-          }
-        } else {
-          return false;
-        }
-
-        return true;
-      default:
-        return false;
-    }
-  }
-
-  function isSymbol(propType, propValue) {
-    // Native Symbol.
-    if (propType === 'symbol') {
-      return true;
-    }
-
-    // falsy value can't be a Symbol
-    if (!propValue) {
-      return false;
-    }
-
-    // 19.4.3.5 Symbol.prototype[@@toStringTag] === 'Symbol'
-    if (propValue['@@toStringTag'] === 'Symbol') {
-      return true;
-    }
-
-    // Fallback for non-spec compliant Symbols which are polyfilled.
-    if (typeof Symbol === 'function' && propValue instanceof Symbol) {
-      return true;
-    }
-
-    return false;
-  }
-
-  // Equivalent of `typeof` but with special handling for array and regexp.
-  function getPropType(propValue) {
-    var propType = typeof propValue;
-    if (Array.isArray(propValue)) {
-      return 'array';
-    }
-    if (propValue instanceof RegExp) {
-      // Old webkits (at least until Android 4.0) return 'function' rather than
-      // 'object' for typeof a RegExp. We'll normalize this here so that /bla/
-      // passes PropTypes.object.
-      return 'object';
-    }
-    if (isSymbol(propType, propValue)) {
-      return 'symbol';
-    }
-    return propType;
-  }
-
-  // This handles more types than `getPropType`. Only used for error messages.
-  // See `createPrimitiveTypeChecker`.
-  function getPreciseType(propValue) {
-    if (typeof propValue === 'undefined' || propValue === null) {
-      return '' + propValue;
-    }
-    var propType = getPropType(propValue);
-    if (propType === 'object') {
-      if (propValue instanceof Date) {
-        return 'date';
-      } else if (propValue instanceof RegExp) {
-        return 'regexp';
-      }
-    }
-    return propType;
-  }
-
-  // Returns a string that is postfixed to a warning about an invalid type.
-  // For example, "undefined" or "of type array"
-  function getPostfixForTypeWarning(value) {
-    var type = getPreciseType(value);
-    switch (type) {
-      case 'array':
-      case 'object':
-        return 'an ' + type;
-      case 'boolean':
-      case 'date':
-      case 'regexp':
-        return 'a ' + type;
-      default:
-        return type;
-    }
-  }
-
-  // Returns class name of the object, if any.
-  function getClassName(propValue) {
-    if (!propValue.constructor || !propValue.constructor.name) {
-      return ANONYMOUS;
-    }
-    return propValue.constructor.name;
-  }
-
-  ReactPropTypes.checkPropTypes = checkPropTypes;
-  ReactPropTypes.resetWarningCache = checkPropTypes.resetWarningCache;
-  ReactPropTypes.PropTypes = ReactPropTypes;
-
-  return ReactPropTypes;
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/prop-types/index.js":
-/*!******************************************!*\
-  !*** ./node_modules/prop-types/index.js ***!
-  \******************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-if (true) {
-  var ReactIs = __webpack_require__(/*! react-is */ "./node_modules/prop-types/node_modules/react-is/index.js");
-
-  // By explicitly using `prop-types` you are opting into new development behavior.
-  // http://fb.me/prop-types-in-prod
-  var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(/*! ./factoryWithTypeCheckers */ "./node_modules/prop-types/factoryWithTypeCheckers.js")(ReactIs.isElement, throwOnDirectAccess);
-} else {}
-
-
-/***/ }),
-
-/***/ "./node_modules/prop-types/lib/ReactPropTypesSecret.js":
-/*!*************************************************************!*\
-  !*** ./node_modules/prop-types/lib/ReactPropTypesSecret.js ***!
-  \*************************************************************/
-/***/ ((module) => {
-
-"use strict";
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-
-
-var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
-
-module.exports = ReactPropTypesSecret;
-
-
-/***/ }),
-
-/***/ "./node_modules/prop-types/lib/has.js":
-/*!********************************************!*\
-  !*** ./node_modules/prop-types/lib/has.js ***!
-  \********************************************/
-/***/ ((module) => {
-
-module.exports = Function.call.bind(Object.prototype.hasOwnProperty);
-
-
-/***/ }),
-
-/***/ "./node_modules/prop-types/node_modules/react-is/cjs/react-is.development.js":
-/*!***********************************************************************************!*\
-  !*** ./node_modules/prop-types/node_modules/react-is/cjs/react-is.development.js ***!
-  \***********************************************************************************/
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-/** @license React v16.13.1
- * react-is.development.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-
-
-
-
-if (true) {
-  (function() {
-'use strict';
-
-// The Symbol used to tag the ReactElement-like types. If there is no native Symbol
-// nor polyfill, then a plain number is used for performance.
-var hasSymbol = typeof Symbol === 'function' && Symbol.for;
-var REACT_ELEMENT_TYPE = hasSymbol ? Symbol.for('react.element') : 0xeac7;
-var REACT_PORTAL_TYPE = hasSymbol ? Symbol.for('react.portal') : 0xeaca;
-var REACT_FRAGMENT_TYPE = hasSymbol ? Symbol.for('react.fragment') : 0xeacb;
-var REACT_STRICT_MODE_TYPE = hasSymbol ? Symbol.for('react.strict_mode') : 0xeacc;
-var REACT_PROFILER_TYPE = hasSymbol ? Symbol.for('react.profiler') : 0xead2;
-var REACT_PROVIDER_TYPE = hasSymbol ? Symbol.for('react.provider') : 0xeacd;
-var REACT_CONTEXT_TYPE = hasSymbol ? Symbol.for('react.context') : 0xeace; // TODO: We don't use AsyncMode or ConcurrentMode anymore. They were temporary
-// (unstable) APIs that have been removed. Can we remove the symbols?
-
-var REACT_ASYNC_MODE_TYPE = hasSymbol ? Symbol.for('react.async_mode') : 0xeacf;
-var REACT_CONCURRENT_MODE_TYPE = hasSymbol ? Symbol.for('react.concurrent_mode') : 0xeacf;
-var REACT_FORWARD_REF_TYPE = hasSymbol ? Symbol.for('react.forward_ref') : 0xead0;
-var REACT_SUSPENSE_TYPE = hasSymbol ? Symbol.for('react.suspense') : 0xead1;
-var REACT_SUSPENSE_LIST_TYPE = hasSymbol ? Symbol.for('react.suspense_list') : 0xead8;
-var REACT_MEMO_TYPE = hasSymbol ? Symbol.for('react.memo') : 0xead3;
-var REACT_LAZY_TYPE = hasSymbol ? Symbol.for('react.lazy') : 0xead4;
-var REACT_BLOCK_TYPE = hasSymbol ? Symbol.for('react.block') : 0xead9;
-var REACT_FUNDAMENTAL_TYPE = hasSymbol ? Symbol.for('react.fundamental') : 0xead5;
-var REACT_RESPONDER_TYPE = hasSymbol ? Symbol.for('react.responder') : 0xead6;
-var REACT_SCOPE_TYPE = hasSymbol ? Symbol.for('react.scope') : 0xead7;
-
-function isValidElementType(type) {
-  return typeof type === 'string' || typeof type === 'function' || // Note: its typeof might be other than 'symbol' or 'number' if it's a polyfill.
-  type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || typeof type === 'object' && type !== null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_RESPONDER_TYPE || type.$$typeof === REACT_SCOPE_TYPE || type.$$typeof === REACT_BLOCK_TYPE);
-}
-
-function typeOf(object) {
-  if (typeof object === 'object' && object !== null) {
-    var $$typeof = object.$$typeof;
-
-    switch ($$typeof) {
-      case REACT_ELEMENT_TYPE:
-        var type = object.type;
-
-        switch (type) {
-          case REACT_ASYNC_MODE_TYPE:
-          case REACT_CONCURRENT_MODE_TYPE:
-          case REACT_FRAGMENT_TYPE:
-          case REACT_PROFILER_TYPE:
-          case REACT_STRICT_MODE_TYPE:
-          case REACT_SUSPENSE_TYPE:
-            return type;
-
-          default:
-            var $$typeofType = type && type.$$typeof;
-
-            switch ($$typeofType) {
-              case REACT_CONTEXT_TYPE:
-              case REACT_FORWARD_REF_TYPE:
-              case REACT_LAZY_TYPE:
-              case REACT_MEMO_TYPE:
-              case REACT_PROVIDER_TYPE:
-                return $$typeofType;
-
-              default:
-                return $$typeof;
-            }
-
-        }
-
-      case REACT_PORTAL_TYPE:
-        return $$typeof;
-    }
-  }
-
-  return undefined;
-} // AsyncMode is deprecated along with isAsyncMode
-
-var AsyncMode = REACT_ASYNC_MODE_TYPE;
-var ConcurrentMode = REACT_CONCURRENT_MODE_TYPE;
-var ContextConsumer = REACT_CONTEXT_TYPE;
-var ContextProvider = REACT_PROVIDER_TYPE;
-var Element = REACT_ELEMENT_TYPE;
-var ForwardRef = REACT_FORWARD_REF_TYPE;
-var Fragment = REACT_FRAGMENT_TYPE;
-var Lazy = REACT_LAZY_TYPE;
-var Memo = REACT_MEMO_TYPE;
-var Portal = REACT_PORTAL_TYPE;
-var Profiler = REACT_PROFILER_TYPE;
-var StrictMode = REACT_STRICT_MODE_TYPE;
-var Suspense = REACT_SUSPENSE_TYPE;
-var hasWarnedAboutDeprecatedIsAsyncMode = false; // AsyncMode should be deprecated
-
-function isAsyncMode(object) {
-  {
-    if (!hasWarnedAboutDeprecatedIsAsyncMode) {
-      hasWarnedAboutDeprecatedIsAsyncMode = true; // Using console['warn'] to evade Babel and ESLint
-
-      console['warn']('The ReactIs.isAsyncMode() alias has been deprecated, ' + 'and will be removed in React 17+. Update your code to use ' + 'ReactIs.isConcurrentMode() instead. It has the exact same API.');
-    }
-  }
-
-  return isConcurrentMode(object) || typeOf(object) === REACT_ASYNC_MODE_TYPE;
-}
-function isConcurrentMode(object) {
-  return typeOf(object) === REACT_CONCURRENT_MODE_TYPE;
-}
-function isContextConsumer(object) {
-  return typeOf(object) === REACT_CONTEXT_TYPE;
-}
-function isContextProvider(object) {
-  return typeOf(object) === REACT_PROVIDER_TYPE;
-}
-function isElement(object) {
-  return typeof object === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
-}
-function isForwardRef(object) {
-  return typeOf(object) === REACT_FORWARD_REF_TYPE;
-}
-function isFragment(object) {
-  return typeOf(object) === REACT_FRAGMENT_TYPE;
-}
-function isLazy(object) {
-  return typeOf(object) === REACT_LAZY_TYPE;
-}
-function isMemo(object) {
-  return typeOf(object) === REACT_MEMO_TYPE;
-}
-function isPortal(object) {
-  return typeOf(object) === REACT_PORTAL_TYPE;
-}
-function isProfiler(object) {
-  return typeOf(object) === REACT_PROFILER_TYPE;
-}
-function isStrictMode(object) {
-  return typeOf(object) === REACT_STRICT_MODE_TYPE;
-}
-function isSuspense(object) {
-  return typeOf(object) === REACT_SUSPENSE_TYPE;
-}
-
-exports.AsyncMode = AsyncMode;
-exports.ConcurrentMode = ConcurrentMode;
-exports.ContextConsumer = ContextConsumer;
-exports.ContextProvider = ContextProvider;
-exports.Element = Element;
-exports.ForwardRef = ForwardRef;
-exports.Fragment = Fragment;
-exports.Lazy = Lazy;
-exports.Memo = Memo;
-exports.Portal = Portal;
-exports.Profiler = Profiler;
-exports.StrictMode = StrictMode;
-exports.Suspense = Suspense;
-exports.isAsyncMode = isAsyncMode;
-exports.isConcurrentMode = isConcurrentMode;
-exports.isContextConsumer = isContextConsumer;
-exports.isContextProvider = isContextProvider;
-exports.isElement = isElement;
-exports.isForwardRef = isForwardRef;
-exports.isFragment = isFragment;
-exports.isLazy = isLazy;
-exports.isMemo = isMemo;
-exports.isPortal = isPortal;
-exports.isProfiler = isProfiler;
-exports.isStrictMode = isStrictMode;
-exports.isSuspense = isSuspense;
-exports.isValidElementType = isValidElementType;
-exports.typeOf = typeOf;
-  })();
-}
-
-
-/***/ }),
-
-/***/ "./node_modules/prop-types/node_modules/react-is/index.js":
-/*!****************************************************************!*\
-  !*** ./node_modules/prop-types/node_modules/react-is/index.js ***!
-  \****************************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-if (false) {} else {
-  module.exports = __webpack_require__(/*! ./cjs/react-is.development.js */ "./node_modules/prop-types/node_modules/react-is/cjs/react-is.development.js");
-}
-
-
-/***/ }),
-
-/***/ "./node_modules/raf-schd/dist/raf-schd.esm.js":
-/*!****************************************************!*\
-  !*** ./node_modules/raf-schd/dist/raf-schd.esm.js ***!
-  \****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-var rafSchd = function rafSchd(fn) {
-  var lastArgs = [];
-  var frameId = null;
-
-  var wrapperFn = function wrapperFn() {
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    lastArgs = args;
-
-    if (frameId) {
-      return;
-    }
-
-    frameId = requestAnimationFrame(function () {
-      frameId = null;
-      fn.apply(void 0, lastArgs);
-    });
-  };
-
-  wrapperFn.cancel = function () {
-    if (!frameId) {
-      return;
-    }
-
-    cancelAnimationFrame(frameId);
-    frameId = null;
-  };
-
-  return wrapperFn;
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (rafSchd);
-
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/dist/react-beautiful-dnd.esm.js":
-/*!**************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/dist/react-beautiful-dnd.esm.js ***!
-  \**************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   DragDropContext: () => (/* binding */ DragDropContext),
-/* harmony export */   Draggable: () => (/* binding */ PublicDraggable),
-/* harmony export */   Droppable: () => (/* binding */ ConnectedDroppable),
-/* harmony export */   resetServerContext: () => (/* binding */ resetServerContext),
-/* harmony export */   useKeyboardSensor: () => (/* binding */ useKeyboardSensor),
-/* harmony export */   useMouseSensor: () => (/* binding */ useMouseSensor),
-/* harmony export */   useTouchSensor: () => (/* binding */ useTouchSensor)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/index.js");
-/* harmony import */ var use_memo_one__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! use-memo-one */ "./node_modules/use-memo-one/dist/use-memo-one.esm.js");
-/* harmony import */ var css_box_model__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! css-box-model */ "./node_modules/css-box-model/dist/css-box-model.esm.js");
-/* harmony import */ var memoize_one__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! memoize-one */ "./node_modules/react-beautiful-dnd/node_modules/memoize-one/dist/memoize-one.esm.js");
-/* harmony import */ var raf_schd__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! raf-schd */ "./node_modules/raf-schd/dist/raf-schd.esm.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-dom */ "react-dom");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_4__);
-
-
-
-
-
-
-
-
-
-
-
-var isProduction = "development" === 'production';
-var spacesAndTabs = /[ \t]{2,}/g;
-var lineStartWithSpaces = /^[ \t]*/gm;
-
-var clean = function clean(value) {
-  return value.replace(spacesAndTabs, ' ').replace(lineStartWithSpaces, '').trim();
-};
-
-var getDevMessage = function getDevMessage(message) {
-  return clean("\n  %creact-beautiful-dnd\n\n  %c" + clean(message) + "\n\n  %c\uD83D\uDC77\u200D This is a development only message. It will be removed in production builds.\n");
-};
-
-var getFormattedMessage = function getFormattedMessage(message) {
-  return [getDevMessage(message), 'color: #00C584; font-size: 1.2em; font-weight: bold;', 'line-height: 1.5', 'color: #723874;'];
-};
-var isDisabledFlag = '__react-beautiful-dnd-disable-dev-warnings';
-function log(type, message) {
-  var _console;
-
-  if (isProduction) {
-    return;
-  }
-
-  if (typeof window !== 'undefined' && window[isDisabledFlag]) {
-    return;
-  }
-
-  (_console = console)[type].apply(_console, getFormattedMessage(message));
-}
-var warning = log.bind(null, 'warn');
-var error = log.bind(null, 'error');
-
-function noop() {}
-
-function getOptions(shared, fromBinding) {
-  return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, shared, {}, fromBinding);
-}
-
-function bindEvents(el, bindings, sharedOptions) {
-  var unbindings = bindings.map(function (binding) {
-    var options = getOptions(sharedOptions, binding.options);
-    el.addEventListener(binding.eventName, binding.fn, options);
-    return function unbind() {
-      el.removeEventListener(binding.eventName, binding.fn, options);
-    };
-  });
-  return function unbindAll() {
-    unbindings.forEach(function (unbind) {
-      unbind();
-    });
-  };
-}
-
-var isProduction$1 = "development" === 'production';
-var prefix = 'Invariant failed';
-function RbdInvariant(message) {
-  this.message = message;
-}
-
-RbdInvariant.prototype.toString = function toString() {
-  return this.message;
-};
-
-function invariant(condition, message) {
-  if (condition) {
-    return;
-  }
-
-  if (isProduction$1) {
-    throw new RbdInvariant(prefix);
-  } else {
-    throw new RbdInvariant(prefix + ": " + (message || ''));
-  }
-}
-
-var ErrorBoundary = function (_React$Component) {
-  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(ErrorBoundary, _React$Component);
-
-  function ErrorBoundary() {
-    var _this;
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
-    _this.callbacks = null;
-    _this.unbind = noop;
-
-    _this.onWindowError = function (event) {
-      var callbacks = _this.getCallbacks();
-
-      if (callbacks.isDragging()) {
-        callbacks.tryAbort();
-         true ? warning("\n        An error was caught by our window 'error' event listener while a drag was occurring.\n        The active drag has been aborted.\n      ") : 0;
-      }
-
-      var err = event.error;
-
-      if (err instanceof RbdInvariant) {
-        event.preventDefault();
-
-        if (true) {
-          error(err.message);
-        }
-      }
-    };
-
-    _this.getCallbacks = function () {
-      if (!_this.callbacks) {
-        throw new Error('Unable to find AppCallbacks in <ErrorBoundary/>');
-      }
-
-      return _this.callbacks;
-    };
-
-    _this.setCallbacks = function (callbacks) {
-      _this.callbacks = callbacks;
-    };
-
-    return _this;
-  }
-
-  var _proto = ErrorBoundary.prototype;
-
-  _proto.componentDidMount = function componentDidMount() {
-    this.unbind = bindEvents(window, [{
-      eventName: 'error',
-      fn: this.onWindowError
-    }]);
-  };
-
-  _proto.componentDidCatch = function componentDidCatch(err) {
-    if (err instanceof RbdInvariant) {
-      if (true) {
-        error(err.message);
-      }
-
-      this.setState({});
-      return;
-    }
-
-    throw err;
-  };
-
-  _proto.componentWillUnmount = function componentWillUnmount() {
-    this.unbind();
-  };
-
-  _proto.render = function render() {
-    return this.props.children(this.setCallbacks);
-  };
-
-  return ErrorBoundary;
-}((react__WEBPACK_IMPORTED_MODULE_0___default().Component));
-
-var dragHandleUsageInstructions = "\n  Press space bar to start a drag.\n  When dragging you can use the arrow keys to move the item around and escape to cancel.\n  Some screen readers may require you to be in focus mode or to use your pass through key\n";
-
-var position = function position(index) {
-  return index + 1;
-};
-
-var onDragStart = function onDragStart(start) {
-  return "\n  You have lifted an item in position " + position(start.source.index) + "\n";
-};
-
-var withLocation = function withLocation(source, destination) {
-  var isInHomeList = source.droppableId === destination.droppableId;
-  var startPosition = position(source.index);
-  var endPosition = position(destination.index);
-
-  if (isInHomeList) {
-    return "\n      You have moved the item from position " + startPosition + "\n      to position " + endPosition + "\n    ";
-  }
-
-  return "\n    You have moved the item from position " + startPosition + "\n    in list " + source.droppableId + "\n    to list " + destination.droppableId + "\n    in position " + endPosition + "\n  ";
-};
-
-var withCombine = function withCombine(id, source, combine) {
-  var inHomeList = source.droppableId === combine.droppableId;
-
-  if (inHomeList) {
-    return "\n      The item " + id + "\n      has been combined with " + combine.draggableId;
-  }
-
-  return "\n      The item " + id + "\n      in list " + source.droppableId + "\n      has been combined with " + combine.draggableId + "\n      in list " + combine.droppableId + "\n    ";
-};
-
-var onDragUpdate = function onDragUpdate(update) {
-  var location = update.destination;
-
-  if (location) {
-    return withLocation(update.source, location);
-  }
-
-  var combine = update.combine;
-
-  if (combine) {
-    return withCombine(update.draggableId, update.source, combine);
-  }
-
-  return 'You are over an area that cannot be dropped on';
-};
-
-var returnedToStart = function returnedToStart(source) {
-  return "\n  The item has returned to its starting position\n  of " + position(source.index) + "\n";
-};
-
-var onDragEnd = function onDragEnd(result) {
-  if (result.reason === 'CANCEL') {
-    return "\n      Movement cancelled.\n      " + returnedToStart(result.source) + "\n    ";
-  }
-
-  var location = result.destination;
-  var combine = result.combine;
-
-  if (location) {
-    return "\n      You have dropped the item.\n      " + withLocation(result.source, location) + "\n    ";
-  }
-
-  if (combine) {
-    return "\n      You have dropped the item.\n      " + withCombine(result.draggableId, result.source, combine) + "\n    ";
-  }
-
-  return "\n    The item has been dropped while not over a drop area.\n    " + returnedToStart(result.source) + "\n  ";
-};
-
-var preset = {
-  dragHandleUsageInstructions: dragHandleUsageInstructions,
-  onDragStart: onDragStart,
-  onDragUpdate: onDragUpdate,
-  onDragEnd: onDragEnd
-};
-
-var origin = {
-  x: 0,
-  y: 0
-};
-var add = function add(point1, point2) {
-  return {
-    x: point1.x + point2.x,
-    y: point1.y + point2.y
-  };
-};
-var subtract = function subtract(point1, point2) {
-  return {
-    x: point1.x - point2.x,
-    y: point1.y - point2.y
-  };
-};
-var isEqual = function isEqual(point1, point2) {
-  return point1.x === point2.x && point1.y === point2.y;
-};
-var negate = function negate(point) {
-  return {
-    x: point.x !== 0 ? -point.x : 0,
-    y: point.y !== 0 ? -point.y : 0
-  };
-};
-var patch = function patch(line, value, otherValue) {
-  var _ref;
-
-  if (otherValue === void 0) {
-    otherValue = 0;
-  }
-
-  return _ref = {}, _ref[line] = value, _ref[line === 'x' ? 'y' : 'x'] = otherValue, _ref;
-};
-var distance = function distance(point1, point2) {
-  return Math.sqrt(Math.pow(point2.x - point1.x, 2) + Math.pow(point2.y - point1.y, 2));
-};
-var closest = function closest(target, points) {
-  return Math.min.apply(Math, points.map(function (point) {
-    return distance(target, point);
-  }));
-};
-var apply = function apply(fn) {
-  return function (point) {
-    return {
-      x: fn(point.x),
-      y: fn(point.y)
-    };
-  };
-};
-
-var executeClip = (function (frame, subject) {
-  var result = (0,css_box_model__WEBPACK_IMPORTED_MODULE_5__.getRect)({
-    top: Math.max(subject.top, frame.top),
-    right: Math.min(subject.right, frame.right),
-    bottom: Math.min(subject.bottom, frame.bottom),
-    left: Math.max(subject.left, frame.left)
-  });
-
-  if (result.width <= 0 || result.height <= 0) {
-    return null;
-  }
-
-  return result;
-});
-
-var offsetByPosition = function offsetByPosition(spacing, point) {
-  return {
-    top: spacing.top + point.y,
-    left: spacing.left + point.x,
-    bottom: spacing.bottom + point.y,
-    right: spacing.right + point.x
-  };
-};
-var getCorners = function getCorners(spacing) {
-  return [{
-    x: spacing.left,
-    y: spacing.top
-  }, {
-    x: spacing.right,
-    y: spacing.top
-  }, {
-    x: spacing.left,
-    y: spacing.bottom
-  }, {
-    x: spacing.right,
-    y: spacing.bottom
-  }];
-};
-var noSpacing = {
-  top: 0,
-  right: 0,
-  bottom: 0,
-  left: 0
-};
-
-var scroll = function scroll(target, frame) {
-  if (!frame) {
-    return target;
-  }
-
-  return offsetByPosition(target, frame.scroll.diff.displacement);
-};
-
-var increase = function increase(target, axis, withPlaceholder) {
-  if (withPlaceholder && withPlaceholder.increasedBy) {
-    var _extends2;
-
-    return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, target, (_extends2 = {}, _extends2[axis.end] = target[axis.end] + withPlaceholder.increasedBy[axis.line], _extends2));
-  }
-
-  return target;
-};
-
-var clip = function clip(target, frame) {
-  if (frame && frame.shouldClipSubject) {
-    return executeClip(frame.pageMarginBox, target);
-  }
-
-  return (0,css_box_model__WEBPACK_IMPORTED_MODULE_5__.getRect)(target);
-};
-
-var getSubject = (function (_ref) {
-  var page = _ref.page,
-      withPlaceholder = _ref.withPlaceholder,
-      axis = _ref.axis,
-      frame = _ref.frame;
-  var scrolled = scroll(page.marginBox, frame);
-  var increased = increase(scrolled, axis, withPlaceholder);
-  var clipped = clip(increased, frame);
-  return {
-    page: page,
-    withPlaceholder: withPlaceholder,
-    active: clipped
-  };
-});
-
-var scrollDroppable = (function (droppable, newScroll) {
-  !droppable.frame ?  true ? invariant(false) : 0 : void 0;
-  var scrollable = droppable.frame;
-  var scrollDiff = subtract(newScroll, scrollable.scroll.initial);
-  var scrollDisplacement = negate(scrollDiff);
-
-  var frame = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, scrollable, {
-    scroll: {
-      initial: scrollable.scroll.initial,
-      current: newScroll,
-      diff: {
-        value: scrollDiff,
-        displacement: scrollDisplacement
-      },
-      max: scrollable.scroll.max
-    }
-  });
-
-  var subject = getSubject({
-    page: droppable.subject.page,
-    withPlaceholder: droppable.subject.withPlaceholder,
-    axis: droppable.axis,
-    frame: frame
-  });
-
-  var result = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, droppable, {
-    frame: frame,
-    subject: subject
-  });
-
-  return result;
-});
-
-function isInteger(value) {
-  if (Number.isInteger) {
-    return Number.isInteger(value);
-  }
-
-  return typeof value === 'number' && isFinite(value) && Math.floor(value) === value;
-}
-function values(map) {
-  if (Object.values) {
-    return Object.values(map);
-  }
-
-  return Object.keys(map).map(function (key) {
-    return map[key];
-  });
-}
-function findIndex(list, predicate) {
-  if (list.findIndex) {
-    return list.findIndex(predicate);
-  }
-
-  for (var i = 0; i < list.length; i++) {
-    if (predicate(list[i])) {
-      return i;
-    }
-  }
-
-  return -1;
-}
-function find(list, predicate) {
-  if (list.find) {
-    return list.find(predicate);
-  }
-
-  var index = findIndex(list, predicate);
-
-  if (index !== -1) {
-    return list[index];
-  }
-
-  return undefined;
-}
-function toArray(list) {
-  return Array.prototype.slice.call(list);
-}
-
-var toDroppableMap = (0,memoize_one__WEBPACK_IMPORTED_MODULE_6__["default"])(function (droppables) {
-  return droppables.reduce(function (previous, current) {
-    previous[current.descriptor.id] = current;
-    return previous;
-  }, {});
-});
-var toDraggableMap = (0,memoize_one__WEBPACK_IMPORTED_MODULE_6__["default"])(function (draggables) {
-  return draggables.reduce(function (previous, current) {
-    previous[current.descriptor.id] = current;
-    return previous;
-  }, {});
-});
-var toDroppableList = (0,memoize_one__WEBPACK_IMPORTED_MODULE_6__["default"])(function (droppables) {
-  return values(droppables);
-});
-var toDraggableList = (0,memoize_one__WEBPACK_IMPORTED_MODULE_6__["default"])(function (draggables) {
-  return values(draggables);
-});
-
-var getDraggablesInsideDroppable = (0,memoize_one__WEBPACK_IMPORTED_MODULE_6__["default"])(function (droppableId, draggables) {
-  var result = toDraggableList(draggables).filter(function (draggable) {
-    return droppableId === draggable.descriptor.droppableId;
-  }).sort(function (a, b) {
-    return a.descriptor.index - b.descriptor.index;
-  });
-  return result;
-});
-
-function tryGetDestination(impact) {
-  if (impact.at && impact.at.type === 'REORDER') {
-    return impact.at.destination;
-  }
-
-  return null;
-}
-function tryGetCombine(impact) {
-  if (impact.at && impact.at.type === 'COMBINE') {
-    return impact.at.combine;
-  }
-
-  return null;
-}
-
-var removeDraggableFromList = (0,memoize_one__WEBPACK_IMPORTED_MODULE_6__["default"])(function (remove, list) {
-  return list.filter(function (item) {
-    return item.descriptor.id !== remove.descriptor.id;
-  });
-});
-
-var moveToNextCombine = (function (_ref) {
-  var isMovingForward = _ref.isMovingForward,
-      draggable = _ref.draggable,
-      destination = _ref.destination,
-      insideDestination = _ref.insideDestination,
-      previousImpact = _ref.previousImpact;
-
-  if (!destination.isCombineEnabled) {
-    return null;
-  }
-
-  var location = tryGetDestination(previousImpact);
-
-  if (!location) {
-    return null;
-  }
-
-  function getImpact(target) {
-    var at = {
-      type: 'COMBINE',
-      combine: {
-        draggableId: target,
-        droppableId: destination.descriptor.id
-      }
-    };
-    return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, previousImpact, {
-      at: at
-    });
-  }
-
-  var all = previousImpact.displaced.all;
-  var closestId = all.length ? all[0] : null;
-
-  if (isMovingForward) {
-    return closestId ? getImpact(closestId) : null;
-  }
-
-  var withoutDraggable = removeDraggableFromList(draggable, insideDestination);
-
-  if (!closestId) {
-    if (!withoutDraggable.length) {
-      return null;
-    }
-
-    var last = withoutDraggable[withoutDraggable.length - 1];
-    return getImpact(last.descriptor.id);
-  }
-
-  var indexOfClosest = findIndex(withoutDraggable, function (d) {
-    return d.descriptor.id === closestId;
-  });
-  !(indexOfClosest !== -1) ?  true ? invariant(false, 'Could not find displaced item in set') : 0 : void 0;
-  var proposedIndex = indexOfClosest - 1;
-
-  if (proposedIndex < 0) {
-    return null;
-  }
-
-  var before = withoutDraggable[proposedIndex];
-  return getImpact(before.descriptor.id);
-});
-
-var isHomeOf = (function (draggable, destination) {
-  return draggable.descriptor.droppableId === destination.descriptor.id;
-});
-
-var noDisplacedBy = {
-  point: origin,
-  value: 0
-};
-var emptyGroups = {
-  invisible: {},
-  visible: {},
-  all: []
-};
-var noImpact = {
-  displaced: emptyGroups,
-  displacedBy: noDisplacedBy,
-  at: null
-};
-
-var isWithin = (function (lowerBound, upperBound) {
-  return function (value) {
-    return lowerBound <= value && value <= upperBound;
-  };
-});
-
-var isPartiallyVisibleThroughFrame = (function (frame) {
-  var isWithinVertical = isWithin(frame.top, frame.bottom);
-  var isWithinHorizontal = isWithin(frame.left, frame.right);
-  return function (subject) {
-    var isContained = isWithinVertical(subject.top) && isWithinVertical(subject.bottom) && isWithinHorizontal(subject.left) && isWithinHorizontal(subject.right);
-
-    if (isContained) {
-      return true;
-    }
-
-    var isPartiallyVisibleVertically = isWithinVertical(subject.top) || isWithinVertical(subject.bottom);
-    var isPartiallyVisibleHorizontally = isWithinHorizontal(subject.left) || isWithinHorizontal(subject.right);
-    var isPartiallyContained = isPartiallyVisibleVertically && isPartiallyVisibleHorizontally;
-
-    if (isPartiallyContained) {
-      return true;
-    }
-
-    var isBiggerVertically = subject.top < frame.top && subject.bottom > frame.bottom;
-    var isBiggerHorizontally = subject.left < frame.left && subject.right > frame.right;
-    var isTargetBiggerThanFrame = isBiggerVertically && isBiggerHorizontally;
-
-    if (isTargetBiggerThanFrame) {
-      return true;
-    }
-
-    var isTargetBiggerOnOneAxis = isBiggerVertically && isPartiallyVisibleHorizontally || isBiggerHorizontally && isPartiallyVisibleVertically;
-    return isTargetBiggerOnOneAxis;
-  };
-});
-
-var isTotallyVisibleThroughFrame = (function (frame) {
-  var isWithinVertical = isWithin(frame.top, frame.bottom);
-  var isWithinHorizontal = isWithin(frame.left, frame.right);
-  return function (subject) {
-    var isContained = isWithinVertical(subject.top) && isWithinVertical(subject.bottom) && isWithinHorizontal(subject.left) && isWithinHorizontal(subject.right);
-    return isContained;
-  };
-});
-
-var vertical = {
-  direction: 'vertical',
-  line: 'y',
-  crossAxisLine: 'x',
-  start: 'top',
-  end: 'bottom',
-  size: 'height',
-  crossAxisStart: 'left',
-  crossAxisEnd: 'right',
-  crossAxisSize: 'width'
-};
-var horizontal = {
-  direction: 'horizontal',
-  line: 'x',
-  crossAxisLine: 'y',
-  start: 'left',
-  end: 'right',
-  size: 'width',
-  crossAxisStart: 'top',
-  crossAxisEnd: 'bottom',
-  crossAxisSize: 'height'
-};
-
-var isTotallyVisibleThroughFrameOnAxis = (function (axis) {
-  return function (frame) {
-    var isWithinVertical = isWithin(frame.top, frame.bottom);
-    var isWithinHorizontal = isWithin(frame.left, frame.right);
-    return function (subject) {
-      if (axis === vertical) {
-        return isWithinVertical(subject.top) && isWithinVertical(subject.bottom);
-      }
-
-      return isWithinHorizontal(subject.left) && isWithinHorizontal(subject.right);
-    };
-  };
-});
-
-var getDroppableDisplaced = function getDroppableDisplaced(target, destination) {
-  var displacement = destination.frame ? destination.frame.scroll.diff.displacement : origin;
-  return offsetByPosition(target, displacement);
-};
-
-var isVisibleInDroppable = function isVisibleInDroppable(target, destination, isVisibleThroughFrameFn) {
-  if (!destination.subject.active) {
-    return false;
-  }
-
-  return isVisibleThroughFrameFn(destination.subject.active)(target);
-};
-
-var isVisibleInViewport = function isVisibleInViewport(target, viewport, isVisibleThroughFrameFn) {
-  return isVisibleThroughFrameFn(viewport)(target);
-};
-
-var isVisible = function isVisible(_ref) {
-  var toBeDisplaced = _ref.target,
-      destination = _ref.destination,
-      viewport = _ref.viewport,
-      withDroppableDisplacement = _ref.withDroppableDisplacement,
-      isVisibleThroughFrameFn = _ref.isVisibleThroughFrameFn;
-  var displacedTarget = withDroppableDisplacement ? getDroppableDisplaced(toBeDisplaced, destination) : toBeDisplaced;
-  return isVisibleInDroppable(displacedTarget, destination, isVisibleThroughFrameFn) && isVisibleInViewport(displacedTarget, viewport, isVisibleThroughFrameFn);
-};
-
-var isPartiallyVisible = function isPartiallyVisible(args) {
-  return isVisible((0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, args, {
-    isVisibleThroughFrameFn: isPartiallyVisibleThroughFrame
-  }));
-};
-var isTotallyVisible = function isTotallyVisible(args) {
-  return isVisible((0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, args, {
-    isVisibleThroughFrameFn: isTotallyVisibleThroughFrame
-  }));
-};
-var isTotallyVisibleOnAxis = function isTotallyVisibleOnAxis(args) {
-  return isVisible((0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, args, {
-    isVisibleThroughFrameFn: isTotallyVisibleThroughFrameOnAxis(args.destination.axis)
-  }));
-};
-
-var getShouldAnimate = function getShouldAnimate(id, last, forceShouldAnimate) {
-  if (typeof forceShouldAnimate === 'boolean') {
-    return forceShouldAnimate;
-  }
-
-  if (!last) {
-    return true;
-  }
-
-  var invisible = last.invisible,
-      visible = last.visible;
-
-  if (invisible[id]) {
-    return false;
-  }
-
-  var previous = visible[id];
-  return previous ? previous.shouldAnimate : true;
-};
-
-function getTarget(draggable, displacedBy) {
-  var marginBox = draggable.page.marginBox;
-  var expandBy = {
-    top: displacedBy.point.y,
-    right: 0,
-    bottom: 0,
-    left: displacedBy.point.x
-  };
-  return (0,css_box_model__WEBPACK_IMPORTED_MODULE_5__.getRect)((0,css_box_model__WEBPACK_IMPORTED_MODULE_5__.expand)(marginBox, expandBy));
-}
-
-function getDisplacementGroups(_ref) {
-  var afterDragging = _ref.afterDragging,
-      destination = _ref.destination,
-      displacedBy = _ref.displacedBy,
-      viewport = _ref.viewport,
-      forceShouldAnimate = _ref.forceShouldAnimate,
-      last = _ref.last;
-  return afterDragging.reduce(function process(groups, draggable) {
-    var target = getTarget(draggable, displacedBy);
-    var id = draggable.descriptor.id;
-    groups.all.push(id);
-    var isVisible = isPartiallyVisible({
-      target: target,
-      destination: destination,
-      viewport: viewport,
-      withDroppableDisplacement: true
-    });
-
-    if (!isVisible) {
-      groups.invisible[draggable.descriptor.id] = true;
-      return groups;
-    }
-
-    var shouldAnimate = getShouldAnimate(id, last, forceShouldAnimate);
-    var displacement = {
-      draggableId: id,
-      shouldAnimate: shouldAnimate
-    };
-    groups.visible[id] = displacement;
-    return groups;
-  }, {
-    all: [],
-    visible: {},
-    invisible: {}
-  });
-}
-
-function getIndexOfLastItem(draggables, options) {
-  if (!draggables.length) {
-    return 0;
-  }
-
-  var indexOfLastItem = draggables[draggables.length - 1].descriptor.index;
-  return options.inHomeList ? indexOfLastItem : indexOfLastItem + 1;
-}
-
-function goAtEnd(_ref) {
-  var insideDestination = _ref.insideDestination,
-      inHomeList = _ref.inHomeList,
-      displacedBy = _ref.displacedBy,
-      destination = _ref.destination;
-  var newIndex = getIndexOfLastItem(insideDestination, {
-    inHomeList: inHomeList
-  });
-  return {
-    displaced: emptyGroups,
-    displacedBy: displacedBy,
-    at: {
-      type: 'REORDER',
-      destination: {
-        droppableId: destination.descriptor.id,
-        index: newIndex
-      }
-    }
-  };
-}
-
-function calculateReorderImpact(_ref2) {
-  var draggable = _ref2.draggable,
-      insideDestination = _ref2.insideDestination,
-      destination = _ref2.destination,
-      viewport = _ref2.viewport,
-      displacedBy = _ref2.displacedBy,
-      last = _ref2.last,
-      index = _ref2.index,
-      forceShouldAnimate = _ref2.forceShouldAnimate;
-  var inHomeList = isHomeOf(draggable, destination);
-
-  if (index == null) {
-    return goAtEnd({
-      insideDestination: insideDestination,
-      inHomeList: inHomeList,
-      displacedBy: displacedBy,
-      destination: destination
-    });
-  }
-
-  var match = find(insideDestination, function (item) {
-    return item.descriptor.index === index;
-  });
-
-  if (!match) {
-    return goAtEnd({
-      insideDestination: insideDestination,
-      inHomeList: inHomeList,
-      displacedBy: displacedBy,
-      destination: destination
-    });
-  }
-
-  var withoutDragging = removeDraggableFromList(draggable, insideDestination);
-  var sliceFrom = insideDestination.indexOf(match);
-  var impacted = withoutDragging.slice(sliceFrom);
-  var displaced = getDisplacementGroups({
-    afterDragging: impacted,
-    destination: destination,
-    displacedBy: displacedBy,
-    last: last,
-    viewport: viewport.frame,
-    forceShouldAnimate: forceShouldAnimate
-  });
-  return {
-    displaced: displaced,
-    displacedBy: displacedBy,
-    at: {
-      type: 'REORDER',
-      destination: {
-        droppableId: destination.descriptor.id,
-        index: index
-      }
-    }
-  };
-}
-
-function didStartAfterCritical(draggableId, afterCritical) {
-  return Boolean(afterCritical.effected[draggableId]);
-}
-
-var fromCombine = (function (_ref) {
-  var isMovingForward = _ref.isMovingForward,
-      destination = _ref.destination,
-      draggables = _ref.draggables,
-      combine = _ref.combine,
-      afterCritical = _ref.afterCritical;
-
-  if (!destination.isCombineEnabled) {
-    return null;
-  }
-
-  var combineId = combine.draggableId;
-  var combineWith = draggables[combineId];
-  var combineWithIndex = combineWith.descriptor.index;
-  var didCombineWithStartAfterCritical = didStartAfterCritical(combineId, afterCritical);
-
-  if (didCombineWithStartAfterCritical) {
-    if (isMovingForward) {
-      return combineWithIndex;
-    }
-
-    return combineWithIndex - 1;
-  }
-
-  if (isMovingForward) {
-    return combineWithIndex + 1;
-  }
-
-  return combineWithIndex;
-});
-
-var fromReorder = (function (_ref) {
-  var isMovingForward = _ref.isMovingForward,
-      isInHomeList = _ref.isInHomeList,
-      insideDestination = _ref.insideDestination,
-      location = _ref.location;
-
-  if (!insideDestination.length) {
-    return null;
-  }
-
-  var currentIndex = location.index;
-  var proposedIndex = isMovingForward ? currentIndex + 1 : currentIndex - 1;
-  var firstIndex = insideDestination[0].descriptor.index;
-  var lastIndex = insideDestination[insideDestination.length - 1].descriptor.index;
-  var upperBound = isInHomeList ? lastIndex : lastIndex + 1;
-
-  if (proposedIndex < firstIndex) {
-    return null;
-  }
-
-  if (proposedIndex > upperBound) {
-    return null;
-  }
-
-  return proposedIndex;
-});
-
-var moveToNextIndex = (function (_ref) {
-  var isMovingForward = _ref.isMovingForward,
-      isInHomeList = _ref.isInHomeList,
-      draggable = _ref.draggable,
-      draggables = _ref.draggables,
-      destination = _ref.destination,
-      insideDestination = _ref.insideDestination,
-      previousImpact = _ref.previousImpact,
-      viewport = _ref.viewport,
-      afterCritical = _ref.afterCritical;
-  var wasAt = previousImpact.at;
-  !wasAt ?  true ? invariant(false, 'Cannot move in direction without previous impact location') : 0 : void 0;
-
-  if (wasAt.type === 'REORDER') {
-    var _newIndex = fromReorder({
-      isMovingForward: isMovingForward,
-      isInHomeList: isInHomeList,
-      location: wasAt.destination,
-      insideDestination: insideDestination
-    });
-
-    if (_newIndex == null) {
-      return null;
-    }
-
-    return calculateReorderImpact({
-      draggable: draggable,
-      insideDestination: insideDestination,
-      destination: destination,
-      viewport: viewport,
-      last: previousImpact.displaced,
-      displacedBy: previousImpact.displacedBy,
-      index: _newIndex
-    });
-  }
-
-  var newIndex = fromCombine({
-    isMovingForward: isMovingForward,
-    destination: destination,
-    displaced: previousImpact.displaced,
-    draggables: draggables,
-    combine: wasAt.combine,
-    afterCritical: afterCritical
-  });
-
-  if (newIndex == null) {
-    return null;
-  }
-
-  return calculateReorderImpact({
-    draggable: draggable,
-    insideDestination: insideDestination,
-    destination: destination,
-    viewport: viewport,
-    last: previousImpact.displaced,
-    displacedBy: previousImpact.displacedBy,
-    index: newIndex
-  });
-});
-
-var getCombinedItemDisplacement = (function (_ref) {
-  var displaced = _ref.displaced,
-      afterCritical = _ref.afterCritical,
-      combineWith = _ref.combineWith,
-      displacedBy = _ref.displacedBy;
-  var isDisplaced = Boolean(displaced.visible[combineWith] || displaced.invisible[combineWith]);
-
-  if (didStartAfterCritical(combineWith, afterCritical)) {
-    return isDisplaced ? origin : negate(displacedBy.point);
-  }
-
-  return isDisplaced ? displacedBy.point : origin;
-});
-
-var whenCombining = (function (_ref) {
-  var afterCritical = _ref.afterCritical,
-      impact = _ref.impact,
-      draggables = _ref.draggables;
-  var combine = tryGetCombine(impact);
-  !combine ?  true ? invariant(false) : 0 : void 0;
-  var combineWith = combine.draggableId;
-  var center = draggables[combineWith].page.borderBox.center;
-  var displaceBy = getCombinedItemDisplacement({
-    displaced: impact.displaced,
-    afterCritical: afterCritical,
-    combineWith: combineWith,
-    displacedBy: impact.displacedBy
-  });
-  return add(center, displaceBy);
-});
-
-var distanceFromStartToBorderBoxCenter = function distanceFromStartToBorderBoxCenter(axis, box) {
-  return box.margin[axis.start] + box.borderBox[axis.size] / 2;
-};
-
-var distanceFromEndToBorderBoxCenter = function distanceFromEndToBorderBoxCenter(axis, box) {
-  return box.margin[axis.end] + box.borderBox[axis.size] / 2;
-};
-
-var getCrossAxisBorderBoxCenter = function getCrossAxisBorderBoxCenter(axis, target, isMoving) {
-  return target[axis.crossAxisStart] + isMoving.margin[axis.crossAxisStart] + isMoving.borderBox[axis.crossAxisSize] / 2;
-};
-
-var goAfter = function goAfter(_ref) {
-  var axis = _ref.axis,
-      moveRelativeTo = _ref.moveRelativeTo,
-      isMoving = _ref.isMoving;
-  return patch(axis.line, moveRelativeTo.marginBox[axis.end] + distanceFromStartToBorderBoxCenter(axis, isMoving), getCrossAxisBorderBoxCenter(axis, moveRelativeTo.marginBox, isMoving));
-};
-var goBefore = function goBefore(_ref2) {
-  var axis = _ref2.axis,
-      moveRelativeTo = _ref2.moveRelativeTo,
-      isMoving = _ref2.isMoving;
-  return patch(axis.line, moveRelativeTo.marginBox[axis.start] - distanceFromEndToBorderBoxCenter(axis, isMoving), getCrossAxisBorderBoxCenter(axis, moveRelativeTo.marginBox, isMoving));
-};
-var goIntoStart = function goIntoStart(_ref3) {
-  var axis = _ref3.axis,
-      moveInto = _ref3.moveInto,
-      isMoving = _ref3.isMoving;
-  return patch(axis.line, moveInto.contentBox[axis.start] + distanceFromStartToBorderBoxCenter(axis, isMoving), getCrossAxisBorderBoxCenter(axis, moveInto.contentBox, isMoving));
-};
-
-var whenReordering = (function (_ref) {
-  var impact = _ref.impact,
-      draggable = _ref.draggable,
-      draggables = _ref.draggables,
-      droppable = _ref.droppable,
-      afterCritical = _ref.afterCritical;
-  var insideDestination = getDraggablesInsideDroppable(droppable.descriptor.id, draggables);
-  var draggablePage = draggable.page;
-  var axis = droppable.axis;
-
-  if (!insideDestination.length) {
-    return goIntoStart({
-      axis: axis,
-      moveInto: droppable.page,
-      isMoving: draggablePage
-    });
-  }
-
-  var displaced = impact.displaced,
-      displacedBy = impact.displacedBy;
-  var closestAfter = displaced.all[0];
-
-  if (closestAfter) {
-    var closest = draggables[closestAfter];
-
-    if (didStartAfterCritical(closestAfter, afterCritical)) {
-      return goBefore({
-        axis: axis,
-        moveRelativeTo: closest.page,
-        isMoving: draggablePage
-      });
-    }
-
-    var withDisplacement = (0,css_box_model__WEBPACK_IMPORTED_MODULE_5__.offset)(closest.page, displacedBy.point);
-    return goBefore({
-      axis: axis,
-      moveRelativeTo: withDisplacement,
-      isMoving: draggablePage
-    });
-  }
-
-  var last = insideDestination[insideDestination.length - 1];
-
-  if (last.descriptor.id === draggable.descriptor.id) {
-    return draggablePage.borderBox.center;
-  }
-
-  if (didStartAfterCritical(last.descriptor.id, afterCritical)) {
-    var page = (0,css_box_model__WEBPACK_IMPORTED_MODULE_5__.offset)(last.page, negate(afterCritical.displacedBy.point));
-    return goAfter({
-      axis: axis,
-      moveRelativeTo: page,
-      isMoving: draggablePage
-    });
-  }
-
-  return goAfter({
-    axis: axis,
-    moveRelativeTo: last.page,
-    isMoving: draggablePage
-  });
-});
-
-var withDroppableDisplacement = (function (droppable, point) {
-  var frame = droppable.frame;
-
-  if (!frame) {
-    return point;
-  }
-
-  return add(point, frame.scroll.diff.displacement);
-});
-
-var getResultWithoutDroppableDisplacement = function getResultWithoutDroppableDisplacement(_ref) {
-  var impact = _ref.impact,
-      draggable = _ref.draggable,
-      droppable = _ref.droppable,
-      draggables = _ref.draggables,
-      afterCritical = _ref.afterCritical;
-  var original = draggable.page.borderBox.center;
-  var at = impact.at;
-
-  if (!droppable) {
-    return original;
-  }
-
-  if (!at) {
-    return original;
-  }
-
-  if (at.type === 'REORDER') {
-    return whenReordering({
-      impact: impact,
-      draggable: draggable,
-      draggables: draggables,
-      droppable: droppable,
-      afterCritical: afterCritical
-    });
-  }
-
-  return whenCombining({
-    impact: impact,
-    draggables: draggables,
-    afterCritical: afterCritical
-  });
-};
-
-var getPageBorderBoxCenterFromImpact = (function (args) {
-  var withoutDisplacement = getResultWithoutDroppableDisplacement(args);
-  var droppable = args.droppable;
-  var withDisplacement = droppable ? withDroppableDisplacement(droppable, withoutDisplacement) : withoutDisplacement;
-  return withDisplacement;
-});
-
-var scrollViewport = (function (viewport, newScroll) {
-  var diff = subtract(newScroll, viewport.scroll.initial);
-  var displacement = negate(diff);
-  var frame = (0,css_box_model__WEBPACK_IMPORTED_MODULE_5__.getRect)({
-    top: newScroll.y,
-    bottom: newScroll.y + viewport.frame.height,
-    left: newScroll.x,
-    right: newScroll.x + viewport.frame.width
-  });
-  var updated = {
-    frame: frame,
-    scroll: {
-      initial: viewport.scroll.initial,
-      max: viewport.scroll.max,
-      current: newScroll,
-      diff: {
-        value: diff,
-        displacement: displacement
-      }
-    }
-  };
-  return updated;
-});
-
-function getDraggables(ids, draggables) {
-  return ids.map(function (id) {
-    return draggables[id];
-  });
-}
-
-function tryGetVisible(id, groups) {
-  for (var i = 0; i < groups.length; i++) {
-    var displacement = groups[i].visible[id];
-
-    if (displacement) {
-      return displacement;
-    }
-  }
-
-  return null;
-}
-
-var speculativelyIncrease = (function (_ref) {
-  var impact = _ref.impact,
-      viewport = _ref.viewport,
-      destination = _ref.destination,
-      draggables = _ref.draggables,
-      maxScrollChange = _ref.maxScrollChange;
-  var scrolledViewport = scrollViewport(viewport, add(viewport.scroll.current, maxScrollChange));
-  var scrolledDroppable = destination.frame ? scrollDroppable(destination, add(destination.frame.scroll.current, maxScrollChange)) : destination;
-  var last = impact.displaced;
-  var withViewportScroll = getDisplacementGroups({
-    afterDragging: getDraggables(last.all, draggables),
-    destination: destination,
-    displacedBy: impact.displacedBy,
-    viewport: scrolledViewport.frame,
-    last: last,
-    forceShouldAnimate: false
-  });
-  var withDroppableScroll = getDisplacementGroups({
-    afterDragging: getDraggables(last.all, draggables),
-    destination: scrolledDroppable,
-    displacedBy: impact.displacedBy,
-    viewport: viewport.frame,
-    last: last,
-    forceShouldAnimate: false
-  });
-  var invisible = {};
-  var visible = {};
-  var groups = [last, withViewportScroll, withDroppableScroll];
-  last.all.forEach(function (id) {
-    var displacement = tryGetVisible(id, groups);
-
-    if (displacement) {
-      visible[id] = displacement;
-      return;
-    }
-
-    invisible[id] = true;
-  });
-
-  var newImpact = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, impact, {
-    displaced: {
-      all: last.all,
-      invisible: invisible,
-      visible: visible
-    }
-  });
-
-  return newImpact;
-});
-
-var withViewportDisplacement = (function (viewport, point) {
-  return add(viewport.scroll.diff.displacement, point);
-});
-
-var getClientFromPageBorderBoxCenter = (function (_ref) {
-  var pageBorderBoxCenter = _ref.pageBorderBoxCenter,
-      draggable = _ref.draggable,
-      viewport = _ref.viewport;
-  var withoutPageScrollChange = withViewportDisplacement(viewport, pageBorderBoxCenter);
-  var offset = subtract(withoutPageScrollChange, draggable.page.borderBox.center);
-  return add(draggable.client.borderBox.center, offset);
-});
-
-var isTotallyVisibleInNewLocation = (function (_ref) {
-  var draggable = _ref.draggable,
-      destination = _ref.destination,
-      newPageBorderBoxCenter = _ref.newPageBorderBoxCenter,
-      viewport = _ref.viewport,
-      withDroppableDisplacement = _ref.withDroppableDisplacement,
-      _ref$onlyOnMainAxis = _ref.onlyOnMainAxis,
-      onlyOnMainAxis = _ref$onlyOnMainAxis === void 0 ? false : _ref$onlyOnMainAxis;
-  var changeNeeded = subtract(newPageBorderBoxCenter, draggable.page.borderBox.center);
-  var shifted = offsetByPosition(draggable.page.borderBox, changeNeeded);
-  var args = {
-    target: shifted,
-    destination: destination,
-    withDroppableDisplacement: withDroppableDisplacement,
-    viewport: viewport
-  };
-  return onlyOnMainAxis ? isTotallyVisibleOnAxis(args) : isTotallyVisible(args);
-});
-
-var moveToNextPlace = (function (_ref) {
-  var isMovingForward = _ref.isMovingForward,
-      draggable = _ref.draggable,
-      destination = _ref.destination,
-      draggables = _ref.draggables,
-      previousImpact = _ref.previousImpact,
-      viewport = _ref.viewport,
-      previousPageBorderBoxCenter = _ref.previousPageBorderBoxCenter,
-      previousClientSelection = _ref.previousClientSelection,
-      afterCritical = _ref.afterCritical;
-
-  if (!destination.isEnabled) {
-    return null;
-  }
-
-  var insideDestination = getDraggablesInsideDroppable(destination.descriptor.id, draggables);
-  var isInHomeList = isHomeOf(draggable, destination);
-  var impact = moveToNextCombine({
-    isMovingForward: isMovingForward,
-    draggable: draggable,
-    destination: destination,
-    insideDestination: insideDestination,
-    previousImpact: previousImpact
-  }) || moveToNextIndex({
-    isMovingForward: isMovingForward,
-    isInHomeList: isInHomeList,
-    draggable: draggable,
-    draggables: draggables,
-    destination: destination,
-    insideDestination: insideDestination,
-    previousImpact: previousImpact,
-    viewport: viewport,
-    afterCritical: afterCritical
-  });
-
-  if (!impact) {
-    return null;
-  }
-
-  var pageBorderBoxCenter = getPageBorderBoxCenterFromImpact({
-    impact: impact,
-    draggable: draggable,
-    droppable: destination,
-    draggables: draggables,
-    afterCritical: afterCritical
-  });
-  var isVisibleInNewLocation = isTotallyVisibleInNewLocation({
-    draggable: draggable,
-    destination: destination,
-    newPageBorderBoxCenter: pageBorderBoxCenter,
-    viewport: viewport.frame,
-    withDroppableDisplacement: false,
-    onlyOnMainAxis: true
-  });
-
-  if (isVisibleInNewLocation) {
-    var clientSelection = getClientFromPageBorderBoxCenter({
-      pageBorderBoxCenter: pageBorderBoxCenter,
-      draggable: draggable,
-      viewport: viewport
-    });
-    return {
-      clientSelection: clientSelection,
-      impact: impact,
-      scrollJumpRequest: null
-    };
-  }
-
-  var distance = subtract(pageBorderBoxCenter, previousPageBorderBoxCenter);
-  var cautious = speculativelyIncrease({
-    impact: impact,
-    viewport: viewport,
-    destination: destination,
-    draggables: draggables,
-    maxScrollChange: distance
-  });
-  return {
-    clientSelection: previousClientSelection,
-    impact: cautious,
-    scrollJumpRequest: distance
-  };
-});
-
-var getKnownActive = function getKnownActive(droppable) {
-  var rect = droppable.subject.active;
-  !rect ?  true ? invariant(false, 'Cannot get clipped area from droppable') : 0 : void 0;
-  return rect;
-};
-
-var getBestCrossAxisDroppable = (function (_ref) {
-  var isMovingForward = _ref.isMovingForward,
-      pageBorderBoxCenter = _ref.pageBorderBoxCenter,
-      source = _ref.source,
-      droppables = _ref.droppables,
-      viewport = _ref.viewport;
-  var active = source.subject.active;
-
-  if (!active) {
-    return null;
-  }
-
-  var axis = source.axis;
-  var isBetweenSourceClipped = isWithin(active[axis.start], active[axis.end]);
-  var candidates = toDroppableList(droppables).filter(function (droppable) {
-    return droppable !== source;
-  }).filter(function (droppable) {
-    return droppable.isEnabled;
-  }).filter(function (droppable) {
-    return Boolean(droppable.subject.active);
-  }).filter(function (droppable) {
-    return isPartiallyVisibleThroughFrame(viewport.frame)(getKnownActive(droppable));
-  }).filter(function (droppable) {
-    var activeOfTarget = getKnownActive(droppable);
-
-    if (isMovingForward) {
-      return active[axis.crossAxisEnd] < activeOfTarget[axis.crossAxisEnd];
-    }
-
-    return activeOfTarget[axis.crossAxisStart] < active[axis.crossAxisStart];
-  }).filter(function (droppable) {
-    var activeOfTarget = getKnownActive(droppable);
-    var isBetweenDestinationClipped = isWithin(activeOfTarget[axis.start], activeOfTarget[axis.end]);
-    return isBetweenSourceClipped(activeOfTarget[axis.start]) || isBetweenSourceClipped(activeOfTarget[axis.end]) || isBetweenDestinationClipped(active[axis.start]) || isBetweenDestinationClipped(active[axis.end]);
-  }).sort(function (a, b) {
-    var first = getKnownActive(a)[axis.crossAxisStart];
-    var second = getKnownActive(b)[axis.crossAxisStart];
-
-    if (isMovingForward) {
-      return first - second;
-    }
-
-    return second - first;
-  }).filter(function (droppable, index, array) {
-    return getKnownActive(droppable)[axis.crossAxisStart] === getKnownActive(array[0])[axis.crossAxisStart];
-  });
-
-  if (!candidates.length) {
-    return null;
-  }
-
-  if (candidates.length === 1) {
-    return candidates[0];
-  }
-
-  var contains = candidates.filter(function (droppable) {
-    var isWithinDroppable = isWithin(getKnownActive(droppable)[axis.start], getKnownActive(droppable)[axis.end]);
-    return isWithinDroppable(pageBorderBoxCenter[axis.line]);
-  });
-
-  if (contains.length === 1) {
-    return contains[0];
-  }
-
-  if (contains.length > 1) {
-    return contains.sort(function (a, b) {
-      return getKnownActive(a)[axis.start] - getKnownActive(b)[axis.start];
-    })[0];
-  }
-
-  return candidates.sort(function (a, b) {
-    var first = closest(pageBorderBoxCenter, getCorners(getKnownActive(a)));
-    var second = closest(pageBorderBoxCenter, getCorners(getKnownActive(b)));
-
-    if (first !== second) {
-      return first - second;
-    }
-
-    return getKnownActive(a)[axis.start] - getKnownActive(b)[axis.start];
-  })[0];
-});
-
-var getCurrentPageBorderBoxCenter = function getCurrentPageBorderBoxCenter(draggable, afterCritical) {
-  var original = draggable.page.borderBox.center;
-  return didStartAfterCritical(draggable.descriptor.id, afterCritical) ? subtract(original, afterCritical.displacedBy.point) : original;
-};
-var getCurrentPageBorderBox = function getCurrentPageBorderBox(draggable, afterCritical) {
-  var original = draggable.page.borderBox;
-  return didStartAfterCritical(draggable.descriptor.id, afterCritical) ? offsetByPosition(original, negate(afterCritical.displacedBy.point)) : original;
-};
-
-var getClosestDraggable = (function (_ref) {
-  var pageBorderBoxCenter = _ref.pageBorderBoxCenter,
-      viewport = _ref.viewport,
-      destination = _ref.destination,
-      insideDestination = _ref.insideDestination,
-      afterCritical = _ref.afterCritical;
-  var sorted = insideDestination.filter(function (draggable) {
-    return isTotallyVisible({
-      target: getCurrentPageBorderBox(draggable, afterCritical),
-      destination: destination,
-      viewport: viewport.frame,
-      withDroppableDisplacement: true
-    });
-  }).sort(function (a, b) {
-    var distanceToA = distance(pageBorderBoxCenter, withDroppableDisplacement(destination, getCurrentPageBorderBoxCenter(a, afterCritical)));
-    var distanceToB = distance(pageBorderBoxCenter, withDroppableDisplacement(destination, getCurrentPageBorderBoxCenter(b, afterCritical)));
-
-    if (distanceToA < distanceToB) {
-      return -1;
-    }
-
-    if (distanceToB < distanceToA) {
-      return 1;
-    }
-
-    return a.descriptor.index - b.descriptor.index;
-  });
-  return sorted[0] || null;
-});
-
-var getDisplacedBy = (0,memoize_one__WEBPACK_IMPORTED_MODULE_6__["default"])(function getDisplacedBy(axis, displaceBy) {
-  var displacement = displaceBy[axis.line];
-  return {
-    value: displacement,
-    point: patch(axis.line, displacement)
-  };
-});
-
-var getRequiredGrowthForPlaceholder = function getRequiredGrowthForPlaceholder(droppable, placeholderSize, draggables) {
-  var axis = droppable.axis;
-
-  if (droppable.descriptor.mode === 'virtual') {
-    return patch(axis.line, placeholderSize[axis.line]);
-  }
-
-  var availableSpace = droppable.subject.page.contentBox[axis.size];
-  var insideDroppable = getDraggablesInsideDroppable(droppable.descriptor.id, draggables);
-  var spaceUsed = insideDroppable.reduce(function (sum, dimension) {
-    return sum + dimension.client.marginBox[axis.size];
-  }, 0);
-  var requiredSpace = spaceUsed + placeholderSize[axis.line];
-  var needsToGrowBy = requiredSpace - availableSpace;
-
-  if (needsToGrowBy <= 0) {
-    return null;
-  }
-
-  return patch(axis.line, needsToGrowBy);
-};
-
-var withMaxScroll = function withMaxScroll(frame, max) {
-  return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, frame, {
-    scroll: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, frame.scroll, {
-      max: max
-    })
-  });
-};
-
-var addPlaceholder = function addPlaceholder(droppable, draggable, draggables) {
-  var frame = droppable.frame;
-  !!isHomeOf(draggable, droppable) ?  true ? invariant(false, 'Should not add placeholder space to home list') : 0 : void 0;
-  !!droppable.subject.withPlaceholder ?  true ? invariant(false, 'Cannot add placeholder size to a subject when it already has one') : 0 : void 0;
-  var placeholderSize = getDisplacedBy(droppable.axis, draggable.displaceBy).point;
-  var requiredGrowth = getRequiredGrowthForPlaceholder(droppable, placeholderSize, draggables);
-  var added = {
-    placeholderSize: placeholderSize,
-    increasedBy: requiredGrowth,
-    oldFrameMaxScroll: droppable.frame ? droppable.frame.scroll.max : null
-  };
-
-  if (!frame) {
-    var _subject = getSubject({
-      page: droppable.subject.page,
-      withPlaceholder: added,
-      axis: droppable.axis,
-      frame: droppable.frame
-    });
-
-    return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, droppable, {
-      subject: _subject
-    });
-  }
-
-  var maxScroll = requiredGrowth ? add(frame.scroll.max, requiredGrowth) : frame.scroll.max;
-  var newFrame = withMaxScroll(frame, maxScroll);
-  var subject = getSubject({
-    page: droppable.subject.page,
-    withPlaceholder: added,
-    axis: droppable.axis,
-    frame: newFrame
-  });
-  return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, droppable, {
-    subject: subject,
-    frame: newFrame
-  });
-};
-var removePlaceholder = function removePlaceholder(droppable) {
-  var added = droppable.subject.withPlaceholder;
-  !added ?  true ? invariant(false, 'Cannot remove placeholder form subject when there was none') : 0 : void 0;
-  var frame = droppable.frame;
-
-  if (!frame) {
-    var _subject2 = getSubject({
-      page: droppable.subject.page,
-      axis: droppable.axis,
-      frame: null,
-      withPlaceholder: null
-    });
-
-    return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, droppable, {
-      subject: _subject2
-    });
-  }
-
-  var oldMaxScroll = added.oldFrameMaxScroll;
-  !oldMaxScroll ?  true ? invariant(false, 'Expected droppable with frame to have old max frame scroll when removing placeholder') : 0 : void 0;
-  var newFrame = withMaxScroll(frame, oldMaxScroll);
-  var subject = getSubject({
-    page: droppable.subject.page,
-    axis: droppable.axis,
-    frame: newFrame,
-    withPlaceholder: null
-  });
-  return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, droppable, {
-    subject: subject,
-    frame: newFrame
-  });
-};
-
-var moveToNewDroppable = (function (_ref) {
-  var previousPageBorderBoxCenter = _ref.previousPageBorderBoxCenter,
-      moveRelativeTo = _ref.moveRelativeTo,
-      insideDestination = _ref.insideDestination,
-      draggable = _ref.draggable,
-      draggables = _ref.draggables,
-      destination = _ref.destination,
-      viewport = _ref.viewport,
-      afterCritical = _ref.afterCritical;
-
-  if (!moveRelativeTo) {
-    if (insideDestination.length) {
-      return null;
-    }
-
-    var proposed = {
-      displaced: emptyGroups,
-      displacedBy: noDisplacedBy,
-      at: {
-        type: 'REORDER',
-        destination: {
-          droppableId: destination.descriptor.id,
-          index: 0
-        }
-      }
-    };
-    var proposedPageBorderBoxCenter = getPageBorderBoxCenterFromImpact({
-      impact: proposed,
-      draggable: draggable,
-      droppable: destination,
-      draggables: draggables,
-      afterCritical: afterCritical
-    });
-    var withPlaceholder = isHomeOf(draggable, destination) ? destination : addPlaceholder(destination, draggable, draggables);
-    var isVisibleInNewLocation = isTotallyVisibleInNewLocation({
-      draggable: draggable,
-      destination: withPlaceholder,
-      newPageBorderBoxCenter: proposedPageBorderBoxCenter,
-      viewport: viewport.frame,
-      withDroppableDisplacement: false,
-      onlyOnMainAxis: true
-    });
-    return isVisibleInNewLocation ? proposed : null;
-  }
-
-  var isGoingBeforeTarget = Boolean(previousPageBorderBoxCenter[destination.axis.line] <= moveRelativeTo.page.borderBox.center[destination.axis.line]);
-
-  var proposedIndex = function () {
-    var relativeTo = moveRelativeTo.descriptor.index;
-
-    if (moveRelativeTo.descriptor.id === draggable.descriptor.id) {
-      return relativeTo;
-    }
-
-    if (isGoingBeforeTarget) {
-      return relativeTo;
-    }
-
-    return relativeTo + 1;
-  }();
-
-  var displacedBy = getDisplacedBy(destination.axis, draggable.displaceBy);
-  return calculateReorderImpact({
-    draggable: draggable,
-    insideDestination: insideDestination,
-    destination: destination,
-    viewport: viewport,
-    displacedBy: displacedBy,
-    last: emptyGroups,
-    index: proposedIndex
-  });
-});
-
-var moveCrossAxis = (function (_ref) {
-  var isMovingForward = _ref.isMovingForward,
-      previousPageBorderBoxCenter = _ref.previousPageBorderBoxCenter,
-      draggable = _ref.draggable,
-      isOver = _ref.isOver,
-      draggables = _ref.draggables,
-      droppables = _ref.droppables,
-      viewport = _ref.viewport,
-      afterCritical = _ref.afterCritical;
-  var destination = getBestCrossAxisDroppable({
-    isMovingForward: isMovingForward,
-    pageBorderBoxCenter: previousPageBorderBoxCenter,
-    source: isOver,
-    droppables: droppables,
-    viewport: viewport
-  });
-
-  if (!destination) {
-    return null;
-  }
-
-  var insideDestination = getDraggablesInsideDroppable(destination.descriptor.id, draggables);
-  var moveRelativeTo = getClosestDraggable({
-    pageBorderBoxCenter: previousPageBorderBoxCenter,
-    viewport: viewport,
-    destination: destination,
-    insideDestination: insideDestination,
-    afterCritical: afterCritical
-  });
-  var impact = moveToNewDroppable({
-    previousPageBorderBoxCenter: previousPageBorderBoxCenter,
-    destination: destination,
-    draggable: draggable,
-    draggables: draggables,
-    moveRelativeTo: moveRelativeTo,
-    insideDestination: insideDestination,
-    viewport: viewport,
-    afterCritical: afterCritical
-  });
-
-  if (!impact) {
-    return null;
-  }
-
-  var pageBorderBoxCenter = getPageBorderBoxCenterFromImpact({
-    impact: impact,
-    draggable: draggable,
-    droppable: destination,
-    draggables: draggables,
-    afterCritical: afterCritical
-  });
-  var clientSelection = getClientFromPageBorderBoxCenter({
-    pageBorderBoxCenter: pageBorderBoxCenter,
-    draggable: draggable,
-    viewport: viewport
-  });
-  return {
-    clientSelection: clientSelection,
-    impact: impact,
-    scrollJumpRequest: null
-  };
-});
-
-var whatIsDraggedOver = (function (impact) {
-  var at = impact.at;
-
-  if (!at) {
-    return null;
-  }
-
-  if (at.type === 'REORDER') {
-    return at.destination.droppableId;
-  }
-
-  return at.combine.droppableId;
-});
-
-var getDroppableOver = function getDroppableOver(impact, droppables) {
-  var id = whatIsDraggedOver(impact);
-  return id ? droppables[id] : null;
-};
-
-var moveInDirection = (function (_ref) {
-  var state = _ref.state,
-      type = _ref.type;
-  var isActuallyOver = getDroppableOver(state.impact, state.dimensions.droppables);
-  var isMainAxisMovementAllowed = Boolean(isActuallyOver);
-  var home = state.dimensions.droppables[state.critical.droppable.id];
-  var isOver = isActuallyOver || home;
-  var direction = isOver.axis.direction;
-  var isMovingOnMainAxis = direction === 'vertical' && (type === 'MOVE_UP' || type === 'MOVE_DOWN') || direction === 'horizontal' && (type === 'MOVE_LEFT' || type === 'MOVE_RIGHT');
-
-  if (isMovingOnMainAxis && !isMainAxisMovementAllowed) {
-    return null;
-  }
-
-  var isMovingForward = type === 'MOVE_DOWN' || type === 'MOVE_RIGHT';
-  var draggable = state.dimensions.draggables[state.critical.draggable.id];
-  var previousPageBorderBoxCenter = state.current.page.borderBoxCenter;
-  var _state$dimensions = state.dimensions,
-      draggables = _state$dimensions.draggables,
-      droppables = _state$dimensions.droppables;
-  return isMovingOnMainAxis ? moveToNextPlace({
-    isMovingForward: isMovingForward,
-    previousPageBorderBoxCenter: previousPageBorderBoxCenter,
-    draggable: draggable,
-    destination: isOver,
-    draggables: draggables,
-    viewport: state.viewport,
-    previousClientSelection: state.current.client.selection,
-    previousImpact: state.impact,
-    afterCritical: state.afterCritical
-  }) : moveCrossAxis({
-    isMovingForward: isMovingForward,
-    previousPageBorderBoxCenter: previousPageBorderBoxCenter,
-    draggable: draggable,
-    isOver: isOver,
-    draggables: draggables,
-    droppables: droppables,
-    viewport: state.viewport,
-    afterCritical: state.afterCritical
-  });
-});
-
-function isMovementAllowed(state) {
-  return state.phase === 'DRAGGING' || state.phase === 'COLLECTING';
-}
-
-function isPositionInFrame(frame) {
-  var isWithinVertical = isWithin(frame.top, frame.bottom);
-  var isWithinHorizontal = isWithin(frame.left, frame.right);
-  return function run(point) {
-    return isWithinVertical(point.y) && isWithinHorizontal(point.x);
-  };
-}
-
-function getHasOverlap(first, second) {
-  return first.left < second.right && first.right > second.left && first.top < second.bottom && first.bottom > second.top;
-}
-
-function getFurthestAway(_ref) {
-  var pageBorderBox = _ref.pageBorderBox,
-      draggable = _ref.draggable,
-      candidates = _ref.candidates;
-  var startCenter = draggable.page.borderBox.center;
-  var sorted = candidates.map(function (candidate) {
-    var axis = candidate.axis;
-    var target = patch(candidate.axis.line, pageBorderBox.center[axis.line], candidate.page.borderBox.center[axis.crossAxisLine]);
-    return {
-      id: candidate.descriptor.id,
-      distance: distance(startCenter, target)
-    };
-  }).sort(function (a, b) {
-    return b.distance - a.distance;
-  });
-  return sorted[0] ? sorted[0].id : null;
-}
-
-function getDroppableOver$1(_ref2) {
-  var pageBorderBox = _ref2.pageBorderBox,
-      draggable = _ref2.draggable,
-      droppables = _ref2.droppables;
-  var candidates = toDroppableList(droppables).filter(function (item) {
-    if (!item.isEnabled) {
-      return false;
-    }
-
-    var active = item.subject.active;
-
-    if (!active) {
-      return false;
-    }
-
-    if (!getHasOverlap(pageBorderBox, active)) {
-      return false;
-    }
-
-    if (isPositionInFrame(active)(pageBorderBox.center)) {
-      return true;
-    }
-
-    var axis = item.axis;
-    var childCenter = active.center[axis.crossAxisLine];
-    var crossAxisStart = pageBorderBox[axis.crossAxisStart];
-    var crossAxisEnd = pageBorderBox[axis.crossAxisEnd];
-    var isContained = isWithin(active[axis.crossAxisStart], active[axis.crossAxisEnd]);
-    var isStartContained = isContained(crossAxisStart);
-    var isEndContained = isContained(crossAxisEnd);
-
-    if (!isStartContained && !isEndContained) {
-      return true;
-    }
-
-    if (isStartContained) {
-      return crossAxisStart < childCenter;
-    }
-
-    return crossAxisEnd > childCenter;
-  });
-
-  if (!candidates.length) {
-    return null;
-  }
-
-  if (candidates.length === 1) {
-    return candidates[0].descriptor.id;
-  }
-
-  return getFurthestAway({
-    pageBorderBox: pageBorderBox,
-    draggable: draggable,
-    candidates: candidates
-  });
-}
-
-var offsetRectByPosition = function offsetRectByPosition(rect, point) {
-  return (0,css_box_model__WEBPACK_IMPORTED_MODULE_5__.getRect)(offsetByPosition(rect, point));
-};
-
-var withDroppableScroll = (function (droppable, area) {
-  var frame = droppable.frame;
-
-  if (!frame) {
-    return area;
-  }
-
-  return offsetRectByPosition(area, frame.scroll.diff.value);
-});
-
-function getIsDisplaced(_ref) {
-  var displaced = _ref.displaced,
-      id = _ref.id;
-  return Boolean(displaced.visible[id] || displaced.invisible[id]);
-}
-
-function atIndex(_ref) {
-  var draggable = _ref.draggable,
-      closest = _ref.closest,
-      inHomeList = _ref.inHomeList;
-
-  if (!closest) {
-    return null;
-  }
-
-  if (!inHomeList) {
-    return closest.descriptor.index;
-  }
-
-  if (closest.descriptor.index > draggable.descriptor.index) {
-    return closest.descriptor.index - 1;
-  }
-
-  return closest.descriptor.index;
-}
-
-var getReorderImpact = (function (_ref2) {
-  var targetRect = _ref2.pageBorderBoxWithDroppableScroll,
-      draggable = _ref2.draggable,
-      destination = _ref2.destination,
-      insideDestination = _ref2.insideDestination,
-      last = _ref2.last,
-      viewport = _ref2.viewport,
-      afterCritical = _ref2.afterCritical;
-  var axis = destination.axis;
-  var displacedBy = getDisplacedBy(destination.axis, draggable.displaceBy);
-  var displacement = displacedBy.value;
-  var targetStart = targetRect[axis.start];
-  var targetEnd = targetRect[axis.end];
-  var withoutDragging = removeDraggableFromList(draggable, insideDestination);
-  var closest = find(withoutDragging, function (child) {
-    var id = child.descriptor.id;
-    var childCenter = child.page.borderBox.center[axis.line];
-    var didStartAfterCritical$1 = didStartAfterCritical(id, afterCritical);
-    var isDisplaced = getIsDisplaced({
-      displaced: last,
-      id: id
-    });
-
-    if (didStartAfterCritical$1) {
-      if (isDisplaced) {
-        return targetEnd <= childCenter;
-      }
-
-      return targetStart < childCenter - displacement;
-    }
-
-    if (isDisplaced) {
-      return targetEnd <= childCenter + displacement;
-    }
-
-    return targetStart < childCenter;
-  });
-  var newIndex = atIndex({
-    draggable: draggable,
-    closest: closest,
-    inHomeList: isHomeOf(draggable, destination)
-  });
-  return calculateReorderImpact({
-    draggable: draggable,
-    insideDestination: insideDestination,
-    destination: destination,
-    viewport: viewport,
-    last: last,
-    displacedBy: displacedBy,
-    index: newIndex
-  });
-});
-
-var combineThresholdDivisor = 4;
-var getCombineImpact = (function (_ref) {
-  var draggable = _ref.draggable,
-      targetRect = _ref.pageBorderBoxWithDroppableScroll,
-      previousImpact = _ref.previousImpact,
-      destination = _ref.destination,
-      insideDestination = _ref.insideDestination,
-      afterCritical = _ref.afterCritical;
-
-  if (!destination.isCombineEnabled) {
-    return null;
-  }
-
-  var axis = destination.axis;
-  var displacedBy = getDisplacedBy(destination.axis, draggable.displaceBy);
-  var displacement = displacedBy.value;
-  var targetStart = targetRect[axis.start];
-  var targetEnd = targetRect[axis.end];
-  var withoutDragging = removeDraggableFromList(draggable, insideDestination);
-  var combineWith = find(withoutDragging, function (child) {
-    var id = child.descriptor.id;
-    var childRect = child.page.borderBox;
-    var childSize = childRect[axis.size];
-    var threshold = childSize / combineThresholdDivisor;
-    var didStartAfterCritical$1 = didStartAfterCritical(id, afterCritical);
-    var isDisplaced = getIsDisplaced({
-      displaced: previousImpact.displaced,
-      id: id
-    });
-
-    if (didStartAfterCritical$1) {
-      if (isDisplaced) {
-        return targetEnd > childRect[axis.start] + threshold && targetEnd < childRect[axis.end] - threshold;
-      }
-
-      return targetStart > childRect[axis.start] - displacement + threshold && targetStart < childRect[axis.end] - displacement - threshold;
-    }
-
-    if (isDisplaced) {
-      return targetEnd > childRect[axis.start] + displacement + threshold && targetEnd < childRect[axis.end] + displacement - threshold;
-    }
-
-    return targetStart > childRect[axis.start] + threshold && targetStart < childRect[axis.end] - threshold;
-  });
-
-  if (!combineWith) {
-    return null;
-  }
-
-  var impact = {
-    displacedBy: displacedBy,
-    displaced: previousImpact.displaced,
-    at: {
-      type: 'COMBINE',
-      combine: {
-        draggableId: combineWith.descriptor.id,
-        droppableId: destination.descriptor.id
-      }
-    }
-  };
-  return impact;
-});
-
-var getDragImpact = (function (_ref) {
-  var pageOffset = _ref.pageOffset,
-      draggable = _ref.draggable,
-      draggables = _ref.draggables,
-      droppables = _ref.droppables,
-      previousImpact = _ref.previousImpact,
-      viewport = _ref.viewport,
-      afterCritical = _ref.afterCritical;
-  var pageBorderBox = offsetRectByPosition(draggable.page.borderBox, pageOffset);
-  var destinationId = getDroppableOver$1({
-    pageBorderBox: pageBorderBox,
-    draggable: draggable,
-    droppables: droppables
-  });
-
-  if (!destinationId) {
-    return noImpact;
-  }
-
-  var destination = droppables[destinationId];
-  var insideDestination = getDraggablesInsideDroppable(destination.descriptor.id, draggables);
-  var pageBorderBoxWithDroppableScroll = withDroppableScroll(destination, pageBorderBox);
-  return getCombineImpact({
-    pageBorderBoxWithDroppableScroll: pageBorderBoxWithDroppableScroll,
-    draggable: draggable,
-    previousImpact: previousImpact,
-    destination: destination,
-    insideDestination: insideDestination,
-    afterCritical: afterCritical
-  }) || getReorderImpact({
-    pageBorderBoxWithDroppableScroll: pageBorderBoxWithDroppableScroll,
-    draggable: draggable,
-    destination: destination,
-    insideDestination: insideDestination,
-    last: previousImpact.displaced,
-    viewport: viewport,
-    afterCritical: afterCritical
-  });
-});
-
-var patchDroppableMap = (function (droppables, updated) {
-  var _extends2;
-
-  return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, droppables, (_extends2 = {}, _extends2[updated.descriptor.id] = updated, _extends2));
-});
-
-var clearUnusedPlaceholder = function clearUnusedPlaceholder(_ref) {
-  var previousImpact = _ref.previousImpact,
-      impact = _ref.impact,
-      droppables = _ref.droppables;
-  var last = whatIsDraggedOver(previousImpact);
-  var now = whatIsDraggedOver(impact);
-
-  if (!last) {
-    return droppables;
-  }
-
-  if (last === now) {
-    return droppables;
-  }
-
-  var lastDroppable = droppables[last];
-
-  if (!lastDroppable.subject.withPlaceholder) {
-    return droppables;
-  }
-
-  var updated = removePlaceholder(lastDroppable);
-  return patchDroppableMap(droppables, updated);
-};
-
-var recomputePlaceholders = (function (_ref2) {
-  var draggable = _ref2.draggable,
-      draggables = _ref2.draggables,
-      droppables = _ref2.droppables,
-      previousImpact = _ref2.previousImpact,
-      impact = _ref2.impact;
-  var cleaned = clearUnusedPlaceholder({
-    previousImpact: previousImpact,
-    impact: impact,
-    droppables: droppables
-  });
-  var isOver = whatIsDraggedOver(impact);
-
-  if (!isOver) {
-    return cleaned;
-  }
-
-  var droppable = droppables[isOver];
-
-  if (isHomeOf(draggable, droppable)) {
-    return cleaned;
-  }
-
-  if (droppable.subject.withPlaceholder) {
-    return cleaned;
-  }
-
-  var patched = addPlaceholder(droppable, draggable, draggables);
-  return patchDroppableMap(cleaned, patched);
-});
-
-var update = (function (_ref) {
-  var state = _ref.state,
-      forcedClientSelection = _ref.clientSelection,
-      forcedDimensions = _ref.dimensions,
-      forcedViewport = _ref.viewport,
-      forcedImpact = _ref.impact,
-      scrollJumpRequest = _ref.scrollJumpRequest;
-  var viewport = forcedViewport || state.viewport;
-  var dimensions = forcedDimensions || state.dimensions;
-  var clientSelection = forcedClientSelection || state.current.client.selection;
-  var offset = subtract(clientSelection, state.initial.client.selection);
-  var client = {
-    offset: offset,
-    selection: clientSelection,
-    borderBoxCenter: add(state.initial.client.borderBoxCenter, offset)
-  };
-  var page = {
-    selection: add(client.selection, viewport.scroll.current),
-    borderBoxCenter: add(client.borderBoxCenter, viewport.scroll.current),
-    offset: add(client.offset, viewport.scroll.diff.value)
-  };
-  var current = {
-    client: client,
-    page: page
-  };
-
-  if (state.phase === 'COLLECTING') {
-    return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({
-      phase: 'COLLECTING'
-    }, state, {
-      dimensions: dimensions,
-      viewport: viewport,
-      current: current
-    });
-  }
-
-  var draggable = dimensions.draggables[state.critical.draggable.id];
-  var newImpact = forcedImpact || getDragImpact({
-    pageOffset: page.offset,
-    draggable: draggable,
-    draggables: dimensions.draggables,
-    droppables: dimensions.droppables,
-    previousImpact: state.impact,
-    viewport: viewport,
-    afterCritical: state.afterCritical
-  });
-  var withUpdatedPlaceholders = recomputePlaceholders({
-    draggable: draggable,
-    impact: newImpact,
-    previousImpact: state.impact,
-    draggables: dimensions.draggables,
-    droppables: dimensions.droppables
-  });
-
-  var result = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, state, {
-    current: current,
-    dimensions: {
-      draggables: dimensions.draggables,
-      droppables: withUpdatedPlaceholders
-    },
-    impact: newImpact,
-    viewport: viewport,
-    scrollJumpRequest: scrollJumpRequest || null,
-    forceShouldAnimate: scrollJumpRequest ? false : null
-  });
-
-  return result;
-});
-
-function getDraggables$1(ids, draggables) {
-  return ids.map(function (id) {
-    return draggables[id];
-  });
-}
-
-var recompute = (function (_ref) {
-  var impact = _ref.impact,
-      viewport = _ref.viewport,
-      draggables = _ref.draggables,
-      destination = _ref.destination,
-      forceShouldAnimate = _ref.forceShouldAnimate;
-  var last = impact.displaced;
-  var afterDragging = getDraggables$1(last.all, draggables);
-  var displaced = getDisplacementGroups({
-    afterDragging: afterDragging,
-    destination: destination,
-    displacedBy: impact.displacedBy,
-    viewport: viewport.frame,
-    forceShouldAnimate: forceShouldAnimate,
-    last: last
-  });
-  return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, impact, {
-    displaced: displaced
-  });
-});
-
-var getClientBorderBoxCenter = (function (_ref) {
-  var impact = _ref.impact,
-      draggable = _ref.draggable,
-      droppable = _ref.droppable,
-      draggables = _ref.draggables,
-      viewport = _ref.viewport,
-      afterCritical = _ref.afterCritical;
-  var pageBorderBoxCenter = getPageBorderBoxCenterFromImpact({
-    impact: impact,
-    draggable: draggable,
-    draggables: draggables,
-    droppable: droppable,
-    afterCritical: afterCritical
-  });
-  return getClientFromPageBorderBoxCenter({
-    pageBorderBoxCenter: pageBorderBoxCenter,
-    draggable: draggable,
-    viewport: viewport
-  });
-});
-
-var refreshSnap = (function (_ref) {
-  var state = _ref.state,
-      forcedDimensions = _ref.dimensions,
-      forcedViewport = _ref.viewport;
-  !(state.movementMode === 'SNAP') ?  true ? invariant(false) : 0 : void 0;
-  var needsVisibilityCheck = state.impact;
-  var viewport = forcedViewport || state.viewport;
-  var dimensions = forcedDimensions || state.dimensions;
-  var draggables = dimensions.draggables,
-      droppables = dimensions.droppables;
-  var draggable = draggables[state.critical.draggable.id];
-  var isOver = whatIsDraggedOver(needsVisibilityCheck);
-  !isOver ?  true ? invariant(false, 'Must be over a destination in SNAP movement mode') : 0 : void 0;
-  var destination = droppables[isOver];
-  var impact = recompute({
-    impact: needsVisibilityCheck,
-    viewport: viewport,
-    destination: destination,
-    draggables: draggables
-  });
-  var clientSelection = getClientBorderBoxCenter({
-    impact: impact,
-    draggable: draggable,
-    droppable: destination,
-    draggables: draggables,
-    viewport: viewport,
-    afterCritical: state.afterCritical
-  });
-  return update({
-    impact: impact,
-    clientSelection: clientSelection,
-    state: state,
-    dimensions: dimensions,
-    viewport: viewport
-  });
-});
-
-var getHomeLocation = (function (descriptor) {
-  return {
-    index: descriptor.index,
-    droppableId: descriptor.droppableId
-  };
-});
-
-var getLiftEffect = (function (_ref) {
-  var draggable = _ref.draggable,
-      home = _ref.home,
-      draggables = _ref.draggables,
-      viewport = _ref.viewport;
-  var displacedBy = getDisplacedBy(home.axis, draggable.displaceBy);
-  var insideHome = getDraggablesInsideDroppable(home.descriptor.id, draggables);
-  var rawIndex = insideHome.indexOf(draggable);
-  !(rawIndex !== -1) ?  true ? invariant(false, 'Expected draggable to be inside home list') : 0 : void 0;
-  var afterDragging = insideHome.slice(rawIndex + 1);
-  var effected = afterDragging.reduce(function (previous, item) {
-    previous[item.descriptor.id] = true;
-    return previous;
-  }, {});
-  var afterCritical = {
-    inVirtualList: home.descriptor.mode === 'virtual',
-    displacedBy: displacedBy,
-    effected: effected
-  };
-  var displaced = getDisplacementGroups({
-    afterDragging: afterDragging,
-    destination: home,
-    displacedBy: displacedBy,
-    last: null,
-    viewport: viewport.frame,
-    forceShouldAnimate: false
-  });
-  var impact = {
-    displaced: displaced,
-    displacedBy: displacedBy,
-    at: {
-      type: 'REORDER',
-      destination: getHomeLocation(draggable.descriptor)
-    }
-  };
-  return {
-    impact: impact,
-    afterCritical: afterCritical
-  };
-});
-
-var patchDimensionMap = (function (dimensions, updated) {
-  return {
-    draggables: dimensions.draggables,
-    droppables: patchDroppableMap(dimensions.droppables, updated)
-  };
-});
-
-var start = function start(key) {
-  if (true) {
-    {
-      return;
-    }
-  }
-};
-var finish = function finish(key) {
-  if (true) {
-    {
-      return;
-    }
-  }
-};
-
-var offsetDraggable = (function (_ref) {
-  var draggable = _ref.draggable,
-      offset$1 = _ref.offset,
-      initialWindowScroll = _ref.initialWindowScroll;
-  var client = (0,css_box_model__WEBPACK_IMPORTED_MODULE_5__.offset)(draggable.client, offset$1);
-  var page = (0,css_box_model__WEBPACK_IMPORTED_MODULE_5__.withScroll)(client, initialWindowScroll);
-
-  var moved = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, draggable, {
-    placeholder: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, draggable.placeholder, {
-      client: client
-    }),
-    client: client,
-    page: page
-  });
-
-  return moved;
-});
-
-var getFrame = (function (droppable) {
-  var frame = droppable.frame;
-  !frame ?  true ? invariant(false, 'Expected Droppable to have a frame') : 0 : void 0;
-  return frame;
-});
-
-var adjustAdditionsForScrollChanges = (function (_ref) {
-  var additions = _ref.additions,
-      updatedDroppables = _ref.updatedDroppables,
-      viewport = _ref.viewport;
-  var windowScrollChange = viewport.scroll.diff.value;
-  return additions.map(function (draggable) {
-    var droppableId = draggable.descriptor.droppableId;
-    var modified = updatedDroppables[droppableId];
-    var frame = getFrame(modified);
-    var droppableScrollChange = frame.scroll.diff.value;
-    var totalChange = add(windowScrollChange, droppableScrollChange);
-    var moved = offsetDraggable({
-      draggable: draggable,
-      offset: totalChange,
-      initialWindowScroll: viewport.scroll.initial
-    });
-    return moved;
-  });
-});
-
-var publishWhileDraggingInVirtual = (function (_ref) {
-  var state = _ref.state,
-      published = _ref.published;
-  start();
-  var withScrollChange = published.modified.map(function (update) {
-    var existing = state.dimensions.droppables[update.droppableId];
-    var scrolled = scrollDroppable(existing, update.scroll);
-    return scrolled;
-  });
-
-  var droppables = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, state.dimensions.droppables, {}, toDroppableMap(withScrollChange));
-
-  var updatedAdditions = toDraggableMap(adjustAdditionsForScrollChanges({
-    additions: published.additions,
-    updatedDroppables: droppables,
-    viewport: state.viewport
-  }));
-
-  var draggables = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, state.dimensions.draggables, {}, updatedAdditions);
-
-  published.removals.forEach(function (id) {
-    delete draggables[id];
-  });
-  var dimensions = {
-    droppables: droppables,
-    draggables: draggables
-  };
-  var wasOverId = whatIsDraggedOver(state.impact);
-  var wasOver = wasOverId ? dimensions.droppables[wasOverId] : null;
-  var draggable = dimensions.draggables[state.critical.draggable.id];
-  var home = dimensions.droppables[state.critical.droppable.id];
-
-  var _getLiftEffect = getLiftEffect({
-    draggable: draggable,
-    home: home,
-    draggables: draggables,
-    viewport: state.viewport
-  }),
-      onLiftImpact = _getLiftEffect.impact,
-      afterCritical = _getLiftEffect.afterCritical;
-
-  var previousImpact = wasOver && wasOver.isCombineEnabled ? state.impact : onLiftImpact;
-  var impact = getDragImpact({
-    pageOffset: state.current.page.offset,
-    draggable: dimensions.draggables[state.critical.draggable.id],
-    draggables: dimensions.draggables,
-    droppables: dimensions.droppables,
-    previousImpact: previousImpact,
-    viewport: state.viewport,
-    afterCritical: afterCritical
-  });
-  finish();
-
-  var draggingState = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({
-    phase: 'DRAGGING'
-  }, state, {
-    phase: 'DRAGGING',
-    impact: impact,
-    onLiftImpact: onLiftImpact,
-    dimensions: dimensions,
-    afterCritical: afterCritical,
-    forceShouldAnimate: false
-  });
-
-  if (state.phase === 'COLLECTING') {
-    return draggingState;
-  }
-
-  var dropPending = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({
-    phase: 'DROP_PENDING'
-  }, draggingState, {
-    phase: 'DROP_PENDING',
-    reason: state.reason,
-    isWaiting: false
-  });
-
-  return dropPending;
-});
-
-var isSnapping = function isSnapping(state) {
-  return state.movementMode === 'SNAP';
-};
-
-var postDroppableChange = function postDroppableChange(state, updated, isEnabledChanging) {
-  var dimensions = patchDimensionMap(state.dimensions, updated);
-
-  if (!isSnapping(state) || isEnabledChanging) {
-    return update({
-      state: state,
-      dimensions: dimensions
-    });
-  }
-
-  return refreshSnap({
-    state: state,
-    dimensions: dimensions
-  });
-};
-
-function removeScrollJumpRequest(state) {
-  if (state.isDragging && state.movementMode === 'SNAP') {
-    return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({
-      phase: 'DRAGGING'
-    }, state, {
-      scrollJumpRequest: null
-    });
-  }
-
-  return state;
-}
-
-var idle = {
-  phase: 'IDLE',
-  completed: null,
-  shouldFlush: false
-};
-var reducer = (function (state, action) {
-  if (state === void 0) {
-    state = idle;
-  }
-
-  if (action.type === 'FLUSH') {
-    return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, idle, {
-      shouldFlush: true
-    });
-  }
-
-  if (action.type === 'INITIAL_PUBLISH') {
-    !(state.phase === 'IDLE') ?  true ? invariant(false, 'INITIAL_PUBLISH must come after a IDLE phase') : 0 : void 0;
-    var _action$payload = action.payload,
-        critical = _action$payload.critical,
-        clientSelection = _action$payload.clientSelection,
-        viewport = _action$payload.viewport,
-        dimensions = _action$payload.dimensions,
-        movementMode = _action$payload.movementMode;
-    var draggable = dimensions.draggables[critical.draggable.id];
-    var home = dimensions.droppables[critical.droppable.id];
-    var client = {
-      selection: clientSelection,
-      borderBoxCenter: draggable.client.borderBox.center,
-      offset: origin
-    };
-    var initial = {
-      client: client,
-      page: {
-        selection: add(client.selection, viewport.scroll.initial),
-        borderBoxCenter: add(client.selection, viewport.scroll.initial),
-        offset: add(client.selection, viewport.scroll.diff.value)
-      }
-    };
-    var isWindowScrollAllowed = toDroppableList(dimensions.droppables).every(function (item) {
-      return !item.isFixedOnPage;
-    });
-
-    var _getLiftEffect = getLiftEffect({
-      draggable: draggable,
-      home: home,
-      draggables: dimensions.draggables,
-      viewport: viewport
-    }),
-        impact = _getLiftEffect.impact,
-        afterCritical = _getLiftEffect.afterCritical;
-
-    var result = {
-      phase: 'DRAGGING',
-      isDragging: true,
-      critical: critical,
-      movementMode: movementMode,
-      dimensions: dimensions,
-      initial: initial,
-      current: initial,
-      isWindowScrollAllowed: isWindowScrollAllowed,
-      impact: impact,
-      afterCritical: afterCritical,
-      onLiftImpact: impact,
-      viewport: viewport,
-      scrollJumpRequest: null,
-      forceShouldAnimate: null
-    };
-    return result;
-  }
-
-  if (action.type === 'COLLECTION_STARTING') {
-    if (state.phase === 'COLLECTING' || state.phase === 'DROP_PENDING') {
-      return state;
-    }
-
-    !(state.phase === 'DRAGGING') ?  true ? invariant(false, "Collection cannot start from phase " + state.phase) : 0 : void 0;
-
-    var _result = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({
-      phase: 'COLLECTING'
-    }, state, {
-      phase: 'COLLECTING'
-    });
-
-    return _result;
-  }
-
-  if (action.type === 'PUBLISH_WHILE_DRAGGING') {
-    !(state.phase === 'COLLECTING' || state.phase === 'DROP_PENDING') ?  true ? invariant(false, "Unexpected " + action.type + " received in phase " + state.phase) : 0 : void 0;
-    return publishWhileDraggingInVirtual({
-      state: state,
-      published: action.payload
-    });
-  }
-
-  if (action.type === 'MOVE') {
-    if (state.phase === 'DROP_PENDING') {
-      return state;
-    }
-
-    !isMovementAllowed(state) ?  true ? invariant(false, action.type + " not permitted in phase " + state.phase) : 0 : void 0;
-    var _clientSelection = action.payload.client;
-
-    if (isEqual(_clientSelection, state.current.client.selection)) {
-      return state;
-    }
-
-    return update({
-      state: state,
-      clientSelection: _clientSelection,
-      impact: isSnapping(state) ? state.impact : null
-    });
-  }
-
-  if (action.type === 'UPDATE_DROPPABLE_SCROLL') {
-    if (state.phase === 'DROP_PENDING') {
-      return removeScrollJumpRequest(state);
-    }
-
-    if (state.phase === 'COLLECTING') {
-      return removeScrollJumpRequest(state);
-    }
-
-    !isMovementAllowed(state) ?  true ? invariant(false, action.type + " not permitted in phase " + state.phase) : 0 : void 0;
-    var _action$payload2 = action.payload,
-        id = _action$payload2.id,
-        newScroll = _action$payload2.newScroll;
-    var target = state.dimensions.droppables[id];
-
-    if (!target) {
-      return state;
-    }
-
-    var scrolled = scrollDroppable(target, newScroll);
-    return postDroppableChange(state, scrolled, false);
-  }
-
-  if (action.type === 'UPDATE_DROPPABLE_IS_ENABLED') {
-    if (state.phase === 'DROP_PENDING') {
-      return state;
-    }
-
-    !isMovementAllowed(state) ?  true ? invariant(false, "Attempting to move in an unsupported phase " + state.phase) : 0 : void 0;
-    var _action$payload3 = action.payload,
-        _id = _action$payload3.id,
-        isEnabled = _action$payload3.isEnabled;
-    var _target = state.dimensions.droppables[_id];
-    !_target ?  true ? invariant(false, "Cannot find Droppable[id: " + _id + "] to toggle its enabled state") : 0 : void 0;
-    !(_target.isEnabled !== isEnabled) ?  true ? invariant(false, "Trying to set droppable isEnabled to " + String(isEnabled) + "\n      but it is already " + String(_target.isEnabled)) : 0 : void 0;
-
-    var updated = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, _target, {
-      isEnabled: isEnabled
-    });
-
-    return postDroppableChange(state, updated, true);
-  }
-
-  if (action.type === 'UPDATE_DROPPABLE_IS_COMBINE_ENABLED') {
-    if (state.phase === 'DROP_PENDING') {
-      return state;
-    }
-
-    !isMovementAllowed(state) ?  true ? invariant(false, "Attempting to move in an unsupported phase " + state.phase) : 0 : void 0;
-    var _action$payload4 = action.payload,
-        _id2 = _action$payload4.id,
-        isCombineEnabled = _action$payload4.isCombineEnabled;
-    var _target2 = state.dimensions.droppables[_id2];
-    !_target2 ?  true ? invariant(false, "Cannot find Droppable[id: " + _id2 + "] to toggle its isCombineEnabled state") : 0 : void 0;
-    !(_target2.isCombineEnabled !== isCombineEnabled) ?  true ? invariant(false, "Trying to set droppable isCombineEnabled to " + String(isCombineEnabled) + "\n      but it is already " + String(_target2.isCombineEnabled)) : 0 : void 0;
-
-    var _updated = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, _target2, {
-      isCombineEnabled: isCombineEnabled
-    });
-
-    return postDroppableChange(state, _updated, true);
-  }
-
-  if (action.type === 'MOVE_BY_WINDOW_SCROLL') {
-    if (state.phase === 'DROP_PENDING' || state.phase === 'DROP_ANIMATING') {
-      return state;
-    }
-
-    !isMovementAllowed(state) ?  true ? invariant(false, "Cannot move by window in phase " + state.phase) : 0 : void 0;
-    !state.isWindowScrollAllowed ?  true ? invariant(false, 'Window scrolling is currently not supported for fixed lists') : 0 : void 0;
-    var _newScroll = action.payload.newScroll;
-
-    if (isEqual(state.viewport.scroll.current, _newScroll)) {
-      return removeScrollJumpRequest(state);
-    }
-
-    var _viewport = scrollViewport(state.viewport, _newScroll);
-
-    if (isSnapping(state)) {
-      return refreshSnap({
-        state: state,
-        viewport: _viewport
-      });
-    }
-
-    return update({
-      state: state,
-      viewport: _viewport
-    });
-  }
-
-  if (action.type === 'UPDATE_VIEWPORT_MAX_SCROLL') {
-    if (!isMovementAllowed(state)) {
-      return state;
-    }
-
-    var maxScroll = action.payload.maxScroll;
-
-    if (isEqual(maxScroll, state.viewport.scroll.max)) {
-      return state;
-    }
-
-    var withMaxScroll = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, state.viewport, {
-      scroll: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, state.viewport.scroll, {
-        max: maxScroll
-      })
-    });
-
-    return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({
-      phase: 'DRAGGING'
-    }, state, {
-      viewport: withMaxScroll
-    });
-  }
-
-  if (action.type === 'MOVE_UP' || action.type === 'MOVE_DOWN' || action.type === 'MOVE_LEFT' || action.type === 'MOVE_RIGHT') {
-    if (state.phase === 'COLLECTING' || state.phase === 'DROP_PENDING') {
-      return state;
-    }
-
-    !(state.phase === 'DRAGGING') ?  true ? invariant(false, action.type + " received while not in DRAGGING phase") : 0 : void 0;
-
-    var _result2 = moveInDirection({
-      state: state,
-      type: action.type
-    });
-
-    if (!_result2) {
-      return state;
-    }
-
-    return update({
-      state: state,
-      impact: _result2.impact,
-      clientSelection: _result2.clientSelection,
-      scrollJumpRequest: _result2.scrollJumpRequest
-    });
-  }
-
-  if (action.type === 'DROP_PENDING') {
-    var reason = action.payload.reason;
-    !(state.phase === 'COLLECTING') ?  true ? invariant(false, 'Can only move into the DROP_PENDING phase from the COLLECTING phase') : 0 : void 0;
-
-    var newState = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({
-      phase: 'DROP_PENDING'
-    }, state, {
-      phase: 'DROP_PENDING',
-      isWaiting: true,
-      reason: reason
-    });
-
-    return newState;
-  }
-
-  if (action.type === 'DROP_ANIMATE') {
-    var _action$payload5 = action.payload,
-        completed = _action$payload5.completed,
-        dropDuration = _action$payload5.dropDuration,
-        newHomeClientOffset = _action$payload5.newHomeClientOffset;
-    !(state.phase === 'DRAGGING' || state.phase === 'DROP_PENDING') ?  true ? invariant(false, "Cannot animate drop from phase " + state.phase) : 0 : void 0;
-    var _result3 = {
-      phase: 'DROP_ANIMATING',
-      completed: completed,
-      dropDuration: dropDuration,
-      newHomeClientOffset: newHomeClientOffset,
-      dimensions: state.dimensions
-    };
-    return _result3;
-  }
-
-  if (action.type === 'DROP_COMPLETE') {
-    var _completed = action.payload.completed;
-    return {
-      phase: 'IDLE',
-      completed: _completed,
-      shouldFlush: false
-    };
-  }
-
-  return state;
-});
-
-var beforeInitialCapture = function beforeInitialCapture(args) {
-  return {
-    type: 'BEFORE_INITIAL_CAPTURE',
-    payload: args
-  };
-};
-var lift = function lift(args) {
-  return {
-    type: 'LIFT',
-    payload: args
-  };
-};
-var initialPublish = function initialPublish(args) {
-  return {
-    type: 'INITIAL_PUBLISH',
-    payload: args
-  };
-};
-var publishWhileDragging = function publishWhileDragging(args) {
-  return {
-    type: 'PUBLISH_WHILE_DRAGGING',
-    payload: args
-  };
-};
-var collectionStarting = function collectionStarting() {
-  return {
-    type: 'COLLECTION_STARTING',
-    payload: null
-  };
-};
-var updateDroppableScroll = function updateDroppableScroll(args) {
-  return {
-    type: 'UPDATE_DROPPABLE_SCROLL',
-    payload: args
-  };
-};
-var updateDroppableIsEnabled = function updateDroppableIsEnabled(args) {
-  return {
-    type: 'UPDATE_DROPPABLE_IS_ENABLED',
-    payload: args
-  };
-};
-var updateDroppableIsCombineEnabled = function updateDroppableIsCombineEnabled(args) {
-  return {
-    type: 'UPDATE_DROPPABLE_IS_COMBINE_ENABLED',
-    payload: args
-  };
-};
-var move = function move(args) {
-  return {
-    type: 'MOVE',
-    payload: args
-  };
-};
-var moveByWindowScroll = function moveByWindowScroll(args) {
-  return {
-    type: 'MOVE_BY_WINDOW_SCROLL',
-    payload: args
-  };
-};
-var updateViewportMaxScroll = function updateViewportMaxScroll(args) {
-  return {
-    type: 'UPDATE_VIEWPORT_MAX_SCROLL',
-    payload: args
-  };
-};
-var moveUp = function moveUp() {
-  return {
-    type: 'MOVE_UP',
-    payload: null
-  };
-};
-var moveDown = function moveDown() {
-  return {
-    type: 'MOVE_DOWN',
-    payload: null
-  };
-};
-var moveRight = function moveRight() {
-  return {
-    type: 'MOVE_RIGHT',
-    payload: null
-  };
-};
-var moveLeft = function moveLeft() {
-  return {
-    type: 'MOVE_LEFT',
-    payload: null
-  };
-};
-var flush = function flush() {
-  return {
-    type: 'FLUSH',
-    payload: null
-  };
-};
-var animateDrop = function animateDrop(args) {
-  return {
-    type: 'DROP_ANIMATE',
-    payload: args
-  };
-};
-var completeDrop = function completeDrop(args) {
-  return {
-    type: 'DROP_COMPLETE',
-    payload: args
-  };
-};
-var drop = function drop(args) {
-  return {
-    type: 'DROP',
-    payload: args
-  };
-};
-var dropPending = function dropPending(args) {
-  return {
-    type: 'DROP_PENDING',
-    payload: args
-  };
-};
-var dropAnimationFinished = function dropAnimationFinished() {
-  return {
-    type: 'DROP_ANIMATION_FINISHED',
-    payload: null
-  };
-};
-
-function checkIndexes(insideDestination) {
-  if (insideDestination.length <= 1) {
-    return;
-  }
-
-  var indexes = insideDestination.map(function (d) {
-    return d.descriptor.index;
-  });
-  var errors = {};
-
-  for (var i = 1; i < indexes.length; i++) {
-    var current = indexes[i];
-    var previous = indexes[i - 1];
-
-    if (current !== previous + 1) {
-      errors[current] = true;
-    }
-  }
-
-  if (!Object.keys(errors).length) {
-    return;
-  }
-
-  var formatted = indexes.map(function (index) {
-    var hasError = Boolean(errors[index]);
-    return hasError ? "[\uD83D\uDD25" + index + "]" : "" + index;
-  }).join(', ');
-   true ? warning("\n    Detected non-consecutive <Draggable /> indexes.\n\n    (This can cause unexpected bugs)\n\n    " + formatted + "\n  ") : 0;
-}
-
-function validateDimensions(critical, dimensions) {
-  if (true) {
-    var insideDestination = getDraggablesInsideDroppable(critical.droppable.id, dimensions.draggables);
-    checkIndexes(insideDestination);
-  }
-}
-
-var lift$1 = (function (marshal) {
-  return function (_ref) {
-    var getState = _ref.getState,
-        dispatch = _ref.dispatch;
-    return function (next) {
-      return function (action) {
-        if (action.type !== 'LIFT') {
-          next(action);
-          return;
-        }
-
-        var _action$payload = action.payload,
-            id = _action$payload.id,
-            clientSelection = _action$payload.clientSelection,
-            movementMode = _action$payload.movementMode;
-        var initial = getState();
-
-        if (initial.phase === 'DROP_ANIMATING') {
-          dispatch(completeDrop({
-            completed: initial.completed
-          }));
-        }
-
-        !(getState().phase === 'IDLE') ?  true ? invariant(false, 'Unexpected phase to start a drag') : 0 : void 0;
-        dispatch(flush());
-        dispatch(beforeInitialCapture({
-          draggableId: id,
-          movementMode: movementMode
-        }));
-        var scrollOptions = {
-          shouldPublishImmediately: movementMode === 'SNAP'
-        };
-        var request = {
-          draggableId: id,
-          scrollOptions: scrollOptions
-        };
-
-        var _marshal$startPublish = marshal.startPublishing(request),
-            critical = _marshal$startPublish.critical,
-            dimensions = _marshal$startPublish.dimensions,
-            viewport = _marshal$startPublish.viewport;
-
-        validateDimensions(critical, dimensions);
-        dispatch(initialPublish({
-          critical: critical,
-          dimensions: dimensions,
-          clientSelection: clientSelection,
-          movementMode: movementMode,
-          viewport: viewport
-        }));
-      };
-    };
-  };
-});
-
-var style = (function (marshal) {
-  return function () {
-    return function (next) {
-      return function (action) {
-        if (action.type === 'INITIAL_PUBLISH') {
-          marshal.dragging();
-        }
-
-        if (action.type === 'DROP_ANIMATE') {
-          marshal.dropping(action.payload.completed.result.reason);
-        }
-
-        if (action.type === 'FLUSH' || action.type === 'DROP_COMPLETE') {
-          marshal.resting();
-        }
-
-        next(action);
-      };
-    };
-  };
-});
-
-var curves = {
-  outOfTheWay: 'cubic-bezier(0.2, 0, 0, 1)',
-  drop: 'cubic-bezier(.2,1,.1,1)'
-};
-var combine = {
-  opacity: {
-    drop: 0,
-    combining: 0.7
-  },
-  scale: {
-    drop: 0.75
-  }
-};
-var timings = {
-  outOfTheWay: 0.2,
-  minDropTime: 0.33,
-  maxDropTime: 0.55
-};
-var outOfTheWayTiming = timings.outOfTheWay + "s " + curves.outOfTheWay;
-var transitions = {
-  fluid: "opacity " + outOfTheWayTiming,
-  snap: "transform " + outOfTheWayTiming + ", opacity " + outOfTheWayTiming,
-  drop: function drop(duration) {
-    var timing = duration + "s " + curves.drop;
-    return "transform " + timing + ", opacity " + timing;
-  },
-  outOfTheWay: "transform " + outOfTheWayTiming,
-  placeholder: "height " + outOfTheWayTiming + ", width " + outOfTheWayTiming + ", margin " + outOfTheWayTiming
-};
-
-var moveTo = function moveTo(offset) {
-  return isEqual(offset, origin) ? null : "translate(" + offset.x + "px, " + offset.y + "px)";
-};
-
-var transforms = {
-  moveTo: moveTo,
-  drop: function drop(offset, isCombining) {
-    var translate = moveTo(offset);
-
-    if (!translate) {
-      return null;
-    }
-
-    if (!isCombining) {
-      return translate;
-    }
-
-    return translate + " scale(" + combine.scale.drop + ")";
-  }
-};
-
-var minDropTime = timings.minDropTime,
-    maxDropTime = timings.maxDropTime;
-var dropTimeRange = maxDropTime - minDropTime;
-var maxDropTimeAtDistance = 1500;
-var cancelDropModifier = 0.6;
-var getDropDuration = (function (_ref) {
-  var current = _ref.current,
-      destination = _ref.destination,
-      reason = _ref.reason;
-  var distance$1 = distance(current, destination);
-
-  if (distance$1 <= 0) {
-    return minDropTime;
-  }
-
-  if (distance$1 >= maxDropTimeAtDistance) {
-    return maxDropTime;
-  }
-
-  var percentage = distance$1 / maxDropTimeAtDistance;
-  var duration = minDropTime + dropTimeRange * percentage;
-  var withDuration = reason === 'CANCEL' ? duration * cancelDropModifier : duration;
-  return Number(withDuration.toFixed(2));
-});
-
-var getNewHomeClientOffset = (function (_ref) {
-  var impact = _ref.impact,
-      draggable = _ref.draggable,
-      dimensions = _ref.dimensions,
-      viewport = _ref.viewport,
-      afterCritical = _ref.afterCritical;
-  var draggables = dimensions.draggables,
-      droppables = dimensions.droppables;
-  var droppableId = whatIsDraggedOver(impact);
-  var destination = droppableId ? droppables[droppableId] : null;
-  var home = droppables[draggable.descriptor.droppableId];
-  var newClientCenter = getClientBorderBoxCenter({
-    impact: impact,
-    draggable: draggable,
-    draggables: draggables,
-    afterCritical: afterCritical,
-    droppable: destination || home,
-    viewport: viewport
-  });
-  var offset = subtract(newClientCenter, draggable.client.borderBox.center);
-  return offset;
-});
-
-var getDropImpact = (function (_ref) {
-  var draggables = _ref.draggables,
-      reason = _ref.reason,
-      lastImpact = _ref.lastImpact,
-      home = _ref.home,
-      viewport = _ref.viewport,
-      onLiftImpact = _ref.onLiftImpact;
-
-  if (!lastImpact.at || reason !== 'DROP') {
-    var recomputedHomeImpact = recompute({
-      draggables: draggables,
-      impact: onLiftImpact,
-      destination: home,
-      viewport: viewport,
-      forceShouldAnimate: true
-    });
-    return {
-      impact: recomputedHomeImpact,
-      didDropInsideDroppable: false
-    };
-  }
-
-  if (lastImpact.at.type === 'REORDER') {
-    return {
-      impact: lastImpact,
-      didDropInsideDroppable: true
-    };
-  }
-
-  var withoutMovement = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, lastImpact, {
-    displaced: emptyGroups
-  });
-
-  return {
-    impact: withoutMovement,
-    didDropInsideDroppable: true
-  };
-});
-
-var drop$1 = (function (_ref) {
-  var getState = _ref.getState,
-      dispatch = _ref.dispatch;
-  return function (next) {
-    return function (action) {
-      if (action.type !== 'DROP') {
-        next(action);
-        return;
-      }
-
-      var state = getState();
-      var reason = action.payload.reason;
-
-      if (state.phase === 'COLLECTING') {
-        dispatch(dropPending({
-          reason: reason
-        }));
-        return;
-      }
-
-      if (state.phase === 'IDLE') {
-        return;
-      }
-
-      var isWaitingForDrop = state.phase === 'DROP_PENDING' && state.isWaiting;
-      !!isWaitingForDrop ?  true ? invariant(false, 'A DROP action occurred while DROP_PENDING and still waiting') : 0 : void 0;
-      !(state.phase === 'DRAGGING' || state.phase === 'DROP_PENDING') ?  true ? invariant(false, "Cannot drop in phase: " + state.phase) : 0 : void 0;
-      var critical = state.critical;
-      var dimensions = state.dimensions;
-      var draggable = dimensions.draggables[state.critical.draggable.id];
-
-      var _getDropImpact = getDropImpact({
-        reason: reason,
-        lastImpact: state.impact,
-        afterCritical: state.afterCritical,
-        onLiftImpact: state.onLiftImpact,
-        home: state.dimensions.droppables[state.critical.droppable.id],
-        viewport: state.viewport,
-        draggables: state.dimensions.draggables
-      }),
-          impact = _getDropImpact.impact,
-          didDropInsideDroppable = _getDropImpact.didDropInsideDroppable;
-
-      var destination = didDropInsideDroppable ? tryGetDestination(impact) : null;
-      var combine = didDropInsideDroppable ? tryGetCombine(impact) : null;
-      var source = {
-        index: critical.draggable.index,
-        droppableId: critical.droppable.id
-      };
-      var result = {
-        draggableId: draggable.descriptor.id,
-        type: draggable.descriptor.type,
-        source: source,
-        reason: reason,
-        mode: state.movementMode,
-        destination: destination,
-        combine: combine
-      };
-      var newHomeClientOffset = getNewHomeClientOffset({
-        impact: impact,
-        draggable: draggable,
-        dimensions: dimensions,
-        viewport: state.viewport,
-        afterCritical: state.afterCritical
-      });
-      var completed = {
-        critical: state.critical,
-        afterCritical: state.afterCritical,
-        result: result,
-        impact: impact
-      };
-      var isAnimationRequired = !isEqual(state.current.client.offset, newHomeClientOffset) || Boolean(result.combine);
-
-      if (!isAnimationRequired) {
-        dispatch(completeDrop({
-          completed: completed
-        }));
-        return;
-      }
-
-      var dropDuration = getDropDuration({
-        current: state.current.client.offset,
-        destination: newHomeClientOffset,
-        reason: reason
-      });
-      var args = {
-        newHomeClientOffset: newHomeClientOffset,
-        dropDuration: dropDuration,
-        completed: completed
-      };
-      dispatch(animateDrop(args));
-    };
-  };
-});
-
-var getWindowScroll = (function () {
-  return {
-    x: window.pageXOffset,
-    y: window.pageYOffset
-  };
-});
-
-function getWindowScrollBinding(update) {
-  return {
-    eventName: 'scroll',
-    options: {
-      passive: true,
-      capture: false
-    },
-    fn: function fn(event) {
-      if (event.target !== window && event.target !== window.document) {
-        return;
-      }
-
-      update();
-    }
-  };
-}
-
-function getScrollListener(_ref) {
-  var onWindowScroll = _ref.onWindowScroll;
-
-  function updateScroll() {
-    onWindowScroll(getWindowScroll());
-  }
-
-  var scheduled = (0,raf_schd__WEBPACK_IMPORTED_MODULE_7__["default"])(updateScroll);
-  var binding = getWindowScrollBinding(scheduled);
-  var unbind = noop;
-
-  function isActive() {
-    return unbind !== noop;
-  }
-
-  function start() {
-    !!isActive() ?  true ? invariant(false, 'Cannot start scroll listener when already active') : 0 : void 0;
-    unbind = bindEvents(window, [binding]);
-  }
-
-  function stop() {
-    !isActive() ?  true ? invariant(false, 'Cannot stop scroll listener when not active') : 0 : void 0;
-    scheduled.cancel();
-    unbind();
-    unbind = noop;
-  }
-
-  return {
-    start: start,
-    stop: stop,
-    isActive: isActive
-  };
-}
-
-var shouldEnd = function shouldEnd(action) {
-  return action.type === 'DROP_COMPLETE' || action.type === 'DROP_ANIMATE' || action.type === 'FLUSH';
-};
-
-var scrollListener = (function (store) {
-  var listener = getScrollListener({
-    onWindowScroll: function onWindowScroll(newScroll) {
-      store.dispatch(moveByWindowScroll({
-        newScroll: newScroll
-      }));
-    }
-  });
-  return function (next) {
-    return function (action) {
-      if (!listener.isActive() && action.type === 'INITIAL_PUBLISH') {
-        listener.start();
-      }
-
-      if (listener.isActive() && shouldEnd(action)) {
-        listener.stop();
-      }
-
-      next(action);
-    };
-  };
-});
-
-var getExpiringAnnounce = (function (announce) {
-  var wasCalled = false;
-  var isExpired = false;
-  var timeoutId = setTimeout(function () {
-    isExpired = true;
-  });
-
-  var result = function result(message) {
-    if (wasCalled) {
-       true ? warning('Announcement already made. Not making a second announcement') : 0;
-      return;
-    }
-
-    if (isExpired) {
-       true ? warning("\n        Announcements cannot be made asynchronously.\n        Default message has already been announced.\n      ") : 0;
-      return;
-    }
-
-    wasCalled = true;
-    announce(message);
-    clearTimeout(timeoutId);
-  };
-
-  result.wasCalled = function () {
-    return wasCalled;
-  };
-
-  return result;
-});
-
-var getAsyncMarshal = (function () {
-  var entries = [];
-
-  var execute = function execute(timerId) {
-    var index = findIndex(entries, function (item) {
-      return item.timerId === timerId;
-    });
-    !(index !== -1) ?  true ? invariant(false, 'Could not find timer') : 0 : void 0;
-
-    var _entries$splice = entries.splice(index, 1),
-        entry = _entries$splice[0];
-
-    entry.callback();
-  };
-
-  var add = function add(fn) {
-    var timerId = setTimeout(function () {
-      return execute(timerId);
-    });
-    var entry = {
-      timerId: timerId,
-      callback: fn
-    };
-    entries.push(entry);
-  };
-
-  var flush = function flush() {
-    if (!entries.length) {
-      return;
-    }
-
-    var shallow = [].concat(entries);
-    entries.length = 0;
-    shallow.forEach(function (entry) {
-      clearTimeout(entry.timerId);
-      entry.callback();
-    });
-  };
-
-  return {
-    add: add,
-    flush: flush
-  };
-});
-
-var areLocationsEqual = function areLocationsEqual(first, second) {
-  if (first == null && second == null) {
-    return true;
-  }
-
-  if (first == null || second == null) {
-    return false;
-  }
-
-  return first.droppableId === second.droppableId && first.index === second.index;
-};
-var isCombineEqual = function isCombineEqual(first, second) {
-  if (first == null && second == null) {
-    return true;
-  }
-
-  if (first == null || second == null) {
-    return false;
-  }
-
-  return first.draggableId === second.draggableId && first.droppableId === second.droppableId;
-};
-var isCriticalEqual = function isCriticalEqual(first, second) {
-  if (first === second) {
-    return true;
-  }
-
-  var isDraggableEqual = first.draggable.id === second.draggable.id && first.draggable.droppableId === second.draggable.droppableId && first.draggable.type === second.draggable.type && first.draggable.index === second.draggable.index;
-  var isDroppableEqual = first.droppable.id === second.droppable.id && first.droppable.type === second.droppable.type;
-  return isDraggableEqual && isDroppableEqual;
-};
-
-var withTimings = function withTimings(key, fn) {
-  start();
-  fn();
-  finish();
-};
-
-var getDragStart = function getDragStart(critical, mode) {
-  return {
-    draggableId: critical.draggable.id,
-    type: critical.droppable.type,
-    source: {
-      droppableId: critical.droppable.id,
-      index: critical.draggable.index
-    },
-    mode: mode
-  };
-};
-
-var execute = function execute(responder, data, announce, getDefaultMessage) {
-  if (!responder) {
-    announce(getDefaultMessage(data));
-    return;
-  }
-
-  var willExpire = getExpiringAnnounce(announce);
-  var provided = {
-    announce: willExpire
-  };
-  responder(data, provided);
-
-  if (!willExpire.wasCalled()) {
-    announce(getDefaultMessage(data));
-  }
-};
-
-var getPublisher = (function (getResponders, announce) {
-  var asyncMarshal = getAsyncMarshal();
-  var dragging = null;
-
-  var beforeCapture = function beforeCapture(draggableId, mode) {
-    !!dragging ?  true ? invariant(false, 'Cannot fire onBeforeCapture as a drag start has already been published') : 0 : void 0;
-    withTimings('onBeforeCapture', function () {
-      var fn = getResponders().onBeforeCapture;
-
-      if (fn) {
-        var before = {
-          draggableId: draggableId,
-          mode: mode
-        };
-        fn(before);
-      }
-    });
-  };
-
-  var beforeStart = function beforeStart(critical, mode) {
-    !!dragging ?  true ? invariant(false, 'Cannot fire onBeforeDragStart as a drag start has already been published') : 0 : void 0;
-    withTimings('onBeforeDragStart', function () {
-      var fn = getResponders().onBeforeDragStart;
-
-      if (fn) {
-        fn(getDragStart(critical, mode));
-      }
-    });
-  };
-
-  var start = function start(critical, mode) {
-    !!dragging ?  true ? invariant(false, 'Cannot fire onBeforeDragStart as a drag start has already been published') : 0 : void 0;
-    var data = getDragStart(critical, mode);
-    dragging = {
-      mode: mode,
-      lastCritical: critical,
-      lastLocation: data.source,
-      lastCombine: null
-    };
-    asyncMarshal.add(function () {
-      withTimings('onDragStart', function () {
-        return execute(getResponders().onDragStart, data, announce, preset.onDragStart);
-      });
-    });
-  };
-
-  var update = function update(critical, impact) {
-    var location = tryGetDestination(impact);
-    var combine = tryGetCombine(impact);
-    !dragging ?  true ? invariant(false, 'Cannot fire onDragMove when onDragStart has not been called') : 0 : void 0;
-    var hasCriticalChanged = !isCriticalEqual(critical, dragging.lastCritical);
-
-    if (hasCriticalChanged) {
-      dragging.lastCritical = critical;
-    }
-
-    var hasLocationChanged = !areLocationsEqual(dragging.lastLocation, location);
-
-    if (hasLocationChanged) {
-      dragging.lastLocation = location;
-    }
-
-    var hasGroupingChanged = !isCombineEqual(dragging.lastCombine, combine);
-
-    if (hasGroupingChanged) {
-      dragging.lastCombine = combine;
-    }
-
-    if (!hasCriticalChanged && !hasLocationChanged && !hasGroupingChanged) {
-      return;
-    }
-
-    var data = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, getDragStart(critical, dragging.mode), {
-      combine: combine,
-      destination: location
-    });
-
-    asyncMarshal.add(function () {
-      withTimings('onDragUpdate', function () {
-        return execute(getResponders().onDragUpdate, data, announce, preset.onDragUpdate);
-      });
-    });
-  };
-
-  var flush = function flush() {
-    !dragging ?  true ? invariant(false, 'Can only flush responders while dragging') : 0 : void 0;
-    asyncMarshal.flush();
-  };
-
-  var drop = function drop(result) {
-    !dragging ?  true ? invariant(false, 'Cannot fire onDragEnd when there is no matching onDragStart') : 0 : void 0;
-    dragging = null;
-    withTimings('onDragEnd', function () {
-      return execute(getResponders().onDragEnd, result, announce, preset.onDragEnd);
-    });
-  };
-
-  var abort = function abort() {
-    if (!dragging) {
-      return;
-    }
-
-    var result = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, getDragStart(dragging.lastCritical, dragging.mode), {
-      combine: null,
-      destination: null,
-      reason: 'CANCEL'
-    });
-
-    drop(result);
-  };
-
-  return {
-    beforeCapture: beforeCapture,
-    beforeStart: beforeStart,
-    start: start,
-    update: update,
-    flush: flush,
-    drop: drop,
-    abort: abort
-  };
-});
-
-var responders = (function (getResponders, announce) {
-  var publisher = getPublisher(getResponders, announce);
-  return function (store) {
-    return function (next) {
-      return function (action) {
-        if (action.type === 'BEFORE_INITIAL_CAPTURE') {
-          publisher.beforeCapture(action.payload.draggableId, action.payload.movementMode);
-          return;
-        }
-
-        if (action.type === 'INITIAL_PUBLISH') {
-          var critical = action.payload.critical;
-          publisher.beforeStart(critical, action.payload.movementMode);
-          next(action);
-          publisher.start(critical, action.payload.movementMode);
-          return;
-        }
-
-        if (action.type === 'DROP_COMPLETE') {
-          var result = action.payload.completed.result;
-          publisher.flush();
-          next(action);
-          publisher.drop(result);
-          return;
-        }
-
-        next(action);
-
-        if (action.type === 'FLUSH') {
-          publisher.abort();
-          return;
-        }
-
-        var state = store.getState();
-
-        if (state.phase === 'DRAGGING') {
-          publisher.update(state.critical, state.impact);
-        }
-      };
-    };
-  };
-});
-
-var dropAnimationFinish = (function (store) {
-  return function (next) {
-    return function (action) {
-      if (action.type !== 'DROP_ANIMATION_FINISHED') {
-        next(action);
-        return;
-      }
-
-      var state = store.getState();
-      !(state.phase === 'DROP_ANIMATING') ?  true ? invariant(false, 'Cannot finish a drop animating when no drop is occurring') : 0 : void 0;
-      store.dispatch(completeDrop({
-        completed: state.completed
-      }));
-    };
-  };
-});
-
-var dropAnimationFlushOnScroll = (function (store) {
-  var unbind = null;
-  var frameId = null;
-
-  function clear() {
-    if (frameId) {
-      cancelAnimationFrame(frameId);
-      frameId = null;
-    }
-
-    if (unbind) {
-      unbind();
-      unbind = null;
-    }
-  }
-
-  return function (next) {
-    return function (action) {
-      if (action.type === 'FLUSH' || action.type === 'DROP_COMPLETE' || action.type === 'DROP_ANIMATION_FINISHED') {
-        clear();
-      }
-
-      next(action);
-
-      if (action.type !== 'DROP_ANIMATE') {
-        return;
-      }
-
-      var binding = {
-        eventName: 'scroll',
-        options: {
-          capture: true,
-          passive: false,
-          once: true
-        },
-        fn: function flushDropAnimation() {
-          var state = store.getState();
-
-          if (state.phase === 'DROP_ANIMATING') {
-            store.dispatch(dropAnimationFinished());
-          }
-        }
-      };
-      frameId = requestAnimationFrame(function () {
-        frameId = null;
-        unbind = bindEvents(window, [binding]);
-      });
-    };
-  };
-});
-
-var dimensionMarshalStopper = (function (marshal) {
-  return function () {
-    return function (next) {
-      return function (action) {
-        if (action.type === 'DROP_COMPLETE' || action.type === 'FLUSH' || action.type === 'DROP_ANIMATE') {
-          marshal.stopPublishing();
-        }
-
-        next(action);
-      };
-    };
-  };
-});
-
-var focus = (function (marshal) {
-  var isWatching = false;
-  return function () {
-    return function (next) {
-      return function (action) {
-        if (action.type === 'INITIAL_PUBLISH') {
-          isWatching = true;
-          marshal.tryRecordFocus(action.payload.critical.draggable.id);
-          next(action);
-          marshal.tryRestoreFocusRecorded();
-          return;
-        }
-
-        next(action);
-
-        if (!isWatching) {
-          return;
-        }
-
-        if (action.type === 'FLUSH') {
-          isWatching = false;
-          marshal.tryRestoreFocusRecorded();
-          return;
-        }
-
-        if (action.type === 'DROP_COMPLETE') {
-          isWatching = false;
-          var result = action.payload.completed.result;
-
-          if (result.combine) {
-            marshal.tryShiftRecord(result.draggableId, result.combine.draggableId);
-          }
-
-          marshal.tryRestoreFocusRecorded();
-        }
-      };
-    };
-  };
-});
-
-var shouldStop = function shouldStop(action) {
-  return action.type === 'DROP_COMPLETE' || action.type === 'DROP_ANIMATE' || action.type === 'FLUSH';
-};
-
-var autoScroll = (function (autoScroller) {
-  return function (store) {
-    return function (next) {
-      return function (action) {
-        if (shouldStop(action)) {
-          autoScroller.stop();
-          next(action);
-          return;
-        }
-
-        if (action.type === 'INITIAL_PUBLISH') {
-          next(action);
-          var state = store.getState();
-          !(state.phase === 'DRAGGING') ?  true ? invariant(false, 'Expected phase to be DRAGGING after INITIAL_PUBLISH') : 0 : void 0;
-          autoScroller.start(state);
-          return;
-        }
-
-        next(action);
-        autoScroller.scroll(store.getState());
-      };
-    };
-  };
-});
-
-var pendingDrop = (function (store) {
-  return function (next) {
-    return function (action) {
-      next(action);
-
-      if (action.type !== 'PUBLISH_WHILE_DRAGGING') {
-        return;
-      }
-
-      var postActionState = store.getState();
-
-      if (postActionState.phase !== 'DROP_PENDING') {
-        return;
-      }
-
-      if (postActionState.isWaiting) {
-        return;
-      }
-
-      store.dispatch(drop({
-        reason: postActionState.reason
-      }));
-    };
-  };
-});
-
-var composeEnhancers =  true && typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-  name: 'react-beautiful-dnd'
-}) : redux__WEBPACK_IMPORTED_MODULE_8__.compose;
-var createStore = (function (_ref) {
-  var dimensionMarshal = _ref.dimensionMarshal,
-      focusMarshal = _ref.focusMarshal,
-      styleMarshal = _ref.styleMarshal,
-      getResponders = _ref.getResponders,
-      announce = _ref.announce,
-      autoScroller = _ref.autoScroller;
-  return (0,redux__WEBPACK_IMPORTED_MODULE_8__.createStore)(reducer, composeEnhancers((0,redux__WEBPACK_IMPORTED_MODULE_8__.applyMiddleware)(style(styleMarshal), dimensionMarshalStopper(dimensionMarshal), lift$1(dimensionMarshal), drop$1, dropAnimationFinish, dropAnimationFlushOnScroll, pendingDrop, autoScroll(autoScroller), scrollListener, focus(focusMarshal), responders(getResponders, announce))));
-});
-
-var clean$1 = function clean() {
-  return {
-    additions: {},
-    removals: {},
-    modified: {}
-  };
-};
-function createPublisher(_ref) {
-  var registry = _ref.registry,
-      callbacks = _ref.callbacks;
-  var staging = clean$1();
-  var frameId = null;
-
-  var collect = function collect() {
-    if (frameId) {
-      return;
-    }
-
-    callbacks.collectionStarting();
-    frameId = requestAnimationFrame(function () {
-      frameId = null;
-      start();
-      var _staging = staging,
-          additions = _staging.additions,
-          removals = _staging.removals,
-          modified = _staging.modified;
-      var added = Object.keys(additions).map(function (id) {
-        return registry.draggable.getById(id).getDimension(origin);
-      }).sort(function (a, b) {
-        return a.descriptor.index - b.descriptor.index;
-      });
-      var updated = Object.keys(modified).map(function (id) {
-        var entry = registry.droppable.getById(id);
-        var scroll = entry.callbacks.getScrollWhileDragging();
-        return {
-          droppableId: id,
-          scroll: scroll
-        };
-      });
-      var result = {
-        additions: added,
-        removals: Object.keys(removals),
-        modified: updated
-      };
-      staging = clean$1();
-      finish();
-      callbacks.publish(result);
-    });
-  };
-
-  var add = function add(entry) {
-    var id = entry.descriptor.id;
-    staging.additions[id] = entry;
-    staging.modified[entry.descriptor.droppableId] = true;
-
-    if (staging.removals[id]) {
-      delete staging.removals[id];
-    }
-
-    collect();
-  };
-
-  var remove = function remove(entry) {
-    var descriptor = entry.descriptor;
-    staging.removals[descriptor.id] = true;
-    staging.modified[descriptor.droppableId] = true;
-
-    if (staging.additions[descriptor.id]) {
-      delete staging.additions[descriptor.id];
-    }
-
-    collect();
-  };
-
-  var stop = function stop() {
-    if (!frameId) {
-      return;
-    }
-
-    cancelAnimationFrame(frameId);
-    frameId = null;
-    staging = clean$1();
-  };
-
-  return {
-    add: add,
-    remove: remove,
-    stop: stop
-  };
-}
-
-var getMaxScroll = (function (_ref) {
-  var scrollHeight = _ref.scrollHeight,
-      scrollWidth = _ref.scrollWidth,
-      height = _ref.height,
-      width = _ref.width;
-  var maxScroll = subtract({
-    x: scrollWidth,
-    y: scrollHeight
-  }, {
-    x: width,
-    y: height
-  });
-  var adjustedMaxScroll = {
-    x: Math.max(0, maxScroll.x),
-    y: Math.max(0, maxScroll.y)
-  };
-  return adjustedMaxScroll;
-});
-
-var getDocumentElement = (function () {
-  var doc = document.documentElement;
-  !doc ?  true ? invariant(false, 'Cannot find document.documentElement') : 0 : void 0;
-  return doc;
-});
-
-var getMaxWindowScroll = (function () {
-  var doc = getDocumentElement();
-  var maxScroll = getMaxScroll({
-    scrollHeight: doc.scrollHeight,
-    scrollWidth: doc.scrollWidth,
-    width: doc.clientWidth,
-    height: doc.clientHeight
-  });
-  return maxScroll;
-});
-
-var getViewport = (function () {
-  var scroll = getWindowScroll();
-  var maxScroll = getMaxWindowScroll();
-  var top = scroll.y;
-  var left = scroll.x;
-  var doc = getDocumentElement();
-  var width = doc.clientWidth;
-  var height = doc.clientHeight;
-  var right = left + width;
-  var bottom = top + height;
-  var frame = (0,css_box_model__WEBPACK_IMPORTED_MODULE_5__.getRect)({
-    top: top,
-    left: left,
-    right: right,
-    bottom: bottom
-  });
-  var viewport = {
-    frame: frame,
-    scroll: {
-      initial: scroll,
-      current: scroll,
-      max: maxScroll,
-      diff: {
-        value: origin,
-        displacement: origin
-      }
-    }
-  };
-  return viewport;
-});
-
-var getInitialPublish = (function (_ref) {
-  var critical = _ref.critical,
-      scrollOptions = _ref.scrollOptions,
-      registry = _ref.registry;
-  start();
-  var viewport = getViewport();
-  var windowScroll = viewport.scroll.current;
-  var home = critical.droppable;
-  var droppables = registry.droppable.getAllByType(home.type).map(function (entry) {
-    return entry.callbacks.getDimensionAndWatchScroll(windowScroll, scrollOptions);
-  });
-  var draggables = registry.draggable.getAllByType(critical.draggable.type).map(function (entry) {
-    return entry.getDimension(windowScroll);
-  });
-  var dimensions = {
-    draggables: toDraggableMap(draggables),
-    droppables: toDroppableMap(droppables)
-  };
-  finish();
-  var result = {
-    dimensions: dimensions,
-    critical: critical,
-    viewport: viewport
-  };
-  return result;
-});
-
-function shouldPublishUpdate(registry, dragging, entry) {
-  if (entry.descriptor.id === dragging.id) {
-    return false;
-  }
-
-  if (entry.descriptor.type !== dragging.type) {
-    return false;
-  }
-
-  var home = registry.droppable.getById(entry.descriptor.droppableId);
-
-  if (home.descriptor.mode !== 'virtual') {
-     true ? warning("\n      You are attempting to add or remove a Draggable [id: " + entry.descriptor.id + "]\n      while a drag is occurring. This is only supported for virtual lists.\n\n      See https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/patterns/virtual-lists.md\n    ") : 0;
-    return false;
-  }
-
-  return true;
-}
-
-var createDimensionMarshal = (function (registry, callbacks) {
-  var collection = null;
-  var publisher = createPublisher({
-    callbacks: {
-      publish: callbacks.publishWhileDragging,
-      collectionStarting: callbacks.collectionStarting
-    },
-    registry: registry
-  });
-
-  var updateDroppableIsEnabled = function updateDroppableIsEnabled(id, isEnabled) {
-    !registry.droppable.exists(id) ?  true ? invariant(false, "Cannot update is enabled flag of Droppable " + id + " as it is not registered") : 0 : void 0;
-
-    if (!collection) {
-      return;
-    }
-
-    callbacks.updateDroppableIsEnabled({
-      id: id,
-      isEnabled: isEnabled
-    });
-  };
-
-  var updateDroppableIsCombineEnabled = function updateDroppableIsCombineEnabled(id, isCombineEnabled) {
-    if (!collection) {
-      return;
-    }
-
-    !registry.droppable.exists(id) ?  true ? invariant(false, "Cannot update isCombineEnabled flag of Droppable " + id + " as it is not registered") : 0 : void 0;
-    callbacks.updateDroppableIsCombineEnabled({
-      id: id,
-      isCombineEnabled: isCombineEnabled
-    });
-  };
-
-  var updateDroppableScroll = function updateDroppableScroll(id, newScroll) {
-    if (!collection) {
-      return;
-    }
-
-    !registry.droppable.exists(id) ?  true ? invariant(false, "Cannot update the scroll on Droppable " + id + " as it is not registered") : 0 : void 0;
-    callbacks.updateDroppableScroll({
-      id: id,
-      newScroll: newScroll
-    });
-  };
-
-  var scrollDroppable = function scrollDroppable(id, change) {
-    if (!collection) {
-      return;
-    }
-
-    registry.droppable.getById(id).callbacks.scroll(change);
-  };
-
-  var stopPublishing = function stopPublishing() {
-    if (!collection) {
-      return;
-    }
-
-    publisher.stop();
-    var home = collection.critical.droppable;
-    registry.droppable.getAllByType(home.type).forEach(function (entry) {
-      return entry.callbacks.dragStopped();
-    });
-    collection.unsubscribe();
-    collection = null;
-  };
-
-  var subscriber = function subscriber(event) {
-    !collection ?  true ? invariant(false, 'Should only be subscribed when a collection is occurring') : 0 : void 0;
-    var dragging = collection.critical.draggable;
-
-    if (event.type === 'ADDITION') {
-      if (shouldPublishUpdate(registry, dragging, event.value)) {
-        publisher.add(event.value);
-      }
-    }
-
-    if (event.type === 'REMOVAL') {
-      if (shouldPublishUpdate(registry, dragging, event.value)) {
-        publisher.remove(event.value);
-      }
-    }
-  };
-
-  var startPublishing = function startPublishing(request) {
-    !!collection ?  true ? invariant(false, 'Cannot start capturing critical dimensions as there is already a collection') : 0 : void 0;
-    var entry = registry.draggable.getById(request.draggableId);
-    var home = registry.droppable.getById(entry.descriptor.droppableId);
-    var critical = {
-      draggable: entry.descriptor,
-      droppable: home.descriptor
-    };
-    var unsubscribe = registry.subscribe(subscriber);
-    collection = {
-      critical: critical,
-      unsubscribe: unsubscribe
-    };
-    return getInitialPublish({
-      critical: critical,
-      registry: registry,
-      scrollOptions: request.scrollOptions
-    });
-  };
-
-  var marshal = {
-    updateDroppableIsEnabled: updateDroppableIsEnabled,
-    updateDroppableIsCombineEnabled: updateDroppableIsCombineEnabled,
-    scrollDroppable: scrollDroppable,
-    updateDroppableScroll: updateDroppableScroll,
-    startPublishing: startPublishing,
-    stopPublishing: stopPublishing
-  };
-  return marshal;
-});
-
-var canStartDrag = (function (state, id) {
-  if (state.phase === 'IDLE') {
-    return true;
-  }
-
-  if (state.phase !== 'DROP_ANIMATING') {
-    return false;
-  }
-
-  if (state.completed.result.draggableId === id) {
-    return false;
-  }
-
-  return state.completed.result.reason === 'DROP';
-});
-
-var scrollWindow = (function (change) {
-  window.scrollBy(change.x, change.y);
-});
-
-var getScrollableDroppables = (0,memoize_one__WEBPACK_IMPORTED_MODULE_6__["default"])(function (droppables) {
-  return toDroppableList(droppables).filter(function (droppable) {
-    if (!droppable.isEnabled) {
-      return false;
-    }
-
-    if (!droppable.frame) {
-      return false;
-    }
-
-    return true;
-  });
-});
-
-var getScrollableDroppableOver = function getScrollableDroppableOver(target, droppables) {
-  var maybe = find(getScrollableDroppables(droppables), function (droppable) {
-    !droppable.frame ?  true ? invariant(false, 'Invalid result') : 0 : void 0;
-    return isPositionInFrame(droppable.frame.pageMarginBox)(target);
-  });
-  return maybe;
-};
-
-var getBestScrollableDroppable = (function (_ref) {
-  var center = _ref.center,
-      destination = _ref.destination,
-      droppables = _ref.droppables;
-
-  if (destination) {
-    var _dimension = droppables[destination];
-
-    if (!_dimension.frame) {
-      return null;
-    }
-
-    return _dimension;
-  }
-
-  var dimension = getScrollableDroppableOver(center, droppables);
-  return dimension;
-});
-
-var config = {
-  startFromPercentage: 0.25,
-  maxScrollAtPercentage: 0.05,
-  maxPixelScroll: 28,
-  ease: function ease(percentage) {
-    return Math.pow(percentage, 2);
-  },
-  durationDampening: {
-    stopDampeningAt: 1200,
-    accelerateAt: 360
-  }
-};
-
-var getDistanceThresholds = (function (container, axis) {
-  var startScrollingFrom = container[axis.size] * config.startFromPercentage;
-  var maxScrollValueAt = container[axis.size] * config.maxScrollAtPercentage;
-  var thresholds = {
-    startScrollingFrom: startScrollingFrom,
-    maxScrollValueAt: maxScrollValueAt
-  };
-  return thresholds;
-});
-
-var getPercentage = (function (_ref) {
-  var startOfRange = _ref.startOfRange,
-      endOfRange = _ref.endOfRange,
-      current = _ref.current;
-  var range = endOfRange - startOfRange;
-
-  if (range === 0) {
-     true ? warning("\n      Detected distance range of 0 in the fluid auto scroller\n      This is unexpected and would cause a divide by 0 issue.\n      Not allowing an auto scroll\n    ") : 0;
-    return 0;
-  }
-
-  var currentInRange = current - startOfRange;
-  var percentage = currentInRange / range;
-  return percentage;
-});
-
-var minScroll = 1;
-
-var getValueFromDistance = (function (distanceToEdge, thresholds) {
-  if (distanceToEdge > thresholds.startScrollingFrom) {
-    return 0;
-  }
-
-  if (distanceToEdge <= thresholds.maxScrollValueAt) {
-    return config.maxPixelScroll;
-  }
-
-  if (distanceToEdge === thresholds.startScrollingFrom) {
-    return minScroll;
-  }
-
-  var percentageFromMaxScrollValueAt = getPercentage({
-    startOfRange: thresholds.maxScrollValueAt,
-    endOfRange: thresholds.startScrollingFrom,
-    current: distanceToEdge
-  });
-  var percentageFromStartScrollingFrom = 1 - percentageFromMaxScrollValueAt;
-  var scroll = config.maxPixelScroll * config.ease(percentageFromStartScrollingFrom);
-  return Math.ceil(scroll);
-});
-
-var accelerateAt = config.durationDampening.accelerateAt;
-var stopAt = config.durationDampening.stopDampeningAt;
-var dampenValueByTime = (function (proposedScroll, dragStartTime) {
-  var startOfRange = dragStartTime;
-  var endOfRange = stopAt;
-  var now = Date.now();
-  var runTime = now - startOfRange;
-
-  if (runTime >= stopAt) {
-    return proposedScroll;
-  }
-
-  if (runTime < accelerateAt) {
-    return minScroll;
-  }
-
-  var betweenAccelerateAtAndStopAtPercentage = getPercentage({
-    startOfRange: accelerateAt,
-    endOfRange: endOfRange,
-    current: runTime
-  });
-  var scroll = proposedScroll * config.ease(betweenAccelerateAtAndStopAtPercentage);
-  return Math.ceil(scroll);
-});
-
-var getValue = (function (_ref) {
-  var distanceToEdge = _ref.distanceToEdge,
-      thresholds = _ref.thresholds,
-      dragStartTime = _ref.dragStartTime,
-      shouldUseTimeDampening = _ref.shouldUseTimeDampening;
-  var scroll = getValueFromDistance(distanceToEdge, thresholds);
-
-  if (scroll === 0) {
-    return 0;
-  }
-
-  if (!shouldUseTimeDampening) {
-    return scroll;
-  }
-
-  return Math.max(dampenValueByTime(scroll, dragStartTime), minScroll);
-});
-
-var getScrollOnAxis = (function (_ref) {
-  var container = _ref.container,
-      distanceToEdges = _ref.distanceToEdges,
-      dragStartTime = _ref.dragStartTime,
-      axis = _ref.axis,
-      shouldUseTimeDampening = _ref.shouldUseTimeDampening;
-  var thresholds = getDistanceThresholds(container, axis);
-  var isCloserToEnd = distanceToEdges[axis.end] < distanceToEdges[axis.start];
-
-  if (isCloserToEnd) {
-    return getValue({
-      distanceToEdge: distanceToEdges[axis.end],
-      thresholds: thresholds,
-      dragStartTime: dragStartTime,
-      shouldUseTimeDampening: shouldUseTimeDampening
-    });
-  }
-
-  return -1 * getValue({
-    distanceToEdge: distanceToEdges[axis.start],
-    thresholds: thresholds,
-    dragStartTime: dragStartTime,
-    shouldUseTimeDampening: shouldUseTimeDampening
-  });
-});
-
-var adjustForSizeLimits = (function (_ref) {
-  var container = _ref.container,
-      subject = _ref.subject,
-      proposedScroll = _ref.proposedScroll;
-  var isTooBigVertically = subject.height > container.height;
-  var isTooBigHorizontally = subject.width > container.width;
-
-  if (!isTooBigHorizontally && !isTooBigVertically) {
-    return proposedScroll;
-  }
-
-  if (isTooBigHorizontally && isTooBigVertically) {
-    return null;
-  }
-
-  return {
-    x: isTooBigHorizontally ? 0 : proposedScroll.x,
-    y: isTooBigVertically ? 0 : proposedScroll.y
-  };
-});
-
-var clean$2 = apply(function (value) {
-  return value === 0 ? 0 : value;
-});
-var getScroll = (function (_ref) {
-  var dragStartTime = _ref.dragStartTime,
-      container = _ref.container,
-      subject = _ref.subject,
-      center = _ref.center,
-      shouldUseTimeDampening = _ref.shouldUseTimeDampening;
-  var distanceToEdges = {
-    top: center.y - container.top,
-    right: container.right - center.x,
-    bottom: container.bottom - center.y,
-    left: center.x - container.left
-  };
-  var y = getScrollOnAxis({
-    container: container,
-    distanceToEdges: distanceToEdges,
-    dragStartTime: dragStartTime,
-    axis: vertical,
-    shouldUseTimeDampening: shouldUseTimeDampening
-  });
-  var x = getScrollOnAxis({
-    container: container,
-    distanceToEdges: distanceToEdges,
-    dragStartTime: dragStartTime,
-    axis: horizontal,
-    shouldUseTimeDampening: shouldUseTimeDampening
-  });
-  var required = clean$2({
-    x: x,
-    y: y
-  });
-
-  if (isEqual(required, origin)) {
-    return null;
-  }
-
-  var limited = adjustForSizeLimits({
-    container: container,
-    subject: subject,
-    proposedScroll: required
-  });
-
-  if (!limited) {
-    return null;
-  }
-
-  return isEqual(limited, origin) ? null : limited;
-});
-
-var smallestSigned = apply(function (value) {
-  if (value === 0) {
-    return 0;
-  }
-
-  return value > 0 ? 1 : -1;
-});
-var getOverlap = function () {
-  var getRemainder = function getRemainder(target, max) {
-    if (target < 0) {
-      return target;
-    }
-
-    if (target > max) {
-      return target - max;
-    }
-
-    return 0;
-  };
-
-  return function (_ref) {
-    var current = _ref.current,
-        max = _ref.max,
-        change = _ref.change;
-    var targetScroll = add(current, change);
-    var overlap = {
-      x: getRemainder(targetScroll.x, max.x),
-      y: getRemainder(targetScroll.y, max.y)
-    };
-
-    if (isEqual(overlap, origin)) {
-      return null;
-    }
-
-    return overlap;
-  };
-}();
-var canPartiallyScroll = function canPartiallyScroll(_ref2) {
-  var rawMax = _ref2.max,
-      current = _ref2.current,
-      change = _ref2.change;
-  var max = {
-    x: Math.max(current.x, rawMax.x),
-    y: Math.max(current.y, rawMax.y)
-  };
-  var smallestChange = smallestSigned(change);
-  var overlap = getOverlap({
-    max: max,
-    current: current,
-    change: smallestChange
-  });
-
-  if (!overlap) {
-    return true;
-  }
-
-  if (smallestChange.x !== 0 && overlap.x === 0) {
-    return true;
-  }
-
-  if (smallestChange.y !== 0 && overlap.y === 0) {
-    return true;
-  }
-
-  return false;
-};
-var canScrollWindow = function canScrollWindow(viewport, change) {
-  return canPartiallyScroll({
-    current: viewport.scroll.current,
-    max: viewport.scroll.max,
-    change: change
-  });
-};
-var getWindowOverlap = function getWindowOverlap(viewport, change) {
-  if (!canScrollWindow(viewport, change)) {
-    return null;
-  }
-
-  var max = viewport.scroll.max;
-  var current = viewport.scroll.current;
-  return getOverlap({
-    current: current,
-    max: max,
-    change: change
-  });
-};
-var canScrollDroppable = function canScrollDroppable(droppable, change) {
-  var frame = droppable.frame;
-
-  if (!frame) {
-    return false;
-  }
-
-  return canPartiallyScroll({
-    current: frame.scroll.current,
-    max: frame.scroll.max,
-    change: change
-  });
-};
-var getDroppableOverlap = function getDroppableOverlap(droppable, change) {
-  var frame = droppable.frame;
-
-  if (!frame) {
-    return null;
-  }
-
-  if (!canScrollDroppable(droppable, change)) {
-    return null;
-  }
-
-  return getOverlap({
-    current: frame.scroll.current,
-    max: frame.scroll.max,
-    change: change
-  });
-};
-
-var getWindowScrollChange = (function (_ref) {
-  var viewport = _ref.viewport,
-      subject = _ref.subject,
-      center = _ref.center,
-      dragStartTime = _ref.dragStartTime,
-      shouldUseTimeDampening = _ref.shouldUseTimeDampening;
-  var scroll = getScroll({
-    dragStartTime: dragStartTime,
-    container: viewport.frame,
-    subject: subject,
-    center: center,
-    shouldUseTimeDampening: shouldUseTimeDampening
-  });
-  return scroll && canScrollWindow(viewport, scroll) ? scroll : null;
-});
-
-var getDroppableScrollChange = (function (_ref) {
-  var droppable = _ref.droppable,
-      subject = _ref.subject,
-      center = _ref.center,
-      dragStartTime = _ref.dragStartTime,
-      shouldUseTimeDampening = _ref.shouldUseTimeDampening;
-  var frame = droppable.frame;
-
-  if (!frame) {
-    return null;
-  }
-
-  var scroll = getScroll({
-    dragStartTime: dragStartTime,
-    container: frame.pageMarginBox,
-    subject: subject,
-    center: center,
-    shouldUseTimeDampening: shouldUseTimeDampening
-  });
-  return scroll && canScrollDroppable(droppable, scroll) ? scroll : null;
-});
-
-var scroll$1 = (function (_ref) {
-  var state = _ref.state,
-      dragStartTime = _ref.dragStartTime,
-      shouldUseTimeDampening = _ref.shouldUseTimeDampening,
-      scrollWindow = _ref.scrollWindow,
-      scrollDroppable = _ref.scrollDroppable;
-  var center = state.current.page.borderBoxCenter;
-  var draggable = state.dimensions.draggables[state.critical.draggable.id];
-  var subject = draggable.page.marginBox;
-
-  if (state.isWindowScrollAllowed) {
-    var viewport = state.viewport;
-
-    var _change = getWindowScrollChange({
-      dragStartTime: dragStartTime,
-      viewport: viewport,
-      subject: subject,
-      center: center,
-      shouldUseTimeDampening: shouldUseTimeDampening
-    });
-
-    if (_change) {
-      scrollWindow(_change);
-      return;
-    }
-  }
-
-  var droppable = getBestScrollableDroppable({
-    center: center,
-    destination: whatIsDraggedOver(state.impact),
-    droppables: state.dimensions.droppables
-  });
-
-  if (!droppable) {
-    return;
-  }
-
-  var change = getDroppableScrollChange({
-    dragStartTime: dragStartTime,
-    droppable: droppable,
-    subject: subject,
-    center: center,
-    shouldUseTimeDampening: shouldUseTimeDampening
-  });
-
-  if (change) {
-    scrollDroppable(droppable.descriptor.id, change);
-  }
-});
-
-var createFluidScroller = (function (_ref) {
-  var scrollWindow = _ref.scrollWindow,
-      scrollDroppable = _ref.scrollDroppable;
-  var scheduleWindowScroll = (0,raf_schd__WEBPACK_IMPORTED_MODULE_7__["default"])(scrollWindow);
-  var scheduleDroppableScroll = (0,raf_schd__WEBPACK_IMPORTED_MODULE_7__["default"])(scrollDroppable);
-  var dragging = null;
-
-  var tryScroll = function tryScroll(state) {
-    !dragging ?  true ? invariant(false, 'Cannot fluid scroll if not dragging') : 0 : void 0;
-    var _dragging = dragging,
-        shouldUseTimeDampening = _dragging.shouldUseTimeDampening,
-        dragStartTime = _dragging.dragStartTime;
-    scroll$1({
-      state: state,
-      scrollWindow: scheduleWindowScroll,
-      scrollDroppable: scheduleDroppableScroll,
-      dragStartTime: dragStartTime,
-      shouldUseTimeDampening: shouldUseTimeDampening
-    });
-  };
-
-  var start$1 = function start$1(state) {
-    start();
-    !!dragging ?  true ? invariant(false, 'Cannot start auto scrolling when already started') : 0 : void 0;
-    var dragStartTime = Date.now();
-    var wasScrollNeeded = false;
-
-    var fakeScrollCallback = function fakeScrollCallback() {
-      wasScrollNeeded = true;
-    };
-
-    scroll$1({
-      state: state,
-      dragStartTime: 0,
-      shouldUseTimeDampening: false,
-      scrollWindow: fakeScrollCallback,
-      scrollDroppable: fakeScrollCallback
-    });
-    dragging = {
-      dragStartTime: dragStartTime,
-      shouldUseTimeDampening: wasScrollNeeded
-    };
-    finish();
-
-    if (wasScrollNeeded) {
-      tryScroll(state);
-    }
-  };
-
-  var stop = function stop() {
-    if (!dragging) {
-      return;
-    }
-
-    scheduleWindowScroll.cancel();
-    scheduleDroppableScroll.cancel();
-    dragging = null;
-  };
-
-  return {
-    start: start$1,
-    stop: stop,
-    scroll: tryScroll
-  };
-});
-
-var createJumpScroller = (function (_ref) {
-  var move = _ref.move,
-      scrollDroppable = _ref.scrollDroppable,
-      scrollWindow = _ref.scrollWindow;
-
-  var moveByOffset = function moveByOffset(state, offset) {
-    var client = add(state.current.client.selection, offset);
-    move({
-      client: client
-    });
-  };
-
-  var scrollDroppableAsMuchAsItCan = function scrollDroppableAsMuchAsItCan(droppable, change) {
-    if (!canScrollDroppable(droppable, change)) {
-      return change;
-    }
-
-    var overlap = getDroppableOverlap(droppable, change);
-
-    if (!overlap) {
-      scrollDroppable(droppable.descriptor.id, change);
-      return null;
-    }
-
-    var whatTheDroppableCanScroll = subtract(change, overlap);
-    scrollDroppable(droppable.descriptor.id, whatTheDroppableCanScroll);
-    var remainder = subtract(change, whatTheDroppableCanScroll);
-    return remainder;
-  };
-
-  var scrollWindowAsMuchAsItCan = function scrollWindowAsMuchAsItCan(isWindowScrollAllowed, viewport, change) {
-    if (!isWindowScrollAllowed) {
-      return change;
-    }
-
-    if (!canScrollWindow(viewport, change)) {
-      return change;
-    }
-
-    var overlap = getWindowOverlap(viewport, change);
-
-    if (!overlap) {
-      scrollWindow(change);
-      return null;
-    }
-
-    var whatTheWindowCanScroll = subtract(change, overlap);
-    scrollWindow(whatTheWindowCanScroll);
-    var remainder = subtract(change, whatTheWindowCanScroll);
-    return remainder;
-  };
-
-  var jumpScroller = function jumpScroller(state) {
-    var request = state.scrollJumpRequest;
-
-    if (!request) {
-      return;
-    }
-
-    var destination = whatIsDraggedOver(state.impact);
-    !destination ?  true ? invariant(false, 'Cannot perform a jump scroll when there is no destination') : 0 : void 0;
-    var droppableRemainder = scrollDroppableAsMuchAsItCan(state.dimensions.droppables[destination], request);
-
-    if (!droppableRemainder) {
-      return;
-    }
-
-    var viewport = state.viewport;
-    var windowRemainder = scrollWindowAsMuchAsItCan(state.isWindowScrollAllowed, viewport, droppableRemainder);
-
-    if (!windowRemainder) {
-      return;
-    }
-
-    moveByOffset(state, windowRemainder);
-  };
-
-  return jumpScroller;
-});
-
-var createAutoScroller = (function (_ref) {
-  var scrollDroppable = _ref.scrollDroppable,
-      scrollWindow = _ref.scrollWindow,
-      move = _ref.move;
-  var fluidScroller = createFluidScroller({
-    scrollWindow: scrollWindow,
-    scrollDroppable: scrollDroppable
-  });
-  var jumpScroll = createJumpScroller({
-    move: move,
-    scrollWindow: scrollWindow,
-    scrollDroppable: scrollDroppable
-  });
-
-  var scroll = function scroll(state) {
-    if (state.phase !== 'DRAGGING') {
-      return;
-    }
-
-    if (state.movementMode === 'FLUID') {
-      fluidScroller.scroll(state);
-      return;
-    }
-
-    if (!state.scrollJumpRequest) {
-      return;
-    }
-
-    jumpScroll(state);
-  };
-
-  var scroller = {
-    scroll: scroll,
-    start: fluidScroller.start,
-    stop: fluidScroller.stop
-  };
-  return scroller;
-});
-
-var prefix$1 = 'data-rbd';
-var dragHandle = function () {
-  var base = prefix$1 + "-drag-handle";
-  return {
-    base: base,
-    draggableId: base + "-draggable-id",
-    contextId: base + "-context-id"
-  };
-}();
-var draggable = function () {
-  var base = prefix$1 + "-draggable";
-  return {
-    base: base,
-    contextId: base + "-context-id",
-    id: base + "-id"
-  };
-}();
-var droppable = function () {
-  var base = prefix$1 + "-droppable";
-  return {
-    base: base,
-    contextId: base + "-context-id",
-    id: base + "-id"
-  };
-}();
-var scrollContainer = {
-  contextId: prefix$1 + "-scroll-container-context-id"
-};
-
-var makeGetSelector = function makeGetSelector(context) {
-  return function (attribute) {
-    return "[" + attribute + "=\"" + context + "\"]";
-  };
-};
-
-var getStyles = function getStyles(rules, property) {
-  return rules.map(function (rule) {
-    var value = rule.styles[property];
-
-    if (!value) {
-      return '';
-    }
-
-    return rule.selector + " { " + value + " }";
-  }).join(' ');
-};
-
-var noPointerEvents = 'pointer-events: none;';
-var getStyles$1 = (function (contextId) {
-  var getSelector = makeGetSelector(contextId);
-
-  var dragHandle$1 = function () {
-    var grabCursor = "\n      cursor: -webkit-grab;\n      cursor: grab;\n    ";
-    return {
-      selector: getSelector(dragHandle.contextId),
-      styles: {
-        always: "\n          -webkit-touch-callout: none;\n          -webkit-tap-highlight-color: rgba(0,0,0,0);\n          touch-action: manipulation;\n        ",
-        resting: grabCursor,
-        dragging: noPointerEvents,
-        dropAnimating: grabCursor
-      }
-    };
-  }();
-
-  var draggable$1 = function () {
-    var transition = "\n      transition: " + transitions.outOfTheWay + ";\n    ";
-    return {
-      selector: getSelector(draggable.contextId),
-      styles: {
-        dragging: transition,
-        dropAnimating: transition,
-        userCancel: transition
-      }
-    };
-  }();
-
-  var droppable$1 = {
-    selector: getSelector(droppable.contextId),
-    styles: {
-      always: "overflow-anchor: none;"
-    }
-  };
-  var body = {
-    selector: 'body',
-    styles: {
-      dragging: "\n        cursor: grabbing;\n        cursor: -webkit-grabbing;\n        user-select: none;\n        -webkit-user-select: none;\n        -moz-user-select: none;\n        -ms-user-select: none;\n        overflow-anchor: none;\n      "
-    }
-  };
-  var rules = [draggable$1, dragHandle$1, droppable$1, body];
-  return {
-    always: getStyles(rules, 'always'),
-    resting: getStyles(rules, 'resting'),
-    dragging: getStyles(rules, 'dragging'),
-    dropAnimating: getStyles(rules, 'dropAnimating'),
-    userCancel: getStyles(rules, 'userCancel')
-  };
-});
-
-var useIsomorphicLayoutEffect = typeof window !== 'undefined' && typeof window.document !== 'undefined' && typeof window.document.createElement !== 'undefined' ? react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect : react__WEBPACK_IMPORTED_MODULE_0__.useEffect;
-
-var getHead = function getHead() {
-  var head = document.querySelector('head');
-  !head ?  true ? invariant(false, 'Cannot find the head to append a style to') : 0 : void 0;
-  return head;
-};
-
-var createStyleEl = function createStyleEl(nonce) {
-  var el = document.createElement('style');
-
-  if (nonce) {
-    el.setAttribute('nonce', nonce);
-  }
-
-  el.type = 'text/css';
-  return el;
-};
-
-function useStyleMarshal(contextId, nonce) {
-  var styles = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useMemo)(function () {
-    return getStyles$1(contextId);
-  }, [contextId]);
-  var alwaysRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
-  var dynamicRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
-  var setDynamicStyle = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)((0,memoize_one__WEBPACK_IMPORTED_MODULE_6__["default"])(function (proposed) {
-    var el = dynamicRef.current;
-    !el ?  true ? invariant(false, 'Cannot set dynamic style element if it is not set') : 0 : void 0;
-    el.textContent = proposed;
-  }), []);
-  var setAlwaysStyle = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function (proposed) {
-    var el = alwaysRef.current;
-    !el ?  true ? invariant(false, 'Cannot set dynamic style element if it is not set') : 0 : void 0;
-    el.textContent = proposed;
-  }, []);
-  useIsomorphicLayoutEffect(function () {
-    !(!alwaysRef.current && !dynamicRef.current) ?  true ? invariant(false, 'style elements already mounted') : 0 : void 0;
-    var always = createStyleEl(nonce);
-    var dynamic = createStyleEl(nonce);
-    alwaysRef.current = always;
-    dynamicRef.current = dynamic;
-    always.setAttribute(prefix$1 + "-always", contextId);
-    dynamic.setAttribute(prefix$1 + "-dynamic", contextId);
-    getHead().appendChild(always);
-    getHead().appendChild(dynamic);
-    setAlwaysStyle(styles.always);
-    setDynamicStyle(styles.resting);
-    return function () {
-      var remove = function remove(ref) {
-        var current = ref.current;
-        !current ?  true ? invariant(false, 'Cannot unmount ref as it is not set') : 0 : void 0;
-        getHead().removeChild(current);
-        ref.current = null;
-      };
-
-      remove(alwaysRef);
-      remove(dynamicRef);
-    };
-  }, [nonce, setAlwaysStyle, setDynamicStyle, styles.always, styles.resting, contextId]);
-  var dragging = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function () {
-    return setDynamicStyle(styles.dragging);
-  }, [setDynamicStyle, styles.dragging]);
-  var dropping = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function (reason) {
-    if (reason === 'DROP') {
-      setDynamicStyle(styles.dropAnimating);
-      return;
-    }
-
-    setDynamicStyle(styles.userCancel);
-  }, [setDynamicStyle, styles.dropAnimating, styles.userCancel]);
-  var resting = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function () {
-    if (!dynamicRef.current) {
-      return;
-    }
-
-    setDynamicStyle(styles.resting);
-  }, [setDynamicStyle, styles.resting]);
-  var marshal = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useMemo)(function () {
-    return {
-      dragging: dragging,
-      dropping: dropping,
-      resting: resting
-    };
-  }, [dragging, dropping, resting]);
-  return marshal;
-}
-
-var getWindowFromEl = (function (el) {
-  return el && el.ownerDocument ? el.ownerDocument.defaultView : window;
-});
-
-function isHtmlElement(el) {
-  return el instanceof getWindowFromEl(el).HTMLElement;
-}
-
-function findDragHandle(contextId, draggableId) {
-  var selector = "[" + dragHandle.contextId + "=\"" + contextId + "\"]";
-  var possible = toArray(document.querySelectorAll(selector));
-
-  if (!possible.length) {
-     true ? warning("Unable to find any drag handles in the context \"" + contextId + "\"") : 0;
-    return null;
-  }
-
-  var handle = find(possible, function (el) {
-    return el.getAttribute(dragHandle.draggableId) === draggableId;
-  });
-
-  if (!handle) {
-     true ? warning("Unable to find drag handle with id \"" + draggableId + "\" as no handle with a matching id was found") : 0;
-    return null;
-  }
-
-  if (!isHtmlElement(handle)) {
-     true ? warning('drag handle needs to be a HTMLElement') : 0;
-    return null;
-  }
-
-  return handle;
-}
-
-function useFocusMarshal(contextId) {
-  var entriesRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)({});
-  var recordRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
-  var restoreFocusFrameRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
-  var isMountedRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(false);
-  var register = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function register(id, focus) {
-    var entry = {
-      id: id,
-      focus: focus
-    };
-    entriesRef.current[id] = entry;
-    return function unregister() {
-      var entries = entriesRef.current;
-      var current = entries[id];
-
-      if (current !== entry) {
-        delete entries[id];
-      }
-    };
-  }, []);
-  var tryGiveFocus = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function tryGiveFocus(tryGiveFocusTo) {
-    var handle = findDragHandle(contextId, tryGiveFocusTo);
-
-    if (handle && handle !== document.activeElement) {
-      handle.focus();
-    }
-  }, [contextId]);
-  var tryShiftRecord = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function tryShiftRecord(previous, redirectTo) {
-    if (recordRef.current === previous) {
-      recordRef.current = redirectTo;
-    }
-  }, []);
-  var tryRestoreFocusRecorded = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function tryRestoreFocusRecorded() {
-    if (restoreFocusFrameRef.current) {
-      return;
-    }
-
-    if (!isMountedRef.current) {
-      return;
-    }
-
-    restoreFocusFrameRef.current = requestAnimationFrame(function () {
-      restoreFocusFrameRef.current = null;
-      var record = recordRef.current;
-
-      if (record) {
-        tryGiveFocus(record);
-      }
-    });
-  }, [tryGiveFocus]);
-  var tryRecordFocus = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function tryRecordFocus(id) {
-    recordRef.current = null;
-    var focused = document.activeElement;
-
-    if (!focused) {
-      return;
-    }
-
-    if (focused.getAttribute(dragHandle.draggableId) !== id) {
-      return;
-    }
-
-    recordRef.current = id;
-  }, []);
-  useIsomorphicLayoutEffect(function () {
-    isMountedRef.current = true;
-    return function clearFrameOnUnmount() {
-      isMountedRef.current = false;
-      var frameId = restoreFocusFrameRef.current;
-
-      if (frameId) {
-        cancelAnimationFrame(frameId);
-      }
-    };
-  }, []);
-  var marshal = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useMemo)(function () {
-    return {
-      register: register,
-      tryRecordFocus: tryRecordFocus,
-      tryRestoreFocusRecorded: tryRestoreFocusRecorded,
-      tryShiftRecord: tryShiftRecord
-    };
-  }, [register, tryRecordFocus, tryRestoreFocusRecorded, tryShiftRecord]);
-  return marshal;
-}
-
-function createRegistry() {
-  var entries = {
-    draggables: {},
-    droppables: {}
-  };
-  var subscribers = [];
-
-  function subscribe(cb) {
-    subscribers.push(cb);
-    return function unsubscribe() {
-      var index = subscribers.indexOf(cb);
-
-      if (index === -1) {
-        return;
-      }
-
-      subscribers.splice(index, 1);
-    };
-  }
-
-  function notify(event) {
-    if (subscribers.length) {
-      subscribers.forEach(function (cb) {
-        return cb(event);
-      });
-    }
-  }
-
-  function findDraggableById(id) {
-    return entries.draggables[id] || null;
-  }
-
-  function getDraggableById(id) {
-    var entry = findDraggableById(id);
-    !entry ?  true ? invariant(false, "Cannot find draggable entry with id [" + id + "]") : 0 : void 0;
-    return entry;
-  }
-
-  var draggableAPI = {
-    register: function register(entry) {
-      entries.draggables[entry.descriptor.id] = entry;
-      notify({
-        type: 'ADDITION',
-        value: entry
-      });
-    },
-    update: function update(entry, last) {
-      var current = entries.draggables[last.descriptor.id];
-
-      if (!current) {
-        return;
-      }
-
-      if (current.uniqueId !== entry.uniqueId) {
-        return;
-      }
-
-      delete entries.draggables[last.descriptor.id];
-      entries.draggables[entry.descriptor.id] = entry;
-    },
-    unregister: function unregister(entry) {
-      var draggableId = entry.descriptor.id;
-      var current = findDraggableById(draggableId);
-
-      if (!current) {
-        return;
-      }
-
-      if (entry.uniqueId !== current.uniqueId) {
-        return;
-      }
-
-      delete entries.draggables[draggableId];
-      notify({
-        type: 'REMOVAL',
-        value: entry
-      });
-    },
-    getById: getDraggableById,
-    findById: findDraggableById,
-    exists: function exists(id) {
-      return Boolean(findDraggableById(id));
-    },
-    getAllByType: function getAllByType(type) {
-      return values(entries.draggables).filter(function (entry) {
-        return entry.descriptor.type === type;
-      });
-    }
-  };
-
-  function findDroppableById(id) {
-    return entries.droppables[id] || null;
-  }
-
-  function getDroppableById(id) {
-    var entry = findDroppableById(id);
-    !entry ?  true ? invariant(false, "Cannot find droppable entry with id [" + id + "]") : 0 : void 0;
-    return entry;
-  }
-
-  var droppableAPI = {
-    register: function register(entry) {
-      entries.droppables[entry.descriptor.id] = entry;
-    },
-    unregister: function unregister(entry) {
-      var current = findDroppableById(entry.descriptor.id);
-
-      if (!current) {
-        return;
-      }
-
-      if (entry.uniqueId !== current.uniqueId) {
-        return;
-      }
-
-      delete entries.droppables[entry.descriptor.id];
-    },
-    getById: getDroppableById,
-    findById: findDroppableById,
-    exists: function exists(id) {
-      return Boolean(findDroppableById(id));
-    },
-    getAllByType: function getAllByType(type) {
-      return values(entries.droppables).filter(function (entry) {
-        return entry.descriptor.type === type;
-      });
-    }
-  };
-
-  function clean() {
-    entries.draggables = {};
-    entries.droppables = {};
-    subscribers.length = 0;
-  }
-
-  return {
-    draggable: draggableAPI,
-    droppable: droppableAPI,
-    subscribe: subscribe,
-    clean: clean
-  };
-}
-
-function useRegistry() {
-  var registry = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useMemo)(createRegistry, []);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    return function unmount() {
-      requestAnimationFrame(registry.clean);
-    };
-  }, [registry]);
-  return registry;
-}
-
-var StoreContext = react__WEBPACK_IMPORTED_MODULE_0___default().createContext(null);
-
-var getBodyElement = (function () {
-  var body = document.body;
-  !body ?  true ? invariant(false, 'Cannot find document.body') : 0 : void 0;
-  return body;
-});
-
-var visuallyHidden = {
-  position: 'absolute',
-  width: '1px',
-  height: '1px',
-  margin: '-1px',
-  border: '0',
-  padding: '0',
-  overflow: 'hidden',
-  clip: 'rect(0 0 0 0)',
-  'clip-path': 'inset(100%)'
-};
-
-var getId = function getId(contextId) {
-  return "rbd-announcement-" + contextId;
-};
-function useAnnouncer(contextId) {
-  var id = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useMemo)(function () {
-    return getId(contextId);
-  }, [contextId]);
-  var ref = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function setup() {
-    var el = document.createElement('div');
-    ref.current = el;
-    el.id = id;
-    el.setAttribute('aria-live', 'assertive');
-    el.setAttribute('aria-atomic', 'true');
-
-    (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])(el.style, visuallyHidden);
-
-    getBodyElement().appendChild(el);
-    return function cleanup() {
-      setTimeout(function remove() {
-        var body = getBodyElement();
-
-        if (body.contains(el)) {
-          body.removeChild(el);
-        }
-
-        if (el === ref.current) {
-          ref.current = null;
-        }
-      });
-    };
-  }, [id]);
-  var announce = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function (message) {
-    var el = ref.current;
-
-    if (el) {
-      el.textContent = message;
-      return;
-    }
-
-     true ? warning("\n      A screen reader message was trying to be announced but it was unable to do so.\n      This can occur if you unmount your <DragDropContext /> in your onDragEnd.\n      Consider calling provided.announce() before the unmount so that the instruction will\n      not be lost for users relying on a screen reader.\n\n      Message not passed to screen reader:\n\n      \"" + message + "\"\n    ") : 0;
-  }, []);
-  return announce;
-}
-
-var count = 0;
-var defaults = {
-  separator: '::'
-};
-function reset() {
-  count = 0;
-}
-function useUniqueId(prefix, options) {
-  if (options === void 0) {
-    options = defaults;
-  }
-
-  return (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useMemo)(function () {
-    return "" + prefix + options.separator + count++;
-  }, [options.separator, prefix]);
-}
-
-function getElementId(_ref) {
-  var contextId = _ref.contextId,
-      uniqueId = _ref.uniqueId;
-  return "rbd-hidden-text-" + contextId + "-" + uniqueId;
-}
-function useHiddenTextElement(_ref2) {
-  var contextId = _ref2.contextId,
-      text = _ref2.text;
-  var uniqueId = useUniqueId('hidden-text', {
-    separator: '-'
-  });
-  var id = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useMemo)(function () {
-    return getElementId({
-      contextId: contextId,
-      uniqueId: uniqueId
-    });
-  }, [uniqueId, contextId]);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function mount() {
-    var el = document.createElement('div');
-    el.id = id;
-    el.textContent = text;
-    el.style.display = 'none';
-    getBodyElement().appendChild(el);
-    return function unmount() {
-      var body = getBodyElement();
-
-      if (body.contains(el)) {
-        body.removeChild(el);
-      }
-    };
-  }, [id, text]);
-  return id;
-}
-
-var AppContext = react__WEBPACK_IMPORTED_MODULE_0___default().createContext(null);
-
-var peerDependencies = {
-	react: "^16.8.5 || ^17.0.0 || ^18.0.0",
-	"react-dom": "^16.8.5 || ^17.0.0 || ^18.0.0"
-};
-
-var semver = /(\d+)\.(\d+)\.(\d+)/;
-
-var getVersion = function getVersion(value) {
-  var result = semver.exec(value);
-  !(result != null) ?  true ? invariant(false, "Unable to parse React version " + value) : 0 : void 0;
-  var major = Number(result[1]);
-  var minor = Number(result[2]);
-  var patch = Number(result[3]);
-  return {
-    major: major,
-    minor: minor,
-    patch: patch,
-    raw: value
-  };
-};
-
-var isSatisfied = function isSatisfied(expected, actual) {
-  if (actual.major > expected.major) {
-    return true;
-  }
-
-  if (actual.major < expected.major) {
-    return false;
-  }
-
-  if (actual.minor > expected.minor) {
-    return true;
-  }
-
-  if (actual.minor < expected.minor) {
-    return false;
-  }
-
-  return actual.patch >= expected.patch;
-};
-
-var checkReactVersion = (function (peerDepValue, actualValue) {
-  var peerDep = getVersion(peerDepValue);
-  var actual = getVersion(actualValue);
-
-  if (isSatisfied(peerDep, actual)) {
-    return;
-  }
-
-   true ? warning("\n    React version: [" + actual.raw + "]\n    does not satisfy expected peer dependency version: [" + peerDep.raw + "]\n\n    This can result in run time bugs, and even fatal crashes\n  ") : 0;
-});
-
-var suffix = "\n  We expect a html5 doctype: <!doctype html>\n  This is to ensure consistent browser layout and measurement\n\n  More information: https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/guides/doctype.md\n";
-var checkDoctype = (function (doc) {
-  var doctype = doc.doctype;
-
-  if (!doctype) {
-     true ? warning("\n      No <!doctype html> found.\n\n      " + suffix + "\n    ") : 0;
-    return;
-  }
-
-  if (doctype.name.toLowerCase() !== 'html') {
-     true ? warning("\n      Unexpected <!doctype> found: (" + doctype.name + ")\n\n      " + suffix + "\n    ") : 0;
-  }
-
-  if (doctype.publicId !== '') {
-     true ? warning("\n      Unexpected <!doctype> publicId found: (" + doctype.publicId + ")\n      A html5 doctype does not have a publicId\n\n      " + suffix + "\n    ") : 0;
-  }
-});
-
-function useDev(useHook) {
-  if (true) {
-    useHook();
-  }
-}
-
-function useDevSetupWarning(fn, inputs) {
-  useDev(function () {
-    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-      try {
-        fn();
-      } catch (e) {
-        error("\n          A setup problem was encountered.\n\n          > " + e.message + "\n        ");
-      }
-    }, inputs);
-  });
-}
-
-function useStartupValidation() {
-  useDevSetupWarning(function () {
-    checkReactVersion(peerDependencies.react, (react__WEBPACK_IMPORTED_MODULE_0___default().version));
-    checkDoctype(document);
-  }, []);
-}
-
-function usePrevious(current) {
-  var ref = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(current);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    ref.current = current;
-  });
-  return ref;
-}
-
-function create() {
-  var lock = null;
-
-  function isClaimed() {
-    return Boolean(lock);
-  }
-
-  function isActive(value) {
-    return value === lock;
-  }
-
-  function claim(abandon) {
-    !!lock ?  true ? invariant(false, 'Cannot claim lock as it is already claimed') : 0 : void 0;
-    var newLock = {
-      abandon: abandon
-    };
-    lock = newLock;
-    return newLock;
-  }
-
-  function release() {
-    !lock ?  true ? invariant(false, 'Cannot release lock when there is no lock') : 0 : void 0;
-    lock = null;
-  }
-
-  function tryAbandon() {
-    if (lock) {
-      lock.abandon();
-      release();
-    }
-  }
-
-  return {
-    isClaimed: isClaimed,
-    isActive: isActive,
-    claim: claim,
-    release: release,
-    tryAbandon: tryAbandon
-  };
-}
-
-var tab = 9;
-var enter = 13;
-var escape = 27;
-var space = 32;
-var pageUp = 33;
-var pageDown = 34;
-var end = 35;
-var home = 36;
-var arrowLeft = 37;
-var arrowUp = 38;
-var arrowRight = 39;
-var arrowDown = 40;
-
-var _preventedKeys;
-var preventedKeys = (_preventedKeys = {}, _preventedKeys[enter] = true, _preventedKeys[tab] = true, _preventedKeys);
-var preventStandardKeyEvents = (function (event) {
-  if (preventedKeys[event.keyCode]) {
-    event.preventDefault();
-  }
-});
-
-var supportedEventName = function () {
-  var base = 'visibilitychange';
-
-  if (typeof document === 'undefined') {
-    return base;
-  }
-
-  var candidates = [base, "ms" + base, "webkit" + base, "moz" + base, "o" + base];
-  var supported = find(candidates, function (eventName) {
-    return "on" + eventName in document;
-  });
-  return supported || base;
-}();
-
-var primaryButton = 0;
-var sloppyClickThreshold = 5;
-
-function isSloppyClickThresholdExceeded(original, current) {
-  return Math.abs(current.x - original.x) >= sloppyClickThreshold || Math.abs(current.y - original.y) >= sloppyClickThreshold;
-}
-
-var idle$1 = {
-  type: 'IDLE'
-};
-
-function getCaptureBindings(_ref) {
-  var cancel = _ref.cancel,
-      completed = _ref.completed,
-      getPhase = _ref.getPhase,
-      setPhase = _ref.setPhase;
-  return [{
-    eventName: 'mousemove',
-    fn: function fn(event) {
-      var button = event.button,
-          clientX = event.clientX,
-          clientY = event.clientY;
-
-      if (button !== primaryButton) {
-        return;
-      }
-
-      var point = {
-        x: clientX,
-        y: clientY
-      };
-      var phase = getPhase();
-
-      if (phase.type === 'DRAGGING') {
-        event.preventDefault();
-        phase.actions.move(point);
-        return;
-      }
-
-      !(phase.type === 'PENDING') ?  true ? invariant(false, 'Cannot be IDLE') : 0 : void 0;
-      var pending = phase.point;
-
-      if (!isSloppyClickThresholdExceeded(pending, point)) {
-        return;
-      }
-
-      event.preventDefault();
-      var actions = phase.actions.fluidLift(point);
-      setPhase({
-        type: 'DRAGGING',
-        actions: actions
-      });
-    }
-  }, {
-    eventName: 'mouseup',
-    fn: function fn(event) {
-      var phase = getPhase();
-
-      if (phase.type !== 'DRAGGING') {
-        cancel();
-        return;
-      }
-
-      event.preventDefault();
-      phase.actions.drop({
-        shouldBlockNextClick: true
-      });
-      completed();
-    }
-  }, {
-    eventName: 'mousedown',
-    fn: function fn(event) {
-      if (getPhase().type === 'DRAGGING') {
-        event.preventDefault();
-      }
-
-      cancel();
-    }
-  }, {
-    eventName: 'keydown',
-    fn: function fn(event) {
-      var phase = getPhase();
-
-      if (phase.type === 'PENDING') {
-        cancel();
-        return;
-      }
-
-      if (event.keyCode === escape) {
-        event.preventDefault();
-        cancel();
-        return;
-      }
-
-      preventStandardKeyEvents(event);
-    }
-  }, {
-    eventName: 'resize',
-    fn: cancel
-  }, {
-    eventName: 'scroll',
-    options: {
-      passive: true,
-      capture: false
-    },
-    fn: function fn() {
-      if (getPhase().type === 'PENDING') {
-        cancel();
-      }
-    }
-  }, {
-    eventName: 'webkitmouseforcedown',
-    fn: function fn(event) {
-      var phase = getPhase();
-      !(phase.type !== 'IDLE') ?  true ? invariant(false, 'Unexpected phase') : 0 : void 0;
-
-      if (phase.actions.shouldRespectForcePress()) {
-        cancel();
-        return;
-      }
-
-      event.preventDefault();
-    }
-  }, {
-    eventName: supportedEventName,
-    fn: cancel
-  }];
-}
-
-function useMouseSensor(api) {
-  var phaseRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(idle$1);
-  var unbindEventsRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(noop);
-  var startCaptureBinding = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useMemo)(function () {
-    return {
-      eventName: 'mousedown',
-      fn: function onMouseDown(event) {
-        if (event.defaultPrevented) {
-          return;
-        }
-
-        if (event.button !== primaryButton) {
-          return;
-        }
-
-        if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) {
-          return;
-        }
-
-        var draggableId = api.findClosestDraggableId(event);
-
-        if (!draggableId) {
-          return;
-        }
-
-        var actions = api.tryGetLock(draggableId, stop, {
-          sourceEvent: event
-        });
-
-        if (!actions) {
-          return;
-        }
-
-        event.preventDefault();
-        var point = {
-          x: event.clientX,
-          y: event.clientY
-        };
-        unbindEventsRef.current();
-        startPendingDrag(actions, point);
-      }
-    };
-  }, [api]);
-  var preventForcePressBinding = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useMemo)(function () {
-    return {
-      eventName: 'webkitmouseforcewillbegin',
-      fn: function fn(event) {
-        if (event.defaultPrevented) {
-          return;
-        }
-
-        var id = api.findClosestDraggableId(event);
-
-        if (!id) {
-          return;
-        }
-
-        var options = api.findOptionsForDraggable(id);
-
-        if (!options) {
-          return;
-        }
-
-        if (options.shouldRespectForcePress) {
-          return;
-        }
-
-        if (!api.canGetLock(id)) {
-          return;
-        }
-
-        event.preventDefault();
-      }
-    };
-  }, [api]);
-  var listenForCapture = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function listenForCapture() {
-    var options = {
-      passive: false,
-      capture: true
-    };
-    unbindEventsRef.current = bindEvents(window, [preventForcePressBinding, startCaptureBinding], options);
-  }, [preventForcePressBinding, startCaptureBinding]);
-  var stop = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function () {
-    var current = phaseRef.current;
-
-    if (current.type === 'IDLE') {
-      return;
-    }
-
-    phaseRef.current = idle$1;
-    unbindEventsRef.current();
-    listenForCapture();
-  }, [listenForCapture]);
-  var cancel = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function () {
-    var phase = phaseRef.current;
-    stop();
-
-    if (phase.type === 'DRAGGING') {
-      phase.actions.cancel({
-        shouldBlockNextClick: true
-      });
-    }
-
-    if (phase.type === 'PENDING') {
-      phase.actions.abort();
-    }
-  }, [stop]);
-  var bindCapturingEvents = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function bindCapturingEvents() {
-    var options = {
-      capture: true,
-      passive: false
-    };
-    var bindings = getCaptureBindings({
-      cancel: cancel,
-      completed: stop,
-      getPhase: function getPhase() {
-        return phaseRef.current;
-      },
-      setPhase: function setPhase(phase) {
-        phaseRef.current = phase;
-      }
-    });
-    unbindEventsRef.current = bindEvents(window, bindings, options);
-  }, [cancel, stop]);
-  var startPendingDrag = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function startPendingDrag(actions, point) {
-    !(phaseRef.current.type === 'IDLE') ?  true ? invariant(false, 'Expected to move from IDLE to PENDING drag') : 0 : void 0;
-    phaseRef.current = {
-      type: 'PENDING',
-      point: point,
-      actions: actions
-    };
-    bindCapturingEvents();
-  }, [bindCapturingEvents]);
-  useIsomorphicLayoutEffect(function mount() {
-    listenForCapture();
-    return function unmount() {
-      unbindEventsRef.current();
-    };
-  }, [listenForCapture]);
-}
-
-var _scrollJumpKeys;
-
-function noop$1() {}
-
-var scrollJumpKeys = (_scrollJumpKeys = {}, _scrollJumpKeys[pageDown] = true, _scrollJumpKeys[pageUp] = true, _scrollJumpKeys[home] = true, _scrollJumpKeys[end] = true, _scrollJumpKeys);
-
-function getDraggingBindings(actions, stop) {
-  function cancel() {
-    stop();
-    actions.cancel();
-  }
-
-  function drop() {
-    stop();
-    actions.drop();
-  }
-
-  return [{
-    eventName: 'keydown',
-    fn: function fn(event) {
-      if (event.keyCode === escape) {
-        event.preventDefault();
-        cancel();
-        return;
-      }
-
-      if (event.keyCode === space) {
-        event.preventDefault();
-        drop();
-        return;
-      }
-
-      if (event.keyCode === arrowDown) {
-        event.preventDefault();
-        actions.moveDown();
-        return;
-      }
-
-      if (event.keyCode === arrowUp) {
-        event.preventDefault();
-        actions.moveUp();
-        return;
-      }
-
-      if (event.keyCode === arrowRight) {
-        event.preventDefault();
-        actions.moveRight();
-        return;
-      }
-
-      if (event.keyCode === arrowLeft) {
-        event.preventDefault();
-        actions.moveLeft();
-        return;
-      }
-
-      if (scrollJumpKeys[event.keyCode]) {
-        event.preventDefault();
-        return;
-      }
-
-      preventStandardKeyEvents(event);
-    }
-  }, {
-    eventName: 'mousedown',
-    fn: cancel
-  }, {
-    eventName: 'mouseup',
-    fn: cancel
-  }, {
-    eventName: 'click',
-    fn: cancel
-  }, {
-    eventName: 'touchstart',
-    fn: cancel
-  }, {
-    eventName: 'resize',
-    fn: cancel
-  }, {
-    eventName: 'wheel',
-    fn: cancel,
-    options: {
-      passive: true
-    }
-  }, {
-    eventName: supportedEventName,
-    fn: cancel
-  }];
-}
-
-function useKeyboardSensor(api) {
-  var unbindEventsRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(noop$1);
-  var startCaptureBinding = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useMemo)(function () {
-    return {
-      eventName: 'keydown',
-      fn: function onKeyDown(event) {
-        if (event.defaultPrevented) {
-          return;
-        }
-
-        if (event.keyCode !== space) {
-          return;
-        }
-
-        var draggableId = api.findClosestDraggableId(event);
-
-        if (!draggableId) {
-          return;
-        }
-
-        var preDrag = api.tryGetLock(draggableId, stop, {
-          sourceEvent: event
-        });
-
-        if (!preDrag) {
-          return;
-        }
-
-        event.preventDefault();
-        var isCapturing = true;
-        var actions = preDrag.snapLift();
-        unbindEventsRef.current();
-
-        function stop() {
-          !isCapturing ?  true ? invariant(false, 'Cannot stop capturing a keyboard drag when not capturing') : 0 : void 0;
-          isCapturing = false;
-          unbindEventsRef.current();
-          listenForCapture();
-        }
-
-        unbindEventsRef.current = bindEvents(window, getDraggingBindings(actions, stop), {
-          capture: true,
-          passive: false
-        });
-      }
-    };
-  }, [api]);
-  var listenForCapture = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function tryStartCapture() {
-    var options = {
-      passive: false,
-      capture: true
-    };
-    unbindEventsRef.current = bindEvents(window, [startCaptureBinding], options);
-  }, [startCaptureBinding]);
-  useIsomorphicLayoutEffect(function mount() {
-    listenForCapture();
-    return function unmount() {
-      unbindEventsRef.current();
-    };
-  }, [listenForCapture]);
-}
-
-var idle$2 = {
-  type: 'IDLE'
-};
-var timeForLongPress = 120;
-var forcePressThreshold = 0.15;
-
-function getWindowBindings(_ref) {
-  var cancel = _ref.cancel,
-      getPhase = _ref.getPhase;
-  return [{
-    eventName: 'orientationchange',
-    fn: cancel
-  }, {
-    eventName: 'resize',
-    fn: cancel
-  }, {
-    eventName: 'contextmenu',
-    fn: function fn(event) {
-      event.preventDefault();
-    }
-  }, {
-    eventName: 'keydown',
-    fn: function fn(event) {
-      if (getPhase().type !== 'DRAGGING') {
-        cancel();
-        return;
-      }
-
-      if (event.keyCode === escape) {
-        event.preventDefault();
-      }
-
-      cancel();
-    }
-  }, {
-    eventName: supportedEventName,
-    fn: cancel
-  }];
-}
-
-function getHandleBindings(_ref2) {
-  var cancel = _ref2.cancel,
-      completed = _ref2.completed,
-      getPhase = _ref2.getPhase;
-  return [{
-    eventName: 'touchmove',
-    options: {
-      capture: false
-    },
-    fn: function fn(event) {
-      var phase = getPhase();
-
-      if (phase.type !== 'DRAGGING') {
-        cancel();
-        return;
-      }
-
-      phase.hasMoved = true;
-      var _event$touches$ = event.touches[0],
-          clientX = _event$touches$.clientX,
-          clientY = _event$touches$.clientY;
-      var point = {
-        x: clientX,
-        y: clientY
-      };
-      event.preventDefault();
-      phase.actions.move(point);
-    }
-  }, {
-    eventName: 'touchend',
-    fn: function fn(event) {
-      var phase = getPhase();
-
-      if (phase.type !== 'DRAGGING') {
-        cancel();
-        return;
-      }
-
-      event.preventDefault();
-      phase.actions.drop({
-        shouldBlockNextClick: true
-      });
-      completed();
-    }
-  }, {
-    eventName: 'touchcancel',
-    fn: function fn(event) {
-      if (getPhase().type !== 'DRAGGING') {
-        cancel();
-        return;
-      }
-
-      event.preventDefault();
-      cancel();
-    }
-  }, {
-    eventName: 'touchforcechange',
-    fn: function fn(event) {
-      var phase = getPhase();
-      !(phase.type !== 'IDLE') ?  true ? invariant(false) : 0 : void 0;
-      var touch = event.touches[0];
-
-      if (!touch) {
-        return;
-      }
-
-      var isForcePress = touch.force >= forcePressThreshold;
-
-      if (!isForcePress) {
-        return;
-      }
-
-      var shouldRespect = phase.actions.shouldRespectForcePress();
-
-      if (phase.type === 'PENDING') {
-        if (shouldRespect) {
-          cancel();
-        }
-
-        return;
-      }
-
-      if (shouldRespect) {
-        if (phase.hasMoved) {
-          event.preventDefault();
-          return;
-        }
-
-        cancel();
-        return;
-      }
-
-      event.preventDefault();
-    }
-  }, {
-    eventName: supportedEventName,
-    fn: cancel
-  }];
-}
-
-function useTouchSensor(api) {
-  var phaseRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(idle$2);
-  var unbindEventsRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(noop);
-  var getPhase = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function getPhase() {
-    return phaseRef.current;
-  }, []);
-  var setPhase = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function setPhase(phase) {
-    phaseRef.current = phase;
-  }, []);
-  var startCaptureBinding = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useMemo)(function () {
-    return {
-      eventName: 'touchstart',
-      fn: function onTouchStart(event) {
-        if (event.defaultPrevented) {
-          return;
-        }
-
-        var draggableId = api.findClosestDraggableId(event);
-
-        if (!draggableId) {
-          return;
-        }
-
-        var actions = api.tryGetLock(draggableId, stop, {
-          sourceEvent: event
-        });
-
-        if (!actions) {
-          return;
-        }
-
-        var touch = event.touches[0];
-        var clientX = touch.clientX,
-            clientY = touch.clientY;
-        var point = {
-          x: clientX,
-          y: clientY
-        };
-        unbindEventsRef.current();
-        startPendingDrag(actions, point);
-      }
-    };
-  }, [api]);
-  var listenForCapture = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function listenForCapture() {
-    var options = {
-      capture: true,
-      passive: false
-    };
-    unbindEventsRef.current = bindEvents(window, [startCaptureBinding], options);
-  }, [startCaptureBinding]);
-  var stop = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function () {
-    var current = phaseRef.current;
-
-    if (current.type === 'IDLE') {
-      return;
-    }
-
-    if (current.type === 'PENDING') {
-      clearTimeout(current.longPressTimerId);
-    }
-
-    setPhase(idle$2);
-    unbindEventsRef.current();
-    listenForCapture();
-  }, [listenForCapture, setPhase]);
-  var cancel = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function () {
-    var phase = phaseRef.current;
-    stop();
-
-    if (phase.type === 'DRAGGING') {
-      phase.actions.cancel({
-        shouldBlockNextClick: true
-      });
-    }
-
-    if (phase.type === 'PENDING') {
-      phase.actions.abort();
-    }
-  }, [stop]);
-  var bindCapturingEvents = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function bindCapturingEvents() {
-    var options = {
-      capture: true,
-      passive: false
-    };
-    var args = {
-      cancel: cancel,
-      completed: stop,
-      getPhase: getPhase
-    };
-    var unbindTarget = bindEvents(window, getHandleBindings(args), options);
-    var unbindWindow = bindEvents(window, getWindowBindings(args), options);
-
-    unbindEventsRef.current = function unbindAll() {
-      unbindTarget();
-      unbindWindow();
-    };
-  }, [cancel, getPhase, stop]);
-  var startDragging = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function startDragging() {
-    var phase = getPhase();
-    !(phase.type === 'PENDING') ?  true ? invariant(false, "Cannot start dragging from phase " + phase.type) : 0 : void 0;
-    var actions = phase.actions.fluidLift(phase.point);
-    setPhase({
-      type: 'DRAGGING',
-      actions: actions,
-      hasMoved: false
-    });
-  }, [getPhase, setPhase]);
-  var startPendingDrag = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function startPendingDrag(actions, point) {
-    !(getPhase().type === 'IDLE') ?  true ? invariant(false, 'Expected to move from IDLE to PENDING drag') : 0 : void 0;
-    var longPressTimerId = setTimeout(startDragging, timeForLongPress);
-    setPhase({
-      type: 'PENDING',
-      point: point,
-      actions: actions,
-      longPressTimerId: longPressTimerId
-    });
-    bindCapturingEvents();
-  }, [bindCapturingEvents, getPhase, setPhase, startDragging]);
-  useIsomorphicLayoutEffect(function mount() {
-    listenForCapture();
-    return function unmount() {
-      unbindEventsRef.current();
-      var phase = getPhase();
-
-      if (phase.type === 'PENDING') {
-        clearTimeout(phase.longPressTimerId);
-        setPhase(idle$2);
-      }
-    };
-  }, [getPhase, listenForCapture, setPhase]);
-  useIsomorphicLayoutEffect(function webkitHack() {
-    var unbind = bindEvents(window, [{
-      eventName: 'touchmove',
-      fn: function fn() {},
-      options: {
-        capture: false,
-        passive: false
-      }
-    }]);
-    return unbind;
-  }, []);
-}
-
-function useValidateSensorHooks(sensorHooks) {
-  useDev(function () {
-    var previousRef = usePrevious(sensorHooks);
-    useDevSetupWarning(function () {
-      !(previousRef.current.length === sensorHooks.length) ?  true ? invariant(false, 'Cannot change the amount of sensor hooks after mounting') : 0 : void 0;
-    });
-  });
-}
-
-var interactiveTagNames = {
-  input: true,
-  button: true,
-  textarea: true,
-  select: true,
-  option: true,
-  optgroup: true,
-  video: true,
-  audio: true
-};
-
-function isAnInteractiveElement(parent, current) {
-  if (current == null) {
-    return false;
-  }
-
-  var hasAnInteractiveTag = Boolean(interactiveTagNames[current.tagName.toLowerCase()]);
-
-  if (hasAnInteractiveTag) {
-    return true;
-  }
-
-  var attribute = current.getAttribute('contenteditable');
-
-  if (attribute === 'true' || attribute === '') {
-    return true;
-  }
-
-  if (current === parent) {
-    return false;
-  }
-
-  return isAnInteractiveElement(parent, current.parentElement);
-}
-
-function isEventInInteractiveElement(draggable, event) {
-  var target = event.target;
-
-  if (!isHtmlElement(target)) {
-    return false;
-  }
-
-  return isAnInteractiveElement(draggable, target);
-}
-
-var getBorderBoxCenterPosition = (function (el) {
-  return (0,css_box_model__WEBPACK_IMPORTED_MODULE_5__.getRect)(el.getBoundingClientRect()).center;
-});
-
-function isElement(el) {
-  return el instanceof getWindowFromEl(el).Element;
-}
-
-var supportedMatchesName = function () {
-  var base = 'matches';
-
-  if (typeof document === 'undefined') {
-    return base;
-  }
-
-  var candidates = [base, 'msMatchesSelector', 'webkitMatchesSelector'];
-  var value = find(candidates, function (name) {
-    return name in Element.prototype;
-  });
-  return value || base;
-}();
-
-function closestPonyfill(el, selector) {
-  if (el == null) {
-    return null;
-  }
-
-  if (el[supportedMatchesName](selector)) {
-    return el;
-  }
-
-  return closestPonyfill(el.parentElement, selector);
-}
-
-function closest$1(el, selector) {
-  if (el.closest) {
-    return el.closest(selector);
-  }
-
-  return closestPonyfill(el, selector);
-}
-
-function getSelector(contextId) {
-  return "[" + dragHandle.contextId + "=\"" + contextId + "\"]";
-}
-
-function findClosestDragHandleFromEvent(contextId, event) {
-  var target = event.target;
-
-  if (!isElement(target)) {
-     true ? warning('event.target must be a Element') : 0;
-    return null;
-  }
-
-  var selector = getSelector(contextId);
-  var handle = closest$1(target, selector);
-
-  if (!handle) {
-    return null;
-  }
-
-  if (!isHtmlElement(handle)) {
-     true ? warning('drag handle must be a HTMLElement') : 0;
-    return null;
-  }
-
-  return handle;
-}
-
-function tryGetClosestDraggableIdFromEvent(contextId, event) {
-  var handle = findClosestDragHandleFromEvent(contextId, event);
-
-  if (!handle) {
-    return null;
-  }
-
-  return handle.getAttribute(dragHandle.draggableId);
-}
-
-function findDraggable(contextId, draggableId) {
-  var selector = "[" + draggable.contextId + "=\"" + contextId + "\"]";
-  var possible = toArray(document.querySelectorAll(selector));
-  var draggable$1 = find(possible, function (el) {
-    return el.getAttribute(draggable.id) === draggableId;
-  });
-
-  if (!draggable$1) {
-    return null;
-  }
-
-  if (!isHtmlElement(draggable$1)) {
-     true ? warning('Draggable element is not a HTMLElement') : 0;
-    return null;
-  }
-
-  return draggable$1;
-}
-
-function preventDefault(event) {
-  event.preventDefault();
-}
-
-function _isActive(_ref) {
-  var expected = _ref.expected,
-      phase = _ref.phase,
-      isLockActive = _ref.isLockActive,
-      shouldWarn = _ref.shouldWarn;
-
-  if (!isLockActive()) {
-    if (shouldWarn) {
-       true ? warning("\n        Cannot perform action.\n        The sensor no longer has an action lock.\n\n        Tips:\n\n        - Throw away your action handlers when forceStop() is called\n        - Check actions.isActive() if you really need to\n      ") : 0;
-    }
-
-    return false;
-  }
-
-  if (expected !== phase) {
-    if (shouldWarn) {
-       true ? warning("\n        Cannot perform action.\n        The actions you used belong to an outdated phase\n\n        Current phase: " + expected + "\n        You called an action from outdated phase: " + phase + "\n\n        Tips:\n\n        - Do not use preDragActions actions after calling preDragActions.lift()\n      ") : 0;
-    }
-
-    return false;
-  }
-
-  return true;
-}
-
-function canStart(_ref2) {
-  var lockAPI = _ref2.lockAPI,
-      store = _ref2.store,
-      registry = _ref2.registry,
-      draggableId = _ref2.draggableId;
-
-  if (lockAPI.isClaimed()) {
-    return false;
-  }
-
-  var entry = registry.draggable.findById(draggableId);
-
-  if (!entry) {
-     true ? warning("Unable to find draggable with id: " + draggableId) : 0;
-    return false;
-  }
-
-  if (!entry.options.isEnabled) {
-    return false;
-  }
-
-  if (!canStartDrag(store.getState(), draggableId)) {
-    return false;
-  }
-
-  return true;
-}
-
-function tryStart(_ref3) {
-  var lockAPI = _ref3.lockAPI,
-      contextId = _ref3.contextId,
-      store = _ref3.store,
-      registry = _ref3.registry,
-      draggableId = _ref3.draggableId,
-      forceSensorStop = _ref3.forceSensorStop,
-      sourceEvent = _ref3.sourceEvent;
-  var shouldStart = canStart({
-    lockAPI: lockAPI,
-    store: store,
-    registry: registry,
-    draggableId: draggableId
-  });
-
-  if (!shouldStart) {
-    return null;
-  }
-
-  var entry = registry.draggable.getById(draggableId);
-  var el = findDraggable(contextId, entry.descriptor.id);
-
-  if (!el) {
-     true ? warning("Unable to find draggable element with id: " + draggableId) : 0;
-    return null;
-  }
-
-  if (sourceEvent && !entry.options.canDragInteractiveElements && isEventInInteractiveElement(el, sourceEvent)) {
-    return null;
-  }
-
-  var lock = lockAPI.claim(forceSensorStop || noop);
-  var phase = 'PRE_DRAG';
-
-  function getShouldRespectForcePress() {
-    return entry.options.shouldRespectForcePress;
-  }
-
-  function isLockActive() {
-    return lockAPI.isActive(lock);
-  }
-
-  function tryDispatch(expected, getAction) {
-    if (_isActive({
-      expected: expected,
-      phase: phase,
-      isLockActive: isLockActive,
-      shouldWarn: true
-    })) {
-      store.dispatch(getAction());
-    }
-  }
-
-  var tryDispatchWhenDragging = tryDispatch.bind(null, 'DRAGGING');
-
-  function lift$1(args) {
-    function completed() {
-      lockAPI.release();
-      phase = 'COMPLETED';
-    }
-
-    if (phase !== 'PRE_DRAG') {
-      completed();
-      !(phase === 'PRE_DRAG') ?  true ? invariant(false, "Cannot lift in phase " + phase) : 0 : void 0;
-    }
-
-    store.dispatch(lift(args.liftActionArgs));
-    phase = 'DRAGGING';
-
-    function finish(reason, options) {
-      if (options === void 0) {
-        options = {
-          shouldBlockNextClick: false
-        };
-      }
-
-      args.cleanup();
-
-      if (options.shouldBlockNextClick) {
-        var unbind = bindEvents(window, [{
-          eventName: 'click',
-          fn: preventDefault,
-          options: {
-            once: true,
-            passive: false,
-            capture: true
-          }
-        }]);
-        setTimeout(unbind);
-      }
-
-      completed();
-      store.dispatch(drop({
-        reason: reason
-      }));
-    }
-
-    return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({
-      isActive: function isActive() {
-        return _isActive({
-          expected: 'DRAGGING',
-          phase: phase,
-          isLockActive: isLockActive,
-          shouldWarn: false
-        });
-      },
-      shouldRespectForcePress: getShouldRespectForcePress,
-      drop: function drop(options) {
-        return finish('DROP', options);
-      },
-      cancel: function cancel(options) {
-        return finish('CANCEL', options);
-      }
-    }, args.actions);
-  }
-
-  function fluidLift(clientSelection) {
-    var move$1 = (0,raf_schd__WEBPACK_IMPORTED_MODULE_7__["default"])(function (client) {
-      tryDispatchWhenDragging(function () {
-        return move({
-          client: client
-        });
-      });
-    });
-    var api = lift$1({
-      liftActionArgs: {
-        id: draggableId,
-        clientSelection: clientSelection,
-        movementMode: 'FLUID'
-      },
-      cleanup: function cleanup() {
-        return move$1.cancel();
-      },
-      actions: {
-        move: move$1
-      }
-    });
-    return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, api, {
-      move: move$1
-    });
-  }
-
-  function snapLift() {
-    var actions = {
-      moveUp: function moveUp$1() {
-        return tryDispatchWhenDragging(moveUp);
-      },
-      moveRight: function moveRight$1() {
-        return tryDispatchWhenDragging(moveRight);
-      },
-      moveDown: function moveDown$1() {
-        return tryDispatchWhenDragging(moveDown);
-      },
-      moveLeft: function moveLeft$1() {
-        return tryDispatchWhenDragging(moveLeft);
-      }
-    };
-    return lift$1({
-      liftActionArgs: {
-        id: draggableId,
-        clientSelection: getBorderBoxCenterPosition(el),
-        movementMode: 'SNAP'
-      },
-      cleanup: noop,
-      actions: actions
-    });
-  }
-
-  function abortPreDrag() {
-    var shouldRelease = _isActive({
-      expected: 'PRE_DRAG',
-      phase: phase,
-      isLockActive: isLockActive,
-      shouldWarn: true
-    });
-
-    if (shouldRelease) {
-      lockAPI.release();
-    }
-  }
-
-  var preDrag = {
-    isActive: function isActive() {
-      return _isActive({
-        expected: 'PRE_DRAG',
-        phase: phase,
-        isLockActive: isLockActive,
-        shouldWarn: false
-      });
-    },
-    shouldRespectForcePress: getShouldRespectForcePress,
-    fluidLift: fluidLift,
-    snapLift: snapLift,
-    abort: abortPreDrag
-  };
-  return preDrag;
-}
-
-var defaultSensors = [useMouseSensor, useKeyboardSensor, useTouchSensor];
-function useSensorMarshal(_ref4) {
-  var contextId = _ref4.contextId,
-      store = _ref4.store,
-      registry = _ref4.registry,
-      customSensors = _ref4.customSensors,
-      enableDefaultSensors = _ref4.enableDefaultSensors;
-  var useSensors = [].concat(enableDefaultSensors ? defaultSensors : [], customSensors || []);
-  var lockAPI = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(function () {
-    return create();
-  })[0];
-  var tryAbandonLock = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function tryAbandonLock(previous, current) {
-    if (previous.isDragging && !current.isDragging) {
-      lockAPI.tryAbandon();
-    }
-  }, [lockAPI]);
-  useIsomorphicLayoutEffect(function listenToStore() {
-    var previous = store.getState();
-    var unsubscribe = store.subscribe(function () {
-      var current = store.getState();
-      tryAbandonLock(previous, current);
-      previous = current;
-    });
-    return unsubscribe;
-  }, [lockAPI, store, tryAbandonLock]);
-  useIsomorphicLayoutEffect(function () {
-    return lockAPI.tryAbandon;
-  }, [lockAPI.tryAbandon]);
-  var canGetLock = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function (draggableId) {
-    return canStart({
-      lockAPI: lockAPI,
-      registry: registry,
-      store: store,
-      draggableId: draggableId
-    });
-  }, [lockAPI, registry, store]);
-  var tryGetLock = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function (draggableId, forceStop, options) {
-    return tryStart({
-      lockAPI: lockAPI,
-      registry: registry,
-      contextId: contextId,
-      store: store,
-      draggableId: draggableId,
-      forceSensorStop: forceStop,
-      sourceEvent: options && options.sourceEvent ? options.sourceEvent : null
-    });
-  }, [contextId, lockAPI, registry, store]);
-  var findClosestDraggableId = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function (event) {
-    return tryGetClosestDraggableIdFromEvent(contextId, event);
-  }, [contextId]);
-  var findOptionsForDraggable = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function (id) {
-    var entry = registry.draggable.findById(id);
-    return entry ? entry.options : null;
-  }, [registry.draggable]);
-  var tryReleaseLock = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function tryReleaseLock() {
-    if (!lockAPI.isClaimed()) {
-      return;
-    }
-
-    lockAPI.tryAbandon();
-
-    if (store.getState().phase !== 'IDLE') {
-      store.dispatch(flush());
-    }
-  }, [lockAPI, store]);
-  var isLockClaimed = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(lockAPI.isClaimed, [lockAPI]);
-  var api = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useMemo)(function () {
-    return {
-      canGetLock: canGetLock,
-      tryGetLock: tryGetLock,
-      findClosestDraggableId: findClosestDraggableId,
-      findOptionsForDraggable: findOptionsForDraggable,
-      tryReleaseLock: tryReleaseLock,
-      isLockClaimed: isLockClaimed
-    };
-  }, [canGetLock, tryGetLock, findClosestDraggableId, findOptionsForDraggable, tryReleaseLock, isLockClaimed]);
-  useValidateSensorHooks(useSensors);
-
-  for (var i = 0; i < useSensors.length; i++) {
-    useSensors[i](api);
-  }
-}
-
-var createResponders = function createResponders(props) {
-  return {
-    onBeforeCapture: props.onBeforeCapture,
-    onBeforeDragStart: props.onBeforeDragStart,
-    onDragStart: props.onDragStart,
-    onDragEnd: props.onDragEnd,
-    onDragUpdate: props.onDragUpdate
-  };
-};
-
-function getStore(lazyRef) {
-  !lazyRef.current ?  true ? invariant(false, 'Could not find store from lazy ref') : 0 : void 0;
-  return lazyRef.current;
-}
-
-function App(props) {
-  var contextId = props.contextId,
-      setCallbacks = props.setCallbacks,
-      sensors = props.sensors,
-      nonce = props.nonce,
-      dragHandleUsageInstructions = props.dragHandleUsageInstructions;
-  var lazyStoreRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
-  useStartupValidation();
-  var lastPropsRef = usePrevious(props);
-  var getResponders = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function () {
-    return createResponders(lastPropsRef.current);
-  }, [lastPropsRef]);
-  var announce = useAnnouncer(contextId);
-  var dragHandleUsageInstructionsId = useHiddenTextElement({
-    contextId: contextId,
-    text: dragHandleUsageInstructions
-  });
-  var styleMarshal = useStyleMarshal(contextId, nonce);
-  var lazyDispatch = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function (action) {
-    getStore(lazyStoreRef).dispatch(action);
-  }, []);
-  var marshalCallbacks = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useMemo)(function () {
-    return (0,redux__WEBPACK_IMPORTED_MODULE_8__.bindActionCreators)({
-      publishWhileDragging: publishWhileDragging,
-      updateDroppableScroll: updateDroppableScroll,
-      updateDroppableIsEnabled: updateDroppableIsEnabled,
-      updateDroppableIsCombineEnabled: updateDroppableIsCombineEnabled,
-      collectionStarting: collectionStarting
-    }, lazyDispatch);
-  }, [lazyDispatch]);
-  var registry = useRegistry();
-  var dimensionMarshal = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useMemo)(function () {
-    return createDimensionMarshal(registry, marshalCallbacks);
-  }, [registry, marshalCallbacks]);
-  var autoScroller = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useMemo)(function () {
-    return createAutoScroller((0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({
-      scrollWindow: scrollWindow,
-      scrollDroppable: dimensionMarshal.scrollDroppable
-    }, (0,redux__WEBPACK_IMPORTED_MODULE_8__.bindActionCreators)({
-      move: move
-    }, lazyDispatch)));
-  }, [dimensionMarshal.scrollDroppable, lazyDispatch]);
-  var focusMarshal = useFocusMarshal(contextId);
-  var store = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useMemo)(function () {
-    return createStore({
-      announce: announce,
-      autoScroller: autoScroller,
-      dimensionMarshal: dimensionMarshal,
-      focusMarshal: focusMarshal,
-      getResponders: getResponders,
-      styleMarshal: styleMarshal
-    });
-  }, [announce, autoScroller, dimensionMarshal, focusMarshal, getResponders, styleMarshal]);
-
-  if (true) {
-    if (lazyStoreRef.current && lazyStoreRef.current !== store) {
-       true ? warning('unexpected store change') : 0;
-    }
-  }
-
-  lazyStoreRef.current = store;
-  var tryResetStore = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function () {
-    var current = getStore(lazyStoreRef);
-    var state = current.getState();
-
-    if (state.phase !== 'IDLE') {
-      current.dispatch(flush());
-    }
-  }, []);
-  var isDragging = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function () {
-    var state = getStore(lazyStoreRef).getState();
-    return state.isDragging || state.phase === 'DROP_ANIMATING';
-  }, []);
-  var appCallbacks = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useMemo)(function () {
-    return {
-      isDragging: isDragging,
-      tryAbort: tryResetStore
-    };
-  }, [isDragging, tryResetStore]);
-  setCallbacks(appCallbacks);
-  var getCanLift = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function (id) {
-    return canStartDrag(getStore(lazyStoreRef).getState(), id);
-  }, []);
-  var getIsMovementAllowed = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function () {
-    return isMovementAllowed(getStore(lazyStoreRef).getState());
-  }, []);
-  var appContext = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useMemo)(function () {
-    return {
-      marshal: dimensionMarshal,
-      focus: focusMarshal,
-      contextId: contextId,
-      canLift: getCanLift,
-      isMovementAllowed: getIsMovementAllowed,
-      dragHandleUsageInstructionsId: dragHandleUsageInstructionsId,
-      registry: registry
-    };
-  }, [contextId, dimensionMarshal, dragHandleUsageInstructionsId, focusMarshal, getCanLift, getIsMovementAllowed, registry]);
-  useSensorMarshal({
-    contextId: contextId,
-    store: store,
-    registry: registry,
-    customSensors: sensors,
-    enableDefaultSensors: props.enableDefaultSensors !== false
-  });
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    return tryResetStore;
-  }, [tryResetStore]);
-  return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(AppContext.Provider, {
-    value: appContext
-  }, react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__.Provider, {
-    context: StoreContext,
-    store: store
-  }, props.children));
-}
-
-var count$1 = 0;
-function reset$1() {
-  count$1 = 0;
-}
-function useInstanceCount() {
-  return (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useMemo)(function () {
-    return "" + count$1++;
-  }, []);
-}
-
-function resetServerContext() {
-  reset$1();
-  reset();
-}
-function DragDropContext(props) {
-  var contextId = useInstanceCount();
-  var dragHandleUsageInstructions = props.dragHandleUsageInstructions || preset.dragHandleUsageInstructions;
-  return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(ErrorBoundary, null, function (setCallbacks) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(App, {
-      nonce: props.nonce,
-      contextId: contextId,
-      setCallbacks: setCallbacks,
-      dragHandleUsageInstructions: dragHandleUsageInstructions,
-      enableDefaultSensors: props.enableDefaultSensors,
-      sensors: props.sensors,
-      onBeforeCapture: props.onBeforeCapture,
-      onBeforeDragStart: props.onBeforeDragStart,
-      onDragStart: props.onDragStart,
-      onDragUpdate: props.onDragUpdate,
-      onDragEnd: props.onDragEnd
-    }, props.children);
-  });
-}
-
-var isEqual$1 = function isEqual(base) {
-  return function (value) {
-    return base === value;
-  };
-};
-
-var isScroll = isEqual$1('scroll');
-var isAuto = isEqual$1('auto');
-var isVisible$1 = isEqual$1('visible');
-
-var isEither = function isEither(overflow, fn) {
-  return fn(overflow.overflowX) || fn(overflow.overflowY);
-};
-
-var isBoth = function isBoth(overflow, fn) {
-  return fn(overflow.overflowX) && fn(overflow.overflowY);
-};
-
-var isElementScrollable = function isElementScrollable(el) {
-  var style = window.getComputedStyle(el);
-  var overflow = {
-    overflowX: style.overflowX,
-    overflowY: style.overflowY
-  };
-  return isEither(overflow, isScroll) || isEither(overflow, isAuto);
-};
-
-var isBodyScrollable = function isBodyScrollable() {
-  if (false) {}
-
-  var body = getBodyElement();
-  var html = document.documentElement;
-  !html ?  true ? invariant(false) : 0 : void 0;
-
-  if (!isElementScrollable(body)) {
-    return false;
-  }
-
-  var htmlStyle = window.getComputedStyle(html);
-  var htmlOverflow = {
-    overflowX: htmlStyle.overflowX,
-    overflowY: htmlStyle.overflowY
-  };
-
-  if (isBoth(htmlOverflow, isVisible$1)) {
-    return false;
-  }
-
-   true ? warning("\n    We have detected that your <body> element might be a scroll container.\n    We have found no reliable way of detecting whether the <body> element is a scroll container.\n    Under most circumstances a <body> scroll bar will be on the <html> element (document.documentElement)\n\n    Because we cannot determine if the <body> is a scroll container, and generally it is not one,\n    we will be treating the <body> as *not* a scroll container\n\n    More information: https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/guides/how-we-detect-scroll-containers.md\n  ") : 0;
-  return false;
-};
-
-var getClosestScrollable = function getClosestScrollable(el) {
-  if (el == null) {
-    return null;
-  }
-
-  if (el === document.body) {
-    return isBodyScrollable() ? el : null;
-  }
-
-  if (el === document.documentElement) {
-    return null;
-  }
-
-  if (!isElementScrollable(el)) {
-    return getClosestScrollable(el.parentElement);
-  }
-
-  return el;
-};
-
-var checkForNestedScrollContainers = (function (scrollable) {
-  if (!scrollable) {
-    return;
-  }
-
-  var anotherScrollParent = getClosestScrollable(scrollable.parentElement);
-
-  if (!anotherScrollParent) {
-    return;
-  }
-
-   true ? warning("\n    Droppable: unsupported nested scroll container detected.\n    A Droppable can only have one scroll parent (which can be itself)\n    Nested scroll containers are currently not supported.\n\n    We hope to support nested scroll containers soon: https://github.com/atlassian/react-beautiful-dnd/issues/131\n  ") : 0;
-});
-
-var getScroll$1 = (function (el) {
-  return {
-    x: el.scrollLeft,
-    y: el.scrollTop
-  };
-});
-
-var getIsFixed = function getIsFixed(el) {
-  if (!el) {
-    return false;
-  }
-
-  var style = window.getComputedStyle(el);
-
-  if (style.position === 'fixed') {
-    return true;
-  }
-
-  return getIsFixed(el.parentElement);
-};
-
-var getEnv = (function (start) {
-  var closestScrollable = getClosestScrollable(start);
-  var isFixedOnPage = getIsFixed(start);
-  return {
-    closestScrollable: closestScrollable,
-    isFixedOnPage: isFixedOnPage
-  };
-});
-
-var getDroppableDimension = (function (_ref) {
-  var descriptor = _ref.descriptor,
-      isEnabled = _ref.isEnabled,
-      isCombineEnabled = _ref.isCombineEnabled,
-      isFixedOnPage = _ref.isFixedOnPage,
-      direction = _ref.direction,
-      client = _ref.client,
-      page = _ref.page,
-      closest = _ref.closest;
-
-  var frame = function () {
-    if (!closest) {
-      return null;
-    }
-
-    var scrollSize = closest.scrollSize,
-        frameClient = closest.client;
-    var maxScroll = getMaxScroll({
-      scrollHeight: scrollSize.scrollHeight,
-      scrollWidth: scrollSize.scrollWidth,
-      height: frameClient.paddingBox.height,
-      width: frameClient.paddingBox.width
-    });
-    return {
-      pageMarginBox: closest.page.marginBox,
-      frameClient: frameClient,
-      scrollSize: scrollSize,
-      shouldClipSubject: closest.shouldClipSubject,
-      scroll: {
-        initial: closest.scroll,
-        current: closest.scroll,
-        max: maxScroll,
-        diff: {
-          value: origin,
-          displacement: origin
-        }
-      }
-    };
-  }();
-
-  var axis = direction === 'vertical' ? vertical : horizontal;
-  var subject = getSubject({
-    page: page,
-    withPlaceholder: null,
-    axis: axis,
-    frame: frame
-  });
-  var dimension = {
-    descriptor: descriptor,
-    isCombineEnabled: isCombineEnabled,
-    isFixedOnPage: isFixedOnPage,
-    axis: axis,
-    isEnabled: isEnabled,
-    client: client,
-    page: page,
-    frame: frame,
-    subject: subject
-  };
-  return dimension;
-});
-
-var getClient = function getClient(targetRef, closestScrollable) {
-  var base = (0,css_box_model__WEBPACK_IMPORTED_MODULE_5__.getBox)(targetRef);
-
-  if (!closestScrollable) {
-    return base;
-  }
-
-  if (targetRef !== closestScrollable) {
-    return base;
-  }
-
-  var top = base.paddingBox.top - closestScrollable.scrollTop;
-  var left = base.paddingBox.left - closestScrollable.scrollLeft;
-  var bottom = top + closestScrollable.scrollHeight;
-  var right = left + closestScrollable.scrollWidth;
-  var paddingBox = {
-    top: top,
-    right: right,
-    bottom: bottom,
-    left: left
-  };
-  var borderBox = (0,css_box_model__WEBPACK_IMPORTED_MODULE_5__.expand)(paddingBox, base.border);
-  var client = (0,css_box_model__WEBPACK_IMPORTED_MODULE_5__.createBox)({
-    borderBox: borderBox,
-    margin: base.margin,
-    border: base.border,
-    padding: base.padding
-  });
-  return client;
-};
-
-var getDimension = (function (_ref) {
-  var ref = _ref.ref,
-      descriptor = _ref.descriptor,
-      env = _ref.env,
-      windowScroll = _ref.windowScroll,
-      direction = _ref.direction,
-      isDropDisabled = _ref.isDropDisabled,
-      isCombineEnabled = _ref.isCombineEnabled,
-      shouldClipSubject = _ref.shouldClipSubject;
-  var closestScrollable = env.closestScrollable;
-  var client = getClient(ref, closestScrollable);
-  var page = (0,css_box_model__WEBPACK_IMPORTED_MODULE_5__.withScroll)(client, windowScroll);
-
-  var closest = function () {
-    if (!closestScrollable) {
-      return null;
-    }
-
-    var frameClient = (0,css_box_model__WEBPACK_IMPORTED_MODULE_5__.getBox)(closestScrollable);
-    var scrollSize = {
-      scrollHeight: closestScrollable.scrollHeight,
-      scrollWidth: closestScrollable.scrollWidth
-    };
-    return {
-      client: frameClient,
-      page: (0,css_box_model__WEBPACK_IMPORTED_MODULE_5__.withScroll)(frameClient, windowScroll),
-      scroll: getScroll$1(closestScrollable),
-      scrollSize: scrollSize,
-      shouldClipSubject: shouldClipSubject
-    };
-  }();
-
-  var dimension = getDroppableDimension({
-    descriptor: descriptor,
-    isEnabled: !isDropDisabled,
-    isCombineEnabled: isCombineEnabled,
-    isFixedOnPage: env.isFixedOnPage,
-    direction: direction,
-    client: client,
-    page: page,
-    closest: closest
-  });
-  return dimension;
-});
-
-var immediate = {
-  passive: false
-};
-var delayed = {
-  passive: true
-};
-var getListenerOptions = (function (options) {
-  return options.shouldPublishImmediately ? immediate : delayed;
-});
-
-function useRequiredContext(Context) {
-  var result = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(Context);
-  !result ?  true ? invariant(false, 'Could not find required context') : 0 : void 0;
-  return result;
-}
-
-var getClosestScrollableFromDrag = function getClosestScrollableFromDrag(dragging) {
-  return dragging && dragging.env.closestScrollable || null;
-};
-
-function useDroppablePublisher(args) {
-  var whileDraggingRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
-  var appContext = useRequiredContext(AppContext);
-  var uniqueId = useUniqueId('droppable');
-  var registry = appContext.registry,
-      marshal = appContext.marshal;
-  var previousRef = usePrevious(args);
-  var descriptor = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useMemo)(function () {
-    return {
-      id: args.droppableId,
-      type: args.type,
-      mode: args.mode
-    };
-  }, [args.droppableId, args.mode, args.type]);
-  var publishedDescriptorRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(descriptor);
-  var memoizedUpdateScroll = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useMemo)(function () {
-    return (0,memoize_one__WEBPACK_IMPORTED_MODULE_6__["default"])(function (x, y) {
-      !whileDraggingRef.current ?  true ? invariant(false, 'Can only update scroll when dragging') : 0 : void 0;
-      var scroll = {
-        x: x,
-        y: y
-      };
-      marshal.updateDroppableScroll(descriptor.id, scroll);
-    });
-  }, [descriptor.id, marshal]);
-  var getClosestScroll = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function () {
-    var dragging = whileDraggingRef.current;
-
-    if (!dragging || !dragging.env.closestScrollable) {
-      return origin;
-    }
-
-    return getScroll$1(dragging.env.closestScrollable);
-  }, []);
-  var updateScroll = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function () {
-    var scroll = getClosestScroll();
-    memoizedUpdateScroll(scroll.x, scroll.y);
-  }, [getClosestScroll, memoizedUpdateScroll]);
-  var scheduleScrollUpdate = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useMemo)(function () {
-    return (0,raf_schd__WEBPACK_IMPORTED_MODULE_7__["default"])(updateScroll);
-  }, [updateScroll]);
-  var onClosestScroll = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function () {
-    var dragging = whileDraggingRef.current;
-    var closest = getClosestScrollableFromDrag(dragging);
-    !(dragging && closest) ?  true ? invariant(false, 'Could not find scroll options while scrolling') : 0 : void 0;
-    var options = dragging.scrollOptions;
-
-    if (options.shouldPublishImmediately) {
-      updateScroll();
-      return;
-    }
-
-    scheduleScrollUpdate();
-  }, [scheduleScrollUpdate, updateScroll]);
-  var getDimensionAndWatchScroll = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function (windowScroll, options) {
-    !!whileDraggingRef.current ?  true ? invariant(false, 'Cannot collect a droppable while a drag is occurring') : 0 : void 0;
-    var previous = previousRef.current;
-    var ref = previous.getDroppableRef();
-    !ref ?  true ? invariant(false, 'Cannot collect without a droppable ref') : 0 : void 0;
-    var env = getEnv(ref);
-    var dragging = {
-      ref: ref,
-      descriptor: descriptor,
-      env: env,
-      scrollOptions: options
-    };
-    whileDraggingRef.current = dragging;
-    var dimension = getDimension({
-      ref: ref,
-      descriptor: descriptor,
-      env: env,
-      windowScroll: windowScroll,
-      direction: previous.direction,
-      isDropDisabled: previous.isDropDisabled,
-      isCombineEnabled: previous.isCombineEnabled,
-      shouldClipSubject: !previous.ignoreContainerClipping
-    });
-    var scrollable = env.closestScrollable;
-
-    if (scrollable) {
-      scrollable.setAttribute(scrollContainer.contextId, appContext.contextId);
-      scrollable.addEventListener('scroll', onClosestScroll, getListenerOptions(dragging.scrollOptions));
-
-      if (true) {
-        checkForNestedScrollContainers(scrollable);
-      }
-    }
-
-    return dimension;
-  }, [appContext.contextId, descriptor, onClosestScroll, previousRef]);
-  var getScrollWhileDragging = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function () {
-    var dragging = whileDraggingRef.current;
-    var closest = getClosestScrollableFromDrag(dragging);
-    !(dragging && closest) ?  true ? invariant(false, 'Can only recollect Droppable client for Droppables that have a scroll container') : 0 : void 0;
-    return getScroll$1(closest);
-  }, []);
-  var dragStopped = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function () {
-    var dragging = whileDraggingRef.current;
-    !dragging ?  true ? invariant(false, 'Cannot stop drag when no active drag') : 0 : void 0;
-    var closest = getClosestScrollableFromDrag(dragging);
-    whileDraggingRef.current = null;
-
-    if (!closest) {
-      return;
-    }
-
-    scheduleScrollUpdate.cancel();
-    closest.removeAttribute(scrollContainer.contextId);
-    closest.removeEventListener('scroll', onClosestScroll, getListenerOptions(dragging.scrollOptions));
-  }, [onClosestScroll, scheduleScrollUpdate]);
-  var scroll = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function (change) {
-    var dragging = whileDraggingRef.current;
-    !dragging ?  true ? invariant(false, 'Cannot scroll when there is no drag') : 0 : void 0;
-    var closest = getClosestScrollableFromDrag(dragging);
-    !closest ?  true ? invariant(false, 'Cannot scroll a droppable with no closest scrollable') : 0 : void 0;
-    closest.scrollTop += change.y;
-    closest.scrollLeft += change.x;
-  }, []);
-  var callbacks = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useMemo)(function () {
-    return {
-      getDimensionAndWatchScroll: getDimensionAndWatchScroll,
-      getScrollWhileDragging: getScrollWhileDragging,
-      dragStopped: dragStopped,
-      scroll: scroll
-    };
-  }, [dragStopped, getDimensionAndWatchScroll, getScrollWhileDragging, scroll]);
-  var entry = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useMemo)(function () {
-    return {
-      uniqueId: uniqueId,
-      descriptor: descriptor,
-      callbacks: callbacks
-    };
-  }, [callbacks, descriptor, uniqueId]);
-  useIsomorphicLayoutEffect(function () {
-    publishedDescriptorRef.current = entry.descriptor;
-    registry.droppable.register(entry);
-    return function () {
-      if (whileDraggingRef.current) {
-         true ? warning('Unsupported: changing the droppableId or type of a Droppable during a drag') : 0;
-        dragStopped();
-      }
-
-      registry.droppable.unregister(entry);
-    };
-  }, [callbacks, descriptor, dragStopped, entry, marshal, registry.droppable]);
-  useIsomorphicLayoutEffect(function () {
-    if (!whileDraggingRef.current) {
-      return;
-    }
-
-    marshal.updateDroppableIsEnabled(publishedDescriptorRef.current.id, !args.isDropDisabled);
-  }, [args.isDropDisabled, marshal]);
-  useIsomorphicLayoutEffect(function () {
-    if (!whileDraggingRef.current) {
-      return;
-    }
-
-    marshal.updateDroppableIsCombineEnabled(publishedDescriptorRef.current.id, args.isCombineEnabled);
-  }, [args.isCombineEnabled, marshal]);
-}
-
-function noop$2() {}
-
-var empty = {
-  width: 0,
-  height: 0,
-  margin: noSpacing
-};
-
-var getSize = function getSize(_ref) {
-  var isAnimatingOpenOnMount = _ref.isAnimatingOpenOnMount,
-      placeholder = _ref.placeholder,
-      animate = _ref.animate;
-
-  if (isAnimatingOpenOnMount) {
-    return empty;
-  }
-
-  if (animate === 'close') {
-    return empty;
-  }
-
-  return {
-    height: placeholder.client.borderBox.height,
-    width: placeholder.client.borderBox.width,
-    margin: placeholder.client.margin
-  };
-};
-
-var getStyle = function getStyle(_ref2) {
-  var isAnimatingOpenOnMount = _ref2.isAnimatingOpenOnMount,
-      placeholder = _ref2.placeholder,
-      animate = _ref2.animate;
-  var size = getSize({
-    isAnimatingOpenOnMount: isAnimatingOpenOnMount,
-    placeholder: placeholder,
-    animate: animate
-  });
-  return {
-    display: placeholder.display,
-    boxSizing: 'border-box',
-    width: size.width,
-    height: size.height,
-    marginTop: size.margin.top,
-    marginRight: size.margin.right,
-    marginBottom: size.margin.bottom,
-    marginLeft: size.margin.left,
-    flexShrink: '0',
-    flexGrow: '0',
-    pointerEvents: 'none',
-    transition: animate !== 'none' ? transitions.placeholder : null
-  };
-};
-
-function Placeholder(props) {
-  var animateOpenTimerRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
-  var tryClearAnimateOpenTimer = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function () {
-    if (!animateOpenTimerRef.current) {
-      return;
-    }
-
-    clearTimeout(animateOpenTimerRef.current);
-    animateOpenTimerRef.current = null;
-  }, []);
-  var animate = props.animate,
-      onTransitionEnd = props.onTransitionEnd,
-      onClose = props.onClose,
-      contextId = props.contextId;
-
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props.animate === 'open'),
-      isAnimatingOpenOnMount = _useState[0],
-      setIsAnimatingOpenOnMount = _useState[1];
-
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    if (!isAnimatingOpenOnMount) {
-      return noop$2;
-    }
-
-    if (animate !== 'open') {
-      tryClearAnimateOpenTimer();
-      setIsAnimatingOpenOnMount(false);
-      return noop$2;
-    }
-
-    if (animateOpenTimerRef.current) {
-      return noop$2;
-    }
-
-    animateOpenTimerRef.current = setTimeout(function () {
-      animateOpenTimerRef.current = null;
-      setIsAnimatingOpenOnMount(false);
-    });
-    return tryClearAnimateOpenTimer;
-  }, [animate, isAnimatingOpenOnMount, tryClearAnimateOpenTimer]);
-  var onSizeChangeEnd = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function (event) {
-    if (event.propertyName !== 'height') {
-      return;
-    }
-
-    onTransitionEnd();
-
-    if (animate === 'close') {
-      onClose();
-    }
-  }, [animate, onClose, onTransitionEnd]);
-  var style = getStyle({
-    isAnimatingOpenOnMount: isAnimatingOpenOnMount,
-    animate: props.animate,
-    placeholder: props.placeholder
-  });
-  return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(props.placeholder.tagName, {
-    style: style,
-    'data-rbd-placeholder-context-id': contextId,
-    onTransitionEnd: onSizeChangeEnd,
-    ref: props.innerRef
-  });
-}
-
-var Placeholder$1 = react__WEBPACK_IMPORTED_MODULE_0___default().memo(Placeholder);
-
-var DroppableContext = react__WEBPACK_IMPORTED_MODULE_0___default().createContext(null);
-
-function checkIsValidInnerRef(el) {
-  !(el && isHtmlElement(el)) ?  true ? invariant(false, "\n    provided.innerRef has not been provided with a HTMLElement.\n\n    You can find a guide on using the innerRef callback functions at:\n    https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/guides/using-inner-ref.md\n  ") : 0 : void 0;
-}
-
-function isBoolean(value) {
-  return typeof value === 'boolean';
-}
-
-function runChecks(args, checks) {
-  checks.forEach(function (check) {
-    return check(args);
-  });
-}
-
-var shared = [function required(_ref) {
-  var props = _ref.props;
-  !props.droppableId ?  true ? invariant(false, 'A Droppable requires a droppableId prop') : 0 : void 0;
-  !(typeof props.droppableId === 'string') ?  true ? invariant(false, "A Droppable requires a [string] droppableId. Provided: [" + typeof props.droppableId + "]") : 0 : void 0;
-}, function _boolean(_ref2) {
-  var props = _ref2.props;
-  !isBoolean(props.isDropDisabled) ?  true ? invariant(false, 'isDropDisabled must be a boolean') : 0 : void 0;
-  !isBoolean(props.isCombineEnabled) ?  true ? invariant(false, 'isCombineEnabled must be a boolean') : 0 : void 0;
-  !isBoolean(props.ignoreContainerClipping) ?  true ? invariant(false, 'ignoreContainerClipping must be a boolean') : 0 : void 0;
-}, function ref(_ref3) {
-  var getDroppableRef = _ref3.getDroppableRef;
-  checkIsValidInnerRef(getDroppableRef());
-}];
-var standard = [function placeholder(_ref4) {
-  var props = _ref4.props,
-      getPlaceholderRef = _ref4.getPlaceholderRef;
-
-  if (!props.placeholder) {
-    return;
-  }
-
-  var ref = getPlaceholderRef();
-
-  if (ref) {
-    return;
-  }
-
-   true ? warning("\n      Droppable setup issue [droppableId: \"" + props.droppableId + "\"]:\n      DroppableProvided > placeholder could not be found.\n\n      Please be sure to add the {provided.placeholder} React Node as a child of your Droppable.\n      More information: https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/api/droppable.md\n    ") : 0;
-}];
-var virtual = [function hasClone(_ref5) {
-  var props = _ref5.props;
-  !props.renderClone ?  true ? invariant(false, 'Must provide a clone render function (renderClone) for virtual lists') : 0 : void 0;
-}, function hasNoPlaceholder(_ref6) {
-  var getPlaceholderRef = _ref6.getPlaceholderRef;
-  !!getPlaceholderRef() ?  true ? invariant(false, 'Expected virtual list to not have a placeholder') : 0 : void 0;
-}];
-function useValidation(args) {
-  useDevSetupWarning(function () {
-    runChecks(args, shared);
-
-    if (args.props.mode === 'standard') {
-      runChecks(args, standard);
-    }
-
-    if (args.props.mode === 'virtual') {
-      runChecks(args, virtual);
-    }
-  });
-}
-
-var AnimateInOut = function (_React$PureComponent) {
-  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(AnimateInOut, _React$PureComponent);
-
-  function AnimateInOut() {
-    var _this;
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _React$PureComponent.call.apply(_React$PureComponent, [this].concat(args)) || this;
-    _this.state = {
-      isVisible: Boolean(_this.props.on),
-      data: _this.props.on,
-      animate: _this.props.shouldAnimate && _this.props.on ? 'open' : 'none'
-    };
-
-    _this.onClose = function () {
-      if (_this.state.animate !== 'close') {
-        return;
-      }
-
-      _this.setState({
-        isVisible: false
-      });
-    };
-
-    return _this;
-  }
-
-  AnimateInOut.getDerivedStateFromProps = function getDerivedStateFromProps(props, state) {
-    if (!props.shouldAnimate) {
-      return {
-        isVisible: Boolean(props.on),
-        data: props.on,
-        animate: 'none'
-      };
-    }
-
-    if (props.on) {
-      return {
-        isVisible: true,
-        data: props.on,
-        animate: 'open'
-      };
-    }
-
-    if (state.isVisible) {
-      return {
-        isVisible: true,
-        data: state.data,
-        animate: 'close'
-      };
-    }
-
-    return {
-      isVisible: false,
-      animate: 'close',
-      data: null
-    };
-  };
-
-  var _proto = AnimateInOut.prototype;
-
-  _proto.render = function render() {
-    if (!this.state.isVisible) {
-      return null;
-    }
-
-    var provided = {
-      onClose: this.onClose,
-      data: this.state.data,
-      animate: this.state.animate
-    };
-    return this.props.children(provided);
-  };
-
-  return AnimateInOut;
-}((react__WEBPACK_IMPORTED_MODULE_0___default().PureComponent));
-
-var zIndexOptions = {
-  dragging: 5000,
-  dropAnimating: 4500
-};
-
-var getDraggingTransition = function getDraggingTransition(shouldAnimateDragMovement, dropping) {
-  if (dropping) {
-    return transitions.drop(dropping.duration);
-  }
-
-  if (shouldAnimateDragMovement) {
-    return transitions.snap;
-  }
-
-  return transitions.fluid;
-};
-
-var getDraggingOpacity = function getDraggingOpacity(isCombining, isDropAnimating) {
-  if (!isCombining) {
-    return null;
-  }
-
-  return isDropAnimating ? combine.opacity.drop : combine.opacity.combining;
-};
-
-var getShouldDraggingAnimate = function getShouldDraggingAnimate(dragging) {
-  if (dragging.forceShouldAnimate != null) {
-    return dragging.forceShouldAnimate;
-  }
-
-  return dragging.mode === 'SNAP';
-};
-
-function getDraggingStyle(dragging) {
-  var dimension = dragging.dimension;
-  var box = dimension.client;
-  var offset = dragging.offset,
-      combineWith = dragging.combineWith,
-      dropping = dragging.dropping;
-  var isCombining = Boolean(combineWith);
-  var shouldAnimate = getShouldDraggingAnimate(dragging);
-  var isDropAnimating = Boolean(dropping);
-  var transform = isDropAnimating ? transforms.drop(offset, isCombining) : transforms.moveTo(offset);
-  var style = {
-    position: 'fixed',
-    top: box.marginBox.top,
-    left: box.marginBox.left,
-    boxSizing: 'border-box',
-    width: box.borderBox.width,
-    height: box.borderBox.height,
-    transition: getDraggingTransition(shouldAnimate, dropping),
-    transform: transform,
-    opacity: getDraggingOpacity(isCombining, isDropAnimating),
-    zIndex: isDropAnimating ? zIndexOptions.dropAnimating : zIndexOptions.dragging,
-    pointerEvents: 'none'
-  };
-  return style;
-}
-
-function getSecondaryStyle(secondary) {
-  return {
-    transform: transforms.moveTo(secondary.offset),
-    transition: secondary.shouldAnimateDisplacement ? null : 'none'
-  };
-}
-
-function getStyle$1(mapped) {
-  return mapped.type === 'DRAGGING' ? getDraggingStyle(mapped) : getSecondaryStyle(mapped);
-}
-
-function getDimension$1(descriptor, el, windowScroll) {
-  if (windowScroll === void 0) {
-    windowScroll = origin;
-  }
-
-  var computedStyles = window.getComputedStyle(el);
-  var borderBox = el.getBoundingClientRect();
-  var client = (0,css_box_model__WEBPACK_IMPORTED_MODULE_5__.calculateBox)(borderBox, computedStyles);
-  var page = (0,css_box_model__WEBPACK_IMPORTED_MODULE_5__.withScroll)(client, windowScroll);
-  var placeholder = {
-    client: client,
-    tagName: el.tagName.toLowerCase(),
-    display: computedStyles.display
-  };
-  var displaceBy = {
-    x: client.marginBox.width,
-    y: client.marginBox.height
-  };
-  var dimension = {
-    descriptor: descriptor,
-    placeholder: placeholder,
-    displaceBy: displaceBy,
-    client: client,
-    page: page
-  };
-  return dimension;
-}
-
-function useDraggablePublisher(args) {
-  var uniqueId = useUniqueId('draggable');
-  var descriptor = args.descriptor,
-      registry = args.registry,
-      getDraggableRef = args.getDraggableRef,
-      canDragInteractiveElements = args.canDragInteractiveElements,
-      shouldRespectForcePress = args.shouldRespectForcePress,
-      isEnabled = args.isEnabled;
-  var options = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useMemo)(function () {
-    return {
-      canDragInteractiveElements: canDragInteractiveElements,
-      shouldRespectForcePress: shouldRespectForcePress,
-      isEnabled: isEnabled
-    };
-  }, [canDragInteractiveElements, isEnabled, shouldRespectForcePress]);
-  var getDimension = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function (windowScroll) {
-    var el = getDraggableRef();
-    !el ?  true ? invariant(false, 'Cannot get dimension when no ref is set') : 0 : void 0;
-    return getDimension$1(descriptor, el, windowScroll);
-  }, [descriptor, getDraggableRef]);
-  var entry = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useMemo)(function () {
-    return {
-      uniqueId: uniqueId,
-      descriptor: descriptor,
-      options: options,
-      getDimension: getDimension
-    };
-  }, [descriptor, getDimension, options, uniqueId]);
-  var publishedRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(entry);
-  var isFirstPublishRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(true);
-  useIsomorphicLayoutEffect(function () {
-    registry.draggable.register(publishedRef.current);
-    return function () {
-      return registry.draggable.unregister(publishedRef.current);
-    };
-  }, [registry.draggable]);
-  useIsomorphicLayoutEffect(function () {
-    if (isFirstPublishRef.current) {
-      isFirstPublishRef.current = false;
-      return;
-    }
-
-    var last = publishedRef.current;
-    publishedRef.current = entry;
-    registry.draggable.update(entry, last);
-  }, [entry, registry.draggable]);
-}
-
-function useValidation$1(props, contextId, getRef) {
-  useDevSetupWarning(function () {
-    function prefix(id) {
-      return "Draggable[id: " + id + "]: ";
-    }
-
-    var id = props.draggableId;
-    !id ?  true ? invariant(false, 'Draggable requires a draggableId') : 0 : void 0;
-    !(typeof id === 'string') ?  true ? invariant(false, "Draggable requires a [string] draggableId.\n      Provided: [type: " + typeof id + "] (value: " + id + ")") : 0 : void 0;
-    !isInteger(props.index) ?  true ? invariant(false, prefix(id) + " requires an integer index prop") : 0 : void 0;
-
-    if (props.mapped.type === 'DRAGGING') {
-      return;
-    }
-
-    checkIsValidInnerRef(getRef());
-
-    if (props.isEnabled) {
-      !findDragHandle(contextId, id) ?  true ? invariant(false, prefix(id) + " Unable to find drag handle") : 0 : void 0;
-    }
-  });
-}
-function useClonePropValidation(isClone) {
-  useDev(function () {
-    var initialRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(isClone);
-    useDevSetupWarning(function () {
-      !(isClone === initialRef.current) ?  true ? invariant(false, 'Draggable isClone prop value changed during component life') : 0 : void 0;
-    }, [isClone]);
-  });
-}
-
-function preventHtml5Dnd(event) {
-  event.preventDefault();
-}
-
-function Draggable(props) {
-  var ref = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
-  var setRef = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function (el) {
-    ref.current = el;
-  }, []);
-  var getRef = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function () {
-    return ref.current;
-  }, []);
-
-  var _useRequiredContext = useRequiredContext(AppContext),
-      contextId = _useRequiredContext.contextId,
-      dragHandleUsageInstructionsId = _useRequiredContext.dragHandleUsageInstructionsId,
-      registry = _useRequiredContext.registry;
-
-  var _useRequiredContext2 = useRequiredContext(DroppableContext),
-      type = _useRequiredContext2.type,
-      droppableId = _useRequiredContext2.droppableId;
-
-  var descriptor = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useMemo)(function () {
-    return {
-      id: props.draggableId,
-      index: props.index,
-      type: type,
-      droppableId: droppableId
-    };
-  }, [props.draggableId, props.index, type, droppableId]);
-  var children = props.children,
-      draggableId = props.draggableId,
-      isEnabled = props.isEnabled,
-      shouldRespectForcePress = props.shouldRespectForcePress,
-      canDragInteractiveElements = props.canDragInteractiveElements,
-      isClone = props.isClone,
-      mapped = props.mapped,
-      dropAnimationFinishedAction = props.dropAnimationFinished;
-  useValidation$1(props, contextId, getRef);
-  useClonePropValidation(isClone);
-
-  if (!isClone) {
-    var forPublisher = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useMemo)(function () {
-      return {
-        descriptor: descriptor,
-        registry: registry,
-        getDraggableRef: getRef,
-        canDragInteractiveElements: canDragInteractiveElements,
-        shouldRespectForcePress: shouldRespectForcePress,
-        isEnabled: isEnabled
-      };
-    }, [descriptor, registry, getRef, canDragInteractiveElements, shouldRespectForcePress, isEnabled]);
-    useDraggablePublisher(forPublisher);
-  }
-
-  var dragHandleProps = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useMemo)(function () {
-    return isEnabled ? {
-      tabIndex: 0,
-      role: 'button',
-      'aria-describedby': dragHandleUsageInstructionsId,
-      'data-rbd-drag-handle-draggable-id': draggableId,
-      'data-rbd-drag-handle-context-id': contextId,
-      draggable: false,
-      onDragStart: preventHtml5Dnd
-    } : null;
-  }, [contextId, dragHandleUsageInstructionsId, draggableId, isEnabled]);
-  var onMoveEnd = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function (event) {
-    if (mapped.type !== 'DRAGGING') {
-      return;
-    }
-
-    if (!mapped.dropping) {
-      return;
-    }
-
-    if (event.propertyName !== 'transform') {
-      return;
-    }
-
-    dropAnimationFinishedAction();
-  }, [dropAnimationFinishedAction, mapped]);
-  var provided = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useMemo)(function () {
-    var style = getStyle$1(mapped);
-    var onTransitionEnd = mapped.type === 'DRAGGING' && mapped.dropping ? onMoveEnd : null;
-    var result = {
-      innerRef: setRef,
-      draggableProps: {
-        'data-rbd-draggable-context-id': contextId,
-        'data-rbd-draggable-id': draggableId,
-        style: style,
-        onTransitionEnd: onTransitionEnd
-      },
-      dragHandleProps: dragHandleProps
-    };
-    return result;
-  }, [contextId, dragHandleProps, draggableId, mapped, onMoveEnd, setRef]);
-  var rubric = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useMemo)(function () {
-    return {
-      draggableId: descriptor.id,
-      type: descriptor.type,
-      source: {
-        index: descriptor.index,
-        droppableId: descriptor.droppableId
-      }
-    };
-  }, [descriptor.droppableId, descriptor.id, descriptor.index, descriptor.type]);
-  return children(provided, mapped.snapshot, rubric);
-}
-
-var isStrictEqual = (function (a, b) {
-  return a === b;
-});
-
-var whatIsDraggedOverFromResult = (function (result) {
-  var combine = result.combine,
-      destination = result.destination;
-
-  if (destination) {
-    return destination.droppableId;
-  }
-
-  if (combine) {
-    return combine.droppableId;
-  }
-
-  return null;
-});
-
-var getCombineWithFromResult = function getCombineWithFromResult(result) {
-  return result.combine ? result.combine.draggableId : null;
-};
-
-var getCombineWithFromImpact = function getCombineWithFromImpact(impact) {
-  return impact.at && impact.at.type === 'COMBINE' ? impact.at.combine.draggableId : null;
-};
-
-function getDraggableSelector() {
-  var memoizedOffset = (0,memoize_one__WEBPACK_IMPORTED_MODULE_6__["default"])(function (x, y) {
-    return {
-      x: x,
-      y: y
-    };
-  });
-  var getMemoizedSnapshot = (0,memoize_one__WEBPACK_IMPORTED_MODULE_6__["default"])(function (mode, isClone, draggingOver, combineWith, dropping) {
-    return {
-      isDragging: true,
-      isClone: isClone,
-      isDropAnimating: Boolean(dropping),
-      dropAnimation: dropping,
-      mode: mode,
-      draggingOver: draggingOver,
-      combineWith: combineWith,
-      combineTargetFor: null
-    };
-  });
-  var getMemoizedProps = (0,memoize_one__WEBPACK_IMPORTED_MODULE_6__["default"])(function (offset, mode, dimension, isClone, draggingOver, combineWith, forceShouldAnimate) {
-    return {
-      mapped: {
-        type: 'DRAGGING',
-        dropping: null,
-        draggingOver: draggingOver,
-        combineWith: combineWith,
-        mode: mode,
-        offset: offset,
-        dimension: dimension,
-        forceShouldAnimate: forceShouldAnimate,
-        snapshot: getMemoizedSnapshot(mode, isClone, draggingOver, combineWith, null)
-      }
-    };
-  });
-
-  var selector = function selector(state, ownProps) {
-    if (state.isDragging) {
-      if (state.critical.draggable.id !== ownProps.draggableId) {
-        return null;
-      }
-
-      var offset = state.current.client.offset;
-      var dimension = state.dimensions.draggables[ownProps.draggableId];
-      var draggingOver = whatIsDraggedOver(state.impact);
-      var combineWith = getCombineWithFromImpact(state.impact);
-      var forceShouldAnimate = state.forceShouldAnimate;
-      return getMemoizedProps(memoizedOffset(offset.x, offset.y), state.movementMode, dimension, ownProps.isClone, draggingOver, combineWith, forceShouldAnimate);
-    }
-
-    if (state.phase === 'DROP_ANIMATING') {
-      var completed = state.completed;
-
-      if (completed.result.draggableId !== ownProps.draggableId) {
-        return null;
-      }
-
-      var isClone = ownProps.isClone;
-      var _dimension = state.dimensions.draggables[ownProps.draggableId];
-      var result = completed.result;
-      var mode = result.mode;
-
-      var _draggingOver = whatIsDraggedOverFromResult(result);
-
-      var _combineWith = getCombineWithFromResult(result);
-
-      var duration = state.dropDuration;
-      var dropping = {
-        duration: duration,
-        curve: curves.drop,
-        moveTo: state.newHomeClientOffset,
-        opacity: _combineWith ? combine.opacity.drop : null,
-        scale: _combineWith ? combine.scale.drop : null
-      };
-      return {
-        mapped: {
-          type: 'DRAGGING',
-          offset: state.newHomeClientOffset,
-          dimension: _dimension,
-          dropping: dropping,
-          draggingOver: _draggingOver,
-          combineWith: _combineWith,
-          mode: mode,
-          forceShouldAnimate: null,
-          snapshot: getMemoizedSnapshot(mode, isClone, _draggingOver, _combineWith, dropping)
-        }
-      };
-    }
-
-    return null;
-  };
-
-  return selector;
-}
-
-function getSecondarySnapshot(combineTargetFor) {
-  return {
-    isDragging: false,
-    isDropAnimating: false,
-    isClone: false,
-    dropAnimation: null,
-    mode: null,
-    draggingOver: null,
-    combineTargetFor: combineTargetFor,
-    combineWith: null
-  };
-}
-
-var atRest = {
-  mapped: {
-    type: 'SECONDARY',
-    offset: origin,
-    combineTargetFor: null,
-    shouldAnimateDisplacement: true,
-    snapshot: getSecondarySnapshot(null)
-  }
-};
-
-function getSecondarySelector() {
-  var memoizedOffset = (0,memoize_one__WEBPACK_IMPORTED_MODULE_6__["default"])(function (x, y) {
-    return {
-      x: x,
-      y: y
-    };
-  });
-  var getMemoizedSnapshot = (0,memoize_one__WEBPACK_IMPORTED_MODULE_6__["default"])(getSecondarySnapshot);
-  var getMemoizedProps = (0,memoize_one__WEBPACK_IMPORTED_MODULE_6__["default"])(function (offset, combineTargetFor, shouldAnimateDisplacement) {
-    if (combineTargetFor === void 0) {
-      combineTargetFor = null;
-    }
-
-    return {
-      mapped: {
-        type: 'SECONDARY',
-        offset: offset,
-        combineTargetFor: combineTargetFor,
-        shouldAnimateDisplacement: shouldAnimateDisplacement,
-        snapshot: getMemoizedSnapshot(combineTargetFor)
-      }
-    };
-  });
-
-  var getFallback = function getFallback(combineTargetFor) {
-    return combineTargetFor ? getMemoizedProps(origin, combineTargetFor, true) : null;
-  };
-
-  var getProps = function getProps(ownId, draggingId, impact, afterCritical) {
-    var visualDisplacement = impact.displaced.visible[ownId];
-    var isAfterCriticalInVirtualList = Boolean(afterCritical.inVirtualList && afterCritical.effected[ownId]);
-    var combine = tryGetCombine(impact);
-    var combineTargetFor = combine && combine.draggableId === ownId ? draggingId : null;
-
-    if (!visualDisplacement) {
-      if (!isAfterCriticalInVirtualList) {
-        return getFallback(combineTargetFor);
-      }
-
-      if (impact.displaced.invisible[ownId]) {
-        return null;
-      }
-
-      var change = negate(afterCritical.displacedBy.point);
-
-      var _offset = memoizedOffset(change.x, change.y);
-
-      return getMemoizedProps(_offset, combineTargetFor, true);
-    }
-
-    if (isAfterCriticalInVirtualList) {
-      return getFallback(combineTargetFor);
-    }
-
-    var displaceBy = impact.displacedBy.point;
-    var offset = memoizedOffset(displaceBy.x, displaceBy.y);
-    return getMemoizedProps(offset, combineTargetFor, visualDisplacement.shouldAnimate);
-  };
-
-  var selector = function selector(state, ownProps) {
-    if (state.isDragging) {
-      if (state.critical.draggable.id === ownProps.draggableId) {
-        return null;
-      }
-
-      return getProps(ownProps.draggableId, state.critical.draggable.id, state.impact, state.afterCritical);
-    }
-
-    if (state.phase === 'DROP_ANIMATING') {
-      var completed = state.completed;
-
-      if (completed.result.draggableId === ownProps.draggableId) {
-        return null;
-      }
-
-      return getProps(ownProps.draggableId, completed.result.draggableId, completed.impact, completed.afterCritical);
-    }
-
-    return null;
-  };
-
-  return selector;
-}
-
-var makeMapStateToProps = function makeMapStateToProps() {
-  var draggingSelector = getDraggableSelector();
-  var secondarySelector = getSecondarySelector();
-
-  var selector = function selector(state, ownProps) {
-    return draggingSelector(state, ownProps) || secondarySelector(state, ownProps) || atRest;
-  };
-
-  return selector;
-};
-var mapDispatchToProps = {
-  dropAnimationFinished: dropAnimationFinished
-};
-var ConnectedDraggable = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.connect)(makeMapStateToProps, mapDispatchToProps, null, {
-  context: StoreContext,
-  pure: true,
-  areStatePropsEqual: isStrictEqual
-})(Draggable);
-
-function PrivateDraggable(props) {
-  var droppableContext = useRequiredContext(DroppableContext);
-  var isUsingCloneFor = droppableContext.isUsingCloneFor;
-
-  if (isUsingCloneFor === props.draggableId && !props.isClone) {
-    return null;
-  }
-
-  return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(ConnectedDraggable, props);
-}
-function PublicDraggable(props) {
-  var isEnabled = typeof props.isDragDisabled === 'boolean' ? !props.isDragDisabled : true;
-  var canDragInteractiveElements = Boolean(props.disableInteractiveElementBlocking);
-  var shouldRespectForcePress = Boolean(props.shouldRespectForcePress);
-  return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(PrivateDraggable, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, props, {
-    isClone: false,
-    isEnabled: isEnabled,
-    canDragInteractiveElements: canDragInteractiveElements,
-    shouldRespectForcePress: shouldRespectForcePress
-  }));
-}
-
-function Droppable(props) {
-  var appContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(AppContext);
-  !appContext ?  true ? invariant(false, 'Could not find app context') : 0 : void 0;
-  var contextId = appContext.contextId,
-      isMovementAllowed = appContext.isMovementAllowed;
-  var droppableRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
-  var placeholderRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
-  var children = props.children,
-      droppableId = props.droppableId,
-      type = props.type,
-      mode = props.mode,
-      direction = props.direction,
-      ignoreContainerClipping = props.ignoreContainerClipping,
-      isDropDisabled = props.isDropDisabled,
-      isCombineEnabled = props.isCombineEnabled,
-      snapshot = props.snapshot,
-      useClone = props.useClone,
-      updateViewportMaxScroll = props.updateViewportMaxScroll,
-      getContainerForClone = props.getContainerForClone;
-  var getDroppableRef = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function () {
-    return droppableRef.current;
-  }, []);
-  var setDroppableRef = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function (value) {
-    droppableRef.current = value;
-  }, []);
-  var getPlaceholderRef = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function () {
-    return placeholderRef.current;
-  }, []);
-  var setPlaceholderRef = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function (value) {
-    placeholderRef.current = value;
-  }, []);
-  useValidation({
-    props: props,
-    getDroppableRef: getDroppableRef,
-    getPlaceholderRef: getPlaceholderRef
-  });
-  var onPlaceholderTransitionEnd = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useCallback)(function () {
-    if (isMovementAllowed()) {
-      updateViewportMaxScroll({
-        maxScroll: getMaxWindowScroll()
-      });
-    }
-  }, [isMovementAllowed, updateViewportMaxScroll]);
-  useDroppablePublisher({
-    droppableId: droppableId,
-    type: type,
-    mode: mode,
-    direction: direction,
-    isDropDisabled: isDropDisabled,
-    isCombineEnabled: isCombineEnabled,
-    ignoreContainerClipping: ignoreContainerClipping,
-    getDroppableRef: getDroppableRef
-  });
-  var placeholder = react__WEBPACK_IMPORTED_MODULE_0___default().createElement(AnimateInOut, {
-    on: props.placeholder,
-    shouldAnimate: props.shouldAnimatePlaceholder
-  }, function (_ref) {
-    var onClose = _ref.onClose,
-        data = _ref.data,
-        animate = _ref.animate;
-    return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Placeholder$1, {
-      placeholder: data,
-      onClose: onClose,
-      innerRef: setPlaceholderRef,
-      animate: animate,
-      contextId: contextId,
-      onTransitionEnd: onPlaceholderTransitionEnd
-    });
-  });
-  var provided = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useMemo)(function () {
-    return {
-      innerRef: setDroppableRef,
-      placeholder: placeholder,
-      droppableProps: {
-        'data-rbd-droppable-id': droppableId,
-        'data-rbd-droppable-context-id': contextId
-      }
-    };
-  }, [contextId, droppableId, placeholder, setDroppableRef]);
-  var isUsingCloneFor = useClone ? useClone.dragging.draggableId : null;
-  var droppableContext = (0,use_memo_one__WEBPACK_IMPORTED_MODULE_9__.useMemo)(function () {
-    return {
-      droppableId: droppableId,
-      type: type,
-      isUsingCloneFor: isUsingCloneFor
-    };
-  }, [droppableId, isUsingCloneFor, type]);
-
-  function getClone() {
-    if (!useClone) {
-      return null;
-    }
-
-    var dragging = useClone.dragging,
-        render = useClone.render;
-    var node = react__WEBPACK_IMPORTED_MODULE_0___default().createElement(PrivateDraggable, {
-      draggableId: dragging.draggableId,
-      index: dragging.source.index,
-      isClone: true,
-      isEnabled: true,
-      shouldRespectForcePress: false,
-      canDragInteractiveElements: true
-    }, function (draggableProvided, draggableSnapshot) {
-      return render(draggableProvided, draggableSnapshot, dragging);
-    });
-    return react_dom__WEBPACK_IMPORTED_MODULE_4___default().createPortal(node, getContainerForClone());
-  }
-
-  return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(DroppableContext.Provider, {
-    value: droppableContext
-  }, children(provided, snapshot), getClone());
-}
-
-var isMatchingType = function isMatchingType(type, critical) {
-  return type === critical.droppable.type;
-};
-
-var getDraggable = function getDraggable(critical, dimensions) {
-  return dimensions.draggables[critical.draggable.id];
-};
-
-var makeMapStateToProps$1 = function makeMapStateToProps() {
-  var idleWithAnimation = {
-    placeholder: null,
-    shouldAnimatePlaceholder: true,
-    snapshot: {
-      isDraggingOver: false,
-      draggingOverWith: null,
-      draggingFromThisWith: null,
-      isUsingPlaceholder: false
-    },
-    useClone: null
-  };
-
-  var idleWithoutAnimation = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, idleWithAnimation, {
-    shouldAnimatePlaceholder: false
-  });
-
-  var getDraggableRubric = (0,memoize_one__WEBPACK_IMPORTED_MODULE_6__["default"])(function (descriptor) {
-    return {
-      draggableId: descriptor.id,
-      type: descriptor.type,
-      source: {
-        index: descriptor.index,
-        droppableId: descriptor.droppableId
-      }
-    };
-  });
-  var getMapProps = (0,memoize_one__WEBPACK_IMPORTED_MODULE_6__["default"])(function (id, isEnabled, isDraggingOverForConsumer, isDraggingOverForImpact, dragging, renderClone) {
-    var draggableId = dragging.descriptor.id;
-    var isHome = dragging.descriptor.droppableId === id;
-
-    if (isHome) {
-      var useClone = renderClone ? {
-        render: renderClone,
-        dragging: getDraggableRubric(dragging.descriptor)
-      } : null;
-      var _snapshot = {
-        isDraggingOver: isDraggingOverForConsumer,
-        draggingOverWith: isDraggingOverForConsumer ? draggableId : null,
-        draggingFromThisWith: draggableId,
-        isUsingPlaceholder: true
-      };
-      return {
-        placeholder: dragging.placeholder,
-        shouldAnimatePlaceholder: false,
-        snapshot: _snapshot,
-        useClone: useClone
-      };
-    }
-
-    if (!isEnabled) {
-      return idleWithoutAnimation;
-    }
-
-    if (!isDraggingOverForImpact) {
-      return idleWithAnimation;
-    }
-
-    var snapshot = {
-      isDraggingOver: isDraggingOverForConsumer,
-      draggingOverWith: draggableId,
-      draggingFromThisWith: null,
-      isUsingPlaceholder: true
-    };
-    return {
-      placeholder: dragging.placeholder,
-      shouldAnimatePlaceholder: true,
-      snapshot: snapshot,
-      useClone: null
-    };
-  });
-
-  var selector = function selector(state, ownProps) {
-    var id = ownProps.droppableId;
-    var type = ownProps.type;
-    var isEnabled = !ownProps.isDropDisabled;
-    var renderClone = ownProps.renderClone;
-
-    if (state.isDragging) {
-      var critical = state.critical;
-
-      if (!isMatchingType(type, critical)) {
-        return idleWithoutAnimation;
-      }
-
-      var dragging = getDraggable(critical, state.dimensions);
-      var isDraggingOver = whatIsDraggedOver(state.impact) === id;
-      return getMapProps(id, isEnabled, isDraggingOver, isDraggingOver, dragging, renderClone);
-    }
-
-    if (state.phase === 'DROP_ANIMATING') {
-      var completed = state.completed;
-
-      if (!isMatchingType(type, completed.critical)) {
-        return idleWithoutAnimation;
-      }
-
-      var _dragging = getDraggable(completed.critical, state.dimensions);
-
-      return getMapProps(id, isEnabled, whatIsDraggedOverFromResult(completed.result) === id, whatIsDraggedOver(completed.impact) === id, _dragging, renderClone);
-    }
-
-    if (state.phase === 'IDLE' && state.completed && !state.shouldFlush) {
-      var _completed = state.completed;
-
-      if (!isMatchingType(type, _completed.critical)) {
-        return idleWithoutAnimation;
-      }
-
-      var wasOver = whatIsDraggedOver(_completed.impact) === id;
-      var wasCombining = Boolean(_completed.impact.at && _completed.impact.at.type === 'COMBINE');
-      var isHome = _completed.critical.droppable.id === id;
-
-      if (wasOver) {
-        return wasCombining ? idleWithAnimation : idleWithoutAnimation;
-      }
-
-      if (isHome) {
-        return idleWithAnimation;
-      }
-
-      return idleWithoutAnimation;
-    }
-
-    return idleWithoutAnimation;
-  };
-
-  return selector;
-};
-var mapDispatchToProps$1 = {
-  updateViewportMaxScroll: updateViewportMaxScroll
-};
-
-function getBody() {
-  !document.body ?  true ? invariant(false, 'document.body is not ready') : 0 : void 0;
-  return document.body;
-}
-
-var defaultProps = {
-  mode: 'standard',
-  type: 'DEFAULT',
-  direction: 'vertical',
-  isDropDisabled: false,
-  isCombineEnabled: false,
-  ignoreContainerClipping: false,
-  renderClone: null,
-  getContainerForClone: getBody
-};
-var ConnectedDroppable = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.connect)(makeMapStateToProps$1, mapDispatchToProps$1, null, {
-  context: StoreContext,
-  pure: true,
-  areStatePropsEqual: isStrictEqual
-})(Droppable);
-ConnectedDroppable.defaultProps = defaultProps;
-
-
-
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/memoize-one/dist/memoize-one.esm.js":
-/*!*******************************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/memoize-one/dist/memoize-one.esm.js ***!
-  \*******************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-var safeIsNaN = Number.isNaN ||
-    function ponyfill(value) {
-        return typeof value === 'number' && value !== value;
-    };
-function isEqual(first, second) {
-    if (first === second) {
-        return true;
-    }
-    if (safeIsNaN(first) && safeIsNaN(second)) {
-        return true;
-    }
-    return false;
-}
-function areInputsEqual(newInputs, lastInputs) {
-    if (newInputs.length !== lastInputs.length) {
-        return false;
-    }
-    for (var i = 0; i < newInputs.length; i++) {
-        if (!isEqual(newInputs[i], lastInputs[i])) {
-            return false;
-        }
-    }
-    return true;
-}
-
-function memoizeOne(resultFn, isEqual) {
-    if (isEqual === void 0) { isEqual = areInputsEqual; }
-    var lastThis;
-    var lastArgs = [];
-    var lastResult;
-    var calledOnce = false;
-    function memoized() {
-        var newArgs = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            newArgs[_i] = arguments[_i];
-        }
-        if (calledOnce && lastThis === this && isEqual(newArgs, lastArgs)) {
-            return lastResult;
-        }
-        lastResult = resultFn.apply(this, newArgs);
-        calledOnce = true;
-        lastThis = this;
-        lastArgs = newArgs;
-        return lastResult;
-    }
-    return memoized;
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (memoizeOne);
-
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/react-is/cjs/react-is.development.js":
-/*!********************************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/react-is/cjs/react-is.development.js ***!
-  \********************************************************************************************/
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-/** @license React v17.0.2
- * react-is.development.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-
-
-if (true) {
-  (function() {
-'use strict';
-
-// ATTENTION
-// When adding new symbols to this file,
-// Please consider also adding to 'react-devtools-shared/src/backend/ReactSymbols'
-// The Symbol used to tag the ReactElement-like types. If there is no native Symbol
-// nor polyfill, then a plain number is used for performance.
-var REACT_ELEMENT_TYPE = 0xeac7;
-var REACT_PORTAL_TYPE = 0xeaca;
-var REACT_FRAGMENT_TYPE = 0xeacb;
-var REACT_STRICT_MODE_TYPE = 0xeacc;
-var REACT_PROFILER_TYPE = 0xead2;
-var REACT_PROVIDER_TYPE = 0xeacd;
-var REACT_CONTEXT_TYPE = 0xeace;
-var REACT_FORWARD_REF_TYPE = 0xead0;
-var REACT_SUSPENSE_TYPE = 0xead1;
-var REACT_SUSPENSE_LIST_TYPE = 0xead8;
-var REACT_MEMO_TYPE = 0xead3;
-var REACT_LAZY_TYPE = 0xead4;
-var REACT_BLOCK_TYPE = 0xead9;
-var REACT_SERVER_BLOCK_TYPE = 0xeada;
-var REACT_FUNDAMENTAL_TYPE = 0xead5;
-var REACT_SCOPE_TYPE = 0xead7;
-var REACT_OPAQUE_ID_TYPE = 0xeae0;
-var REACT_DEBUG_TRACING_MODE_TYPE = 0xeae1;
-var REACT_OFFSCREEN_TYPE = 0xeae2;
-var REACT_LEGACY_HIDDEN_TYPE = 0xeae3;
-
-if (typeof Symbol === 'function' && Symbol.for) {
-  var symbolFor = Symbol.for;
-  REACT_ELEMENT_TYPE = symbolFor('react.element');
-  REACT_PORTAL_TYPE = symbolFor('react.portal');
-  REACT_FRAGMENT_TYPE = symbolFor('react.fragment');
-  REACT_STRICT_MODE_TYPE = symbolFor('react.strict_mode');
-  REACT_PROFILER_TYPE = symbolFor('react.profiler');
-  REACT_PROVIDER_TYPE = symbolFor('react.provider');
-  REACT_CONTEXT_TYPE = symbolFor('react.context');
-  REACT_FORWARD_REF_TYPE = symbolFor('react.forward_ref');
-  REACT_SUSPENSE_TYPE = symbolFor('react.suspense');
-  REACT_SUSPENSE_LIST_TYPE = symbolFor('react.suspense_list');
-  REACT_MEMO_TYPE = symbolFor('react.memo');
-  REACT_LAZY_TYPE = symbolFor('react.lazy');
-  REACT_BLOCK_TYPE = symbolFor('react.block');
-  REACT_SERVER_BLOCK_TYPE = symbolFor('react.server.block');
-  REACT_FUNDAMENTAL_TYPE = symbolFor('react.fundamental');
-  REACT_SCOPE_TYPE = symbolFor('react.scope');
-  REACT_OPAQUE_ID_TYPE = symbolFor('react.opaque.id');
-  REACT_DEBUG_TRACING_MODE_TYPE = symbolFor('react.debug_trace_mode');
-  REACT_OFFSCREEN_TYPE = symbolFor('react.offscreen');
-  REACT_LEGACY_HIDDEN_TYPE = symbolFor('react.legacy_hidden');
-}
-
-// Filter certain DOM attributes (e.g. src, href) if their values are empty strings.
-
-var enableScopeAPI = false; // Experimental Create Event Handle API.
-
-function isValidElementType(type) {
-  if (typeof type === 'string' || typeof type === 'function') {
-    return true;
-  } // Note: typeof might be other than 'symbol' or 'number' (e.g. if it's a polyfill).
-
-
-  if (type === REACT_FRAGMENT_TYPE || type === REACT_PROFILER_TYPE || type === REACT_DEBUG_TRACING_MODE_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || type === REACT_LEGACY_HIDDEN_TYPE || enableScopeAPI ) {
-    return true;
-  }
-
-  if (typeof type === 'object' && type !== null) {
-    if (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_BLOCK_TYPE || type[0] === REACT_SERVER_BLOCK_TYPE) {
-      return true;
-    }
-  }
-
-  return false;
-}
-
-function typeOf(object) {
-  if (typeof object === 'object' && object !== null) {
-    var $$typeof = object.$$typeof;
-
-    switch ($$typeof) {
-      case REACT_ELEMENT_TYPE:
-        var type = object.type;
-
-        switch (type) {
-          case REACT_FRAGMENT_TYPE:
-          case REACT_PROFILER_TYPE:
-          case REACT_STRICT_MODE_TYPE:
-          case REACT_SUSPENSE_TYPE:
-          case REACT_SUSPENSE_LIST_TYPE:
-            return type;
-
-          default:
-            var $$typeofType = type && type.$$typeof;
-
-            switch ($$typeofType) {
-              case REACT_CONTEXT_TYPE:
-              case REACT_FORWARD_REF_TYPE:
-              case REACT_LAZY_TYPE:
-              case REACT_MEMO_TYPE:
-              case REACT_PROVIDER_TYPE:
-                return $$typeofType;
-
-              default:
-                return $$typeof;
-            }
-
-        }
-
-      case REACT_PORTAL_TYPE:
-        return $$typeof;
-    }
-  }
-
-  return undefined;
-}
-var ContextConsumer = REACT_CONTEXT_TYPE;
-var ContextProvider = REACT_PROVIDER_TYPE;
-var Element = REACT_ELEMENT_TYPE;
-var ForwardRef = REACT_FORWARD_REF_TYPE;
-var Fragment = REACT_FRAGMENT_TYPE;
-var Lazy = REACT_LAZY_TYPE;
-var Memo = REACT_MEMO_TYPE;
-var Portal = REACT_PORTAL_TYPE;
-var Profiler = REACT_PROFILER_TYPE;
-var StrictMode = REACT_STRICT_MODE_TYPE;
-var Suspense = REACT_SUSPENSE_TYPE;
-var hasWarnedAboutDeprecatedIsAsyncMode = false;
-var hasWarnedAboutDeprecatedIsConcurrentMode = false; // AsyncMode should be deprecated
-
-function isAsyncMode(object) {
-  {
-    if (!hasWarnedAboutDeprecatedIsAsyncMode) {
-      hasWarnedAboutDeprecatedIsAsyncMode = true; // Using console['warn'] to evade Babel and ESLint
-
-      console['warn']('The ReactIs.isAsyncMode() alias has been deprecated, ' + 'and will be removed in React 18+.');
-    }
-  }
-
-  return false;
-}
-function isConcurrentMode(object) {
-  {
-    if (!hasWarnedAboutDeprecatedIsConcurrentMode) {
-      hasWarnedAboutDeprecatedIsConcurrentMode = true; // Using console['warn'] to evade Babel and ESLint
-
-      console['warn']('The ReactIs.isConcurrentMode() alias has been deprecated, ' + 'and will be removed in React 18+.');
-    }
-  }
-
-  return false;
-}
-function isContextConsumer(object) {
-  return typeOf(object) === REACT_CONTEXT_TYPE;
-}
-function isContextProvider(object) {
-  return typeOf(object) === REACT_PROVIDER_TYPE;
-}
-function isElement(object) {
-  return typeof object === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
-}
-function isForwardRef(object) {
-  return typeOf(object) === REACT_FORWARD_REF_TYPE;
-}
-function isFragment(object) {
-  return typeOf(object) === REACT_FRAGMENT_TYPE;
-}
-function isLazy(object) {
-  return typeOf(object) === REACT_LAZY_TYPE;
-}
-function isMemo(object) {
-  return typeOf(object) === REACT_MEMO_TYPE;
-}
-function isPortal(object) {
-  return typeOf(object) === REACT_PORTAL_TYPE;
-}
-function isProfiler(object) {
-  return typeOf(object) === REACT_PROFILER_TYPE;
-}
-function isStrictMode(object) {
-  return typeOf(object) === REACT_STRICT_MODE_TYPE;
-}
-function isSuspense(object) {
-  return typeOf(object) === REACT_SUSPENSE_TYPE;
-}
-
-exports.ContextConsumer = ContextConsumer;
-exports.ContextProvider = ContextProvider;
-exports.Element = Element;
-exports.ForwardRef = ForwardRef;
-exports.Fragment = Fragment;
-exports.Lazy = Lazy;
-exports.Memo = Memo;
-exports.Portal = Portal;
-exports.Profiler = Profiler;
-exports.StrictMode = StrictMode;
-exports.Suspense = Suspense;
-exports.isAsyncMode = isAsyncMode;
-exports.isConcurrentMode = isConcurrentMode;
-exports.isContextConsumer = isContextConsumer;
-exports.isContextProvider = isContextProvider;
-exports.isElement = isElement;
-exports.isForwardRef = isForwardRef;
-exports.isFragment = isFragment;
-exports.isLazy = isLazy;
-exports.isMemo = isMemo;
-exports.isPortal = isPortal;
-exports.isProfiler = isProfiler;
-exports.isStrictMode = isStrictMode;
-exports.isSuspense = isSuspense;
-exports.isValidElementType = isValidElementType;
-exports.typeOf = typeOf;
-  })();
-}
-
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/react-is/index.js":
-/*!*************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/react-is/index.js ***!
-  \*************************************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-if (false) {} else {
-  module.exports = __webpack_require__(/*! ./cjs/react-is.development.js */ "./node_modules/react-beautiful-dnd/node_modules/react-is/cjs/react-is.development.js");
-}
-
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/components/Context.js":
-/*!********************************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/react-redux/es/components/Context.js ***!
-  \********************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   ReactReduxContext: () => (/* binding */ ReactReduxContext),
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-var ReactReduxContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createContext(null);
-
-if (true) {
-  ReactReduxContext.displayName = 'ReactRedux';
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ReactReduxContext);
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/components/Provider.js":
-/*!*********************************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/react-redux/es/components/Provider.js ***!
-  \*********************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _Context__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Context */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/components/Context.js");
-/* harmony import */ var _utils_Subscription__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/Subscription */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/Subscription.js");
-/* harmony import */ var _utils_useIsomorphicLayoutEffect__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/useIsomorphicLayoutEffect */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/useIsomorphicLayoutEffect.js");
-
-
-
-
-
-
-function Provider(_ref) {
-  var store = _ref.store,
-      context = _ref.context,
-      children = _ref.children;
-  var contextValue = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
-    var subscription = (0,_utils_Subscription__WEBPACK_IMPORTED_MODULE_2__.createSubscription)(store);
-    return {
-      store: store,
-      subscription: subscription
-    };
-  }, [store]);
-  var previousState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
-    return store.getState();
-  }, [store]);
-  (0,_utils_useIsomorphicLayoutEffect__WEBPACK_IMPORTED_MODULE_3__.useIsomorphicLayoutEffect)(function () {
-    var subscription = contextValue.subscription;
-    subscription.onStateChange = subscription.notifyNestedSubs;
-    subscription.trySubscribe();
-
-    if (previousState !== store.getState()) {
-      subscription.notifyNestedSubs();
-    }
-
-    return function () {
-      subscription.tryUnsubscribe();
-      subscription.onStateChange = null;
-    };
-  }, [contextValue, previousState]);
-  var Context = context || _Context__WEBPACK_IMPORTED_MODULE_1__.ReactReduxContext;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Context.Provider, {
-    value: contextValue
-  }, children);
-}
-
-if (true) {
-  Provider.propTypes = {
-    store: prop_types__WEBPACK_IMPORTED_MODULE_4___default().shape({
-      subscribe: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func.isRequired),
-      dispatch: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func.isRequired),
-      getState: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func.isRequired)
-    }),
-    context: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().object),
-    children: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().any)
-  };
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Provider);
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/components/connectAdvanced.js":
-/*!****************************************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/react-redux/es/components/connectAdvanced.js ***!
-  \****************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ connectAdvanced)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
-/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
-/* harmony import */ var hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! hoist-non-react-statics */ "./node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js");
-/* harmony import */ var hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_is__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-is */ "./node_modules/react-beautiful-dnd/node_modules/react-is/index.js");
-/* harmony import */ var _utils_Subscription__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/Subscription */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/Subscription.js");
-/* harmony import */ var _utils_useIsomorphicLayoutEffect__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/useIsomorphicLayoutEffect */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/useIsomorphicLayoutEffect.js");
-/* harmony import */ var _Context__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Context */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/components/Context.js");
-
-
-var _excluded = ["getDisplayName", "methodName", "renderCountProp", "shouldHandleStateChanges", "storeKey", "withRef", "forwardRef", "context"],
-    _excluded2 = ["reactReduxForwardedRef"];
-
-
-
-
-
- // Define some constant arrays just to avoid re-creating these
-
-var EMPTY_ARRAY = [];
-var NO_SUBSCRIPTION_ARRAY = [null, null];
-
-var stringifyComponent = function stringifyComponent(Comp) {
-  try {
-    return JSON.stringify(Comp);
-  } catch (err) {
-    return String(Comp);
-  }
-};
-
-function storeStateUpdatesReducer(state, action) {
-  var updateCount = state[1];
-  return [action.payload, updateCount + 1];
-}
-
-function useIsomorphicLayoutEffectWithArgs(effectFunc, effectArgs, dependencies) {
-  (0,_utils_useIsomorphicLayoutEffect__WEBPACK_IMPORTED_MODULE_6__.useIsomorphicLayoutEffect)(function () {
-    return effectFunc.apply(void 0, effectArgs);
-  }, dependencies);
-}
-
-function captureWrapperProps(lastWrapperProps, lastChildProps, renderIsScheduled, wrapperProps, actualChildProps, childPropsFromStoreUpdate, notifyNestedSubs) {
-  // We want to capture the wrapper props and child props we used for later comparisons
-  lastWrapperProps.current = wrapperProps;
-  lastChildProps.current = actualChildProps;
-  renderIsScheduled.current = false; // If the render was from a store update, clear out that reference and cascade the subscriber update
-
-  if (childPropsFromStoreUpdate.current) {
-    childPropsFromStoreUpdate.current = null;
-    notifyNestedSubs();
-  }
-}
-
-function subscribeUpdates(shouldHandleStateChanges, store, subscription, childPropsSelector, lastWrapperProps, lastChildProps, renderIsScheduled, childPropsFromStoreUpdate, notifyNestedSubs, forceComponentUpdateDispatch) {
-  // If we're not subscribed to the store, nothing to do here
-  if (!shouldHandleStateChanges) return; // Capture values for checking if and when this component unmounts
-
-  var didUnsubscribe = false;
-  var lastThrownError = null; // We'll run this callback every time a store subscription update propagates to this component
-
-  var checkForUpdates = function checkForUpdates() {
-    if (didUnsubscribe) {
-      // Don't run stale listeners.
-      // Redux doesn't guarantee unsubscriptions happen until next dispatch.
-      return;
-    }
-
-    var latestStoreState = store.getState();
-    var newChildProps, error;
-
-    try {
-      // Actually run the selector with the most recent store state and wrapper props
-      // to determine what the child props should be
-      newChildProps = childPropsSelector(latestStoreState, lastWrapperProps.current);
-    } catch (e) {
-      error = e;
-      lastThrownError = e;
-    }
-
-    if (!error) {
-      lastThrownError = null;
-    } // If the child props haven't changed, nothing to do here - cascade the subscription update
-
-
-    if (newChildProps === lastChildProps.current) {
-      if (!renderIsScheduled.current) {
-        notifyNestedSubs();
-      }
-    } else {
-      // Save references to the new child props.  Note that we track the "child props from store update"
-      // as a ref instead of a useState/useReducer because we need a way to determine if that value has
-      // been processed.  If this went into useState/useReducer, we couldn't clear out the value without
-      // forcing another re-render, which we don't want.
-      lastChildProps.current = newChildProps;
-      childPropsFromStoreUpdate.current = newChildProps;
-      renderIsScheduled.current = true; // If the child props _did_ change (or we caught an error), this wrapper component needs to re-render
-
-      forceComponentUpdateDispatch({
-        type: 'STORE_UPDATED',
-        payload: {
-          error: error
-        }
-      });
-    }
-  }; // Actually subscribe to the nearest connected ancestor (or store)
-
-
-  subscription.onStateChange = checkForUpdates;
-  subscription.trySubscribe(); // Pull data from the store after first render in case the store has
-  // changed since we began.
-
-  checkForUpdates();
-
-  var unsubscribeWrapper = function unsubscribeWrapper() {
-    didUnsubscribe = true;
-    subscription.tryUnsubscribe();
-    subscription.onStateChange = null;
-
-    if (lastThrownError) {
-      // It's possible that we caught an error due to a bad mapState function, but the
-      // parent re-rendered without this component and we're about to unmount.
-      // This shouldn't happen as long as we do top-down subscriptions correctly, but
-      // if we ever do those wrong, this throw will surface the error in our tests.
-      // In that case, throw the error from here so it doesn't get lost.
-      throw lastThrownError;
-    }
-  };
-
-  return unsubscribeWrapper;
-}
-
-var initStateUpdates = function initStateUpdates() {
-  return [null, 0];
-};
-
-function connectAdvanced(
-/*
-  selectorFactory is a func that is responsible for returning the selector function used to
-  compute new props from state, props, and dispatch. For example:
-      export default connectAdvanced((dispatch, options) => (state, props) => ({
-      thing: state.things[props.thingId],
-      saveThing: fields => dispatch(actionCreators.saveThing(props.thingId, fields)),
-    }))(YourComponent)
-    Access to dispatch is provided to the factory so selectorFactories can bind actionCreators
-  outside of their selector as an optimization. Options passed to connectAdvanced are passed to
-  the selectorFactory, along with displayName and WrappedComponent, as the second argument.
-    Note that selectorFactory is responsible for all caching/memoization of inbound and outbound
-  props. Do not use connectAdvanced directly without memoizing results between calls to your
-  selector, otherwise the Connect component will re-render on every state or props change.
-*/
-selectorFactory, // options object:
-_ref) {
-  if (_ref === void 0) {
-    _ref = {};
-  }
-
-  var _ref2 = _ref,
-      _ref2$getDisplayName = _ref2.getDisplayName,
-      getDisplayName = _ref2$getDisplayName === void 0 ? function (name) {
-    return "ConnectAdvanced(" + name + ")";
-  } : _ref2$getDisplayName,
-      _ref2$methodName = _ref2.methodName,
-      methodName = _ref2$methodName === void 0 ? 'connectAdvanced' : _ref2$methodName,
-      _ref2$renderCountProp = _ref2.renderCountProp,
-      renderCountProp = _ref2$renderCountProp === void 0 ? undefined : _ref2$renderCountProp,
-      _ref2$shouldHandleSta = _ref2.shouldHandleStateChanges,
-      shouldHandleStateChanges = _ref2$shouldHandleSta === void 0 ? true : _ref2$shouldHandleSta,
-      _ref2$storeKey = _ref2.storeKey,
-      storeKey = _ref2$storeKey === void 0 ? 'store' : _ref2$storeKey,
-      _ref2$withRef = _ref2.withRef,
-      withRef = _ref2$withRef === void 0 ? false : _ref2$withRef,
-      _ref2$forwardRef = _ref2.forwardRef,
-      forwardRef = _ref2$forwardRef === void 0 ? false : _ref2$forwardRef,
-      _ref2$context = _ref2.context,
-      context = _ref2$context === void 0 ? _Context__WEBPACK_IMPORTED_MODULE_7__.ReactReduxContext : _ref2$context,
-      connectOptions = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(_ref2, _excluded);
-
-  if (true) {
-    if (renderCountProp !== undefined) {
-      throw new Error("renderCountProp is removed. render counting is built into the latest React Dev Tools profiling extension");
-    }
-
-    if (withRef) {
-      throw new Error('withRef is removed. To access the wrapped instance, use a ref on the connected component');
-    }
-
-    var customStoreWarningMessage = 'To use a custom Redux store for specific components, create a custom React context with ' + "React.createContext(), and pass the context object to React Redux's Provider and specific components" + ' like: <Provider context={MyContext}><ConnectedComponent context={MyContext} /></Provider>. ' + 'You may also pass a {context : MyContext} option to connect';
-
-    if (storeKey !== 'store') {
-      throw new Error('storeKey has been removed and does not do anything. ' + customStoreWarningMessage);
-    }
-  }
-
-  var Context = context;
-  return function wrapWithConnect(WrappedComponent) {
-    if ( true && !(0,react_is__WEBPACK_IMPORTED_MODULE_4__.isValidElementType)(WrappedComponent)) {
-      throw new Error("You must pass a component to the function returned by " + (methodName + ". Instead received " + stringifyComponent(WrappedComponent)));
-    }
-
-    var wrappedComponentName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
-    var displayName = getDisplayName(wrappedComponentName);
-
-    var selectorFactoryOptions = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, connectOptions, {
-      getDisplayName: getDisplayName,
-      methodName: methodName,
-      renderCountProp: renderCountProp,
-      shouldHandleStateChanges: shouldHandleStateChanges,
-      storeKey: storeKey,
-      displayName: displayName,
-      wrappedComponentName: wrappedComponentName,
-      WrappedComponent: WrappedComponent
-    });
-
-    var pure = connectOptions.pure;
-
-    function createChildSelector(store) {
-      return selectorFactory(store.dispatch, selectorFactoryOptions);
-    } // If we aren't running in "pure" mode, we don't want to memoize values.
-    // To avoid conditionally calling hooks, we fall back to a tiny wrapper
-    // that just executes the given callback immediately.
-
-
-    var usePureOnlyMemo = pure ? react__WEBPACK_IMPORTED_MODULE_3__.useMemo : function (callback) {
-      return callback();
-    };
-
-    function ConnectFunction(props) {
-      var _useMemo = (0,react__WEBPACK_IMPORTED_MODULE_3__.useMemo)(function () {
-        // Distinguish between actual "data" props that were passed to the wrapper component,
-        // and values needed to control behavior (forwarded refs, alternate context instances).
-        // To maintain the wrapperProps object reference, memoize this destructuring.
-        var reactReduxForwardedRef = props.reactReduxForwardedRef,
-            wrapperProps = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, _excluded2);
-
-        return [props.context, reactReduxForwardedRef, wrapperProps];
-      }, [props]),
-          propsContext = _useMemo[0],
-          reactReduxForwardedRef = _useMemo[1],
-          wrapperProps = _useMemo[2];
-
-      var ContextToUse = (0,react__WEBPACK_IMPORTED_MODULE_3__.useMemo)(function () {
-        // Users may optionally pass in a custom context instance to use instead of our ReactReduxContext.
-        // Memoize the check that determines which context instance we should use.
-        return propsContext && propsContext.Consumer && (0,react_is__WEBPACK_IMPORTED_MODULE_4__.isContextConsumer)( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(propsContext.Consumer, null)) ? propsContext : Context;
-      }, [propsContext, Context]); // Retrieve the store and ancestor subscription via context, if available
-
-      var contextValue = (0,react__WEBPACK_IMPORTED_MODULE_3__.useContext)(ContextToUse); // The store _must_ exist as either a prop or in context.
-      // We'll check to see if it _looks_ like a Redux store first.
-      // This allows us to pass through a `store` prop that is just a plain value.
-
-      var didStoreComeFromProps = Boolean(props.store) && Boolean(props.store.getState) && Boolean(props.store.dispatch);
-      var didStoreComeFromContext = Boolean(contextValue) && Boolean(contextValue.store);
-
-      if ( true && !didStoreComeFromProps && !didStoreComeFromContext) {
-        throw new Error("Could not find \"store\" in the context of " + ("\"" + displayName + "\". Either wrap the root component in a <Provider>, ") + "or pass a custom React context provider to <Provider> and the corresponding " + ("React context consumer to " + displayName + " in connect options."));
-      } // Based on the previous check, one of these must be true
-
-
-      var store = didStoreComeFromProps ? props.store : contextValue.store;
-      var childPropsSelector = (0,react__WEBPACK_IMPORTED_MODULE_3__.useMemo)(function () {
-        // The child props selector needs the store reference as an input.
-        // Re-create this selector whenever the store changes.
-        return createChildSelector(store);
-      }, [store]);
-
-      var _useMemo2 = (0,react__WEBPACK_IMPORTED_MODULE_3__.useMemo)(function () {
-        if (!shouldHandleStateChanges) return NO_SUBSCRIPTION_ARRAY; // This Subscription's source should match where store came from: props vs. context. A component
-        // connected to the store via props shouldn't use subscription from context, or vice versa.
-
-        // This Subscription's source should match where store came from: props vs. context. A component
-        // connected to the store via props shouldn't use subscription from context, or vice versa.
-        var subscription = (0,_utils_Subscription__WEBPACK_IMPORTED_MODULE_5__.createSubscription)(store, didStoreComeFromProps ? null : contextValue.subscription); // `notifyNestedSubs` is duplicated to handle the case where the component is unmounted in
-        // the middle of the notification loop, where `subscription` will then be null. This can
-        // probably be avoided if Subscription's listeners logic is changed to not call listeners
-        // that have been unsubscribed in the  middle of the notification loop.
-
-        // `notifyNestedSubs` is duplicated to handle the case where the component is unmounted in
-        // the middle of the notification loop, where `subscription` will then be null. This can
-        // probably be avoided if Subscription's listeners logic is changed to not call listeners
-        // that have been unsubscribed in the  middle of the notification loop.
-        var notifyNestedSubs = subscription.notifyNestedSubs.bind(subscription);
-        return [subscription, notifyNestedSubs];
-      }, [store, didStoreComeFromProps, contextValue]),
-          subscription = _useMemo2[0],
-          notifyNestedSubs = _useMemo2[1]; // Determine what {store, subscription} value should be put into nested context, if necessary,
-      // and memoize that value to avoid unnecessary context updates.
-
-
-      var overriddenContextValue = (0,react__WEBPACK_IMPORTED_MODULE_3__.useMemo)(function () {
-        if (didStoreComeFromProps) {
-          // This component is directly subscribed to a store from props.
-          // We don't want descendants reading from this store - pass down whatever
-          // the existing context value is from the nearest connected ancestor.
-          return contextValue;
-        } // Otherwise, put this component's subscription instance into context, so that
-        // connected descendants won't update until after this component is done
-
-
-        return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, contextValue, {
-          subscription: subscription
-        });
-      }, [didStoreComeFromProps, contextValue, subscription]); // We need to force this wrapper component to re-render whenever a Redux store update
-      // causes a change to the calculated child component props (or we caught an error in mapState)
-
-      var _useReducer = (0,react__WEBPACK_IMPORTED_MODULE_3__.useReducer)(storeStateUpdatesReducer, EMPTY_ARRAY, initStateUpdates),
-          _useReducer$ = _useReducer[0],
-          previousStateUpdateResult = _useReducer$[0],
-          forceComponentUpdateDispatch = _useReducer[1]; // Propagate any mapState/mapDispatch errors upwards
-
-
-      if (previousStateUpdateResult && previousStateUpdateResult.error) {
-        throw previousStateUpdateResult.error;
-      } // Set up refs to coordinate values between the subscription effect and the render logic
-
-
-      var lastChildProps = (0,react__WEBPACK_IMPORTED_MODULE_3__.useRef)();
-      var lastWrapperProps = (0,react__WEBPACK_IMPORTED_MODULE_3__.useRef)(wrapperProps);
-      var childPropsFromStoreUpdate = (0,react__WEBPACK_IMPORTED_MODULE_3__.useRef)();
-      var renderIsScheduled = (0,react__WEBPACK_IMPORTED_MODULE_3__.useRef)(false);
-      var actualChildProps = usePureOnlyMemo(function () {
-        // Tricky logic here:
-        // - This render may have been triggered by a Redux store update that produced new child props
-        // - However, we may have gotten new wrapper props after that
-        // If we have new child props, and the same wrapper props, we know we should use the new child props as-is.
-        // But, if we have new wrapper props, those might change the child props, so we have to recalculate things.
-        // So, we'll use the child props from store update only if the wrapper props are the same as last time.
-        if (childPropsFromStoreUpdate.current && wrapperProps === lastWrapperProps.current) {
-          return childPropsFromStoreUpdate.current;
-        } // TODO We're reading the store directly in render() here. Bad idea?
-        // This will likely cause Bad Things (TM) to happen in Concurrent Mode.
-        // Note that we do this because on renders _not_ caused by store updates, we need the latest store state
-        // to determine what the child props should be.
-
-
-        return childPropsSelector(store.getState(), wrapperProps);
-      }, [store, previousStateUpdateResult, wrapperProps]); // We need this to execute synchronously every time we re-render. However, React warns
-      // about useLayoutEffect in SSR, so we try to detect environment and fall back to
-      // just useEffect instead to avoid the warning, since neither will run anyway.
-
-      useIsomorphicLayoutEffectWithArgs(captureWrapperProps, [lastWrapperProps, lastChildProps, renderIsScheduled, wrapperProps, actualChildProps, childPropsFromStoreUpdate, notifyNestedSubs]); // Our re-subscribe logic only runs when the store/subscription setup changes
-
-      useIsomorphicLayoutEffectWithArgs(subscribeUpdates, [shouldHandleStateChanges, store, subscription, childPropsSelector, lastWrapperProps, lastChildProps, renderIsScheduled, childPropsFromStoreUpdate, notifyNestedSubs, forceComponentUpdateDispatch], [store, subscription, childPropsSelector]); // Now that all that's done, we can finally try to actually render the child component.
-      // We memoize the elements for the rendered child component as an optimization.
-
-      var renderedWrappedComponent = (0,react__WEBPACK_IMPORTED_MODULE_3__.useMemo)(function () {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(WrappedComponent, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, actualChildProps, {
-          ref: reactReduxForwardedRef
-        }));
-      }, [reactReduxForwardedRef, WrappedComponent, actualChildProps]); // If React sees the exact same element reference as last time, it bails out of re-rendering
-      // that child, same as if it was wrapped in React.memo() or returned false from shouldComponentUpdate.
-
-      var renderedChild = (0,react__WEBPACK_IMPORTED_MODULE_3__.useMemo)(function () {
-        if (shouldHandleStateChanges) {
-          // If this component is subscribed to store updates, we need to pass its own
-          // subscription instance down to our descendants. That means rendering the same
-          // Context instance, and putting a different value into the context.
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(ContextToUse.Provider, {
-            value: overriddenContextValue
-          }, renderedWrappedComponent);
-        }
-
-        return renderedWrappedComponent;
-      }, [ContextToUse, renderedWrappedComponent, overriddenContextValue]);
-      return renderedChild;
-    } // If we're in "pure" mode, ensure our wrapper component only re-renders when incoming props have changed.
-
-
-    var Connect = pure ? react__WEBPACK_IMPORTED_MODULE_3___default().memo(ConnectFunction) : ConnectFunction;
-    Connect.WrappedComponent = WrappedComponent;
-    Connect.displayName = ConnectFunction.displayName = displayName;
-
-    if (forwardRef) {
-      var forwarded = react__WEBPACK_IMPORTED_MODULE_3___default().forwardRef(function forwardConnectRef(props, ref) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(Connect, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
-          reactReduxForwardedRef: ref
-        }));
-      });
-      forwarded.displayName = displayName;
-      forwarded.WrappedComponent = WrappedComponent;
-      return hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_2___default()(forwarded, WrappedComponent);
-    }
-
-    return hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_2___default()(Connect, WrappedComponent);
-  };
-}
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/connect/connect.js":
-/*!*****************************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/react-redux/es/connect/connect.js ***!
-  \*****************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   createConnect: () => (/* binding */ createConnect),
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
-/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
-/* harmony import */ var _components_connectAdvanced__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/connectAdvanced */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/components/connectAdvanced.js");
-/* harmony import */ var _utils_shallowEqual__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/shallowEqual */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/shallowEqual.js");
-/* harmony import */ var _mapDispatchToProps__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./mapDispatchToProps */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/connect/mapDispatchToProps.js");
-/* harmony import */ var _mapStateToProps__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./mapStateToProps */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/connect/mapStateToProps.js");
-/* harmony import */ var _mergeProps__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./mergeProps */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/connect/mergeProps.js");
-/* harmony import */ var _selectorFactory__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./selectorFactory */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/connect/selectorFactory.js");
-
-
-var _excluded = ["pure", "areStatesEqual", "areOwnPropsEqual", "areStatePropsEqual", "areMergedPropsEqual"];
-
-
-
-
-
-
-/*
-  connect is a facade over connectAdvanced. It turns its args into a compatible
-  selectorFactory, which has the signature:
-
-    (dispatch, options) => (nextState, nextOwnProps) => nextFinalProps
-  
-  connect passes its args to connectAdvanced as options, which will in turn pass them to
-  selectorFactory each time a Connect component instance is instantiated or hot reloaded.
-
-  selectorFactory returns a final props selector from its mapStateToProps,
-  mapStateToPropsFactories, mapDispatchToProps, mapDispatchToPropsFactories, mergeProps,
-  mergePropsFactories, and pure args.
-
-  The resulting final props selector is called by the Connect component instance whenever
-  it receives new props or store state.
- */
-
-function match(arg, factories, name) {
-  for (var i = factories.length - 1; i >= 0; i--) {
-    var result = factories[i](arg);
-    if (result) return result;
-  }
-
-  return function (dispatch, options) {
-    throw new Error("Invalid value of type " + typeof arg + " for " + name + " argument when connecting component " + options.wrappedComponentName + ".");
-  };
-}
-
-function strictEqual(a, b) {
-  return a === b;
-} // createConnect with default args builds the 'official' connect behavior. Calling it with
-// different options opens up some testing and extensibility scenarios
-
-
-function createConnect(_temp) {
-  var _ref = _temp === void 0 ? {} : _temp,
-      _ref$connectHOC = _ref.connectHOC,
-      connectHOC = _ref$connectHOC === void 0 ? _components_connectAdvanced__WEBPACK_IMPORTED_MODULE_2__["default"] : _ref$connectHOC,
-      _ref$mapStateToPropsF = _ref.mapStateToPropsFactories,
-      mapStateToPropsFactories = _ref$mapStateToPropsF === void 0 ? _mapStateToProps__WEBPACK_IMPORTED_MODULE_5__["default"] : _ref$mapStateToPropsF,
-      _ref$mapDispatchToPro = _ref.mapDispatchToPropsFactories,
-      mapDispatchToPropsFactories = _ref$mapDispatchToPro === void 0 ? _mapDispatchToProps__WEBPACK_IMPORTED_MODULE_4__["default"] : _ref$mapDispatchToPro,
-      _ref$mergePropsFactor = _ref.mergePropsFactories,
-      mergePropsFactories = _ref$mergePropsFactor === void 0 ? _mergeProps__WEBPACK_IMPORTED_MODULE_6__["default"] : _ref$mergePropsFactor,
-      _ref$selectorFactory = _ref.selectorFactory,
-      selectorFactory = _ref$selectorFactory === void 0 ? _selectorFactory__WEBPACK_IMPORTED_MODULE_7__["default"] : _ref$selectorFactory;
-
-  return function connect(mapStateToProps, mapDispatchToProps, mergeProps, _ref2) {
-    if (_ref2 === void 0) {
-      _ref2 = {};
-    }
-
-    var _ref3 = _ref2,
-        _ref3$pure = _ref3.pure,
-        pure = _ref3$pure === void 0 ? true : _ref3$pure,
-        _ref3$areStatesEqual = _ref3.areStatesEqual,
-        areStatesEqual = _ref3$areStatesEqual === void 0 ? strictEqual : _ref3$areStatesEqual,
-        _ref3$areOwnPropsEqua = _ref3.areOwnPropsEqual,
-        areOwnPropsEqual = _ref3$areOwnPropsEqua === void 0 ? _utils_shallowEqual__WEBPACK_IMPORTED_MODULE_3__["default"] : _ref3$areOwnPropsEqua,
-        _ref3$areStatePropsEq = _ref3.areStatePropsEqual,
-        areStatePropsEqual = _ref3$areStatePropsEq === void 0 ? _utils_shallowEqual__WEBPACK_IMPORTED_MODULE_3__["default"] : _ref3$areStatePropsEq,
-        _ref3$areMergedPropsE = _ref3.areMergedPropsEqual,
-        areMergedPropsEqual = _ref3$areMergedPropsE === void 0 ? _utils_shallowEqual__WEBPACK_IMPORTED_MODULE_3__["default"] : _ref3$areMergedPropsE,
-        extraOptions = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(_ref3, _excluded);
-
-    var initMapStateToProps = match(mapStateToProps, mapStateToPropsFactories, 'mapStateToProps');
-    var initMapDispatchToProps = match(mapDispatchToProps, mapDispatchToPropsFactories, 'mapDispatchToProps');
-    var initMergeProps = match(mergeProps, mergePropsFactories, 'mergeProps');
-    return connectHOC(selectorFactory, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
-      // used in error messages
-      methodName: 'connect',
-      // used to compute Connect's displayName from the wrapped component's displayName.
-      getDisplayName: function getDisplayName(name) {
-        return "Connect(" + name + ")";
-      },
-      // if mapStateToProps is falsy, the Connect component doesn't subscribe to store state changes
-      shouldHandleStateChanges: Boolean(mapStateToProps),
-      // passed through to selectorFactory
-      initMapStateToProps: initMapStateToProps,
-      initMapDispatchToProps: initMapDispatchToProps,
-      initMergeProps: initMergeProps,
-      pure: pure,
-      areStatesEqual: areStatesEqual,
-      areOwnPropsEqual: areOwnPropsEqual,
-      areStatePropsEqual: areStatePropsEqual,
-      areMergedPropsEqual: areMergedPropsEqual
-    }, extraOptions));
-  };
-}
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (/*#__PURE__*/createConnect());
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/connect/mapDispatchToProps.js":
-/*!****************************************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/react-redux/es/connect/mapDispatchToProps.js ***!
-  \****************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
-/* harmony export */   whenMapDispatchToPropsIsFunction: () => (/* binding */ whenMapDispatchToPropsIsFunction),
-/* harmony export */   whenMapDispatchToPropsIsMissing: () => (/* binding */ whenMapDispatchToPropsIsMissing),
-/* harmony export */   whenMapDispatchToPropsIsObject: () => (/* binding */ whenMapDispatchToPropsIsObject)
-/* harmony export */ });
-/* harmony import */ var _utils_bindActionCreators__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/bindActionCreators */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/bindActionCreators.js");
-/* harmony import */ var _wrapMapToProps__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./wrapMapToProps */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/connect/wrapMapToProps.js");
-
-
-function whenMapDispatchToPropsIsFunction(mapDispatchToProps) {
-  return typeof mapDispatchToProps === 'function' ? (0,_wrapMapToProps__WEBPACK_IMPORTED_MODULE_1__.wrapMapToPropsFunc)(mapDispatchToProps, 'mapDispatchToProps') : undefined;
-}
-function whenMapDispatchToPropsIsMissing(mapDispatchToProps) {
-  return !mapDispatchToProps ? (0,_wrapMapToProps__WEBPACK_IMPORTED_MODULE_1__.wrapMapToPropsConstant)(function (dispatch) {
-    return {
-      dispatch: dispatch
-    };
-  }) : undefined;
-}
-function whenMapDispatchToPropsIsObject(mapDispatchToProps) {
-  return mapDispatchToProps && typeof mapDispatchToProps === 'object' ? (0,_wrapMapToProps__WEBPACK_IMPORTED_MODULE_1__.wrapMapToPropsConstant)(function (dispatch) {
-    return (0,_utils_bindActionCreators__WEBPACK_IMPORTED_MODULE_0__["default"])(mapDispatchToProps, dispatch);
-  }) : undefined;
-}
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ([whenMapDispatchToPropsIsFunction, whenMapDispatchToPropsIsMissing, whenMapDispatchToPropsIsObject]);
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/connect/mapStateToProps.js":
-/*!*************************************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/react-redux/es/connect/mapStateToProps.js ***!
-  \*************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
-/* harmony export */   whenMapStateToPropsIsFunction: () => (/* binding */ whenMapStateToPropsIsFunction),
-/* harmony export */   whenMapStateToPropsIsMissing: () => (/* binding */ whenMapStateToPropsIsMissing)
-/* harmony export */ });
-/* harmony import */ var _wrapMapToProps__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./wrapMapToProps */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/connect/wrapMapToProps.js");
-
-function whenMapStateToPropsIsFunction(mapStateToProps) {
-  return typeof mapStateToProps === 'function' ? (0,_wrapMapToProps__WEBPACK_IMPORTED_MODULE_0__.wrapMapToPropsFunc)(mapStateToProps, 'mapStateToProps') : undefined;
-}
-function whenMapStateToPropsIsMissing(mapStateToProps) {
-  return !mapStateToProps ? (0,_wrapMapToProps__WEBPACK_IMPORTED_MODULE_0__.wrapMapToPropsConstant)(function () {
-    return {};
-  }) : undefined;
-}
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ([whenMapStateToPropsIsFunction, whenMapStateToPropsIsMissing]);
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/connect/mergeProps.js":
-/*!********************************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/react-redux/es/connect/mergeProps.js ***!
-  \********************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
-/* harmony export */   defaultMergeProps: () => (/* binding */ defaultMergeProps),
-/* harmony export */   whenMergePropsIsFunction: () => (/* binding */ whenMergePropsIsFunction),
-/* harmony export */   whenMergePropsIsOmitted: () => (/* binding */ whenMergePropsIsOmitted),
-/* harmony export */   wrapMergePropsFunc: () => (/* binding */ wrapMergePropsFunc)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
-/* harmony import */ var _utils_verifyPlainObject__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/verifyPlainObject */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/verifyPlainObject.js");
-
-
-function defaultMergeProps(stateProps, dispatchProps, ownProps) {
-  return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, ownProps, stateProps, dispatchProps);
-}
-function wrapMergePropsFunc(mergeProps) {
-  return function initMergePropsProxy(dispatch, _ref) {
-    var displayName = _ref.displayName,
-        pure = _ref.pure,
-        areMergedPropsEqual = _ref.areMergedPropsEqual;
-    var hasRunOnce = false;
-    var mergedProps;
-    return function mergePropsProxy(stateProps, dispatchProps, ownProps) {
-      var nextMergedProps = mergeProps(stateProps, dispatchProps, ownProps);
-
-      if (hasRunOnce) {
-        if (!pure || !areMergedPropsEqual(nextMergedProps, mergedProps)) mergedProps = nextMergedProps;
-      } else {
-        hasRunOnce = true;
-        mergedProps = nextMergedProps;
-        if (true) (0,_utils_verifyPlainObject__WEBPACK_IMPORTED_MODULE_1__["default"])(mergedProps, displayName, 'mergeProps');
-      }
-
-      return mergedProps;
-    };
-  };
-}
-function whenMergePropsIsFunction(mergeProps) {
-  return typeof mergeProps === 'function' ? wrapMergePropsFunc(mergeProps) : undefined;
-}
-function whenMergePropsIsOmitted(mergeProps) {
-  return !mergeProps ? function () {
-    return defaultMergeProps;
-  } : undefined;
-}
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ([whenMergePropsIsFunction, whenMergePropsIsOmitted]);
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/connect/selectorFactory.js":
-/*!*************************************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/react-redux/es/connect/selectorFactory.js ***!
-  \*************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ finalPropsSelectorFactory),
-/* harmony export */   impureFinalPropsSelectorFactory: () => (/* binding */ impureFinalPropsSelectorFactory),
-/* harmony export */   pureFinalPropsSelectorFactory: () => (/* binding */ pureFinalPropsSelectorFactory)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
-/* harmony import */ var _verifySubselectors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./verifySubselectors */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/connect/verifySubselectors.js");
-
-var _excluded = ["initMapStateToProps", "initMapDispatchToProps", "initMergeProps"];
-
-function impureFinalPropsSelectorFactory(mapStateToProps, mapDispatchToProps, mergeProps, dispatch) {
-  return function impureFinalPropsSelector(state, ownProps) {
-    return mergeProps(mapStateToProps(state, ownProps), mapDispatchToProps(dispatch, ownProps), ownProps);
-  };
-}
-function pureFinalPropsSelectorFactory(mapStateToProps, mapDispatchToProps, mergeProps, dispatch, _ref) {
-  var areStatesEqual = _ref.areStatesEqual,
-      areOwnPropsEqual = _ref.areOwnPropsEqual,
-      areStatePropsEqual = _ref.areStatePropsEqual;
-  var hasRunAtLeastOnce = false;
-  var state;
-  var ownProps;
-  var stateProps;
-  var dispatchProps;
-  var mergedProps;
-
-  function handleFirstCall(firstState, firstOwnProps) {
-    state = firstState;
-    ownProps = firstOwnProps;
-    stateProps = mapStateToProps(state, ownProps);
-    dispatchProps = mapDispatchToProps(dispatch, ownProps);
-    mergedProps = mergeProps(stateProps, dispatchProps, ownProps);
-    hasRunAtLeastOnce = true;
-    return mergedProps;
-  }
-
-  function handleNewPropsAndNewState() {
-    stateProps = mapStateToProps(state, ownProps);
-    if (mapDispatchToProps.dependsOnOwnProps) dispatchProps = mapDispatchToProps(dispatch, ownProps);
-    mergedProps = mergeProps(stateProps, dispatchProps, ownProps);
-    return mergedProps;
-  }
-
-  function handleNewProps() {
-    if (mapStateToProps.dependsOnOwnProps) stateProps = mapStateToProps(state, ownProps);
-    if (mapDispatchToProps.dependsOnOwnProps) dispatchProps = mapDispatchToProps(dispatch, ownProps);
-    mergedProps = mergeProps(stateProps, dispatchProps, ownProps);
-    return mergedProps;
-  }
-
-  function handleNewState() {
-    var nextStateProps = mapStateToProps(state, ownProps);
-    var statePropsChanged = !areStatePropsEqual(nextStateProps, stateProps);
-    stateProps = nextStateProps;
-    if (statePropsChanged) mergedProps = mergeProps(stateProps, dispatchProps, ownProps);
-    return mergedProps;
-  }
-
-  function handleSubsequentCalls(nextState, nextOwnProps) {
-    var propsChanged = !areOwnPropsEqual(nextOwnProps, ownProps);
-    var stateChanged = !areStatesEqual(nextState, state, nextOwnProps, ownProps);
-    state = nextState;
-    ownProps = nextOwnProps;
-    if (propsChanged && stateChanged) return handleNewPropsAndNewState();
-    if (propsChanged) return handleNewProps();
-    if (stateChanged) return handleNewState();
-    return mergedProps;
-  }
-
-  return function pureFinalPropsSelector(nextState, nextOwnProps) {
-    return hasRunAtLeastOnce ? handleSubsequentCalls(nextState, nextOwnProps) : handleFirstCall(nextState, nextOwnProps);
-  };
-} // TODO: Add more comments
-// If pure is true, the selector returned by selectorFactory will memoize its results,
-// allowing connectAdvanced's shouldComponentUpdate to return false if final
-// props have not changed. If false, the selector will always return a new
-// object and shouldComponentUpdate will always return true.
-
-function finalPropsSelectorFactory(dispatch, _ref2) {
-  var initMapStateToProps = _ref2.initMapStateToProps,
-      initMapDispatchToProps = _ref2.initMapDispatchToProps,
-      initMergeProps = _ref2.initMergeProps,
-      options = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(_ref2, _excluded);
-
-  var mapStateToProps = initMapStateToProps(dispatch, options);
-  var mapDispatchToProps = initMapDispatchToProps(dispatch, options);
-  var mergeProps = initMergeProps(dispatch, options);
-
-  if (true) {
-    (0,_verifySubselectors__WEBPACK_IMPORTED_MODULE_1__["default"])(mapStateToProps, mapDispatchToProps, mergeProps, options.displayName);
-  }
-
-  var selectorFactory = options.pure ? pureFinalPropsSelectorFactory : impureFinalPropsSelectorFactory;
-  return selectorFactory(mapStateToProps, mapDispatchToProps, mergeProps, dispatch, options);
-}
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/connect/verifySubselectors.js":
-/*!****************************************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/react-redux/es/connect/verifySubselectors.js ***!
-  \****************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ verifySubselectors)
-/* harmony export */ });
-/* harmony import */ var _utils_warning__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/warning */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/warning.js");
-
-
-function verify(selector, methodName, displayName) {
-  if (!selector) {
-    throw new Error("Unexpected value for " + methodName + " in " + displayName + ".");
-  } else if (methodName === 'mapStateToProps' || methodName === 'mapDispatchToProps') {
-    if (!Object.prototype.hasOwnProperty.call(selector, 'dependsOnOwnProps')) {
-      (0,_utils_warning__WEBPACK_IMPORTED_MODULE_0__["default"])("The selector for " + methodName + " of " + displayName + " did not specify a value for dependsOnOwnProps.");
-    }
-  }
-}
-
-function verifySubselectors(mapStateToProps, mapDispatchToProps, mergeProps, displayName) {
-  verify(mapStateToProps, 'mapStateToProps', displayName);
-  verify(mapDispatchToProps, 'mapDispatchToProps', displayName);
-  verify(mergeProps, 'mergeProps', displayName);
-}
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/connect/wrapMapToProps.js":
-/*!************************************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/react-redux/es/connect/wrapMapToProps.js ***!
-  \************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   getDependsOnOwnProps: () => (/* binding */ getDependsOnOwnProps),
-/* harmony export */   wrapMapToPropsConstant: () => (/* binding */ wrapMapToPropsConstant),
-/* harmony export */   wrapMapToPropsFunc: () => (/* binding */ wrapMapToPropsFunc)
-/* harmony export */ });
-/* harmony import */ var _utils_verifyPlainObject__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/verifyPlainObject */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/verifyPlainObject.js");
-
-function wrapMapToPropsConstant(getConstant) {
-  return function initConstantSelector(dispatch, options) {
-    var constant = getConstant(dispatch, options);
-
-    function constantSelector() {
-      return constant;
-    }
-
-    constantSelector.dependsOnOwnProps = false;
-    return constantSelector;
-  };
-} // dependsOnOwnProps is used by createMapToPropsProxy to determine whether to pass props as args
-// to the mapToProps function being wrapped. It is also used by makePurePropsSelector to determine
-// whether mapToProps needs to be invoked when props have changed.
-//
-// A length of one signals that mapToProps does not depend on props from the parent component.
-// A length of zero is assumed to mean mapToProps is getting args via arguments or ...args and
-// therefore not reporting its length accurately..
-
-function getDependsOnOwnProps(mapToProps) {
-  return mapToProps.dependsOnOwnProps !== null && mapToProps.dependsOnOwnProps !== undefined ? Boolean(mapToProps.dependsOnOwnProps) : mapToProps.length !== 1;
-} // Used by whenMapStateToPropsIsFunction and whenMapDispatchToPropsIsFunction,
-// this function wraps mapToProps in a proxy function which does several things:
-//
-//  * Detects whether the mapToProps function being called depends on props, which
-//    is used by selectorFactory to decide if it should reinvoke on props changes.
-//
-//  * On first call, handles mapToProps if returns another function, and treats that
-//    new function as the true mapToProps for subsequent calls.
-//
-//  * On first call, verifies the first result is a plain object, in order to warn
-//    the developer that their mapToProps function is not returning a valid result.
-//
-
-function wrapMapToPropsFunc(mapToProps, methodName) {
-  return function initProxySelector(dispatch, _ref) {
-    var displayName = _ref.displayName;
-
-    var proxy = function mapToPropsProxy(stateOrDispatch, ownProps) {
-      return proxy.dependsOnOwnProps ? proxy.mapToProps(stateOrDispatch, ownProps) : proxy.mapToProps(stateOrDispatch);
-    }; // allow detectFactoryAndVerify to get ownProps
-
-
-    proxy.dependsOnOwnProps = true;
-
-    proxy.mapToProps = function detectFactoryAndVerify(stateOrDispatch, ownProps) {
-      proxy.mapToProps = mapToProps;
-      proxy.dependsOnOwnProps = getDependsOnOwnProps(mapToProps);
-      var props = proxy(stateOrDispatch, ownProps);
-
-      if (typeof props === 'function') {
-        proxy.mapToProps = props;
-        proxy.dependsOnOwnProps = getDependsOnOwnProps(props);
-        props = proxy(stateOrDispatch, ownProps);
-      }
-
-      if (true) (0,_utils_verifyPlainObject__WEBPACK_IMPORTED_MODULE_0__["default"])(props, displayName, methodName);
-      return props;
-    };
-
-    return proxy;
-  };
-}
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/exports.js":
-/*!*********************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/react-redux/es/exports.js ***!
-  \*********************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Provider: () => (/* reexport safe */ _components_Provider__WEBPACK_IMPORTED_MODULE_0__["default"]),
-/* harmony export */   ReactReduxContext: () => (/* reexport safe */ _components_Context__WEBPACK_IMPORTED_MODULE_2__.ReactReduxContext),
-/* harmony export */   connect: () => (/* reexport safe */ _connect_connect__WEBPACK_IMPORTED_MODULE_3__["default"]),
-/* harmony export */   connectAdvanced: () => (/* reexport safe */ _components_connectAdvanced__WEBPACK_IMPORTED_MODULE_1__["default"]),
-/* harmony export */   createDispatchHook: () => (/* reexport safe */ _hooks_useDispatch__WEBPACK_IMPORTED_MODULE_4__.createDispatchHook),
-/* harmony export */   createSelectorHook: () => (/* reexport safe */ _hooks_useSelector__WEBPACK_IMPORTED_MODULE_5__.createSelectorHook),
-/* harmony export */   createStoreHook: () => (/* reexport safe */ _hooks_useStore__WEBPACK_IMPORTED_MODULE_6__.createStoreHook),
-/* harmony export */   shallowEqual: () => (/* reexport safe */ _utils_shallowEqual__WEBPACK_IMPORTED_MODULE_7__["default"]),
-/* harmony export */   useDispatch: () => (/* reexport safe */ _hooks_useDispatch__WEBPACK_IMPORTED_MODULE_4__.useDispatch),
-/* harmony export */   useSelector: () => (/* reexport safe */ _hooks_useSelector__WEBPACK_IMPORTED_MODULE_5__.useSelector),
-/* harmony export */   useStore: () => (/* reexport safe */ _hooks_useStore__WEBPACK_IMPORTED_MODULE_6__.useStore)
-/* harmony export */ });
-/* harmony import */ var _components_Provider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/Provider */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/components/Provider.js");
-/* harmony import */ var _components_connectAdvanced__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/connectAdvanced */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/components/connectAdvanced.js");
-/* harmony import */ var _components_Context__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Context */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/components/Context.js");
-/* harmony import */ var _connect_connect__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./connect/connect */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/connect/connect.js");
-/* harmony import */ var _hooks_useDispatch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./hooks/useDispatch */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/hooks/useDispatch.js");
-/* harmony import */ var _hooks_useSelector__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./hooks/useSelector */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/hooks/useSelector.js");
-/* harmony import */ var _hooks_useStore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./hooks/useStore */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/hooks/useStore.js");
-/* harmony import */ var _utils_shallowEqual__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./utils/shallowEqual */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/shallowEqual.js");
-
-
-
-
-
-
-
-
-
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/hooks/useDispatch.js":
-/*!*******************************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/react-redux/es/hooks/useDispatch.js ***!
-  \*******************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   createDispatchHook: () => (/* binding */ createDispatchHook),
-/* harmony export */   useDispatch: () => (/* binding */ useDispatch)
-/* harmony export */ });
-/* harmony import */ var _components_Context__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Context */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/components/Context.js");
-/* harmony import */ var _useStore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./useStore */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/hooks/useStore.js");
-
-
-/**
- * Hook factory, which creates a `useDispatch` hook bound to a given context.
- *
- * @param {React.Context} [context=ReactReduxContext] Context passed to your `<Provider>`.
- * @returns {Function} A `useDispatch` hook bound to the specified context.
- */
-
-function createDispatchHook(context) {
-  if (context === void 0) {
-    context = _components_Context__WEBPACK_IMPORTED_MODULE_0__.ReactReduxContext;
-  }
-
-  var useStore = context === _components_Context__WEBPACK_IMPORTED_MODULE_0__.ReactReduxContext ? _useStore__WEBPACK_IMPORTED_MODULE_1__.useStore : (0,_useStore__WEBPACK_IMPORTED_MODULE_1__.createStoreHook)(context);
-  return function useDispatch() {
-    var store = useStore();
-    return store.dispatch;
-  };
-}
-/**
- * A hook to access the redux `dispatch` function.
- *
- * @returns {any|function} redux store's `dispatch` function
- *
- * @example
- *
- * import React, { useCallback } from 'react'
- * import { useDispatch } from 'react-redux'
- *
- * export const CounterComponent = ({ value }) => {
- *   const dispatch = useDispatch()
- *   const increaseCounter = useCallback(() => dispatch({ type: 'increase-counter' }), [])
- *   return (
- *     <div>
- *       <span>{value}</span>
- *       <button onClick={increaseCounter}>Increase counter</button>
- *     </div>
- *   )
- * }
- */
-
-var useDispatch = /*#__PURE__*/createDispatchHook();
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/hooks/useReduxContext.js":
-/*!***********************************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/react-redux/es/hooks/useReduxContext.js ***!
-  \***********************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   useReduxContext: () => (/* binding */ useReduxContext)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_Context__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Context */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/components/Context.js");
-
-
-/**
- * A hook to access the value of the `ReactReduxContext`. This is a low-level
- * hook that you should usually not need to call directly.
- *
- * @returns {any} the value of the `ReactReduxContext`
- *
- * @example
- *
- * import React from 'react'
- * import { useReduxContext } from 'react-redux'
- *
- * export const CounterComponent = ({ value }) => {
- *   const { store } = useReduxContext()
- *   return <div>{store.getState()}</div>
- * }
- */
-
-function useReduxContext() {
-  var contextValue = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_components_Context__WEBPACK_IMPORTED_MODULE_1__.ReactReduxContext);
-
-  if ( true && !contextValue) {
-    throw new Error('could not find react-redux context value; please ensure the component is wrapped in a <Provider>');
-  }
-
-  return contextValue;
-}
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/hooks/useSelector.js":
-/*!*******************************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/react-redux/es/hooks/useSelector.js ***!
-  \*******************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   createSelectorHook: () => (/* binding */ createSelectorHook),
-/* harmony export */   useSelector: () => (/* binding */ useSelector)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _useReduxContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./useReduxContext */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/hooks/useReduxContext.js");
-/* harmony import */ var _utils_Subscription__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/Subscription */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/Subscription.js");
-/* harmony import */ var _utils_useIsomorphicLayoutEffect__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/useIsomorphicLayoutEffect */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/useIsomorphicLayoutEffect.js");
-/* harmony import */ var _components_Context__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Context */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/components/Context.js");
-
-
-
-
-
-
-var refEquality = function refEquality(a, b) {
-  return a === b;
-};
-
-function useSelectorWithStoreAndSubscription(selector, equalityFn, store, contextSub) {
-  var _useReducer = (0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)(function (s) {
-    return s + 1;
-  }, 0),
-      forceRender = _useReducer[1];
-
-  var subscription = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
-    return (0,_utils_Subscription__WEBPACK_IMPORTED_MODULE_2__.createSubscription)(store, contextSub);
-  }, [store, contextSub]);
-  var latestSubscriptionCallbackError = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
-  var latestSelector = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
-  var latestStoreState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
-  var latestSelectedState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
-  var storeState = store.getState();
-  var selectedState;
-
-  try {
-    if (selector !== latestSelector.current || storeState !== latestStoreState.current || latestSubscriptionCallbackError.current) {
-      var newSelectedState = selector(storeState); // ensure latest selected state is reused so that a custom equality function can result in identical references
-
-      if (latestSelectedState.current === undefined || !equalityFn(newSelectedState, latestSelectedState.current)) {
-        selectedState = newSelectedState;
-      } else {
-        selectedState = latestSelectedState.current;
-      }
-    } else {
-      selectedState = latestSelectedState.current;
-    }
-  } catch (err) {
-    if (latestSubscriptionCallbackError.current) {
-      err.message += "\nThe error may be correlated with this previous error:\n" + latestSubscriptionCallbackError.current.stack + "\n\n";
-    }
-
-    throw err;
-  }
-
-  (0,_utils_useIsomorphicLayoutEffect__WEBPACK_IMPORTED_MODULE_3__.useIsomorphicLayoutEffect)(function () {
-    latestSelector.current = selector;
-    latestStoreState.current = storeState;
-    latestSelectedState.current = selectedState;
-    latestSubscriptionCallbackError.current = undefined;
-  });
-  (0,_utils_useIsomorphicLayoutEffect__WEBPACK_IMPORTED_MODULE_3__.useIsomorphicLayoutEffect)(function () {
-    function checkForUpdates() {
-      try {
-        var newStoreState = store.getState(); // Avoid calling selector multiple times if the store's state has not changed
-
-        if (newStoreState === latestStoreState.current) {
-          return;
-        }
-
-        var _newSelectedState = latestSelector.current(newStoreState);
-
-        if (equalityFn(_newSelectedState, latestSelectedState.current)) {
-          return;
-        }
-
-        latestSelectedState.current = _newSelectedState;
-        latestStoreState.current = newStoreState;
-      } catch (err) {
-        // we ignore all errors here, since when the component
-        // is re-rendered, the selectors are called again, and
-        // will throw again, if neither props nor store state
-        // changed
-        latestSubscriptionCallbackError.current = err;
-      }
-
-      forceRender();
-    }
-
-    subscription.onStateChange = checkForUpdates;
-    subscription.trySubscribe();
-    checkForUpdates();
-    return function () {
-      return subscription.tryUnsubscribe();
-    };
-  }, [store, subscription]);
-  return selectedState;
-}
-/**
- * Hook factory, which creates a `useSelector` hook bound to a given context.
- *
- * @param {React.Context} [context=ReactReduxContext] Context passed to your `<Provider>`.
- * @returns {Function} A `useSelector` hook bound to the specified context.
- */
-
-
-function createSelectorHook(context) {
-  if (context === void 0) {
-    context = _components_Context__WEBPACK_IMPORTED_MODULE_4__.ReactReduxContext;
-  }
-
-  var useReduxContext = context === _components_Context__WEBPACK_IMPORTED_MODULE_4__.ReactReduxContext ? _useReduxContext__WEBPACK_IMPORTED_MODULE_1__.useReduxContext : function () {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(context);
-  };
-  return function useSelector(selector, equalityFn) {
-    if (equalityFn === void 0) {
-      equalityFn = refEquality;
-    }
-
-    if (true) {
-      if (!selector) {
-        throw new Error("You must pass a selector to useSelector");
-      }
-
-      if (typeof selector !== 'function') {
-        throw new Error("You must pass a function as a selector to useSelector");
-      }
-
-      if (typeof equalityFn !== 'function') {
-        throw new Error("You must pass a function as an equality function to useSelector");
-      }
-    }
-
-    var _useReduxContext = useReduxContext(),
-        store = _useReduxContext.store,
-        contextSub = _useReduxContext.subscription;
-
-    var selectedState = useSelectorWithStoreAndSubscription(selector, equalityFn, store, contextSub);
-    (0,react__WEBPACK_IMPORTED_MODULE_0__.useDebugValue)(selectedState);
-    return selectedState;
-  };
-}
-/**
- * A hook to access the redux store's state. This hook takes a selector function
- * as an argument. The selector is called with the store state.
- *
- * This hook takes an optional equality comparison function as the second parameter
- * that allows you to customize the way the selected state is compared to determine
- * whether the component needs to be re-rendered.
- *
- * @param {Function} selector the selector function
- * @param {Function=} equalityFn the function that will be used to determine equality
- *
- * @returns {any} the selected state
- *
- * @example
- *
- * import React from 'react'
- * import { useSelector } from 'react-redux'
- *
- * export const CounterComponent = () => {
- *   const counter = useSelector(state => state.counter)
- *   return <div>{counter}</div>
- * }
- */
-
-var useSelector = /*#__PURE__*/createSelectorHook();
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/hooks/useStore.js":
-/*!****************************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/react-redux/es/hooks/useStore.js ***!
-  \****************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   createStoreHook: () => (/* binding */ createStoreHook),
-/* harmony export */   useStore: () => (/* binding */ useStore)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_Context__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Context */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/components/Context.js");
-/* harmony import */ var _useReduxContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./useReduxContext */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/hooks/useReduxContext.js");
-
-
-
-/**
- * Hook factory, which creates a `useStore` hook bound to a given context.
- *
- * @param {React.Context} [context=ReactReduxContext] Context passed to your `<Provider>`.
- * @returns {Function} A `useStore` hook bound to the specified context.
- */
-
-function createStoreHook(context) {
-  if (context === void 0) {
-    context = _components_Context__WEBPACK_IMPORTED_MODULE_1__.ReactReduxContext;
-  }
-
-  var useReduxContext = context === _components_Context__WEBPACK_IMPORTED_MODULE_1__.ReactReduxContext ? _useReduxContext__WEBPACK_IMPORTED_MODULE_2__.useReduxContext : function () {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(context);
-  };
-  return function useStore() {
-    var _useReduxContext = useReduxContext(),
-        store = _useReduxContext.store;
-
-    return store;
-  };
-}
-/**
- * A hook to access the redux store.
- *
- * @returns {any} the redux store
- *
- * @example
- *
- * import React from 'react'
- * import { useStore } from 'react-redux'
- *
- * export const ExampleComponent = () => {
- *   const store = useStore()
- *   return <div>{store.getState()}</div>
- * }
- */
-
-var useStore = /*#__PURE__*/createStoreHook();
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/index.js":
-/*!*******************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/react-redux/es/index.js ***!
-  \*******************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Provider: () => (/* reexport safe */ _exports__WEBPACK_IMPORTED_MODULE_0__.Provider),
-/* harmony export */   ReactReduxContext: () => (/* reexport safe */ _exports__WEBPACK_IMPORTED_MODULE_0__.ReactReduxContext),
-/* harmony export */   batch: () => (/* reexport safe */ _utils_reactBatchedUpdates__WEBPACK_IMPORTED_MODULE_1__.unstable_batchedUpdates),
-/* harmony export */   connect: () => (/* reexport safe */ _exports__WEBPACK_IMPORTED_MODULE_0__.connect),
-/* harmony export */   connectAdvanced: () => (/* reexport safe */ _exports__WEBPACK_IMPORTED_MODULE_0__.connectAdvanced),
-/* harmony export */   createDispatchHook: () => (/* reexport safe */ _exports__WEBPACK_IMPORTED_MODULE_0__.createDispatchHook),
-/* harmony export */   createSelectorHook: () => (/* reexport safe */ _exports__WEBPACK_IMPORTED_MODULE_0__.createSelectorHook),
-/* harmony export */   createStoreHook: () => (/* reexport safe */ _exports__WEBPACK_IMPORTED_MODULE_0__.createStoreHook),
-/* harmony export */   shallowEqual: () => (/* reexport safe */ _exports__WEBPACK_IMPORTED_MODULE_0__.shallowEqual),
-/* harmony export */   useDispatch: () => (/* reexport safe */ _exports__WEBPACK_IMPORTED_MODULE_0__.useDispatch),
-/* harmony export */   useSelector: () => (/* reexport safe */ _exports__WEBPACK_IMPORTED_MODULE_0__.useSelector),
-/* harmony export */   useStore: () => (/* reexport safe */ _exports__WEBPACK_IMPORTED_MODULE_0__.useStore)
-/* harmony export */ });
-/* harmony import */ var _exports__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./exports */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/exports.js");
-/* harmony import */ var _utils_reactBatchedUpdates__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils/reactBatchedUpdates */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/reactBatchedUpdates.js");
-/* harmony import */ var _utils_batch__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils/batch */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/batch.js");
-
-
- // Enable batched updates in our subscriptions for use
-// with standard React renderers (ReactDOM, React Native)
-
-(0,_utils_batch__WEBPACK_IMPORTED_MODULE_2__.setBatch)(_utils_reactBatchedUpdates__WEBPACK_IMPORTED_MODULE_1__.unstable_batchedUpdates);
-
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/Subscription.js":
-/*!********************************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/Subscription.js ***!
-  \********************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   createSubscription: () => (/* binding */ createSubscription)
-/* harmony export */ });
-/* harmony import */ var _batch__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./batch */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/batch.js");
- // encapsulates the subscription logic for connecting a component to the redux store, as
-// well as nesting subscriptions of descendant components, so that we can ensure the
-// ancestor components re-render before descendants
-
-function createListenerCollection() {
-  var batch = (0,_batch__WEBPACK_IMPORTED_MODULE_0__.getBatch)();
-  var first = null;
-  var last = null;
-  return {
-    clear: function clear() {
-      first = null;
-      last = null;
-    },
-    notify: function notify() {
-      batch(function () {
-        var listener = first;
-
-        while (listener) {
-          listener.callback();
-          listener = listener.next;
-        }
-      });
-    },
-    get: function get() {
-      var listeners = [];
-      var listener = first;
-
-      while (listener) {
-        listeners.push(listener);
-        listener = listener.next;
-      }
-
-      return listeners;
-    },
-    subscribe: function subscribe(callback) {
-      var isSubscribed = true;
-      var listener = last = {
-        callback: callback,
-        next: null,
-        prev: last
-      };
-
-      if (listener.prev) {
-        listener.prev.next = listener;
-      } else {
-        first = listener;
-      }
-
-      return function unsubscribe() {
-        if (!isSubscribed || first === null) return;
-        isSubscribed = false;
-
-        if (listener.next) {
-          listener.next.prev = listener.prev;
-        } else {
-          last = listener.prev;
-        }
-
-        if (listener.prev) {
-          listener.prev.next = listener.next;
-        } else {
-          first = listener.next;
-        }
-      };
-    }
-  };
-}
-
-var nullListeners = {
-  notify: function notify() {},
-  get: function get() {
-    return [];
-  }
-};
-function createSubscription(store, parentSub) {
-  var unsubscribe;
-  var listeners = nullListeners;
-
-  function addNestedSub(listener) {
-    trySubscribe();
-    return listeners.subscribe(listener);
-  }
-
-  function notifyNestedSubs() {
-    listeners.notify();
-  }
-
-  function handleChangeWrapper() {
-    if (subscription.onStateChange) {
-      subscription.onStateChange();
-    }
-  }
-
-  function isSubscribed() {
-    return Boolean(unsubscribe);
-  }
-
-  function trySubscribe() {
-    if (!unsubscribe) {
-      unsubscribe = parentSub ? parentSub.addNestedSub(handleChangeWrapper) : store.subscribe(handleChangeWrapper);
-      listeners = createListenerCollection();
-    }
-  }
-
-  function tryUnsubscribe() {
-    if (unsubscribe) {
-      unsubscribe();
-      unsubscribe = undefined;
-      listeners.clear();
-      listeners = nullListeners;
-    }
-  }
-
-  var subscription = {
-    addNestedSub: addNestedSub,
-    notifyNestedSubs: notifyNestedSubs,
-    handleChangeWrapper: handleChangeWrapper,
-    isSubscribed: isSubscribed,
-    trySubscribe: trySubscribe,
-    tryUnsubscribe: tryUnsubscribe,
-    getListeners: function getListeners() {
-      return listeners;
-    }
-  };
-  return subscription;
-}
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/batch.js":
-/*!*************************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/batch.js ***!
-  \*************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   getBatch: () => (/* binding */ getBatch),
-/* harmony export */   setBatch: () => (/* binding */ setBatch)
-/* harmony export */ });
-// Default to a dummy "batch" implementation that just runs the callback
-function defaultNoopBatch(callback) {
-  callback();
-}
-
-var batch = defaultNoopBatch; // Allow injecting another batching function later
-
-var setBatch = function setBatch(newBatch) {
-  return batch = newBatch;
-}; // Supply a getter just to skip dealing with ESM bindings
-
-var getBatch = function getBatch() {
-  return batch;
-};
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/bindActionCreators.js":
-/*!**************************************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/bindActionCreators.js ***!
-  \**************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ bindActionCreators)
-/* harmony export */ });
-function bindActionCreators(actionCreators, dispatch) {
-  var boundActionCreators = {};
-
-  var _loop = function _loop(key) {
-    var actionCreator = actionCreators[key];
-
-    if (typeof actionCreator === 'function') {
-      boundActionCreators[key] = function () {
-        return dispatch(actionCreator.apply(void 0, arguments));
-      };
-    }
-  };
-
-  for (var key in actionCreators) {
-    _loop(key);
-  }
-
-  return boundActionCreators;
-}
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/isPlainObject.js":
-/*!*********************************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/isPlainObject.js ***!
-  \*********************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ isPlainObject)
-/* harmony export */ });
-/**
- * @param {any} obj The object to inspect.
- * @returns {boolean} True if the argument appears to be a plain object.
- */
-function isPlainObject(obj) {
-  if (typeof obj !== 'object' || obj === null) return false;
-  var proto = Object.getPrototypeOf(obj);
-  if (proto === null) return true;
-  var baseProto = proto;
-
-  while (Object.getPrototypeOf(baseProto) !== null) {
-    baseProto = Object.getPrototypeOf(baseProto);
-  }
-
-  return proto === baseProto;
-}
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/reactBatchedUpdates.js":
-/*!***************************************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/reactBatchedUpdates.js ***!
-  \***************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   unstable_batchedUpdates: () => (/* reexport safe */ react_dom__WEBPACK_IMPORTED_MODULE_0__.unstable_batchedUpdates)
-/* harmony export */ });
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-dom */ "react-dom");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_0__);
-/* eslint-disable import/no-unresolved */
-
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/shallowEqual.js":
-/*!********************************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/shallowEqual.js ***!
-  \********************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ shallowEqual)
-/* harmony export */ });
-function is(x, y) {
-  if (x === y) {
-    return x !== 0 || y !== 0 || 1 / x === 1 / y;
-  } else {
-    return x !== x && y !== y;
-  }
-}
-
-function shallowEqual(objA, objB) {
-  if (is(objA, objB)) return true;
-
-  if (typeof objA !== 'object' || objA === null || typeof objB !== 'object' || objB === null) {
-    return false;
-  }
-
-  var keysA = Object.keys(objA);
-  var keysB = Object.keys(objB);
-  if (keysA.length !== keysB.length) return false;
-
-  for (var i = 0; i < keysA.length; i++) {
-    if (!Object.prototype.hasOwnProperty.call(objB, keysA[i]) || !is(objA[keysA[i]], objB[keysA[i]])) {
-      return false;
-    }
-  }
-
-  return true;
-}
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/useIsomorphicLayoutEffect.js":
-/*!*********************************************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/useIsomorphicLayoutEffect.js ***!
-  \*********************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   useIsomorphicLayoutEffect: () => (/* binding */ useIsomorphicLayoutEffect)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
- // React currently throws a warning when using useLayoutEffect on the server.
-// To get around it, we can conditionally useEffect on the server (no-op) and
-// useLayoutEffect in the browser. We need useLayoutEffect to ensure the store
-// subscription callback always has the selector from the latest render commit
-// available, otherwise a store update may happen between render and the effect,
-// which may cause missed updates; we also must ensure the store subscription
-// is created synchronously, otherwise a store update may occur before the
-// subscription is created and an inconsistent state may be observed
-
-var useIsomorphicLayoutEffect = typeof window !== 'undefined' && typeof window.document !== 'undefined' && typeof window.document.createElement !== 'undefined' ? react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect : react__WEBPACK_IMPORTED_MODULE_0__.useEffect;
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/verifyPlainObject.js":
-/*!*************************************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/verifyPlainObject.js ***!
-  \*************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ verifyPlainObject)
-/* harmony export */ });
-/* harmony import */ var _isPlainObject__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./isPlainObject */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/isPlainObject.js");
-/* harmony import */ var _warning__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./warning */ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/warning.js");
-
-
-function verifyPlainObject(value, displayName, methodName) {
-  if (!(0,_isPlainObject__WEBPACK_IMPORTED_MODULE_0__["default"])(value)) {
-    (0,_warning__WEBPACK_IMPORTED_MODULE_1__["default"])(methodName + "() in " + displayName + " must return a plain object. Instead received " + value + ".");
-  }
-}
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/warning.js":
-/*!***************************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/react-redux/es/utils/warning.js ***!
-  \***************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ warning)
-/* harmony export */ });
-/**
- * Prints a warning in the console if it exists.
- *
- * @param {String} message The warning message.
- * @returns {void}
- */
-function warning(message) {
-  /* eslint-disable no-console */
-  if (typeof console !== 'undefined' && typeof console.error === 'function') {
-    console.error(message);
-  }
-  /* eslint-enable no-console */
-
-
-  try {
-    // This error was thrown as a convenience so that if you enable
-    // "break on all exceptions" in your console,
-    // it would pause the execution at this line.
-    throw new Error(message);
-    /* eslint-disable no-empty */
-  } catch (e) {}
-  /* eslint-enable no-empty */
-
-}
-
-/***/ }),
-
-/***/ "./node_modules/redux/es/redux.js":
-/*!****************************************!*\
-  !*** ./node_modules/redux/es/redux.js ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   __DO_NOT_USE__ActionTypes: () => (/* binding */ ActionTypes),
-/* harmony export */   applyMiddleware: () => (/* binding */ applyMiddleware),
-/* harmony export */   bindActionCreators: () => (/* binding */ bindActionCreators),
-/* harmony export */   combineReducers: () => (/* binding */ combineReducers),
-/* harmony export */   compose: () => (/* binding */ compose),
-/* harmony export */   createStore: () => (/* binding */ createStore),
-/* harmony export */   legacy_createStore: () => (/* binding */ legacy_createStore)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
-
-
-/**
- * Adapted from React: https://github.com/facebook/react/blob/master/packages/shared/formatProdErrorMessage.js
- *
- * Do not require this module directly! Use normal throw error calls. These messages will be replaced with error codes
- * during build.
- * @param {number} code
- */
-function formatProdErrorMessage(code) {
-  return "Minified Redux error #" + code + "; visit https://redux.js.org/Errors?code=" + code + " for the full message or " + 'use the non-minified dev environment for full errors. ';
-}
-
-// Inlined version of the `symbol-observable` polyfill
-var $$observable = (function () {
-  return typeof Symbol === 'function' && Symbol.observable || '@@observable';
-})();
-
-/**
- * These are private action types reserved by Redux.
- * For any unknown actions, you must return the current state.
- * If the current state is undefined, you must return the initial state.
- * Do not reference these action types directly in your code.
- */
-var randomString = function randomString() {
-  return Math.random().toString(36).substring(7).split('').join('.');
-};
-
-var ActionTypes = {
-  INIT: "@@redux/INIT" + randomString(),
-  REPLACE: "@@redux/REPLACE" + randomString(),
-  PROBE_UNKNOWN_ACTION: function PROBE_UNKNOWN_ACTION() {
-    return "@@redux/PROBE_UNKNOWN_ACTION" + randomString();
-  }
-};
-
-/**
- * @param {any} obj The object to inspect.
- * @returns {boolean} True if the argument appears to be a plain object.
- */
-function isPlainObject(obj) {
-  if (typeof obj !== 'object' || obj === null) return false;
-  var proto = obj;
-
-  while (Object.getPrototypeOf(proto) !== null) {
-    proto = Object.getPrototypeOf(proto);
-  }
-
-  return Object.getPrototypeOf(obj) === proto;
-}
-
-// Inlined / shortened version of `kindOf` from https://github.com/jonschlinkert/kind-of
-function miniKindOf(val) {
-  if (val === void 0) return 'undefined';
-  if (val === null) return 'null';
-  var type = typeof val;
-
-  switch (type) {
-    case 'boolean':
-    case 'string':
-    case 'number':
-    case 'symbol':
-    case 'function':
-      {
-        return type;
-      }
-  }
-
-  if (Array.isArray(val)) return 'array';
-  if (isDate(val)) return 'date';
-  if (isError(val)) return 'error';
-  var constructorName = ctorName(val);
-
-  switch (constructorName) {
-    case 'Symbol':
-    case 'Promise':
-    case 'WeakMap':
-    case 'WeakSet':
-    case 'Map':
-    case 'Set':
-      return constructorName;
-  } // other
-
-
-  return type.slice(8, -1).toLowerCase().replace(/\s/g, '');
-}
-
-function ctorName(val) {
-  return typeof val.constructor === 'function' ? val.constructor.name : null;
-}
-
-function isError(val) {
-  return val instanceof Error || typeof val.message === 'string' && val.constructor && typeof val.constructor.stackTraceLimit === 'number';
-}
-
-function isDate(val) {
-  if (val instanceof Date) return true;
-  return typeof val.toDateString === 'function' && typeof val.getDate === 'function' && typeof val.setDate === 'function';
-}
-
-function kindOf(val) {
-  var typeOfVal = typeof val;
-
-  if (true) {
-    typeOfVal = miniKindOf(val);
-  }
-
-  return typeOfVal;
-}
-
-/**
- * @deprecated
- *
- * **We recommend using the `configureStore` method
- * of the `@reduxjs/toolkit` package**, which replaces `createStore`.
- *
- * Redux Toolkit is our recommended approach for writing Redux logic today,
- * including store setup, reducers, data fetching, and more.
- *
- * **For more details, please read this Redux docs page:**
- * **https://redux.js.org/introduction/why-rtk-is-redux-today**
- *
- * `configureStore` from Redux Toolkit is an improved version of `createStore` that
- * simplifies setup and helps avoid common bugs.
- *
- * You should not be using the `redux` core package by itself today, except for learning purposes.
- * The `createStore` method from the core `redux` package will not be removed, but we encourage
- * all users to migrate to using Redux Toolkit for all Redux code.
- *
- * If you want to use `createStore` without this visual deprecation warning, use
- * the `legacy_createStore` import instead:
- *
- * `import { legacy_createStore as createStore} from 'redux'`
- *
- */
-
-function createStore(reducer, preloadedState, enhancer) {
-  var _ref2;
-
-  if (typeof preloadedState === 'function' && typeof enhancer === 'function' || typeof enhancer === 'function' && typeof arguments[3] === 'function') {
-    throw new Error( false ? 0 : 'It looks like you are passing several store enhancers to ' + 'createStore(). This is not supported. Instead, compose them ' + 'together to a single function. See https://redux.js.org/tutorials/fundamentals/part-4-store#creating-a-store-with-enhancers for an example.');
-  }
-
-  if (typeof preloadedState === 'function' && typeof enhancer === 'undefined') {
-    enhancer = preloadedState;
-    preloadedState = undefined;
-  }
-
-  if (typeof enhancer !== 'undefined') {
-    if (typeof enhancer !== 'function') {
-      throw new Error( false ? 0 : "Expected the enhancer to be a function. Instead, received: '" + kindOf(enhancer) + "'");
-    }
-
-    return enhancer(createStore)(reducer, preloadedState);
-  }
-
-  if (typeof reducer !== 'function') {
-    throw new Error( false ? 0 : "Expected the root reducer to be a function. Instead, received: '" + kindOf(reducer) + "'");
-  }
-
-  var currentReducer = reducer;
-  var currentState = preloadedState;
-  var currentListeners = [];
-  var nextListeners = currentListeners;
-  var isDispatching = false;
-  /**
-   * This makes a shallow copy of currentListeners so we can use
-   * nextListeners as a temporary list while dispatching.
-   *
-   * This prevents any bugs around consumers calling
-   * subscribe/unsubscribe in the middle of a dispatch.
-   */
-
-  function ensureCanMutateNextListeners() {
-    if (nextListeners === currentListeners) {
-      nextListeners = currentListeners.slice();
-    }
-  }
-  /**
-   * Reads the state tree managed by the store.
-   *
-   * @returns {any} The current state tree of your application.
-   */
-
-
-  function getState() {
-    if (isDispatching) {
-      throw new Error( false ? 0 : 'You may not call store.getState() while the reducer is executing. ' + 'The reducer has already received the state as an argument. ' + 'Pass it down from the top reducer instead of reading it from the store.');
-    }
-
-    return currentState;
-  }
-  /**
-   * Adds a change listener. It will be called any time an action is dispatched,
-   * and some part of the state tree may potentially have changed. You may then
-   * call `getState()` to read the current state tree inside the callback.
-   *
-   * You may call `dispatch()` from a change listener, with the following
-   * caveats:
-   *
-   * 1. The subscriptions are snapshotted just before every `dispatch()` call.
-   * If you subscribe or unsubscribe while the listeners are being invoked, this
-   * will not have any effect on the `dispatch()` that is currently in progress.
-   * However, the next `dispatch()` call, whether nested or not, will use a more
-   * recent snapshot of the subscription list.
-   *
-   * 2. The listener should not expect to see all state changes, as the state
-   * might have been updated multiple times during a nested `dispatch()` before
-   * the listener is called. It is, however, guaranteed that all subscribers
-   * registered before the `dispatch()` started will be called with the latest
-   * state by the time it exits.
-   *
-   * @param {Function} listener A callback to be invoked on every dispatch.
-   * @returns {Function} A function to remove this change listener.
-   */
-
-
-  function subscribe(listener) {
-    if (typeof listener !== 'function') {
-      throw new Error( false ? 0 : "Expected the listener to be a function. Instead, received: '" + kindOf(listener) + "'");
-    }
-
-    if (isDispatching) {
-      throw new Error( false ? 0 : 'You may not call store.subscribe() while the reducer is executing. ' + 'If you would like to be notified after the store has been updated, subscribe from a ' + 'component and invoke store.getState() in the callback to access the latest state. ' + 'See https://redux.js.org/api/store#subscribelistener for more details.');
-    }
-
-    var isSubscribed = true;
-    ensureCanMutateNextListeners();
-    nextListeners.push(listener);
-    return function unsubscribe() {
-      if (!isSubscribed) {
-        return;
-      }
-
-      if (isDispatching) {
-        throw new Error( false ? 0 : 'You may not unsubscribe from a store listener while the reducer is executing. ' + 'See https://redux.js.org/api/store#subscribelistener for more details.');
-      }
-
-      isSubscribed = false;
-      ensureCanMutateNextListeners();
-      var index = nextListeners.indexOf(listener);
-      nextListeners.splice(index, 1);
-      currentListeners = null;
-    };
-  }
-  /**
-   * Dispatches an action. It is the only way to trigger a state change.
-   *
-   * The `reducer` function, used to create the store, will be called with the
-   * current state tree and the given `action`. Its return value will
-   * be considered the **next** state of the tree, and the change listeners
-   * will be notified.
-   *
-   * The base implementation only supports plain object actions. If you want to
-   * dispatch a Promise, an Observable, a thunk, or something else, you need to
-   * wrap your store creating function into the corresponding middleware. For
-   * example, see the documentation for the `redux-thunk` package. Even the
-   * middleware will eventually dispatch plain object actions using this method.
-   *
-   * @param {Object} action A plain object representing “what changed”. It is
-   * a good idea to keep actions serializable so you can record and replay user
-   * sessions, or use the time travelling `redux-devtools`. An action must have
-   * a `type` property which may not be `undefined`. It is a good idea to use
-   * string constants for action types.
-   *
-   * @returns {Object} For convenience, the same action object you dispatched.
-   *
-   * Note that, if you use a custom middleware, it may wrap `dispatch()` to
-   * return something else (for example, a Promise you can await).
-   */
-
-
-  function dispatch(action) {
-    if (!isPlainObject(action)) {
-      throw new Error( false ? 0 : "Actions must be plain objects. Instead, the actual type was: '" + kindOf(action) + "'. You may need to add middleware to your store setup to handle dispatching other values, such as 'redux-thunk' to handle dispatching functions. See https://redux.js.org/tutorials/fundamentals/part-4-store#middleware and https://redux.js.org/tutorials/fundamentals/part-6-async-logic#using-the-redux-thunk-middleware for examples.");
-    }
-
-    if (typeof action.type === 'undefined') {
-      throw new Error( false ? 0 : 'Actions may not have an undefined "type" property. You may have misspelled an action type string constant.');
-    }
-
-    if (isDispatching) {
-      throw new Error( false ? 0 : 'Reducers may not dispatch actions.');
-    }
-
-    try {
-      isDispatching = true;
-      currentState = currentReducer(currentState, action);
-    } finally {
-      isDispatching = false;
-    }
-
-    var listeners = currentListeners = nextListeners;
-
-    for (var i = 0; i < listeners.length; i++) {
-      var listener = listeners[i];
-      listener();
-    }
-
-    return action;
-  }
-  /**
-   * Replaces the reducer currently used by the store to calculate the state.
-   *
-   * You might need this if your app implements code splitting and you want to
-   * load some of the reducers dynamically. You might also need this if you
-   * implement a hot reloading mechanism for Redux.
-   *
-   * @param {Function} nextReducer The reducer for the store to use instead.
-   * @returns {void}
-   */
-
-
-  function replaceReducer(nextReducer) {
-    if (typeof nextReducer !== 'function') {
-      throw new Error( false ? 0 : "Expected the nextReducer to be a function. Instead, received: '" + kindOf(nextReducer));
-    }
-
-    currentReducer = nextReducer; // This action has a similiar effect to ActionTypes.INIT.
-    // Any reducers that existed in both the new and old rootReducer
-    // will receive the previous state. This effectively populates
-    // the new state tree with any relevant data from the old one.
-
-    dispatch({
-      type: ActionTypes.REPLACE
-    });
-  }
-  /**
-   * Interoperability point for observable/reactive libraries.
-   * @returns {observable} A minimal observable of state changes.
-   * For more information, see the observable proposal:
-   * https://github.com/tc39/proposal-observable
-   */
-
-
-  function observable() {
-    var _ref;
-
-    var outerSubscribe = subscribe;
-    return _ref = {
-      /**
-       * The minimal observable subscription method.
-       * @param {Object} observer Any object that can be used as an observer.
-       * The observer object should have a `next` method.
-       * @returns {subscription} An object with an `unsubscribe` method that can
-       * be used to unsubscribe the observable from the store, and prevent further
-       * emission of values from the observable.
-       */
-      subscribe: function subscribe(observer) {
-        if (typeof observer !== 'object' || observer === null) {
-          throw new Error( false ? 0 : "Expected the observer to be an object. Instead, received: '" + kindOf(observer) + "'");
-        }
-
-        function observeState() {
-          if (observer.next) {
-            observer.next(getState());
-          }
-        }
-
-        observeState();
-        var unsubscribe = outerSubscribe(observeState);
-        return {
-          unsubscribe: unsubscribe
-        };
-      }
-    }, _ref[$$observable] = function () {
-      return this;
-    }, _ref;
-  } // When a store is created, an "INIT" action is dispatched so that every
-  // reducer returns their initial state. This effectively populates
-  // the initial state tree.
-
-
-  dispatch({
-    type: ActionTypes.INIT
-  });
-  return _ref2 = {
-    dispatch: dispatch,
-    subscribe: subscribe,
-    getState: getState,
-    replaceReducer: replaceReducer
-  }, _ref2[$$observable] = observable, _ref2;
-}
-/**
- * Creates a Redux store that holds the state tree.
- *
- * **We recommend using `configureStore` from the
- * `@reduxjs/toolkit` package**, which replaces `createStore`:
- * **https://redux.js.org/introduction/why-rtk-is-redux-today**
- *
- * The only way to change the data in the store is to call `dispatch()` on it.
- *
- * There should only be a single store in your app. To specify how different
- * parts of the state tree respond to actions, you may combine several reducers
- * into a single reducer function by using `combineReducers`.
- *
- * @param {Function} reducer A function that returns the next state tree, given
- * the current state tree and the action to handle.
- *
- * @param {any} [preloadedState] The initial state. You may optionally specify it
- * to hydrate the state from the server in universal apps, or to restore a
- * previously serialized user session.
- * If you use `combineReducers` to produce the root reducer function, this must be
- * an object with the same shape as `combineReducers` keys.
- *
- * @param {Function} [enhancer] The store enhancer. You may optionally specify it
- * to enhance the store with third-party capabilities such as middleware,
- * time travel, persistence, etc. The only store enhancer that ships with Redux
- * is `applyMiddleware()`.
- *
- * @returns {Store} A Redux store that lets you read the state, dispatch actions
- * and subscribe to changes.
- */
-
-var legacy_createStore = createStore;
-
-/**
- * Prints a warning in the console if it exists.
- *
- * @param {String} message The warning message.
- * @returns {void}
- */
-function warning(message) {
-  /* eslint-disable no-console */
-  if (typeof console !== 'undefined' && typeof console.error === 'function') {
-    console.error(message);
-  }
-  /* eslint-enable no-console */
-
-
-  try {
-    // This error was thrown as a convenience so that if you enable
-    // "break on all exceptions" in your console,
-    // it would pause the execution at this line.
-    throw new Error(message);
-  } catch (e) {} // eslint-disable-line no-empty
-
-}
-
-function getUnexpectedStateShapeWarningMessage(inputState, reducers, action, unexpectedKeyCache) {
-  var reducerKeys = Object.keys(reducers);
-  var argumentName = action && action.type === ActionTypes.INIT ? 'preloadedState argument passed to createStore' : 'previous state received by the reducer';
-
-  if (reducerKeys.length === 0) {
-    return 'Store does not have a valid reducer. Make sure the argument passed ' + 'to combineReducers is an object whose values are reducers.';
-  }
-
-  if (!isPlainObject(inputState)) {
-    return "The " + argumentName + " has unexpected type of \"" + kindOf(inputState) + "\". Expected argument to be an object with the following " + ("keys: \"" + reducerKeys.join('", "') + "\"");
-  }
-
-  var unexpectedKeys = Object.keys(inputState).filter(function (key) {
-    return !reducers.hasOwnProperty(key) && !unexpectedKeyCache[key];
-  });
-  unexpectedKeys.forEach(function (key) {
-    unexpectedKeyCache[key] = true;
-  });
-  if (action && action.type === ActionTypes.REPLACE) return;
-
-  if (unexpectedKeys.length > 0) {
-    return "Unexpected " + (unexpectedKeys.length > 1 ? 'keys' : 'key') + " " + ("\"" + unexpectedKeys.join('", "') + "\" found in " + argumentName + ". ") + "Expected to find one of the known reducer keys instead: " + ("\"" + reducerKeys.join('", "') + "\". Unexpected keys will be ignored.");
-  }
-}
-
-function assertReducerShape(reducers) {
-  Object.keys(reducers).forEach(function (key) {
-    var reducer = reducers[key];
-    var initialState = reducer(undefined, {
-      type: ActionTypes.INIT
-    });
-
-    if (typeof initialState === 'undefined') {
-      throw new Error( false ? 0 : "The slice reducer for key \"" + key + "\" returned undefined during initialization. " + "If the state passed to the reducer is undefined, you must " + "explicitly return the initial state. The initial state may " + "not be undefined. If you don't want to set a value for this reducer, " + "you can use null instead of undefined.");
-    }
-
-    if (typeof reducer(undefined, {
-      type: ActionTypes.PROBE_UNKNOWN_ACTION()
-    }) === 'undefined') {
-      throw new Error( false ? 0 : "The slice reducer for key \"" + key + "\" returned undefined when probed with a random type. " + ("Don't try to handle '" + ActionTypes.INIT + "' or other actions in \"redux/*\" ") + "namespace. They are considered private. Instead, you must return the " + "current state for any unknown actions, unless it is undefined, " + "in which case you must return the initial state, regardless of the " + "action type. The initial state may not be undefined, but can be null.");
-    }
-  });
-}
-/**
- * Turns an object whose values are different reducer functions, into a single
- * reducer function. It will call every child reducer, and gather their results
- * into a single state object, whose keys correspond to the keys of the passed
- * reducer functions.
- *
- * @param {Object} reducers An object whose values correspond to different
- * reducer functions that need to be combined into one. One handy way to obtain
- * it is to use ES6 `import * as reducers` syntax. The reducers may never return
- * undefined for any action. Instead, they should return their initial state
- * if the state passed to them was undefined, and the current state for any
- * unrecognized action.
- *
- * @returns {Function} A reducer function that invokes every reducer inside the
- * passed object, and builds a state object with the same shape.
- */
-
-
-function combineReducers(reducers) {
-  var reducerKeys = Object.keys(reducers);
-  var finalReducers = {};
-
-  for (var i = 0; i < reducerKeys.length; i++) {
-    var key = reducerKeys[i];
-
-    if (true) {
-      if (typeof reducers[key] === 'undefined') {
-        warning("No reducer provided for key \"" + key + "\"");
-      }
-    }
-
-    if (typeof reducers[key] === 'function') {
-      finalReducers[key] = reducers[key];
-    }
-  }
-
-  var finalReducerKeys = Object.keys(finalReducers); // This is used to make sure we don't warn about the same
-  // keys multiple times.
-
-  var unexpectedKeyCache;
-
-  if (true) {
-    unexpectedKeyCache = {};
-  }
-
-  var shapeAssertionError;
-
-  try {
-    assertReducerShape(finalReducers);
-  } catch (e) {
-    shapeAssertionError = e;
-  }
-
-  return function combination(state, action) {
-    if (state === void 0) {
-      state = {};
-    }
-
-    if (shapeAssertionError) {
-      throw shapeAssertionError;
-    }
-
-    if (true) {
-      var warningMessage = getUnexpectedStateShapeWarningMessage(state, finalReducers, action, unexpectedKeyCache);
-
-      if (warningMessage) {
-        warning(warningMessage);
-      }
-    }
-
-    var hasChanged = false;
-    var nextState = {};
-
-    for (var _i = 0; _i < finalReducerKeys.length; _i++) {
-      var _key = finalReducerKeys[_i];
-      var reducer = finalReducers[_key];
-      var previousStateForKey = state[_key];
-      var nextStateForKey = reducer(previousStateForKey, action);
-
-      if (typeof nextStateForKey === 'undefined') {
-        var actionType = action && action.type;
-        throw new Error( false ? 0 : "When called with an action of type " + (actionType ? "\"" + String(actionType) + "\"" : '(unknown type)') + ", the slice reducer for key \"" + _key + "\" returned undefined. " + "To ignore an action, you must explicitly return the previous state. " + "If you want this reducer to hold no value, you can return null instead of undefined.");
-      }
-
-      nextState[_key] = nextStateForKey;
-      hasChanged = hasChanged || nextStateForKey !== previousStateForKey;
-    }
-
-    hasChanged = hasChanged || finalReducerKeys.length !== Object.keys(state).length;
-    return hasChanged ? nextState : state;
-  };
-}
-
-function bindActionCreator(actionCreator, dispatch) {
-  return function () {
-    return dispatch(actionCreator.apply(this, arguments));
-  };
-}
-/**
- * Turns an object whose values are action creators, into an object with the
- * same keys, but with every function wrapped into a `dispatch` call so they
- * may be invoked directly. This is just a convenience method, as you can call
- * `store.dispatch(MyActionCreators.doSomething())` yourself just fine.
- *
- * For convenience, you can also pass an action creator as the first argument,
- * and get a dispatch wrapped function in return.
- *
- * @param {Function|Object} actionCreators An object whose values are action
- * creator functions. One handy way to obtain it is to use ES6 `import * as`
- * syntax. You may also pass a single function.
- *
- * @param {Function} dispatch The `dispatch` function available on your Redux
- * store.
- *
- * @returns {Function|Object} The object mimicking the original object, but with
- * every action creator wrapped into the `dispatch` call. If you passed a
- * function as `actionCreators`, the return value will also be a single
- * function.
- */
-
-
-function bindActionCreators(actionCreators, dispatch) {
-  if (typeof actionCreators === 'function') {
-    return bindActionCreator(actionCreators, dispatch);
-  }
-
-  if (typeof actionCreators !== 'object' || actionCreators === null) {
-    throw new Error( false ? 0 : "bindActionCreators expected an object or a function, but instead received: '" + kindOf(actionCreators) + "'. " + "Did you write \"import ActionCreators from\" instead of \"import * as ActionCreators from\"?");
-  }
-
-  var boundActionCreators = {};
-
-  for (var key in actionCreators) {
-    var actionCreator = actionCreators[key];
-
-    if (typeof actionCreator === 'function') {
-      boundActionCreators[key] = bindActionCreator(actionCreator, dispatch);
-    }
-  }
-
-  return boundActionCreators;
-}
-
-/**
- * Composes single-argument functions from right to left. The rightmost
- * function can take multiple arguments as it provides the signature for
- * the resulting composite function.
- *
- * @param {...Function} funcs The functions to compose.
- * @returns {Function} A function obtained by composing the argument functions
- * from right to left. For example, compose(f, g, h) is identical to doing
- * (...args) => f(g(h(...args))).
- */
-function compose() {
-  for (var _len = arguments.length, funcs = new Array(_len), _key = 0; _key < _len; _key++) {
-    funcs[_key] = arguments[_key];
-  }
-
-  if (funcs.length === 0) {
-    return function (arg) {
-      return arg;
-    };
-  }
-
-  if (funcs.length === 1) {
-    return funcs[0];
-  }
-
-  return funcs.reduce(function (a, b) {
-    return function () {
-      return a(b.apply(void 0, arguments));
-    };
-  });
-}
-
-/**
- * Creates a store enhancer that applies middleware to the dispatch method
- * of the Redux store. This is handy for a variety of tasks, such as expressing
- * asynchronous actions in a concise manner, or logging every action payload.
- *
- * See `redux-thunk` package as an example of the Redux middleware.
- *
- * Because middleware is potentially asynchronous, this should be the first
- * store enhancer in the composition chain.
- *
- * Note that each middleware will be given the `dispatch` and `getState` functions
- * as named arguments.
- *
- * @param {...Function} middlewares The middleware chain to be applied.
- * @returns {Function} A store enhancer applying the middleware.
- */
-
-function applyMiddleware() {
-  for (var _len = arguments.length, middlewares = new Array(_len), _key = 0; _key < _len; _key++) {
-    middlewares[_key] = arguments[_key];
-  }
-
-  return function (createStore) {
-    return function () {
-      var store = createStore.apply(void 0, arguments);
-
-      var _dispatch = function dispatch() {
-        throw new Error( false ? 0 : 'Dispatching while constructing your middleware is not allowed. ' + 'Other middleware would not be applied to this dispatch.');
-      };
-
-      var middlewareAPI = {
-        getState: store.getState,
-        dispatch: function dispatch() {
-          return _dispatch.apply(void 0, arguments);
-        }
-      };
-      var chain = middlewares.map(function (middleware) {
-        return middleware(middlewareAPI);
-      });
-      _dispatch = compose.apply(void 0, chain)(store.dispatch);
-      return (0,_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])((0,_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, store), {}, {
-        dispatch: _dispatch
-      });
-    };
-  };
-}
-
-
-
-
-/***/ }),
-
-/***/ "./node_modules/use-memo-one/dist/use-memo-one.esm.js":
-/*!************************************************************!*\
-  !*** ./node_modules/use-memo-one/dist/use-memo-one.esm.js ***!
-  \************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   useCallback: () => (/* binding */ useCallback),
-/* harmony export */   useCallbackOne: () => (/* binding */ useCallbackOne),
-/* harmony export */   useMemo: () => (/* binding */ useMemo),
-/* harmony export */   useMemoOne: () => (/* binding */ useMemoOne)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-
-function areInputsEqual(newInputs, lastInputs) {
-  if (newInputs.length !== lastInputs.length) {
-    return false;
-  }
-
-  for (var i = 0; i < newInputs.length; i++) {
-    if (newInputs[i] !== lastInputs[i]) {
-      return false;
-    }
-  }
-
-  return true;
-}
-
-function useMemoOne(getResult, inputs) {
-  var initial = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(function () {
-    return {
-      inputs: inputs,
-      result: getResult()
-    };
-  })[0];
-  var isFirstRun = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(true);
-  var committed = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(initial);
-  var useCache = isFirstRun.current || Boolean(inputs && committed.current.inputs && areInputsEqual(inputs, committed.current.inputs));
-  var cache = useCache ? committed.current : {
-    inputs: inputs,
-    result: getResult()
-  };
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    isFirstRun.current = false;
-    committed.current = cache;
-  }, [cache]);
-  return cache.result;
-}
-function useCallbackOne(callback, inputs) {
-  return useMemoOne(function () {
-    return callback;
-  }, inputs);
-}
-var useMemo = useMemoOne;
-var useCallback = useCallbackOne;
-
-
 
 
 /***/ }),
@@ -13644,36 +8212,6 @@ module.exports = window["wp"]["i18n"];
 
 /***/ }),
 
-/***/ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/defineProperty.js ***!
-  \*******************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ _defineProperty)
-/* harmony export */ });
-/* harmony import */ var _toPropertyKey_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./toPropertyKey.js */ "./node_modules/@babel/runtime/helpers/esm/toPropertyKey.js");
-
-function _defineProperty(obj, key, value) {
-  key = (0,_toPropertyKey_js__WEBPACK_IMPORTED_MODULE_0__["default"])(key);
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-  return obj;
-}
-
-/***/ }),
-
 /***/ "./node_modules/@babel/runtime/helpers/esm/extends.js":
 /*!************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/esm/extends.js ***!
@@ -13699,212 +8237,6 @@ function _extends() {
   };
   return _extends.apply(this, arguments);
 }
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js":
-/*!******************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js ***!
-  \******************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ _inheritsLoose)
-/* harmony export */ });
-/* harmony import */ var _setPrototypeOf_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./setPrototypeOf.js */ "./node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js");
-
-function _inheritsLoose(subClass, superClass) {
-  subClass.prototype = Object.create(superClass.prototype);
-  subClass.prototype.constructor = subClass;
-  (0,_setPrototypeOf_js__WEBPACK_IMPORTED_MODULE_0__["default"])(subClass, superClass);
-}
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js":
-/*!******************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/objectSpread2.js ***!
-  \******************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ _objectSpread2)
-/* harmony export */ });
-/* harmony import */ var _defineProperty_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./defineProperty.js */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
-
-function ownKeys(object, enumerableOnly) {
-  var keys = Object.keys(object);
-  if (Object.getOwnPropertySymbols) {
-    var symbols = Object.getOwnPropertySymbols(object);
-    enumerableOnly && (symbols = symbols.filter(function (sym) {
-      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-    })), keys.push.apply(keys, symbols);
-  }
-  return keys;
-}
-function _objectSpread2(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = null != arguments[i] ? arguments[i] : {};
-    i % 2 ? ownKeys(Object(source), !0).forEach(function (key) {
-      (0,_defineProperty_js__WEBPACK_IMPORTED_MODULE_0__["default"])(target, key, source[key]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) {
-      Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-    });
-  }
-  return target;
-}
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js":
-/*!*********************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js ***!
-  \*********************************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ _objectWithoutPropertiesLoose)
-/* harmony export */ });
-function _objectWithoutPropertiesLoose(source, excluded) {
-  if (source == null) return {};
-  var target = {};
-  var sourceKeys = Object.keys(source);
-  var key, i;
-  for (i = 0; i < sourceKeys.length; i++) {
-    key = sourceKeys[i];
-    if (excluded.indexOf(key) >= 0) continue;
-    target[key] = source[key];
-  }
-  return target;
-}
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js ***!
-  \*******************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ _setPrototypeOf)
-/* harmony export */ });
-function _setPrototypeOf(o, p) {
-  _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
-    o.__proto__ = p;
-    return o;
-  };
-  return _setPrototypeOf(o, p);
-}
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/helpers/esm/toPrimitive.js":
-/*!****************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/toPrimitive.js ***!
-  \****************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ _toPrimitive)
-/* harmony export */ });
-/* harmony import */ var _typeof_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./typeof.js */ "./node_modules/@babel/runtime/helpers/esm/typeof.js");
-
-function _toPrimitive(input, hint) {
-  if ((0,_typeof_js__WEBPACK_IMPORTED_MODULE_0__["default"])(input) !== "object" || input === null) return input;
-  var prim = input[Symbol.toPrimitive];
-  if (prim !== undefined) {
-    var res = prim.call(input, hint || "default");
-    if ((0,_typeof_js__WEBPACK_IMPORTED_MODULE_0__["default"])(res) !== "object") return res;
-    throw new TypeError("@@toPrimitive must return a primitive value.");
-  }
-  return (hint === "string" ? String : Number)(input);
-}
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/helpers/esm/toPropertyKey.js":
-/*!******************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/toPropertyKey.js ***!
-  \******************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ _toPropertyKey)
-/* harmony export */ });
-/* harmony import */ var _typeof_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./typeof.js */ "./node_modules/@babel/runtime/helpers/esm/typeof.js");
-/* harmony import */ var _toPrimitive_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./toPrimitive.js */ "./node_modules/@babel/runtime/helpers/esm/toPrimitive.js");
-
-
-function _toPropertyKey(arg) {
-  var key = (0,_toPrimitive_js__WEBPACK_IMPORTED_MODULE_1__["default"])(arg, "string");
-  return (0,_typeof_js__WEBPACK_IMPORTED_MODULE_0__["default"])(key) === "symbol" ? key : String(key);
-}
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/helpers/esm/typeof.js":
-/*!***********************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/typeof.js ***!
-  \***********************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ _typeof)
-/* harmony export */ });
-function _typeof(obj) {
-  "@babel/helpers - typeof";
-
-  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
-    return typeof obj;
-  } : function (obj) {
-    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-  }, _typeof(obj);
-}
-
-/***/ }),
-
-/***/ "./node_modules/tiny-invariant/dist/esm/tiny-invariant.js":
-/*!****************************************************************!*\
-  !*** ./node_modules/tiny-invariant/dist/esm/tiny-invariant.js ***!
-  \****************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ invariant)
-/* harmony export */ });
-var isProduction = "development" === 'production';
-var prefix = 'Invariant failed';
-function invariant(condition, message) {
-    if (condition) {
-        return;
-    }
-    if (isProduction) {
-        throw new Error(prefix);
-    }
-    var provided = typeof message === 'function' ? message() : message;
-    var value = provided ? "".concat(prefix, ": ").concat(provided) : prefix;
-    throw new Error(value);
-}
-
-
-
 
 /***/ }),
 

@@ -488,6 +488,39 @@ video {
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
 }
+.container {
+  width: 100%;
+}
+@media (min-width: 640px) {
+
+  .container {
+    max-width: 640px;
+  }
+}
+@media (min-width: 768px) {
+
+  .container {
+    max-width: 768px;
+  }
+}
+@media (min-width: 1024px) {
+
+  .container {
+    max-width: 1024px;
+  }
+}
+@media (min-width: 1280px) {
+
+  .container {
+    max-width: 1280px;
+  }
+}
+@media (min-width: 1536px) {
+
+  .container {
+    max-width: 1536px;
+  }
+}
 .mt-0 {
   margin-top: 0px;
 }
@@ -502,6 +535,9 @@ video {
 }
 .w-full {
   width: 100%;
+}
+.transform {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 .flex-col {
   flex-direction: column;
@@ -545,6 +581,11 @@ video {
   --tw-text-opacity: 1;
   color: rgb(30 41 59 / var(--tw-text-opacity));
 }
+.shadow {
+  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
 .shadow-md {
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
@@ -556,9 +597,857 @@ video {
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
+.transition {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.ease-out {
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
 .hover\:bg-teal-700:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(15 118 110 / var(--tw-bg-opacity));
+}
+
+/*!************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/components/DnD/components/Button/Button.module.css ***!
+  \************************************************************************************************************************************************************************************************************/
+.x6VkY6vfzZtROaGagl5J {
+  padding: 14px 20px;
+  border: none;
+  background-color: #242836;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #f6f8ff;
+  cursor: pointer;
+  outline: none;
+  transform: scale(1);
+  transition: transform 0.2s, background 0.4s;
+
+  &:hover,
+  &:focus {
+    background-color: #2f3545;
+    transform: scale(1.02);
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 4px #4c9ffe;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/components/DnD/components/ConfirmModal/ConfirmModal.module.css ***!
+  \************************************************************************************************************************************************************************************************************************/
+.RvEzaLfXyMIEA78HWgLT {
+  --width: 250px;
+  --height: 120px;
+
+  display: flex;
+  flex-direction: column;
+  width: var(--width);
+  height: var(--height);
+  position: fixed;
+  top: calc(100vh / 2 - var(--height) / 2);
+  left: calc(100vw / 2 - var(--width) / 2);
+  border-radius: 10px;
+  box-shadow: -1px 0 15px 0 rgba(34, 33, 81, 0.01),
+    0px 15px 15px 0 rgba(34, 33, 81, 0.25);
+  padding: 15px;
+  box-sizing: border-box;
+  background-color: white;
+  text-align: center;
+  z-index: 1;
+
+  h1 {
+    flex: 1;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 20px;
+  }
+
+  button {
+    width: 50px;
+    height: 23px;
+    background: #242836;
+    color: #f6f8ff;
+    border: none;
+    border-radius: 3px;
+    margin: 0 5px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #2f3545;
+    }
+  }
+}
+
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/components/DnD/components/Item/components/Action/Action.module.css ***!
+  \****************************************************************************************************************************************************************************************************************************/
+$focused-outline-color: #4c9ffe;
+
+.oZ83SsiBn3n4BI65pUiL {
+  display: flex;
+  width: 12px;
+  padding: 15px;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  touch-action: none;
+  cursor: var(--cursor, pointer);
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: transparent;
+  -webkit-tap-highlight-color: transparent;
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--action-background, rgba(0, 0, 0, 0.05));
+
+      svg {
+        fill: #6f7b88;
+      }
+    }
+  }
+
+  svg {
+    flex: 0 0 auto;
+    margin: auto;
+    height: 100%;
+    overflow: visible;
+    fill: #919eab;
+  }
+
+  &:active {
+    background-color: var(--background, rgba(0, 0, 0, 0.05));
+
+    svg {
+      fill: var(--fill, #788491);
+    }
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0),
+      0 0px 0px 2px $focused-outline-color;
+  }
+}
+
+/*!********************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/components/DnD/components/Item/Item.module.css ***!
+  \********************************************************************************************************************************************************************************************************/
+$font-weight: 400;
+$background-color: #fff;
+$border-color: #efefef;
+$text-color: #333;
+$handle-color: rgba(0, 0, 0, 0.25);
+$box-shadow-border: 0 0 0 calc(1px / var(--scale-x, 1)) rgba(63, 63, 68, 0.05);
+$box-shadow-common: 0 1px calc(3px / var(--scale-x, 1)) 0 rgba(34, 33, 81, 0.15);
+$box-shadow: $box-shadow-border, $box-shadow-common;
+$focused-outline-color: #4c9ffe;
+
+@keyframes QQo0oNoYrugyF_JUXTqG {
+  0% {
+    transform: scale(1);
+    box-shadow: var(--box-shadow);
+  }
+  100% {
+    transform: scale(var(--scale));
+    box-shadow: var(--box-shadow-picked-up);
+  }
+}
+
+@keyframes jHvm2MpnilXRJucJPAEV {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.MGkpH0mxTTQdDMONMgCj {
+  display: flex;
+  box-sizing: border-box;
+  transform: translate3d(var(--translate-x, 0), var(--translate-y, 0), 0)
+    scaleX(var(--scale-x, 1)) scaleY(var(--scale-y, 1));
+  transform-origin: 0 0;
+  touch-action: manipulation;
+
+  &.jHvm2MpnilXRJucJPAEV {
+    animation: jHvm2MpnilXRJucJPAEV 500ms ease;
+  }
+
+  &.s6NSamO6GPOtJMLs7wKr {
+    --scale: 1.05;
+    --box-shadow: $box-shadow;
+    --box-shadow-picked-up: $box-shadow-border,
+      -1px 0 15px 0 rgba(34, 33, 81, 0.01),
+      0px 15px 15px 0 rgba(34, 33, 81, 0.25);
+    z-index: 999;
+  }
+}
+
+.WiXhCBM9EVaW5m9wdyge {
+  position: relative;
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  padding: 18px 20px;
+  background-color: $background-color;
+  box-shadow: $box-shadow;
+  outline: none;
+  border-radius: calc(4px / var(--scale-x, 1));
+  box-sizing: border-box;
+  list-style: none;
+  transform-origin: 50% 50%;
+
+  -webkit-tap-highlight-color: transparent;
+
+  color: $text-color;
+  font-weight: $font-weight;
+  font-size: 1rem;
+  white-space: nowrap;
+
+  transform: scale(var(--scale, 1));
+  transition: box-shadow 200ms cubic-bezier(0.18, 0.67, 0.6, 1.22);
+
+  &:focus-visible {
+    box-shadow: 0 0px 4px 1px $focused-outline-color, $box-shadow;
+  }
+
+  &:not(.ezzxX8tXZDbT7xUUmwOx) {
+    touch-action: manipulation;
+    cursor: grab;
+  }
+
+  &._xdJub6MxMT0CuqK1XJH:not(.s6NSamO6GPOtJMLs7wKr) {
+    opacity: var(--dragging-opacity, 0.5);
+    z-index: 0;
+
+    &:focus {
+      box-shadow: $box-shadow;
+    }
+  }
+
+  &.hE3Aj0naP9Q687Oabp04 {
+    color: #999;
+    background-color: #f1f1f1;
+    &:focus {
+      box-shadow: 0 0px 4px 1px rgba(0, 0, 0, 0.1), $box-shadow;
+    }
+    cursor: not-allowed;
+  }
+
+  &.s6NSamO6GPOtJMLs7wKr {
+    cursor: inherit;
+    /* box-shadow: 0 0px 6px 2px $focused-outline-color; */
+    animation: QQo0oNoYrugyF_JUXTqG 200ms cubic-bezier(0.18, 0.67, 0.6, 1.22);
+    transform: scale(var(--scale));
+    box-shadow: var(--box-shadow-picked-up);
+    opacity: 1;
+  }
+
+  &.P6csp9l8lfrFePolhqr4:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    height: 100%;
+    width: 3px;
+    display: block;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    background-color: var(--color);
+  }
+
+  &:hover {
+    .PfPy7zlUq_RZ8NGuLtnj {
+      visibility: visible;
+    }
+  }
+}
+
+.PfPy7zlUq_RZ8NGuLtnj {
+  visibility: hidden;
+}
+
+.VcXuP_e6qddLugwqgjJ2 {
+  display: flex;
+  align-self: flex-start;
+  margin-top: -12px;
+  margin-left: auto;
+  margin-bottom: -15px;
+  margin-right: -10px;
+}
+
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/components/DnD/components/Container/Container.module.css ***!
+  \******************************************************************************************************************************************************************************************************************/
+.R0tahmIpczZeehgi1AYZ {
+  display: flex;
+  flex-direction: column;
+  grid-auto-rows: max-content;
+  overflow: hidden;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  outline: none;
+  min-width: 350px;
+  margin: 10px;
+  border-radius: 5px;
+  min-height: 200px;
+  transition: background-color 350ms ease;
+  background-color: rgba(246, 246, 246, 1);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  font-size: 1em;
+
+  ul {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(var(--columns, 1), 1fr);
+    list-style: none;
+    padding: 20px;
+    margin: 0;
+  }
+
+  &.SBFmulUia77oqz56qZps {
+    ul {
+      overflow-y: auto;
+    }
+  }
+
+  &.FlXl5CIr9NgsmAECwUy0 {
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.5);
+    background-color: transparent;
+    border-style: dashed;
+    border-color: rgba(0, 0, 0, 0.08);
+
+    &:hover {
+      border-color: rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  &.Sx7JDsp0LZ9ety5FXKpv {
+    background-color: rgb(235, 235, 235, 1);
+  }
+
+  &.eE0ZoF9CCmfHZ_vRERsS {
+    overflow: visible;
+    background-color: transparent !important;
+    border: none !important;
+  }
+
+  &.EF8D3tRuI1aVmPuEn2Og {
+    width: 100%;
+
+    ul {
+      grid-auto-flow: column;
+    }
+  }
+
+  &.NNtF1kX1clBQn1FNjHNo {
+    box-shadow: 0 1px 10px 0 rgba(34, 33, 81, 0.1);
+  }
+
+  &:focus-visible {
+    border-color: transparent;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0), 0 0px 0px 2px #4c9ffe;
+  }
+}
+
+.XBLxhEpfsJfnY8bscIUq {
+  display: flex;
+  padding: 5px 20px;
+  padding-right: 8px;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
+  &:hover {
+    .aWZRd0xx9thMF3THoJH7 > * {
+      opacity: 1 !important;
+    }
+  }
+}
+
+.aWZRd0xx9thMF3THoJH7 {
+  display: flex;
+
+  > *:first-child:not(:last-child) {
+    opacity: 0;
+
+    &:focus-visible {
+      opacity: 1;
+    }
+  }
+}
+
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/components/DnD/components/Draggable/Draggable.module.css ***!
+  \******************************************************************************************************************************************************************************************************************/
+.IyMBph7aqLEnAtjUkUvk {
+	position: relative;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	transition: transform 250ms ease;
+
+	> button {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 54px;
+		flex-shrink: 1;
+		-webkit-appearance: none;
+		   -moz-appearance: none;
+		        appearance: none;
+		outline: none;
+		border: 0;
+		padding: 8px 18px;
+		background-color: #181a22;
+		border-radius: 5px;
+		box-shadow: var(--box-shadow);
+		transform: translate3d(var(--translate-x, 0), var(--translate-y, 0), 0)
+			scale(var(--scale, 1));
+		transition: box-shadow 300ms ease;
+	}
+
+	&:not(.h06xRbMH_SItjgzCBM6U) {
+		> button {
+			touch-action: none;
+			cursor: grab;
+
+			&:focus-visible:not(.txaXk21SqB4CfuRHI4gQ &) {
+				box-shadow: 0 0 0 3px #4c9ffe;
+			}
+		}
+	}
+
+	&.h06xRbMH_SItjgzCBM6U {
+		> button {
+			--action-background: rgba(255, 255, 255, 0.1);
+
+			> svg {
+				margin-right: 5px;
+			}
+
+			> button {
+				margin-right: -10px;
+			}
+		}
+	}
+
+	img {
+		width: 140px;
+		-webkit-user-select: none;
+		   -moz-user-select: none;
+		        user-select: none;
+		pointer-events: none;
+	}
+
+	label {
+		display: block;
+		flex-shrink: 1;
+		padding: 10px;
+		transition: opacity 250ms ease;
+
+		text-align: center;
+		font-size: 1rem;
+		font-weight: 300;
+		color: #8d8d8d;
+		-webkit-user-select: none;
+		   -moz-user-select: none;
+		        user-select: none;
+		/* cursor: url("/cursor.svg"), auto; */
+
+		animation-name: ZQzqltJ0rNAXiUXO_EjQ;
+		animation-duration: 1.5s;
+		animation-delay: 2s;
+		animation-iteration-count: infinite;
+		animation-timing-function: ease;
+		animation-direction: alternate;
+	}
+
+	&.nnPgPHYqEN7nAWrFiVmr {
+		z-index: 1;
+		transition: none;
+
+		* {
+			cursor: grabbing;
+		}
+
+		> button {
+			--scale: 1.06;
+			--box-shadow: -1px 0 15px 0 rgba(34, 33, 81, 0.01),
+				0px 15px 15px 0 rgba(34, 33, 81, 0.25);
+
+			&:focus-visible {
+				--box-shadow: 0 0px 10px 2px #4c9ffe;
+			}
+		}
+
+		label {
+			animation: none;
+			opacity: 0;
+		}
+	}
+
+	&.mMy14LC0mtjwVK2c9weM,
+	&.nnPgPHYqEN7nAWrFiVmr {
+		> button {
+			animation: tK9BF1Zflg2XFXKgiFk6 250ms cubic-bezier(0.18, 0.67, 0.6, 1.22);
+		}
+	}
+}
+
+@keyframes ZQzqltJ0rNAXiUXO_EjQ {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes tK9BF1Zflg2XFXKgiFk6 {
+	0% {
+		transform: translate3d(var(--translate-x, 0), var(--translate-y, 0), 0)
+			scale(1);
+	}
+	100% {
+		transform: translate3d(var(--translate-x, 0), var(--translate-y, 0), 0)
+			scale(var(--scale));
+		box-shadow: var(--box-shadow);
+	}
+}
+
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/components/DnD/components/Droppable/Droppable.module.css ***!
+  \******************************************************************************************************************************************************************************************************************/
+.cVOiKziiohqw5OEIIUfS {
+  position: relative;
+  padding-top: 80px;
+  text-align: center;
+  border-radius: 10px;
+  width: 340px;
+  height: 340px;
+  box-sizing: border-box;
+  background-color: #fff;
+  box-shadow: inset rgba(201, 211, 219, 0.5) 0 0 0 2px,
+    rgba(255, 255, 255, 0) 0 0 0 1px, rgba(201, 211, 219, 0.25) 20px 14px 24px;
+  transition: box-shadow 250ms ease;
+
+  > svg {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 200px;
+    transform: translate3d(-50%, -50%, 0);
+    opacity: 0.8;
+    transition: opacity 300ms ease, transform 200ms ease;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+            user-select: none;
+    pointer-events: none;
+  }
+
+  &.VVrIZcdTQgq6vUuzIjBp {
+    > svg {
+      opacity: 0.8;
+    }
+  }
+
+  &.h_w6Fh8nuQbizNfYUDF8 {
+    box-shadow: inset #1eb99d 0 0 0 3px, rgba(201, 211, 219, 0.5) 20px 14px 24px;
+
+    > svg {
+      opacity: 1;
+    }
+
+    &.a4ZHnJr6owytWKvqHsXQ {
+      box-shadow: inset rgba(201, 211, 219, 0.7) 0 0 0 3px,
+        rgba(201, 211, 219, 0.5) 20px 14px 24px;
+    }
+  }
+
+  &.a4ZHnJr6owytWKvqHsXQ {
+    > svg {
+      opacity: 0.2;
+      transform: translate3d(-50%, 100%, 0) scale(0.8);
+    }
+  }
+}
+
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/components/DnD/components/FloatingControls/FloatingControls.module.css ***!
+  \********************************************************************************************************************************************************************************************************************************/
+.MX0XmwT0lhVknjSFBYZm {
+  position: fixed;
+  top: 25px;
+  right: 25px;
+}
+
+/*!********************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/components/DnD/components/Grid/Grid.module.css ***!
+  \********************************************************************************************************************************************************************************************************/
+.GDXaO3AZ_fyJtXfn4rPF {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent calc(var(--grid-size) - 1px),
+      #ddd calc(var(--grid-size) - 1px),
+      #ddd var(--grid-size)
+    ),
+    repeating-linear-gradient(
+      -90deg,
+      transparent,
+      transparent calc(var(--grid-size) - 1px),
+      #ddd calc(var(--grid-size) - 1px),
+      #ddd var(--grid-size)
+    );
+  background-size: var(--grid-size) var(--grid-size);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.h7hlqRAjVy7btGZiG7RA {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+}
+
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/components/DnD/components/GridContainer/GridContainer.module.css ***!
+  \**************************************************************************************************************************************************************************************************************************/
+.Nc0lHXzfUSCKFOS9wJBO {
+  max-width: 800px;
+  display: grid;
+  grid-template-columns: repeat(var(--col-count), 1fr);
+  grid-gap: 10px;
+  padding: 20px;
+
+  @media (max-width: 850px) {
+    grid-template-columns: repeat(calc(var(--col-count) - 1), 1fr);
+  }
+
+  @media (max-width: 650px) {
+    grid-template-columns: repeat(calc(var(--col-count) - 2), 1fr);
+  }
+}
+
+/*!********************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/components/DnD/components/List/List.module.css ***!
+  \********************************************************************************************************************************************************************************************************/
+.H7R8tSzoBIHgPNLN0lXk {
+  display: grid;
+  grid-auto-rows: max-content;
+  box-sizing: border-box;
+  min-width: 350px;
+  grid-gap: 10px;
+  padding: 20px;
+  padding-bottom: 0;
+  margin: 10px;
+  border-radius: 5px;
+  min-height: 200px;
+  transition: background-color 350ms ease;
+  grid-template-columns: repeat(var(--columns, 1), 1fr);
+
+  &:after {
+    content: '';
+    height: 10px;
+    grid-column-start: span var(--columns, 1);
+  }
+
+  &.pMydCUfLVBsaRJqmhuT5 {
+    width: 100%;
+    grid-auto-flow: column;
+  }
+}
+
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/components/DnD/components/OverflowWrapper/OverflowWrapper.module.css ***!
+  \******************************************************************************************************************************************************************************************************************************/
+.lOjrmcJjybYpNxq8Iry0 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: hidden;
+}
+
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/components/DnD/components/Wrapper/Wrapper.module.css ***!
+  \**************************************************************************************************************************************************************************************************************/
+.nsr_ED3mxk9L46TL6SmV {
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  justify-content: flex-start;
+
+  &.XwXE8rTHqLIEJDZLheRr {
+    justify-content: center;
+  }
+}
+
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/components/DnD/Tree/components/TreeItem/TreeItem.module.css ***!
+  \*********************************************************************************************************************************************************************************************************************/
+.V8VE_fSMOx9l1PjYlqmr {
+  list-style: none;
+  box-sizing: border-box;
+  padding-left: var(--spacing);
+  margin-bottom: -1px;
+
+  &.ZESj_aunHXz2Fst5FSAA {
+    display: inline-block;
+    pointer-events: none;
+    padding: 0;
+    padding-left: 10px;
+    padding-top: 5px;
+
+    ._mKmmdzRsLJXNkExxIlp {
+      --vertical-padding: 5px;
+
+      padding-right: 24px;
+      border-radius: 4px;
+      box-shadow: 0px 15px 15px 0 rgba(34, 33, 81, 0.1);
+    }
+  }
+
+  &.CBv6yKjw_PW8UZw14WYH {
+    &.bLxrFkmfZ2xNykSdLzTF {
+      opacity: 1;
+      position: relative;
+      z-index: 1;
+      margin-bottom: -1px;
+
+      ._mKmmdzRsLJXNkExxIlp {
+        position: relative;
+        padding: 0;
+        height: 8px;
+        border-color: #2389ff;
+        background-color: #56a1f8;
+
+        &:before {
+          position: absolute;
+          left: -8px;
+          top: -4px;
+          display: block;
+          content: '';
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          border: 1px solid #2389ff;
+          background-color: #ffffff;
+        }
+
+        > * {
+          /* Items are hidden using height and opacity to retain focus */
+          opacity: 0;
+          height: 0;
+        }
+      }
+    }
+
+    &:not(.bLxrFkmfZ2xNykSdLzTF) {
+      opacity: 0.5;
+    }
+
+    ._mKmmdzRsLJXNkExxIlp > * {
+      box-shadow: none;
+      background-color: transparent;
+    }
+  }
+}
+
+._mKmmdzRsLJXNkExxIlp {
+  --vertical-padding: 10px;
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: var(--vertical-padding) 10px;
+  background-color: #fff;
+  border: 1px solid #dedede;
+  color: #222;
+  box-sizing: border-box;
+}
+
+.Pxl2hsp2skgeLvWItZK_ {
+  flex-grow: 1;
+  padding-left: 0.5rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.ZMeW0aR1uEeCcwtiwJn1 {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #2389ff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.KL5JVH138W3mWDsrcOwi {
+  pointer-events: none;
+}
+
+.hHuPmNOT3rg8Qy0D0WdF,
+.ZESj_aunHXz2Fst5FSAA {
+  .Pxl2hsp2skgeLvWItZK_,
+  .ZMeW0aR1uEeCcwtiwJn1 {
+    -moz-user-select: none;
+         user-select: none;
+    -webkit-user-select: none;
+  }
+}
+
+.QAcuU4JEY6ssUo_GJDBs {
+  svg {
+    transition: transform 250ms ease;
+  }
+
+  &.vscC_bwmkWXjMDCoaRwv svg {
+    transform: rotate(-90deg);
+  }
 }
 
 
