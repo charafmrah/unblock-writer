@@ -75,7 +75,7 @@ function generate_post_content($request_data) {
         'messages' => array(
             array(
                 'role' => 'system',
-                'content' => 'Write a blog post based on this outline: ',
+                'content' => 'Write a blog post based on this outline (use markdown): ',
             ),
             array(
                 'role' => 'user',

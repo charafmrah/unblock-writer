@@ -5385,6 +5385,9 @@ function SortableTree(_ref3) {
     removable
   } = _ref3;
   console.log('defaultItems', defaultItems);
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    setItems(defaultItems);
+  }, [defaultItems]);
   const [items, setItems] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(() => defaultItems);
   const [activeId, setActiveId] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   const [overId, setOverId] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
@@ -7750,16 +7753,14 @@ function outlineToTree(outline) {
         tree.push(currentSection);
       }
       currentSection = {
-        id: `item-${idCounter++}`,
-        title: line.slice(3),
+        id: line.slice(3),
         children: []
       };
     } else if (line.startsWith('### ')) {
       // This is an H3 element.
       if (currentSection) {
         currentSection.children.push({
-          id: `item-${idCounter++}`,
-          title: line.slice(4),
+          id: line.slice(4),
           children: []
         });
       }

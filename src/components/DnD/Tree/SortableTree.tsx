@@ -114,6 +114,9 @@ export function SortableTree({
 	removable,
 }: Props) {
 	console.log('defaultItems', defaultItems);
+	useEffect(() => {
+		setItems(defaultItems);
+	}, [defaultItems]);
 	const [items, setItems] = useState(() => defaultItems);
 	const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
 	const [overId, setOverId] = useState<UniqueIdentifier | null>(null);

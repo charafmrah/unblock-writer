@@ -21,16 +21,14 @@ function outlineToTree(outline) {
 				tree.push(currentSection);
 			}
 			currentSection = {
-				id: `item-${idCounter++}`,
-				title: line.slice(3),
+				id: line.slice(3),
 				children: [],
 			};
 		} else if (line.startsWith('### ')) {
 			// This is an H3 element.
 			if (currentSection) {
 				currentSection.children.push({
-					id: `item-${idCounter++}`,
-					title: line.slice(4),
+					id: line.slice(4),
 					children: [],
 				});
 			}
