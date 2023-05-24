@@ -6,7 +6,7 @@
   "title": "Unblock Writer",
   "category": "widgets",
   "icon": "smiley",
-  "description": "Example block scaffolded with Create Block tool.",
+  "description": "Unblock Writer helps you to get over writer's block by providing you with a ChatGPT generated outline & content.",
   "supports": {
     "html": false
   },

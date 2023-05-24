@@ -39,6 +39,7 @@ import { sortableTreeKeyboardCoordinates } from './keyboardCoordinates';
 import { SortableTreeItem } from './components';
 import { CSS } from '@dnd-kit/utilities';
 
+/* example of a tree structure:
 const initialItems: TreeItems = [
 	{
 		id: 'Home',
@@ -65,6 +66,7 @@ const initialItems: TreeItems = [
 		],
 	},
 ];
+*/
 
 const measuring = {
 	droppable: {
@@ -113,7 +115,6 @@ export function SortableTree({
 	indentationWidth = 50,
 	removable,
 }: Props) {
-	console.log('defaultItems', defaultItems);
 	useEffect(() => {
 		setItems(defaultItems);
 	}, [defaultItems]);

@@ -5222,6 +5222,7 @@ function Configuration(_ref) {
     onConfigurationSubmit
   } = _ref;
   const [apiKey, setApiKey] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+  const [loading, setLoading] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const [errorMessage, setErrorMessage] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null); // Add a state for error message
 
   // Fetch the saved API key when the component is mounted.
@@ -5235,6 +5236,8 @@ function Configuration(_ref) {
   };
   const handleSubmit = async event => {
     event.preventDefault();
+    setLoading(true);
+    setErrorMessage(null);
     // make a request to your own server to test the API key
     try {
       const response = await fetch('/wp-json/unblock-writer/v1/api-key', {
@@ -5255,25 +5258,32 @@ function Configuration(_ref) {
       // if no error, call the callback function
       onConfigurationSubmit(apiKey);
     } catch (error) {
-      // If there's an error, set the error message
+      setLoading(false);
       setErrorMessage(error.message);
     }
   };
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
     className: "mt-0"
-  }, "Connect Your ChatGPT Account"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("form", {
+  }, "Connect ChatGPT"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("form", {
     onSubmit: handleSubmit,
     className: "flex flex-col gap-5"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Your OpenAI API Key:"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+  }, errorMessage && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "error text-red-500 font-bold"
+  }, errorMessage), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    htmlFor: "api-key",
+    className: "cursor-text"
+  }, "Insert your OpenAI API key:"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "text",
     value: apiKey,
-    onChange: handleInputChange
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    onChange: handleInputChange,
+    name: "api-key"
+  }), !loading ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     type: "submit",
-    className: "py-2 bg-teal-600 rounded-md hover:bg-teal-700 text-slate-100"
-  }, "Verify Key"), errorMessage && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "error text-red-500 font-bold"
-  }, errorMessage)));
+    className: "py-2 bg-blue-500 rounded-md hover:bg-blue-600 text-slate-100"
+  }, "Verify Key") : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    className: "py-2 bg-gray-950 rounded-md  text-slate-100",
+    disabled: true
+  }, "Verifying...")));
 }
 
 /***/ }),
@@ -5308,37 +5318,36 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const initialItems = [{
-  id: 'Home',
-  children: []
-}, {
-  id: 'Collections',
-  children: [{
-    id: 'Spring',
-    children: []
-  }, {
-    id: 'Summer',
-    children: []
-  }, {
-    id: 'Fall',
-    children: []
-  }, {
-    id: 'Winter',
-    children: []
-  }]
-}, {
-  id: 'About Us',
-  children: []
-}, {
-  id: 'My Account',
-  children: [{
-    id: 'Addresses',
-    children: []
-  }, {
-    id: 'Order History',
-    children: []
-  }]
-}];
+
+/* example of a tree structure:
+const initialItems: TreeItems = [
+	{
+		id: 'Home',
+		children: [],
+	},
+	{
+		id: 'Collections',
+		children: [
+			{ id: 'Spring', children: [] },
+			{ id: 'Summer', children: [] },
+			{ id: 'Fall', children: [] },
+			{ id: 'Winter', children: [] },
+		],
+	},
+	{
+		id: 'About Us',
+		children: [],
+	},
+	{
+		id: 'My Account',
+		children: [
+			{ id: 'Addresses', children: [] },
+			{ id: 'Order History', children: [] },
+		],
+	},
+];
+*/
+
 const measuring = {
   droppable: {
     strategy: _dnd_kit_core__WEBPACK_IMPORTED_MODULE_2__.MeasuringStrategy.Always
@@ -5384,7 +5393,6 @@ function SortableTree(_ref3) {
     indentationWidth = 50,
     removable
   } = _ref3;
-  console.log('defaultItems', defaultItems);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     setItems(defaultItems);
   }, [defaultItems]);
@@ -7363,9 +7371,38 @@ function Error() {
 /*!***********************************!*\
   !*** ./src/components/Loading.js ***!
   \***********************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Loading)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _styles_loading_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../styles/loading.css */ "./src/styles/loading.css");
 
 
+function Loading(_ref) {
+  let {
+    instructions
+  } = _ref;
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "w-full h-full min-h-[400px] flex justify-center items-center place-self-center"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex flex-col gap-5"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "typewriter"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "slide"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", null)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "paper"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "keyboard"
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "text-sm text-gray-600"
+  }, instructions)));
+}
 
 /***/ }),
 
@@ -7385,8 +7422,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @dnd-kit/core */ "./node_modules/@dnd-kit/core/dist/core.esm.js");
 /* harmony import */ var _DnD_Tree_SortableTree__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DnD/Tree/SortableTree */ "./src/components/DnD/Tree/SortableTree.tsx");
 /* harmony import */ var _utils_outlineToTree__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/outlineToTree */ "./src/utils/outlineToTree.js");
-/* harmony import */ var _utils_treeToOutline__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/treeToOutline */ "./src/utils/treeToOutline.js");
-
 
 
 
@@ -7422,13 +7457,21 @@ function Outline(_ref) {
     };
     onOutlineSubmit(outlineObject);
   };
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, "Outline"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", null, h1), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.DndContext, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_DnD_Tree_SortableTree__WEBPACK_IMPORTED_MODULE_2__.SortableTree, {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
+    className: "my-0"
+  }, h1), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex flex-col gap-5"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "text-sm text-gray-600"
+  }, "Edit the outline below to change the order of your blog post."), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex flex-col gap-3"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.DndContext, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_DnD_Tree_SortableTree__WEBPACK_IMPORTED_MODULE_2__.SortableTree, {
     defaultItems: newOutline,
     onChange: handleChange
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+  })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     onClick: handleSubmit,
     type: "submit",
-    className: "w-full p-2 bg-teal-600 rounded-md hover:bg-teal-700 text-slate-100"
+    className: "w-full p-2 bg-blue-500 rounded-md hover:bg-blue-600 text-slate-100"
   }, "Generate Blog Post"));
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Outline);
@@ -7450,9 +7493,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 
 function Submission() {
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
-    className: "mt-0"
-  }, "Nice"));
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "min-h-[400px] flex flex-col justify-center items-center"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, "Your Content Is Ready"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Enjoy editing!"));
 }
 
 /***/ }),
@@ -7470,6 +7513,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Loading__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Loading */ "./src/components/Loading.js");
+
 
 
 function Topic(_ref) {
@@ -7484,7 +7529,7 @@ function Topic(_ref) {
     event.preventDefault();
     onTopicSubmit(topic);
   };
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
     className: "mt-0"
   }, "Topic Selection"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("form", {
     onSubmit: handleSubmit,
@@ -7495,7 +7540,7 @@ function Topic(_ref) {
     onChange: handleInputChange
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     type: "submit",
-    className: "p-2 bg-teal-600 rounded-md hover:bg-teal-700 text-slate-100"
+    className: "p-2 bg-blue-500 rounded-md hover:bg-blue-600 text-slate-100"
   }, "Generate Outline")));
 }
 
@@ -7518,14 +7563,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _editor_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./editor.css */ "./src/editor.css");
+/* harmony import */ var _styles_editor_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./styles/editor.css */ "./src/styles/editor.css");
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _components_Error__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Error */ "./src/components/Error.js");
-/* harmony import */ var _components_Configuration__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Configuration */ "./src/components/Configuration.js");
-/* harmony import */ var _components_Topic__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Topic */ "./src/components/Topic.js");
-/* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Loading */ "./src/components/Loading.js");
-/* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_components_Loading__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Loading */ "./src/components/Loading.js");
+/* harmony import */ var _components_Configuration__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Configuration */ "./src/components/Configuration.js");
+/* harmony import */ var _components_Topic__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Topic */ "./src/components/Topic.js");
 /* harmony import */ var _components_Outline__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Outline */ "./src/components/Outline.js");
 /* harmony import */ var _components_Submission__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/Submission */ "./src/components/Submission.js");
 /* harmony import */ var marked__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! marked */ "./node_modules/marked/lib/marked.esm.js");
@@ -7581,6 +7625,7 @@ function Edit() {
     setState('TOPIC');
   };
   const handleTopicSubmit = async topic => {
+    setState('LOADING');
     setTopic(topic);
 
     // making the API call to GPT-4 to get the outline
@@ -7609,6 +7654,7 @@ function Edit() {
     insertBlocks
   } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_4__.useDispatch)('core/block-editor');
   const handleOutlineSubmit = async outline => {
+    setState('LOADING');
     setOutline(outline);
 
     // making the API call to GPT-4 to get the content
@@ -7649,23 +7695,20 @@ function Edit() {
 
     // insert the blocks into the editor
     insertBlocks(blocks);
-
-    // switch to the submission state
-    // setState('SUBMISSION');
+    setState('SUBMISSION');
   };
-
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)({
-    className: 'flex flex-col justify-center items-middle w-full h-full bg-slate-100 p-2 text-slate-800 rounded-md shadow-md'
+    className: 'flex flex-col min-h-[400px] justify-between gap-5 items-middle w-full h-full bg-slate-100 p-4 text-slate-800 rounded-md shadow-md'
   }), (() => {
     switch (state) {
       case 'CONFIGURATION':
-        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Configuration__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Configuration__WEBPACK_IMPORTED_MODULE_7__["default"], {
           onConfigurationSubmit: handleConfigurationSubmit
         });
       case 'LOADING':
-        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)((_components_Loading__WEBPACK_IMPORTED_MODULE_8___default()), null);
+        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Loading__WEBPACK_IMPORTED_MODULE_6__["default"], null);
       case 'TOPIC':
-        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Topic__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Topic__WEBPACK_IMPORTED_MODULE_8__["default"], {
           onTopicSubmit: handleTopicSubmit
         });
       case 'OUTLINE':
@@ -7680,61 +7723,6 @@ function Edit() {
     }
   })());
 }
-
-/***/ }),
-
-/***/ "./src/index.js":
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.css */ "./src/style.css");
-/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./src/edit.js");
-/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save */ "./src/save.js");
-/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./block.json */ "./src/block.json");
-/**
- * Registers a new block provided a unique name and an object defining its behavior.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
- */
-
-
-/**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * All files containing `style` keyword are bundled together. The code used
- * gets applied both to the front of your site and to the editor.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
- */
-
-
-/**
- * Internal dependencies
- */
-
-
-
-
-/**
- * Every block starts by registering a new block type definition.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
- */
-(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_4__.name, {
-  /**
-   * @see ./edit.js
-   */
-  edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"],
-  /**
-   * @see ./save.js
-   */
-  save: _save__WEBPACK_IMPORTED_MODULE_3__["default"]
-});
 
 /***/ }),
 
@@ -7772,7 +7760,7 @@ __webpack_require__.r(__webpack_exports__);
  * @return {WPElement} Element to render.
  */
 function save() {
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save(), 'Unblock Writer – hello from the saved content!');
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null);
 }
 
 /***/ }),
@@ -7834,43 +7822,6 @@ function outlineToTree(outline) {
   };
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (outlineToTree);
-
-/***/ }),
-
-/***/ "./src/utils/treeToOutline.js":
-/*!************************************!*\
-  !*** ./src/utils/treeToOutline.js ***!
-  \************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-// File: /src/utils/treeToOutline.js
-
-/**
- * Convert tree structure to outline string.
- *
- * @param {Array} tree - The tree structure.
- * @returns {string} The outline string.
- */
-function treeToOutline(tree) {
-  let outline = '';
-  tree.forEach(section => {
-    if (section.type === 'h2') {
-      outline += `## ${section.text}\n`;
-      section.children.forEach(item => {
-        if (item.type === 'h3') {
-          outline += `- ${item.text}\n`;
-        }
-      });
-    }
-  });
-  return outline;
-}
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (treeToOutline);
 
 /***/ }),
 
@@ -8167,10 +8118,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/editor.css":
-/*!************************!*\
-  !*** ./src/editor.css ***!
-  \************************/
+/***/ "./src/styles/editor.css":
+/*!*******************************!*\
+  !*** ./src/styles/editor.css ***!
+  \*******************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -8180,10 +8131,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/style.css":
-/*!***********************!*\
-  !*** ./src/style.css ***!
-  \***********************/
+/***/ "./src/styles/global.css":
+/*!*******************************!*\
+  !*** ./src/styles/global.css ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/styles/loading.css":
+/*!********************************!*\
+  !*** ./src/styles/loading.css ***!
+  \********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -11268,7 +11232,7 @@ const lexer = Lexer.lex;
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"create-block/unblock-writer","version":"0.1.0","title":"Unblock Writer","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","supports":{"html":false},"textdomain":"unblock-writer","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"create-block/unblock-writer","version":"0.1.0","title":"Unblock Writer","category":"widgets","icon":"smiley","description":"Unblock Writer helps you to get over writer\'s block by providing you with a ChatGPT generated outline & content.","supports":{"html":false},"textdomain":"unblock-writer","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
 
 /***/ })
 
@@ -11298,42 +11262,7 @@ module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json
 /******/ 		return module.exports;
 /******/ 	}
 /******/ 	
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = __webpack_modules__;
-/******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/chunk loaded */
-/******/ 	(() => {
-/******/ 		var deferred = [];
-/******/ 		__webpack_require__.O = (result, chunkIds, fn, priority) => {
-/******/ 			if(chunkIds) {
-/******/ 				priority = priority || 0;
-/******/ 				for(var i = deferred.length; i > 0 && deferred[i - 1][2] > priority; i--) deferred[i] = deferred[i - 1];
-/******/ 				deferred[i] = [chunkIds, fn, priority];
-/******/ 				return;
-/******/ 			}
-/******/ 			var notFulfilled = Infinity;
-/******/ 			for (var i = 0; i < deferred.length; i++) {
-/******/ 				var [chunkIds, fn, priority] = deferred[i];
-/******/ 				var fulfilled = true;
-/******/ 				for (var j = 0; j < chunkIds.length; j++) {
-/******/ 					if ((priority & 1 === 0 || notFulfilled >= priority) && Object.keys(__webpack_require__.O).every((key) => (__webpack_require__.O[key](chunkIds[j])))) {
-/******/ 						chunkIds.splice(j--, 1);
-/******/ 					} else {
-/******/ 						fulfilled = false;
-/******/ 						if(priority < notFulfilled) notFulfilled = priority;
-/******/ 					}
-/******/ 				}
-/******/ 				if(fulfilled) {
-/******/ 					deferred.splice(i--, 1)
-/******/ 					var r = fn();
-/******/ 					if (r !== undefined) result = r;
-/******/ 				}
-/******/ 			}
-/******/ 			return result;
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
@@ -11374,68 +11303,61 @@ module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json
 /******/ 		};
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/jsonp chunk loading */
-/******/ 	(() => {
-/******/ 		// no baseURI
-/******/ 		
-/******/ 		// object to store loaded and loading chunks
-/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
-/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
-/******/ 		var installedChunks = {
-/******/ 			"index": 0,
-/******/ 			"./style-index": 0
-/******/ 		};
-/******/ 		
-/******/ 		// no chunk on demand loading
-/******/ 		
-/******/ 		// no prefetching
-/******/ 		
-/******/ 		// no preloaded
-/******/ 		
-/******/ 		// no HMR
-/******/ 		
-/******/ 		// no HMR manifest
-/******/ 		
-/******/ 		__webpack_require__.O.j = (chunkId) => (installedChunks[chunkId] === 0);
-/******/ 		
-/******/ 		// install a JSONP callback for chunk loading
-/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
-/******/ 			var [chunkIds, moreModules, runtime] = data;
-/******/ 			// add "moreModules" to the modules object,
-/******/ 			// then flag all "chunkIds" as loaded and fire callback
-/******/ 			var moduleId, chunkId, i = 0;
-/******/ 			if(chunkIds.some((id) => (installedChunks[id] !== 0))) {
-/******/ 				for(moduleId in moreModules) {
-/******/ 					if(__webpack_require__.o(moreModules, moduleId)) {
-/******/ 						__webpack_require__.m[moduleId] = moreModules[moduleId];
-/******/ 					}
-/******/ 				}
-/******/ 				if(runtime) var result = runtime(__webpack_require__);
-/******/ 			}
-/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
-/******/ 			for(;i < chunkIds.length; i++) {
-/******/ 				chunkId = chunkIds[i];
-/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
-/******/ 					installedChunks[chunkId][0]();
-/******/ 				}
-/******/ 				installedChunks[chunkId] = 0;
-/******/ 			}
-/******/ 			return __webpack_require__.O(result);
-/******/ 		}
-/******/ 		
-/******/ 		var chunkLoadingGlobal = globalThis["webpackChunkunblock_writer"] = globalThis["webpackChunkunblock_writer"] || [];
-/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
-/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
-/******/ 	})();
-/******/ 	
 /************************************************************************/
-/******/ 	
-/******/ 	// startup
-/******/ 	// Load entry module and return exports
-/******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["./style-index"], () => (__webpack_require__("./src/index.js")))
-/******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
-/******/ 	
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+(() => {
+"use strict";
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _styles_global_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./styles/global.css */ "./src/styles/global.css");
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./src/edit.js");
+/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save */ "./src/save.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./block.json */ "./src/block.json");
+/**
+ * Registers a new block provided a unique name and an object defining its behavior.
+ *
+ * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
+ */
+
+
+/**
+ * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
+ * All files containing `style` keyword are bundled together. The code used
+ * gets applied both to the front of your site and to the editor.
+ *
+ * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
+ */
+
+
+/**
+ * Internal dependencies
+ */
+
+
+
+
+/**
+ * Every block starts by registering a new block type definition.
+ *
+ * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
+ */
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_4__.name, {
+  /**
+   * @see ./edit.js
+   */
+  edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"],
+  /**
+   * @see ./save.js
+   */
+  save: _save__WEBPACK_IMPORTED_MODULE_3__["default"]
+});
+})();
+
 /******/ })()
 ;
 //# sourceMappingURL=index.js.map

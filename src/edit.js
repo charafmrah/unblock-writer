@@ -19,13 +19,13 @@ import { useBlockProps } from '@wordpress/block-editor';
  *
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
-import './editor.css';
+import './styles/editor.css';
 import { useState } from '@wordpress/element';
 import { useDispatch } from '@wordpress/data';
 import Error from './components/Error';
+import Loading from './components/Loading';
 import Configuration from './components/Configuration';
 import Topic from './components/Topic';
-import Loading from './components/Loading';
 import Outline from './components/Outline';
 import Submission from './components/Submission';
 import * as marked from 'marked';
@@ -47,11 +47,11 @@ export default function Edit() {
 
 	const handleConfigurationSubmit = (apiKey) => {
 		setApiKey(apiKey);
-
 		setState('TOPIC');
 	};
 
 	const handleTopicSubmit = async (topic) => {
+		setState('LOADING');
 		setTopic(topic);
 
 		// making the API call to GPT-4 to get the outline
@@ -85,6 +85,7 @@ export default function Edit() {
 	const { insertBlocks } = useDispatch('core/block-editor');
 
 	const handleOutlineSubmit = async (outline) => {
+		setState('LOADING');
 		setOutline(outline);
 
 		// making the API call to GPT-4 to get the content
@@ -133,15 +134,14 @@ export default function Edit() {
 		// insert the blocks into the editor
 		insertBlocks(blocks);
 
-		// switch to the submission state
-		// setState('SUBMISSION');
+		setState('SUBMISSION');
 	};
 
 	return (
 		<div
 			{...useBlockProps({
 				className:
-					'flex flex-col justify-center items-middle w-full h-full bg-slate-100 p-2 text-slate-800 rounded-md shadow-md',
+					'flex flex-col min-h-[400px] justify-between gap-5 items-middle w-full h-full bg-slate-100 p-4 text-slate-800 rounded-md shadow-md',
 			})}
 		>
 			{(() => {

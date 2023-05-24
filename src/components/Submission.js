@@ -1,7 +1,8 @@
 export default function Submission() {
 	return (
-		<div>
-			<h2 className="mt-0">Nice</h2>
+		<div className="min-h-[400px] flex flex-col justify-center items-center">
+			<h2>Your Content Is Ready</h2>
+			<p>Enjoy editing!</p>
 		</div>
 	);
 }

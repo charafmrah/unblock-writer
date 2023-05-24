@@ -3,6 +3,7 @@ import apiFetch from '@wordpress/api-fetch';
 
 export default function Configuration({ onConfigurationSubmit }) {
 	const [apiKey, setApiKey] = useState('');
+	const [loading, setLoading] = useState(false);
 	const [errorMessage, setErrorMessage] = useState(null); // Add a state for error message
 
 	// Fetch the saved API key when the component is mounted.
@@ -18,6 +19,8 @@ export default function Configuration({ onConfigurationSubmit }) {
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
+		setLoading(true);
+		setErrorMessage(null);
 		// make a request to your own server to test the API key
 		try {
 			const response = await fetch('/wp-json/unblock-writer/v1/api-key', {
@@ -38,33 +41,45 @@ export default function Configuration({ onConfigurationSubmit }) {
 			// if no error, call the callback function
 			onConfigurationSubmit(apiKey);
 		} catch (error) {
-			// If there's an error, set the error message
+			setLoading(false);
 			setErrorMessage(error.message);
 		}
 	};
 
 	return (
-		<div>
-			<h2 className="mt-0">Connect Your ChatGPT Account</h2>
+		<>
+			<h2 className="mt-0">Connect ChatGPT</h2>
 			<form onSubmit={handleSubmit} className="flex flex-col gap-5">
-				<label>Your OpenAI API Key:</label>
-				<input
-					type="text"
-					value={apiKey}
-					onChange={handleInputChange}
-				/>
-				<button
-					type="submit"
-					className="py-2 bg-teal-600 rounded-md hover:bg-teal-700 text-slate-100"
-				>
-					Verify Key
-				</button>
 				{errorMessage && (
 					<p className="error text-red-500 font-bold">
 						{errorMessage}
 					</p>
 				)}
+				<label htmlFor="api-key" className="cursor-text">
+					Insert your OpenAI API key:
+				</label>
+				<input
+					type="text"
+					value={apiKey}
+					onChange={handleInputChange}
+					name="api-key"
+				/>
+				{!loading ? (
+					<button
+						type="submit"
+						className="py-2 bg-blue-500 rounded-md hover:bg-blue-600 text-slate-100"
+					>
+						Verify Key
+					</button>
+				) : (
+					<button
+						className="py-2 bg-gray-950 rounded-md  text-slate-100"
+						disabled
+					>
+						Verifying...
+					</button>
+				)}
 			</form>
-		</div>
+		</>
 	);
 }
