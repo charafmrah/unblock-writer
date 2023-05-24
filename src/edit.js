@@ -21,12 +21,14 @@ import { useBlockProps } from '@wordpress/block-editor';
  */
 import './editor.css';
 import { useState } from '@wordpress/element';
+import { useDispatch } from '@wordpress/data';
 import Error from './components/Error';
 import Configuration from './components/Configuration';
 import Topic from './components/Topic';
 import Loading from './components/Loading';
 import Outline from './components/Outline';
 import Submission from './components/Submission';
+import * as marked from 'marked';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -80,18 +82,59 @@ export default function Edit() {
 		setState('OUTLINE');
 	};
 
-	const handleOutlineSubmit = (outline) => {
+	const { insertBlocks } = useDispatch('core/block-editor');
+
+	const handleOutlineSubmit = async (outline) => {
 		setOutline(outline);
 
-		setState('LOADING');
+		// making the API call to GPT-4 to get the content
+		const contentResponse = await fetch(
+			'/wp-json/unblock-writer/v1/generate-content',
+			{
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'X-WP-Nonce': unblockWriter.nonce,
+				},
+				body: JSON.stringify({
+					outline: JSON.stringify(outline), // stringify the outline before passing it
+					apiKey: apiKey,
+				}),
+			}
+		);
 
-		// TODO: make the API call to GPT-4 to get the content
+		if (!contentResponse.ok) {
+			// TODO: handle the error
+			return;
+		}
 
-		// TODO: switch to the submission state and set the content
-	};
+		const content = await contentResponse.json();
+		// parse the markdown content into tokens
+		const tokens = marked.lexer(content);
 
-	const handleContentSubmit = (content) => {
-		setContent(content);
+		const blocks = tokens
+			.map((token) => {
+				let block;
+				if (token.type === 'heading') {
+					block = wp.blocks.createBlock('core/heading', {
+						content: token.text,
+						level: token.depth,
+					});
+				} else if (token.type === 'paragraph') {
+					block = wp.blocks.createBlock('core/paragraph', {
+						content: token.text,
+					});
+				}
+				// Add more block types based on the tokens as needed
+				return block;
+			})
+			.filter(Boolean); // filter out undefined blocks
+
+		// insert the blocks into the editor
+		insertBlocks(blocks);
+
+		// switch to the submission state
+		// setState('SUBMISSION');
 	};
 
 	return (

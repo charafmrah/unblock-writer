@@ -97,7 +97,7 @@ function make_request_to_openai($body, $apiKey) {
             'method' => 'POST',
             'headers' => $headers,
             'body' => json_encode($body),
-            'timeout' => 60,
+            'timeout' => 500,
         )
     );
     if (is_wp_error($response)) {

@@ -21,7 +21,11 @@ function Outline({ outline, onOutlineSubmit }) {
 	};
 
 	const handleSubmit = () => {
-		onOutlineSubmit(h1 + '\n' + treeToOutline(newOutline));
+		const outlineObject = {
+			h1: h1,
+			outline: newOutline,
+		};
+		onOutlineSubmit(outlineObject);
 	};
 
 	return (
