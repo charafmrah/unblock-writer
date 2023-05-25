@@ -11,7 +11,7 @@
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       unblock-writer
  *
- * @package           create-block
+ * @package           unblock-writer
  */
 
 add_action( 'init', 'create_block_unblock_writer_block_init' );

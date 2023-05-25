@@ -17,8 +17,15 @@ export default function Topic({ onTopicSubmit }) {
 		<>
 			<h2 className="mt-0">Topic Selection</h2>
 			<form onSubmit={handleSubmit} className="flex flex-col gap-5">
-				<label>What is your blog post about?</label>
-				<input type="text" value={topic} onChange={handleInputChange} />
+				<label className="cursor-text">
+					What is your blog post about?
+				</label>
+				<input
+					type="text"
+					value={topic}
+					onChange={handleInputChange}
+					placeholder="Enter a topic here"
+				/>
 				<button
 					type="submit"
 					className="p-2 bg-blue-500 rounded-md hover:bg-blue-600 text-slate-100"

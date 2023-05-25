@@ -63,6 +63,7 @@ export default function Configuration({ onConfigurationSubmit }) {
 					value={apiKey}
 					onChange={handleInputChange}
 					name="api-key"
+					placeholder="sk-XXXXXXXXXXXXXXX"
 				/>
 				{!loading ? (
 					<button

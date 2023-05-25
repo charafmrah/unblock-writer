@@ -5276,7 +5276,8 @@ function Configuration(_ref) {
     type: "text",
     value: apiKey,
     onChange: handleInputChange,
-    name: "api-key"
+    name: "api-key",
+    placeholder: "sk-XXXXXXXXXXXXXXX"
   }), !loading ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     type: "submit",
     className: "py-2 bg-blue-500 rounded-md hover:bg-blue-600 text-slate-100"
@@ -7534,10 +7535,13 @@ function Topic(_ref) {
   }, "Topic Selection"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("form", {
     onSubmit: handleSubmit,
     className: "flex flex-col gap-5"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "What is your blog post about?"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    className: "cursor-text"
+  }, "What is your blog post about?"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "text",
     value: topic,
-    onChange: handleInputChange
+    onChange: handleInputChange,
+    placeholder: "Enter a topic here"
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     type: "submit",
     className: "p-2 bg-blue-500 rounded-md hover:bg-blue-600 text-slate-100"
