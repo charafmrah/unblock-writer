@@ -11236,7 +11236,7 @@ const lexer = Lexer.lex;
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"create-block/unblock-writer","version":"0.1.0","title":"Unblock Writer","category":"widgets","icon":"smiley","description":"Unblock Writer helps you to get over writer\'s block by providing you with a ChatGPT generated outline & content.","supports":{"html":false},"textdomain":"unblock-writer","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"unblock-writer/unblock-writer-blog-post","version":"0.1.0","title":"Unblock Writer","category":"widgets","icon":"smiley","description":"Unblock Writer helps you to get over writer\'s block by providing you with a ChatGPT generated outline & content.","supports":{"html":false},"textdomain":"unblock-writer","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
 
 /***/ })
 
