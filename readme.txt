@@ -1,6 +1,6 @@
 === UnblockWriter ===
 Contributors:      Web Pangolin
-Tags:              Gutenberg, Blocks, AI, Writing, OpenAI
+Tags:              Gutenberg, Block, AI, Writing, OpenAI
 Tested up to:      6.1
 Stable tag:        0.1.0
 License:           GPL-2.0-or-later
