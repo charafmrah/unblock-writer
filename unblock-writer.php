@@ -57,7 +57,7 @@ function generate_outline($request_data) {
         'messages' => array(
             array(
                 'role' => 'system',
-                'content' => 'Create a blog post headers outline for this topic (use and return markdown headers only, NO BULLET POINTS, only headers). Only return H2, H3 and H4 level headers with no explanations. Again, only return markdown headers in the form # (H1 title), ## (for H2), and ### (for H3) ONLY, no bullet points. If the topic is vague, return an outline for a closely related topic: ',
+                'content' => 'Create a blog post headers outline for this topic (use and return markdown headers only, NO BULLET POINTS, only headers). Only return H1, H2, H3 and H4 level headers with no explanations. Again, only return markdown headers in the form # (H1 title), ## (for H2), and ### (for H3) ONLY, no bullet points. If the topic is vague, return an outline for a closely related topic: ',
             ),
             array(
                 'role' => 'user',

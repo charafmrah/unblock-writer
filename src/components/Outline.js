@@ -45,14 +45,16 @@ function Outline({ outlineString, onOutlineSubmit }) {
 					Edit the outline below to change the order of your blog
 					post.
 				</div>
-				<div className="flex flex-col gap-3">
+				<div className="flex flex-col">
 					<DndContext>
 						<SortableTree
 							outline={outline}
 							setOutline={setOutline}
+							removable={true}
+							indicator={true}
 						/>
 					</DndContext>
-					<form>
+					<form className="mt-3 mb-6">
 						<label className="text-sm text-gray-600">
 							Add a new heading
 						</label>

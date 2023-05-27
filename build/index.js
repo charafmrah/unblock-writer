@@ -5319,37 +5319,36 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const initialItems = [{
-  id: 'Home',
-  children: []
-}, {
-  id: 'Collections',
-  children: [{
-    id: 'Spring',
-    children: []
-  }, {
-    id: 'Summer',
-    children: []
-  }, {
-    id: 'Fall',
-    children: []
-  }, {
-    id: 'Winter',
-    children: []
-  }]
-}, {
-  id: 'About Us',
-  children: []
-}, {
-  id: 'My Account',
-  children: [{
-    id: 'Addresses',
-    children: []
-  }, {
-    id: 'Order History',
-    children: []
-  }]
-}];
+
+/*
+const initialItems: TreeItems = [
+	{
+		id: 'Home',
+		children: [],
+	},
+	{
+		id: 'Collections',
+		children: [
+			{ id: 'Spring', children: [] },
+			{ id: 'Summer', children: [] },
+			{ id: 'Fall', children: [] },
+			{ id: 'Winter', children: [] },
+		],
+	},
+	{
+		id: 'About Us',
+		children: [],
+	},
+	{
+		id: 'My Account',
+		children: [
+			{ id: 'Addresses', children: [] },
+			{ id: 'Order History', children: [] },
+		],
+	},
+];
+*/
+
 const measuring = {
   droppable: {
     strategy: _dnd_kit_core__WEBPACK_IMPORTED_MODULE_2__.MeasuringStrategy.Always
@@ -5396,7 +5395,6 @@ function SortableTree(_ref3) {
     indentationWidth = 50,
     removable
   } = _ref3;
-  console.log('outline', outline);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     setItems(outline);
     setOutline(outline);
@@ -5593,11 +5591,9 @@ function SortableTree(_ref3) {
       const newItems = (0,_utilities__WEBPACK_IMPORTED_MODULE_4__.buildTree)(sortedItems);
       setItems(newItems);
       setOutline(newItems);
-      console.log('moved');
     }
   }
   function handleDragCancel() {
-    console.log('cancelled');
     resetState();
   }
   function resetState() {
@@ -7480,11 +7476,15 @@ function Outline(_ref) {
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-sm text-gray-600"
   }, "Edit the outline below to change the order of your blog post."), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex flex-col gap-3"
+    className: "flex flex-col"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.DndContext, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_DnD_Tree_SortableTree__WEBPACK_IMPORTED_MODULE_2__.SortableTree, {
     outline: outline,
-    setOutline: setOutline
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("form", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    setOutline: setOutline,
+    removable: true,
+    indicator: true
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("form", {
+    className: "mt-3 mb-6"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "text-sm text-gray-600"
   }, "Add a new heading"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "grid grid-cols-4 gap-5"
