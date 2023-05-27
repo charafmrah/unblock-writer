@@ -12,8 +12,8 @@
 		"test": "jest",
 		"lint:css": "wp-scripts lint-style",
 		"lint:js": "wp-scripts lint-js",
-		"build:css": "postcss src/*.css -d build",
-		"start:css": "npx postcss src/*.css -d build -w",
+		"build:css": "npx postcss src/styles/*.css -d build",
+		"start:css": "npx postcss src/styles/*.css -d build -w",
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "wp-scripts plugin-zip"
 	},

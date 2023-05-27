@@ -72,6 +72,7 @@ export default function Edit() {
 
 		if (!outlineResponse.ok) {
 			// handle the error
+			setState('ERROR');
 			return;
 		}
 
@@ -161,7 +162,7 @@ export default function Edit() {
 					case 'OUTLINE':
 						return (
 							<Outline
-								outline={outline}
+								outlineString={outline}
 								onOutlineSubmit={handleOutlineSubmit}
 							/>
 						);

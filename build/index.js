@@ -5319,36 +5319,37 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-/* example of a tree structure:
-const initialItems: TreeItems = [
-	{
-		id: 'Home',
-		children: [],
-	},
-	{
-		id: 'Collections',
-		children: [
-			{ id: 'Spring', children: [] },
-			{ id: 'Summer', children: [] },
-			{ id: 'Fall', children: [] },
-			{ id: 'Winter', children: [] },
-		],
-	},
-	{
-		id: 'About Us',
-		children: [],
-	},
-	{
-		id: 'My Account',
-		children: [
-			{ id: 'Addresses', children: [] },
-			{ id: 'Order History', children: [] },
-		],
-	},
-];
-*/
-
+const initialItems = [{
+  id: 'Home',
+  children: []
+}, {
+  id: 'Collections',
+  children: [{
+    id: 'Spring',
+    children: []
+  }, {
+    id: 'Summer',
+    children: []
+  }, {
+    id: 'Fall',
+    children: []
+  }, {
+    id: 'Winter',
+    children: []
+  }]
+}, {
+  id: 'About Us',
+  children: []
+}, {
+  id: 'My Account',
+  children: [{
+    id: 'Addresses',
+    children: []
+  }, {
+    id: 'Order History',
+    children: []
+  }]
+}];
 const measuring = {
   droppable: {
     strategy: _dnd_kit_core__WEBPACK_IMPORTED_MODULE_2__.MeasuringStrategy.Always
@@ -5388,16 +5389,19 @@ const dropAnimationConfig = {
 };
 function SortableTree(_ref3) {
   let {
+    outline,
+    setOutline,
     collapsible,
-    defaultItems,
     indicator = false,
     indentationWidth = 50,
     removable
   } = _ref3;
+  console.log('outline', outline);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    setItems(defaultItems);
-  }, [defaultItems]);
-  const [items, setItems] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(() => defaultItems);
+    setItems(outline);
+    setOutline(outline);
+  }, [outline]);
+  const [items, setItems] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(() => outline);
   const [activeId, setActiveId] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   const [overId, setOverId] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   const [offsetLeft, setOffsetLeft] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(0);
@@ -5588,9 +5592,12 @@ function SortableTree(_ref3) {
       const sortedItems = (0,_dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_3__.arrayMove)(clonedItems, activeIndex, overIndex);
       const newItems = (0,_utilities__WEBPACK_IMPORTED_MODULE_4__.buildTree)(sortedItems);
       setItems(newItems);
+      setOutline(newItems);
+      console.log('moved');
     }
   }
   function handleDragCancel() {
+    console.log('cancelled');
     resetState();
   }
   function resetState() {
@@ -7430,34 +7437,42 @@ __webpack_require__.r(__webpack_exports__);
 
 function Outline(_ref) {
   let {
-    outline,
+    outlineString,
     onOutlineSubmit
   } = _ref;
   const [h1, setH1] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('');
-  const [newOutline, setNewOutline] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+  const [outline, setOutline] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+  const newHeadingRef = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    if (typeof outline === 'string') {
+    if (typeof outlineString === 'string') {
       const {
         h1,
         tree
-      } = (0,_utils_outlineToTree__WEBPACK_IMPORTED_MODULE_3__["default"])(outline);
+      } = (0,_utils_outlineToTree__WEBPACK_IMPORTED_MODULE_3__["default"])(outlineString);
       setH1(h1);
-      setNewOutline(tree);
+      setOutline(tree);
     }
-  }, [outline]);
-  const handleChange = _ref2 => {
-    let {
-      items
-    } = _ref2;
-    setNewOutline(items);
-  };
+  }, []);
   const handleSubmit = () => {
     const outlineObject = {
       h1: h1,
-      outline: newOutline
+      outline: outline
     };
+    console.log(outline);
     onOutlineSubmit(outlineObject);
   };
+  const handleNewHeading = e => {
+    e.preventDefault();
+    // Add a new heading to the outline
+    const newHeadingValue = newHeadingRef.current.value;
+    const newHeading = {
+      id: newHeadingValue,
+      children: []
+    };
+    setOutline([...outline, newHeading]);
+    newHeadingRef.current.value = ''; // Clear the input field
+  };
+
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
     className: "my-0"
   }, h1), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -7467,9 +7482,20 @@ function Outline(_ref) {
   }, "Edit the outline below to change the order of your blog post."), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex flex-col gap-3"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.DndContext, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_DnD_Tree_SortableTree__WEBPACK_IMPORTED_MODULE_2__.SortableTree, {
-    defaultItems: newOutline,
-    onChange: handleChange
-  })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    outline: outline,
+    setOutline: setOutline
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("form", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    className: "text-sm text-gray-600"
+  }, "Add a new heading"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "grid grid-cols-4 gap-5"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    type: "text",
+    className: "w-full col-span-3 p-2 border border-gray-300 rounded-md",
+    ref: newHeadingRef
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    onClick: handleNewHeading,
+    className: "w-full p-2 bg-teal-500 rounded-md hover:bg-teal-600 text-slate-100"
+  }, "Add Heading"))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     onClick: handleSubmit,
     type: "submit",
     className: "w-full p-2 bg-blue-500 rounded-md hover:bg-blue-600 text-slate-100"
@@ -7541,7 +7567,8 @@ function Topic(_ref) {
     type: "text",
     value: topic,
     onChange: handleInputChange,
-    placeholder: "Enter a topic here"
+    placeholder: "Enter a topic here",
+    maxLength: 500
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     type: "submit",
     className: "p-2 bg-blue-500 rounded-md hover:bg-blue-600 text-slate-100"
@@ -7646,6 +7673,7 @@ function Edit() {
     });
     if (!outlineResponse.ok) {
       // handle the error
+      setState('ERROR');
       return;
     }
     const outline = await outlineResponse.json();
@@ -7717,7 +7745,7 @@ function Edit() {
         });
       case 'OUTLINE':
         return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Outline__WEBPACK_IMPORTED_MODULE_9__["default"], {
-          outline: outline,
+          outlineString: outline,
           onOutlineSubmit: handleOutlineSubmit
         });
       case 'SUBMISSION':
@@ -11236,7 +11264,7 @@ const lexer = Lexer.lex;
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"unblock-writer/unblock-writer-blog-post","version":"0.1.0","title":"Unblock Writer","category":"widgets","icon":"smiley","description":"Unblock Writer helps you to get over writer\'s block by providing you with a ChatGPT generated outline & content.","supports":{"html":false},"textdomain":"unblock-writer","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"unblock-writer/unblock-writer-blog-post","version":"0.1.0","title":"AI Generated Blog Post - Unblock Writer","keywords":["ai","gpt","chatgpt","blog","post","writer"],"category":"text","icon":"edit-page","description":"Unblock Writer helps you to get over writer\'s block by providing you with a ChatGPT generated outline & content.","supports":{"html":false},"textdomain":"unblock-writer","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
 
 /***/ })
 

@@ -39,7 +39,6 @@ import { sortableTreeKeyboardCoordinates } from './keyboardCoordinates';
 import { SortableTreeItem } from './components';
 import { CSS } from '@dnd-kit/utilities';
 
-/* example of a tree structure:
 const initialItems: TreeItems = [
 	{
 		id: 'Home',
@@ -66,7 +65,6 @@ const initialItems: TreeItems = [
 		],
 	},
 ];
-*/
 
 const measuring = {
 	droppable: {
@@ -101,24 +99,28 @@ const dropAnimationConfig: DropAnimation = {
 };
 
 interface Props {
+	outline: TreeItems;
+	setOutline: React.Dispatch<React.SetStateAction<TreeItems>>;
 	collapsible?: boolean;
-	defaultItems: TreeItems;
 	indentationWidth?: number;
 	indicator?: boolean;
 	removable?: boolean;
 }
 
 export function SortableTree({
+	outline,
+	setOutline,
 	collapsible,
-	defaultItems,
 	indicator = false,
 	indentationWidth = 50,
 	removable,
 }: Props) {
+	console.log('outline', outline);
 	useEffect(() => {
-		setItems(defaultItems);
-	}, [defaultItems]);
-	const [items, setItems] = useState(() => defaultItems);
+		setItems(outline);
+		setOutline(outline);
+	}, [outline]);
+	const [items, setItems] = useState(() => outline);
 	const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
 	const [overId, setOverId] = useState<UniqueIdentifier | null>(null);
 	const [offsetLeft, setOffsetLeft] = useState(0);
@@ -306,10 +308,13 @@ export function SortableTree({
 			const newItems = buildTree(sortedItems);
 
 			setItems(newItems);
+			setOutline(newItems);
+			console.log('moved');
 		}
 	}
 
 	function handleDragCancel() {
+		console.log('cancelled');
 		resetState();
 	}
 

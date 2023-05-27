@@ -25,6 +25,7 @@ export default function Topic({ onTopicSubmit }) {
 					value={topic}
 					onChange={handleInputChange}
 					placeholder="Enter a topic here"
+					maxLength={500}
 				/>
 				<button
 					type="submit"

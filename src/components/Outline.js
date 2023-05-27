@@ -1,30 +1,40 @@
-import { useState, useEffect } from '@wordpress/element';
+import { useState, useEffect, useRef } from '@wordpress/element';
 import { DndContext } from '@dnd-kit/core';
 import { SortableTree } from './DnD/Tree/SortableTree';
 import outlineToTree from '../utils/outlineToTree';
 
-function Outline({ outline, onOutlineSubmit }) {
+function Outline({ outlineString, onOutlineSubmit }) {
 	const [h1, setH1] = useState('');
-	const [newOutline, setNewOutline] = useState([]);
+	const [outline, setOutline] = useState([]);
+	const newHeadingRef = useRef(null);
 
 	useEffect(() => {
-		if (typeof outline === 'string') {
-			const { h1, tree } = outlineToTree(outline);
+		if (typeof outlineString === 'string') {
+			const { h1, tree } = outlineToTree(outlineString);
 			setH1(h1);
-			setNewOutline(tree);
+			setOutline(tree);
 		}
-	}, [outline]);
-
-	const handleChange = ({ items }) => {
-		setNewOutline(items);
-	};
+	}, []);
 
 	const handleSubmit = () => {
 		const outlineObject = {
 			h1: h1,
-			outline: newOutline,
+			outline: outline,
 		};
+		console.log(outline);
 		onOutlineSubmit(outlineObject);
+	};
+
+	const handleNewHeading = (e) => {
+		e.preventDefault();
+		// Add a new heading to the outline
+		const newHeadingValue = newHeadingRef.current.value;
+		const newHeading = {
+			id: newHeadingValue,
+			children: [],
+		};
+		setOutline([...outline, newHeading]);
+		newHeadingRef.current.value = ''; // Clear the input field
 	};
 
 	return (
@@ -38,10 +48,28 @@ function Outline({ outline, onOutlineSubmit }) {
 				<div className="flex flex-col gap-3">
 					<DndContext>
 						<SortableTree
-							defaultItems={newOutline}
-							onChange={handleChange}
+							outline={outline}
+							setOutline={setOutline}
 						/>
 					</DndContext>
+					<form>
+						<label className="text-sm text-gray-600">
+							Add a new heading
+						</label>
+						<div className="grid grid-cols-4 gap-5">
+							<input
+								type="text"
+								className="w-full col-span-3 p-2 border border-gray-300 rounded-md"
+								ref={newHeadingRef}
+							/>
+							<button
+								onClick={handleNewHeading}
+								className="w-full p-2 bg-teal-500 rounded-md hover:bg-teal-600 text-slate-100"
+							>
+								Add Heading
+							</button>
+						</div>
+					</form>
 				</div>
 			</div>
 			<button

@@ -3,9 +3,10 @@
 	"apiVersion": 2,
 	"name": "unblock-writer/unblock-writer-blog-post",
 	"version": "0.1.0",
-	"title": "Unblock Writer",
-	"category": "widgets",
-	"icon": "smiley",
+	"title": "AI Generated Blog Post - Unblock Writer",
+	"keywords": ["ai", "gpt", "chatgpt", "blog", "post", "writer"],
+	"category": "text",
+	"icon": "edit-page",
 	"description": "Unblock Writer helps you to get over writer's block by providing you with a ChatGPT generated outline & content.",
 	"supports": {
 		"html": false
