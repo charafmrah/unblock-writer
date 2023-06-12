@@ -17,9 +17,7 @@ export default function Topic({ onTopicSubmit }) {
 		<>
 			<h2 className="mt-0">Topic Selection</h2>
 			<form onSubmit={handleSubmit} className="flex flex-col gap-5">
-				<label className="cursor-text">
-					What is your blog post about?
-				</label>
+				<label className="cursor-text">Target Keyword</label>
 				<input
 					type="text"
 					value={topic}

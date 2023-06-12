@@ -1,6 +1,3 @@
-/*!***************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/styles/global.css ***!
-  \***************************************************************************************************************************************************************************/
 /**
  * The following styles get applied both on the front of your site
  * and in the editor.
@@ -559,11 +556,11 @@ video {
 .transform {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) !important;
 }
-.cursor-text {
-  cursor: text !important;
-}
 .cursor-pointer {
   cursor: pointer !important;
+}
+.cursor-text {
+  cursor: text !important;
 }
 .grid-cols-4 {
   grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
@@ -629,6 +626,10 @@ video {
 .font-bold {
   font-weight: 700 !important;
 }
+.text-blue-500 {
+  --tw-text-opacity: 1 !important;
+  color: rgb(59 130 246 / var(--tw-text-opacity)) !important;
+}
 .text-gray-600 {
   --tw-text-opacity: 1 !important;
   color: rgb(75 85 99 / var(--tw-text-opacity)) !important;
@@ -644,10 +645,6 @@ video {
 .text-slate-800 {
   --tw-text-opacity: 1 !important;
   color: rgb(30 41 59 / var(--tw-text-opacity)) !important;
-}
-.text-blue-500 {
-  --tw-text-opacity: 1 !important;
-  color: rgb(59 130 246 / var(--tw-text-opacity)) !important;
 }
 .shadow {
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1) !important;
@@ -684,9 +681,6 @@ video {
   background-color: rgb(13 148 136 / var(--tw-bg-opacity)) !important;
 }
 
-/*!***************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/styles/editor.css ***!
-  \***************************************************************************************************************************************************************************/
 /**
  * The following styles get applied inside the editor only.
  *
@@ -1244,11 +1238,11 @@ video {
 .transform {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) !important;
 }
-.cursor-text {
-  cursor: text !important;
-}
 .cursor-pointer {
   cursor: pointer !important;
+}
+.cursor-text {
+  cursor: text !important;
 }
 .grid-cols-4 {
   grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
@@ -1314,6 +1308,10 @@ video {
 .font-bold {
   font-weight: 700 !important;
 }
+.text-blue-500 {
+  --tw-text-opacity: 1 !important;
+  color: rgb(59 130 246 / var(--tw-text-opacity)) !important;
+}
 .text-gray-600 {
   --tw-text-opacity: 1 !important;
   color: rgb(75 85 99 / var(--tw-text-opacity)) !important;
@@ -1329,10 +1327,6 @@ video {
 .text-slate-800 {
   --tw-text-opacity: 1 !important;
   color: rgb(30 41 59 / var(--tw-text-opacity)) !important;
-}
-.text-blue-500 {
-  --tw-text-opacity: 1 !important;
-  color: rgb(59 130 246 / var(--tw-text-opacity)) !important;
 }
 .shadow {
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1) !important;
@@ -1369,9 +1363,6 @@ video {
   background-color: rgb(13 148 136 / var(--tw-bg-opacity)) !important;
 }
 
-/*!****************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/styles/loading.css ***!
-  \****************************************************************************************************************************************************************************/
 .typewriter {
 	--blue: #5c86ff;
 	--blue-dark: #275efe;
@@ -1667,9 +1658,6 @@ video {
 	}
 }
 
-/*!************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/components/DnD/components/Button/Button.module.css ***!
-  \************************************************************************************************************************************************************************************************************/
 .x6VkY6vfzZtROaGagl5J {
   padding: 14px 20px;
   border: none;
@@ -1698,9 +1686,6 @@ video {
   }
 }
 
-/*!************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/components/DnD/components/ConfirmModal/ConfirmModal.module.css ***!
-  \************************************************************************************************************************************************************************************************************************/
 .RvEzaLfXyMIEA78HWgLT {
   --width: 250px;
   --height: 120px;
@@ -1744,9 +1729,6 @@ video {
   }
 }
 
-/*!****************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/components/DnD/components/Item/components/Action/Action.module.css ***!
-  \****************************************************************************************************************************************************************************************************************************/
 $focused-outline-color: #4c9ffe;
 
 .oZ83SsiBn3n4BI65pUiL {
@@ -1800,9 +1782,6 @@ $focused-outline-color: #4c9ffe;
   }
 }
 
-/*!********************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/components/DnD/components/Item/Item.module.css ***!
-  \********************************************************************************************************************************************************************************************************/
 $font-weight: 400;
 $background-color: #fff;
 $border-color: #efefef;
@@ -1949,9 +1928,6 @@ $focused-outline-color: #4c9ffe;
   margin-right: -10px;
 }
 
-/*!******************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/components/DnD/components/Container/Container.module.css ***!
-  \******************************************************************************************************************************************************************************************************************/
 .R0tahmIpczZeehgi1AYZ {
   display: flex;
   flex-direction: column;
@@ -2058,9 +2034,6 @@ $focused-outline-color: #4c9ffe;
   }
 }
 
-/*!******************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/components/DnD/components/Draggable/Draggable.module.css ***!
-  \******************************************************************************************************************************************************************************************************************/
 .IyMBph7aqLEnAtjUkUvk {
 	position: relative;
 	display: flex;
@@ -2198,9 +2171,6 @@ $focused-outline-color: #4c9ffe;
 	}
 }
 
-/*!******************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/components/DnD/components/Droppable/Droppable.module.css ***!
-  \******************************************************************************************************************************************************************************************************************/
 .cVOiKziiohqw5OEIIUfS {
   position: relative;
   padding-top: 80px;
@@ -2255,18 +2225,12 @@ $focused-outline-color: #4c9ffe;
   }
 }
 
-/*!********************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/components/DnD/components/FloatingControls/FloatingControls.module.css ***!
-  \********************************************************************************************************************************************************************************************************************************/
 .MX0XmwT0lhVknjSFBYZm {
   position: fixed;
   top: 25px;
   right: 25px;
 }
 
-/*!********************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/components/DnD/components/Grid/Grid.module.css ***!
-  \********************************************************************************************************************************************************************************************************/
 .GDXaO3AZ_fyJtXfn4rPF {
   position: fixed;
   top: 0;
@@ -2298,9 +2262,6 @@ $focused-outline-color: #4c9ffe;
   bottom: 20px;
 }
 
-/*!**************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/components/DnD/components/GridContainer/GridContainer.module.css ***!
-  \**************************************************************************************************************************************************************************************************************************/
 .Nc0lHXzfUSCKFOS9wJBO {
   max-width: 800px;
   display: grid;
@@ -2317,9 +2278,6 @@ $focused-outline-color: #4c9ffe;
   }
 }
 
-/*!********************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/components/DnD/components/List/List.module.css ***!
-  \********************************************************************************************************************************************************************************************************/
 .H7R8tSzoBIHgPNLN0lXk {
   display: grid;
   grid-auto-rows: max-content;
@@ -2346,9 +2304,6 @@ $focused-outline-color: #4c9ffe;
   }
 }
 
-/*!******************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/components/DnD/components/OverflowWrapper/OverflowWrapper.module.css ***!
-  \******************************************************************************************************************************************************************************************************************************/
 .lOjrmcJjybYpNxq8Iry0 {
   position: absolute;
   top: 0;
@@ -2358,9 +2313,6 @@ $focused-outline-color: #4c9ffe;
   overflow: hidden;
 }
 
-/*!**************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/components/DnD/components/Wrapper/Wrapper.module.css ***!
-  \**************************************************************************************************************************************************************************************************************/
 .nsr_ED3mxk9L46TL6SmV {
   display: flex;
   width: 100%;
@@ -2373,9 +2325,6 @@ $focused-outline-color: #4c9ffe;
   }
 }
 
-/*!*********************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/components/DnD/Tree/components/TreeItem/TreeItem.module.css ***!
-  \*********************************************************************************************************************************************************************************************************************/
 .V8VE_fSMOx9l1PjYlqmr {
   list-style: none;
   box-sizing: border-box;
@@ -2505,5 +2454,3 @@ $focused-outline-color: #4c9ffe;
   }
 }
 
-
-/*# sourceMappingURL=index.css.map*/
