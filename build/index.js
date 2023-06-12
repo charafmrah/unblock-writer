@@ -5272,7 +5272,11 @@ function Configuration(_ref) {
   }, errorMessage), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: "api-key",
     className: "cursor-text"
-  }, "Insert your OpenAI API key:"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+  }, "Insert your", ' ', (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    className: "text-blue-500 cursor-pointer",
+    href: "https://unblock-writer.com/chatgpt-api/",
+    target: "_blank"
+  }, "OpenAI API key"), ":"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "text",
     value: apiKey,
     onChange: handleInputChange,
@@ -5605,6 +5609,10 @@ function SortableTree(_ref3) {
   }
   function handleRemove(id) {
     setItems(items => (0,_utilities__WEBPACK_IMPORTED_MODULE_4__.removeItem)(items, id));
+    setOutline(outline => {
+      const newOutline = (0,_utilities__WEBPACK_IMPORTED_MODULE_4__.removeItem)(outline, id);
+      return newOutline;
+    });
   }
   function handleCollapse(id) {
     setItems(items => (0,_utilities__WEBPACK_IMPORTED_MODULE_4__.setProperty)(items, id, 'collapsed', value => {
@@ -7494,7 +7502,7 @@ function Outline(_ref) {
     ref: newHeadingRef
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     onClick: handleNewHeading,
-    className: "w-full p-2 bg-teal-500 rounded-md hover:bg-teal-600 text-slate-100"
+    className: "w-full p-2 bg-emerald-500 rounded-md hover:bg-teal-600 text-slate-100"
   }, "Add Heading"))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     onClick: handleSubmit,
     type: "submit",

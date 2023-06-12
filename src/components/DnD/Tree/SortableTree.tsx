@@ -328,6 +328,11 @@ export function SortableTree({
 
 	function handleRemove(id: UniqueIdentifier) {
 		setItems((items) => removeItem(items, id));
+
+		setOutline((outline) => {
+			const newOutline = removeItem(outline, id);
+			return newOutline;
+		});
 	}
 
 	function handleCollapse(id: UniqueIdentifier) {

@@ -56,7 +56,15 @@ export default function Configuration({ onConfigurationSubmit }) {
 					</p>
 				)}
 				<label htmlFor="api-key" className="cursor-text">
-					Insert your OpenAI API key:
+					Insert your{' '}
+					<a
+						className="text-blue-500 cursor-pointer"
+						href="https://unblock-writer.com/chatgpt-api/"
+						target="_blank"
+					>
+						OpenAI API key
+					</a>
+					:
 				</label>
 				<input
 					type="text"

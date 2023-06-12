@@ -66,7 +66,7 @@ function Outline({ outlineString, onOutlineSubmit }) {
 							/>
 							<button
 								onClick={handleNewHeading}
-								className="w-full p-2 bg-teal-500 rounded-md hover:bg-teal-600 text-slate-100"
+								className="w-full p-2 bg-emerald-500 rounded-md hover:bg-teal-600 text-slate-100"
 							>
 								Add Heading
 							</button>
